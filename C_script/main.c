@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <math.h>
 #include "fun.h"
-#define P_0 150.174       // = E_0, MeV/fm^3
-#define R_0 20.06145      // km
-#define M_0 12.655756     // solar masses
-#define a (13.4 / P_0)      // energy density parameter
-#define b (5.6 / P_0)       // energy density parameter
+#define P0 150.174       // = E_0, MeV/fm^3
+#define R0 20.06145      // km
+#define M0 12.655756     // solar masses
+#define a (13.4 / P0)      // energy density parameter
+#define b (5.6 / P0)       // energy density parameter
 #define alpha 0.514
 #define beta 3.436
 #define alpha1 (alpha - 1)
@@ -25,6 +25,25 @@
 
 int main(){
 
+    double m = 0.00001;
+    double P = P0;
+    double r = 0;
+    double rho = findRho(P);
+    double h = 0.0001;
+    FILE *f = fopen("../data/data.csv", "w");
+    fprintf(f, "r,P,m,rho\n");
+    fprintf(f, "%e,%e,%e,%e\n", r, P, m, rho);
+
+    while (P > 0.1){
+        r += h;
+        rungeKutta4(h, r, &P, &m);
+        rho = findRho(P);
+        fprintf(f, "%e,%e,%e,%e\n", r, P, m, rho);
+    }
+
+    fclose(f);
+
+    return 0;
 }
 
 

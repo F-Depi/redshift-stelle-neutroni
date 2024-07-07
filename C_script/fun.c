@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <math.h>
 #include "fun.h"
-#define P_0 150.174       // = E_0, MeV/fm^3
-#define R_0 20.06145      // km
-#define M_0 12.655756     // solar masses
-#define a (13.4 / P_0)      // energy density parameter
-#define b (5.6 / P_0)       // energy density parameter
+#define P0 150.174       // = E_0, MeV/fm^3
+#define R0 20.06145      // km
+#define M0 12.655756     // solar masses
+#define a (13.4 / P0)      // energy density parameter
+#define b (5.6 / P0)       // energy density parameter
 #define alpha 0.514
 #define beta 3.436
 #define alpha1 (alpha - 1)
@@ -20,13 +20,17 @@
  rho(P) is found by numerically
  */
 
-double f_m(double r, double rho){
+double f_m(double r, double P){
+    double rho = findRho(P);
     double rho3 = pow(rho, 3);
     return pow(r, 3) * ( a * rho3 + b * rho);
 }
 
 
-double f_P(double r, double rho, double P, double m){
+double f_P(double r, double P, double m){
+    if (m == 0)
+        return 0;
+    double rho = findRho(P);
     double rho3 = pow(rho, 3);
     double Er = a * rho3 + b * rho;
     return - m * Er * (1 + P / Er) * (1 + pow(r, 3) * P / m) / (r - 2 * m);
@@ -53,20 +57,22 @@ double findRho(double P){
     return rho;
 }
 
-/*
-double* rungeKutta4(double r, double m, double P, double h, double (*f_m)(double, double), double (*f_P)(double, double, double)) {
+void rungeKutta4(double h, double r, double *P, double *m){
 
-    double rho, k1, k2, k3, k4, l1, l2, l3, l4;
+    double k1, k2, k3, k4, l1, l2, l3, l4;
 
-    rho = findRho(P);
-    k1 = h * f_m(r, rho);
-    l1 = h * f_P(r, rho, P, m);
+    k1 = h * f_m(r, *P);
+    l1 = h * f_P(r, *P, *m);
 
-    k2 = h * f_m(r + h / 2, rho + l1 / 2);
+    k2 = h * f_m(r + h / 2, *P + l1 / 2);
+    l2 = h * f_P(r + h / 2, *P + l1 / 2, *m + k1 / 2);
+
+    k3 = h * f_m(r + h / 2, *P + l2 / 2);
+    l3 = h * f_P(r + h / 2, *P + l2 / 2, *m + k2 / 2);
+
+    k4 = h * f_m(r + h, *P + l3);
+    l4 = h * f_P(r + h, *P + l3, *m + k3);
 
     *m += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
-    *P += (1. / 6) * (l1 + 2 * l2 + 2 * l3 + l4);
-
-    return 0;
+    *P += (l1 + 2 * l2 + 2 * l3 + l4) / 6;
 }
-*/

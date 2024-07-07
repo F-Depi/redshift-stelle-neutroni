@@ -10,10 +10,10 @@
  rho(P) is found by numerically
  */
 
-double f_m(double r, double rho);
+double f_m(double r, double P);
 
 
-double f_P(double r, double rho, double P, double m);
+double f_P(double r, double P, double m);
 
 
 double P_rho(double rho);
@@ -22,5 +22,7 @@ double P_rho(double rho);
 double DP_rho(double rho);
 
 double findRho(double P);
+
+void rungeKutta4(double h, double r, double *P, double *m);
 
 #endif
