@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-''' Andamento P(r), m(r), rho(r) di una stella'''
+''' Andamento P(r), m(r), rho(r) di una stella
 data = pd.read_csv('../data/data.csv')
 
 print("M = " + str(data['m'].iloc[-1]))
@@ -29,8 +29,9 @@ axs[2].set_ylabel('Densità')
 axs[2].set_title('rho(r)')
 
 plt.show()
+'''
 
-''' h diversi
+''' h diversi '''
 data_cvg = pd.read_csv('../data/data_cvg.csv')
 
 fig, axs = plt.subplots(1, 2, figsize=(15, 5))
@@ -45,7 +46,7 @@ axs[1].set_xlabel('Incremento')
 axs[1].set_ylabel('Massa')
 
 plt.show()
-'''
+
 
 exit()
 ''' Grafico M-R '''

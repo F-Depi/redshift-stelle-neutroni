@@ -24,6 +24,7 @@
 
 
 int main(){
+    /*
     printf("a = %f\n", a);
     printf("b = %f\n", b);
     printf("alpha = %f\n", alpha);
@@ -48,10 +49,11 @@ int main(){
         P = i*0.01;
         fprintf(f2, "%e,%e\n", P, findRho(P));
     }
+    */
 
-    // Testare i parametri h e quanto si avvicina a 0 P
+
     /*
-
+    // Funziona? Converge?
     double m = 0;
     double P = P0;
     double r = 0;
@@ -63,7 +65,7 @@ int main(){
     fprintf(f, "r,P,m,rho\n");
     fprintf(f, "%e,%e,%e,%e\n", r, P, m, rho);
 
-    while (r < 3.){           // Analizzando la curva di P si vede che non si scende di molto sotto 0.01 (si arriva circa a 0.004), quindi 0.01 va bene.
+    while (P > 0){           // Analizzando la curva di P si vede che non si scende di molto sotto 0.01 (si arriva circa a 0.004), quindi 0.01 va bene.
         r += h;
         rungeKutta4(h, r, &P, &m);
         rho = findRho(P);
@@ -72,32 +74,38 @@ int main(){
     }
 
     fclose(f);
+    // Sì
     */
 
-    /*
-    // Da qui si capisce che h = 1e-4 è sufficiente. Per sicurezza usiamo h = 1e-5
-    FILE *f2 = fopen("../data/data_cvg_small.csv", "w");
-    fprintf(f2, "h,R,M\n");
 
-    for (double h = 1e-6; h > 1e-8; h /= 2){
+
+    // What's the best h increment?
+    FILE *f2 = fopen("../data/data_cvg_small.csv", "w");
+    fprintf(f2, "h,R,M,P\n");
+
+    for (double h = 1e-2; h > 1e-8; h /= 2){
         printf("h = %e\n", h);
-        double R_stella = -3;
-        double M_stella = -3;
+        double R_stella = -3.14;
+        double M_stella = -3.14;
+        double P_supercifie = -3.14;
         double m = 0;
         double P = P0;
         double r = 0;
 
-        while (P > 0.01){
-            r += h;
-            rungeKutta4(h, r, &P, &m);
+        while (P > 0){
+            // Saving data before the last step, to avoid the case where P < 0
             R_stella = r;
             M_stella = m;
+            P_supercifie = P;
+
+            r += h;
+            rungeKutta4(h, r, &P, &m);
         }
-        fprintf(f2, "%e,%e,%e\n", h, R_stella, M_stella);
+        fprintf(f2, "%e,%e,%e,%e\n", h, R_stella, M_stella, P_supercifie);
     }
 
     fclose(f2);
-    */
+    // h = 1e-4 should be fine, but let's use 1e-5 to be sure
 }
 
 
