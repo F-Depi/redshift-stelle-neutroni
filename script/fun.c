@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <math.h>
 #include "fun.h"
-#define P0 150.174       // = E_0, MeV/fm^3
-#define R0 20.06145      // km
-#define M0 12.655756     // solar masses
-#define A (13.4 / P0)      // energy density parameter
-#define B (5.6 / P0)       // energy density parameter
+#define P0 150.174          // = E_0, MeV/c^2/fm^3
+#define R0 20.06145         // km
+#define M0 12.655756        // solar masses
+#define RHO0 0.16           // fm^-3
+#define A (13.4 / P0)       // energy density parameters
+#define B (5.6 / P0)       
 #define ALPHA 0.514
 #define BETA 3.436
 #define ALPHA1 (ALPHA - 1)
@@ -21,7 +22,7 @@
  */
 
 double fun_m(double r, double P){
-    return pow(r, 3) * fun_E(P);
+    return r * r * fun_E(P);
 }
 
 

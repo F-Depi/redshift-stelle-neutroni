@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <math.h>
 #include "fun.h"
-#define P0 150.174       // = E_0, MeV/fm^3
-#define R0 20.06145      // km
-#define M0 12.655756     // solar masses
-#define a (13.4 / P0)      // energy density parameter
-#define b (5.6 / P0)       // energy density parameter
-#define alpha 0.514
-#define beta 3.436
-#define alpha1 (alpha - 1)
-#define beta1 (beta - 1)
+#define P0 150.174          // = E_0, MeV/c^2/fm^3
+#define R0 20.06145         // km
+#define M0 12.655756        // solar masses
+#define RHO0 0.16           // fm^-3
+#define A (13.4 / P0)       // energy density parameters
+#define B (5.6 / P0)       
+#define ALPHA 0.514
+#define BETA 3.436
+#define ALPHA1 (ALPHA - 1)
+#define BETA1 (BETA - 1)
+
 
 
 /*
@@ -22,9 +24,7 @@
  */
 
 
-
-int main(){
-    /*
+void test_cnts_findRho(){
     printf("a = %f\n", a);
     printf("b = %f\n", b);
     printf("alpha = %f\n", alpha);
@@ -49,13 +49,13 @@ int main(){
         P = i*0.01;
         fprintf(f2, "%e,%e\n", P, findRho(P));
     }
-    */
+
+}
 
 
-    /*
-    // Funziona? Converge?
+void test_cvg(){
     double m = 0;
-    double P = P0;
+    double P = 1;
     double r = 0;
     double rho = findRho(P);
     double h = 1e-5;
@@ -63,24 +63,22 @@ int main(){
 
     FILE *f = fopen("../data/data.csv", "w");
     fprintf(f, "r,P,m,rho\n");
-    fprintf(f, "%e,%e,%e,%e\n", r, P, m, rho);
+    fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * RHO0);
 
     while (P > 0){           // Analizzando la curva di P si vede che non si scende di molto sotto 0.01 (si arriva circa a 0.004), quindi 0.01 va bene.
         r += h;
         rungeKutta4(h, r, &P, &m);
         rho = findRho(P);
-        fprintf(f, "%e,%e,%e,%e\n", r, P, m, rho);
+        fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * RHO0);
         fflush(f);
     }
 
     fclose(f);
-    // Sì
-    */
+}
 
 
-
-    // What's the best h increment?
-    FILE *f2 = fopen("../data/data_cvg_small.csv", "w");
+void test_h(){
+    FILE *f2 = fopen("../data/data_cvg.csv", "w");
     fprintf(f2, "h,R,M,P\n");
 
     for (double h = 1e-2; h > 1e-8; h /= 2){
@@ -101,10 +99,26 @@ int main(){
             r += h;
             rungeKutta4(h, r, &P, &m);
         }
-        fprintf(f2, "%e,%e,%e,%e\n", h, R_stella, M_stella, P_supercifie);
+        fprintf(f2, "%e,%e,%e,%e\n", h, R_stella * R0, M_stella * M0, P_supercifie * P0);
     }
 
     fclose(f2);
+}
+
+
+int main(){
+
+    // Test findRho
+    //test_cnts_findRho();
+
+    
+    // Funziona? Converge?
+    //test_cvg();
+    // Sì
+
+
+    // What's the best h increment?
+    //test_h();
     // h = 1e-4 should be fine, but let's use 1e-5 to be sure
 }
 

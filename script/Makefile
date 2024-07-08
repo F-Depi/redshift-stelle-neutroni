@@ -10,4 +10,4 @@ test: $(OBJECTS_TEST)
 	$(CC) $(CFLAGS) -o test.x $(OBJECTS_TEST) -lm
 
 main: $(OBJECTS_TEST)
-	$(CC) $(CFLAGS) -o main.x $(OBJECTS_MAIN) -lm
+	$(CC) $(CFLAGS) -o main.x $(OBJECTS_MAIN) -lm -fopenmp

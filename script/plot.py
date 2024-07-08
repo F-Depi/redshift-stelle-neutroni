@@ -2,64 +2,107 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-''' Andamento P(r), m(r), rho(r) di una stella
-data = pd.read_csv('../data/data.csv')
 
-print("M = " + str(data['m'].iloc[-1]))
-print("R = " + str(data['r'].iloc[-1]))
+def test_P_rhi():
+    data = pd.read_csv('../data/rho-P.csv')
+    data2 = pd.read_csv('../data/P-rho.csv')
 
-fig, axs = plt.subplots(1, 3, figsize=(20, 5))
-axs[0].plot(data['r'], data['P'], linestyle='', marker='.', markersize=0.5)
-axs[0].axhline(y=0, color='k')
-#axs[0].set_ylim(-5, 200)
-axs[0].set_xlabel('Raggio')
-axs[0].set_ylabel('Pressione')
-axs[0].set_title('P(r)')
+    plt.plot(data['rho'], data['P'], linestyle='', marker='.')
+    plt.plot(data2['rho'], data2['P'], linestyle='', marker='.')
+    plt.axhline(y=0, color='k')
+    plt.xlabel('Density')
+    plt.ylabel('Pressure')
+    plt.show()
 
-axs[1].plot(data['r'], data['m'], linestyle='', marker='.', markersize=0.5)
-#axs[1].set_ylim(-0.1, 1)
-axs[1].set_xlabel('Raggio')
-axs[1].set_ylabel('Massa')
-axs[1].set_title('m(r)')
 
-axs[2].plot(data['r'], data['rho'], linestyle='', marker='.', markersize=0.5)
-#axs[2].set_ylim(-1, 15)
-axs[2].set_xlabel('Raggio')
-axs[2].set_ylabel('Densità')
-axs[2].set_title('rho(r)')
+def test_stella():
+    data = pd.read_csv('../data/data.csv')
 
-plt.show()
-'''
+    print("M = " + str(data['m'].iloc[-1]))
+    print("R = " + str(data['r'].iloc[-1]))
+
+    fig, axs = plt.subplots(1, 3, figsize=(20, 5))
+    axs[0].plot(data['r'], data['P'], linestyle='', marker='.')
+    axs[0].axhline(y=0, color='k')
+    #axs[0].set_ylim(-5, 200)
+    axs[0].set_xlabel('Raggio')
+    axs[0].set_ylabel('Pressione')
+    axs[0].set_title('P(r)')
+
+    axs[1].plot(data['r'], data['m'], linestyle='', marker='.')
+    #axs[1].set_ylim(-0.1, 1)
+    axs[1].set_xlabel('Raggio')
+    axs[1].set_ylabel('Massa')
+    axs[1].set_title('m(r)')
+
+    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.')
+    #axs[2].set_ylim(-1, 15)
+    axs[2].set_xlabel('Raggio')
+    axs[2].set_ylabel('Densità')
+    axs[2].set_title('rho(r)')
+
+    plt.show()
+
+
+def test_cvg():
+    data_cvg = pd.read_csv('../data/data_cvg.csv')
+
+    fig, axs = plt.subplots(1, 2, figsize=(15, 5))
+    axs[0].plot(data_cvg['h'], data_cvg['R'], linestyle='', marker='.')
+    axs[0].set_xscale('log')
+    axs[0].set_xlabel('Incremento')
+    axs[0].set_ylabel('Raggio')
+
+    axs[1].plot(data_cvg['h'], data_cvg['M'], linestyle='', marker='.')
+    axs[1].set_xscale('log')
+    axs[1].set_xlabel('Incremento')
+    axs[1].set_ylabel('Massa')
+
+    plt.show()
+
+
+def plot_MR():
+    data3 = np.genfromtxt('../data/RM_medium.csv', delimiter=',', skip_header=1, dtype=float)
+    P0 = data3[:, 1] * 1.733e15
+    R = data3[:, 2]
+    M = data3[:, 3]
+
+    fig, axs = plt.subplots(3, 1, figsize=(18, 10))
+
+    axs[0].plot(R, M, linestyle='', marker='.')
+    axs[0].plot(R, R/2, linestyle='-', color='red')
+    axs[0].set_xscale('log')
+    axs[0].set_yscale('log')
+    axs[0].set_xlabel('Raggio [km]')
+    axs[0].set_ylabel('Massa [M_sun]')
+    axs[0].set_ylabel(r'Massa $[M_{\odot}]$')
+
+    axs[1].plot(R, P0, linestyle='', marker='.')
+    axs[1].set_xscale('log')
+    axs[1].set_yscale('log')
+    axs[1].set_xlabel('Raggio [km]')
+    # axs[1].set_ylabel(r'Pressione iniziale $\left[\frac{Mev}{c^2 fm^3}\right]$')
+    axs[1].set_ylabel(r'Pressione iniziale $\left[\frac{Kg}{m^3}\right]$')
+
+    axs[2].plot(P0, M, linestyle='', marker='.')
+    axs[2].set_xscale('log')
+    #axs[2].set_xlim(-2, 1e18)
+    #axs[2].set_xlabel(r'Pressione iniziale $\left[\frac{Mev}{c^2 fm^3}\right]$')
+    axs[2].set_xlabel(r'Pressione iniziale $\left[\frac{Kg}{m^3}\right]$')
+    axs[2].set_ylabel(r'Massa $[M_{\odot}]$')
+
+    plt.show()
+
+
+''' P(rho) vs rho(P) '''
+test_P_rhi()
+
+''' Andamento P(r), m(r), rho(r) di una stella '''
+test_stella()
 
 ''' h diversi '''
-data_cvg = pd.read_csv('../data/data_cvg.csv')
+test_cvg()
 
-fig, axs = plt.subplots(1, 2, figsize=(15, 5))
-axs[0].plot(data_cvg['h'], data_cvg['R'], linestyle='', marker='o')
-axs[0].set_xscale('log')
-axs[0].set_xlabel('Incremento')
-axs[0].set_ylabel('Raggio')
-
-axs[1].plot(data_cvg['h'], data_cvg['M'], linestyle='', marker='o')
-axs[1].set_xscale('log')
-axs[1].set_xlabel('Incremento')
-axs[1].set_ylabel('Massa')
-
-plt.show()
-
-
-exit()
 ''' Grafico M-R '''
-data3 = pd.read_csv('../data/RM2.csv')
-
-plt.figure()
-plt.plot(data3['R'], data3['M'], linestyle='', marker='o')
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel('Raggio')
-plt.ylabel('Massa')
-plt.title('M-R')
-plt.show()
-
-
+plot_MR()
 
