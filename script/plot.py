@@ -16,7 +16,7 @@ def test_P_rhi():
 
 
 def test_stella():
-    data = pd.read_csv('../data/data.csv')
+    data = pd.read_csv('../data/data0.csv')
 
     print("M = " + str(data['m'].iloc[-1]))
     print("R = " + str(data['r'].iloc[-1]))
@@ -41,6 +41,24 @@ def test_stella():
     axs[2].set_ylabel('Densità')
     axs[2].set_title('rho(r)')
 
+    data = pd.read_csv('../data/data1.csv')
+
+    print("M = " + str(data['m'].iloc[-1]))
+    print("R = " + str(data['r'].iloc[-1]))
+
+    axs[0].plot(data['r'], data['P'], linestyle='', marker='.')
+    axs[1].plot(data['r'], data['m'], linestyle='', marker='.')
+    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.')
+
+    data = pd.read_csv('../data/data2.csv')
+
+    print("M = " + str(data['m'].iloc[-1]))
+    print("R = " + str(data['r'].iloc[-1]))
+
+    axs[0].plot(data['r'], data['P'], linestyle='', marker='.')
+    axs[1].plot(data['r'], data['m'], linestyle='', marker='.')
+    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.')
+
     plt.show()
 
 
@@ -62,31 +80,57 @@ def test_cvg():
 
 
 def plot_MR():
-    data3 = np.genfromtxt('../data/RM_medium.csv', delimiter=',', skip_header=1, dtype=float)
-    P0 = data3[:, 1] * 1.733e15
-    R = data3[:, 2]
-    M = data3[:, 3]
+    data = np.genfromtxt('../data/MR_0.csv', delimiter=',', skip_header=1, dtype=float)
+    P0 = data[:, 1] * 1.733e15
+    R = data[:, 2]
+    M = data[:, 3]
 
     fig, axs = plt.subplots(3, 1, figsize=(18, 10))
 
     axs[0].plot(R, M, linestyle='', marker='.')
     axs[0].plot(R, R/2, linestyle='-', color='red')
+    axs[1].plot(R, P0, linestyle='', marker='.')
+    axs[2].plot(P0, M, linestyle='', marker='.')
+
+    data = np.genfromtxt('../data/MR_1.csv', delimiter=',', skip_header=1, dtype=float)
+    P0 = data[:, 1] * 1.733e15
+    R = data[:, 2]
+    M = data[:, 3]
+
+    axs[0].plot(R, M, linestyle='', marker='.')
+    axs[1].plot(R, P0, linestyle='', marker='.')
+    axs[2].plot(P0, M, linestyle='', marker='.')
+
+    data = np.genfromtxt('../data/MR_2.csv', delimiter=',', skip_header=1, dtype=float)
+    P0 = data[:, 1] * 1.733e15
+    R = data[:, 2]
+    M = data[:, 3]
+
+    axs[0].plot(R, M, linestyle='', marker='.')
+    axs[1].plot(R, P0, linestyle='', marker='.')
+    axs[2].plot(P0, M, linestyle='', marker='.')
+
+    ## Make it nicer
+
     axs[0].set_xscale('log')
     axs[0].set_yscale('log')
+    axs[0].grid('on')
     axs[0].set_xlabel('Raggio [km]')
     axs[0].set_ylabel('Massa [M_sun]')
     axs[0].set_ylabel(r'Massa $[M_{\odot}]$')
+    axs[0].legend([r'Modello $a \alpha b \beta$', 'Shwarzschild Radius', r'$\lambda = 5/3, K = 0.05$', r'$\lambda = 2.54, K = 0.01$'])
 
-    axs[1].plot(R, P0, linestyle='', marker='.')
     axs[1].set_xscale('log')
     axs[1].set_yscale('log')
+    axs[1].grid('on')
     axs[1].set_xlabel('Raggio [km]')
     # axs[1].set_ylabel(r'Pressione iniziale $\left[\frac{Mev}{c^2 fm^3}\right]$')
     axs[1].set_ylabel(r'Pressione iniziale $\left[\frac{Kg}{m^3}\right]$')
 
-    axs[2].plot(P0, M, linestyle='', marker='.')
     axs[2].set_xscale('log')
+    axs[2].set_yscale('log')
     #axs[2].set_xlim(-2, 1e18)
+    axs[2].grid('on')
     #axs[2].set_xlabel(r'Pressione iniziale $\left[\frac{Mev}{c^2 fm^3}\right]$')
     axs[2].set_xlabel(r'Pressione iniziale $\left[\frac{Kg}{m^3}\right]$')
     axs[2].set_ylabel(r'Massa $[M_{\odot}]$')
@@ -95,14 +139,16 @@ def plot_MR():
 
 
 ''' P(rho) vs rho(P) '''
-test_P_rhi()
+#test_P_rhi()
 
 ''' Andamento P(r), m(r), rho(r) di una stella '''
-test_stella()
+#test_stella()
 
 ''' h diversi '''
-test_cvg()
+#test_cvg()
 
 ''' Grafico M-R '''
 plot_MR()
+
+''' Grafico M-R generale '''
 

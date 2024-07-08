@@ -25,14 +25,14 @@
 
 
 void test_cnts_findRho(){
-    printf("a = %f\n", a);
-    printf("b = %f\n", b);
-    printf("alpha = %f\n", alpha);
-    printf("beta = %f\n", beta);
-    printf("alpha - 1 = %f\n", alpha1);
-    printf("beta - 1 = %f\n", beta1);
-    printf("alpha1 * a = %f\n", alpha1 * a);
-    printf("beta1 * b = %f\n", beta1 * b);
+    printf("a = %f\n", A);
+    printf("b = %f\n", B);
+    printf("alpha = %f\n", ALPHA);
+    printf("beta = %f\n", BETA);
+    printf("alpha - 1 = %f\n", ALPHA1);
+    printf("beta - 1 = %f\n", BETA1);
+    printf("alpha1 * a = %f\n", ALPHA1 * A);
+    printf("beta1 * b = %f\n", BETA1 * B);
 
 
     double rho, P;
@@ -40,14 +40,14 @@ void test_cnts_findRho(){
     fprintf(f1, "rho,P\n");
     for (int i = 0; i < 1000; i++){
         rho = i*0.01;
-        fprintf(f1, "%e,%e\n", rho, P_of_rho(rho));
+        fprintf(f1, "%e,%e\n", rho * R0, P_of_rho(rho) * P0);
     }
 
     FILE *f2 = fopen("../data/P-rho.csv", "w");
     fprintf(f2, "P,rho\n");
     for (int i = 0; i < 25000; i++){
         P = i*0.01;
-        fprintf(f2, "%e,%e\n", P, findRho(P));
+        fprintf(f2, "%e,%e\n", P * P0, findRho(P) * RHO0);
     }
 
 }
@@ -61,13 +61,13 @@ void test_cvg(){
     double h = 1e-5;
 
 
-    FILE *f = fopen("../data/data.csv", "w");
+    FILE *f = fopen("../data/data2.csv", "w");
     fprintf(f, "r,P,m,rho\n");
     fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * RHO0);
 
     while (P > 0){           // Analizzando la curva di P si vede che non si scende di molto sotto 0.01 (si arriva circa a 0.004), quindi 0.01 va bene.
         r += h;
-        rungeKutta4(h, r, &P, &m);
+        rungeKutta4(h, r, &P, &m, 2);
         rho = findRho(P);
         fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * RHO0);
         fflush(f);
@@ -78,7 +78,7 @@ void test_cvg(){
 
 
 void test_h(){
-    FILE *f2 = fopen("../data/data_cvg.csv", "w");
+    FILE *f2 = fopen("../data/data_cvg_1.csv", "w");
     fprintf(f2, "h,R,M,P\n");
 
     for (double h = 1e-2; h > 1e-8; h /= 2){
@@ -97,7 +97,7 @@ void test_h(){
             P_supercifie = P;
 
             r += h;
-            rungeKutta4(h, r, &P, &m);
+            rungeKutta4(h, r, &P, &m, 1);
         }
         fprintf(f2, "%e,%e,%e,%e\n", h, R_stella * R0, M_stella * M0, P_supercifie * P0);
     }

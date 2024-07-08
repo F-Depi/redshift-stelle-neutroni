@@ -14,12 +14,12 @@
 #define BETA1 (BETA - 1)
 
 
-void solve_system(double h, double r, double P, double m, double RM[2]){
+void solve_system(double h, double r, double P, double m, double RM[2], int tipo_politropica){
     while (P > 0){
         RM[0] = r;
         RM[1] = m;
         r += h;
-        rungeKutta4(h, r, &P, &m);
+        rungeKutta4(h, r, &P, &m, tipo_politropica);
         if (r < 2 * m){
             printf("BH");
             break;
@@ -28,31 +28,63 @@ void solve_system(double h, double r, double P, double m, double RM[2]){
 }
 
 
-int main(){
+void get_MR(int tipo_politropica){
 
-    FILE *f1 = fopen("../data/RM_medium.csv", "w");
-    fprintf(f1, "h,P0,R,M\n");
+    char filename[50];
+    sprintf(filename, "../data/MR_%d.csv", tipo_politropica);
+    FILE *f = fopen(filename, "w");
+    fprintf(f, "h,P0,R,M\n");
 
-    #pragma omp parallel for schedule(dynamic), shared(f1), num_threads(8)
-    for (int i = -100; i < 100; i++){
-        double startP = pow(10, i / 10.);
-        double P = startP;
-        double RM[2] = {};
-        double m = 0;
-        double r = 0;
-        double h = 1e-5;
+    double startP, P, prevM, m, r;
+    double RM[2] = {};
+    double h = 1e-5;
 
-        solve_system(h, r, P, m, RM);
-
-        #pragma omp critical
-        {
-            fprintf(f1, "%e,%e,%e,%e\n", h, startP * P0, RM[0] * R0, RM[1] * M0);
-            fflush(f1);
-            printf("i = %d, P = %.2e\n", i, startP);
-        }
+    int start_i;
+    if (tipo_politropica == 0){
+        start_i = -450;
+    } else if (tipo_politropica == 1){
+        start_i = -600;
+    } else if (tipo_politropica == 2){
+        start_i = -650;
     }
 
-    fclose(f1);
+    for (int i = start_i; i < 500; i++){
+
+        prevM = RM[1];
+        startP = pow(10, i / 100.);
+        P = startP;
+        m = 0;
+        r = 0;
+        RM[0] = 0;
+        RM[1] = 0;
+
+        solve_system(h, r, P, m, RM, tipo_politropica);
+
+        if (RM[1] < prevM){
+            printf("Limit reached at P = %.2e MeV c^-3 fm^-3\n", startP * P0);
+            break;
+        }
+        if (RM[0] * R0 < 3){
+            printf("Star too small, not saving the data\n");
+            continue;
+        }
+
+        fprintf(f, "%e,%e,%e,%e\n", h, startP * P0, RM[0] * R0, RM[1] * M0);
+        fflush(f);
+        printf("i = %d, P = %.2e\n", i, startP);
+    }
+
+    fclose(f);
+
+}
+
+
+int main(){
+
+    #pragma omp parallel for num_threads(3)
+    for (int i = 1; i < 3; i++){
+        get_MR(i);
+    }
 
     return 0;
 }

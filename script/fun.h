@@ -10,10 +10,10 @@
  rho(P) is found by numerically
  */
 
-double fun_m(double r, double P);
+double fun_m(double r, double P, int tipo_politropica);
 
 
-double fun_P(double r, double P, double m);
+double fun_P(double r, double P, double m, int tipo_politropica);
 
 
 double P_of_rho(double rho);
@@ -25,9 +25,9 @@ double DP_of_rho(double rho);
 double findRho(double P);
 
 
-double fun_E(double P);
+double fun_E(double P, int tipo_politropica);
 
 
-void rungeKutta4(double h, double r, double *P, double *m);
+void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica);
 
 #endif

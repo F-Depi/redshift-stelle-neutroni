@@ -21,15 +21,15 @@
  rho(P) is found by numerically
  */
 
-double fun_m(double r, double P){
-    return r * r * fun_E(P);
+double fun_m(double r, double P, int tipo_politropica){
+    return r * r * fun_E(P, tipo_politropica);
 }
 
 
-double fun_P(double r, double P, double m){
+double fun_P(double r, double P, double m, int tipo_politropica){
     if (m == 0)
         return 0;
-    return (fun_E(P) + P) * (m + pow(r, 3) * P) / ((2 * m - r) * r);
+    return (fun_E(P, tipo_politropica) + P) * (m + pow(r, 3) * P) / ((2 * m - r) * r);
 }
 
 
@@ -67,27 +67,47 @@ double findRho(double P){
     return rho;
 }
 
-double fun_E(double P){
-    double rho = findRho(P);
-    return A * pow(rho, ALPHA) + B * pow(rho, BETA);
+double fun_E(double P, int tipo_politropica){
+    // Politropica quasi realistica (a*rho^alpha + b*rho^beta)
+    if (tipo_politropica == 0){
+        double rho = findRho(P);
+        return A * pow(rho, ALPHA) + B * pow(rho, BETA);
+    }
+
+    double lambda, K;
+
+    // Materia fermionica non relativistica
+    if (tipo_politropica == 1){
+        lambda = 5. / 3.;
+        K = 0.05;
+    } else if (tipo_politropica == 2){
+        lambda = 2.54;
+        K = 0.01;
+    } else {
+        printf("Tipo politropica non riconosciuto\n");
+        return 0;
+    }
+
+    double a1 = P / (lambda - 1);
+    return a1 + pow(a1 / K, 1. / lambda);
 }
 
 
-void rungeKutta4(double h, double r, double *P, double *m){
+void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica){
 
     double k1, k2, k3, k4, l1, l2, l3, l4;
 
-    k1 = h * fun_m(r, *P);
-    l1 = h * fun_P(r, *P, *m);
+    k1 = h * fun_m(r, *P, tipo_politropica);
+    l1 = h * fun_P(r, *P, *m, tipo_politropica);
 
-    k2 = h * fun_m(r + h / 2, *P + l1 / 2);
-    l2 = h * fun_P(r + h / 2, *P + l1 / 2, *m + k1 / 2);
+    k2 = h * fun_m(r + h / 2, *P + l1 / 2, tipo_politropica);
+    l2 = h * fun_P(r + h / 2, *P + l1 / 2, *m + k1 / 2, tipo_politropica);
 
-    k3 = h * fun_m(r + h / 2, *P + l2 / 2);
-    l3 = h * fun_P(r + h / 2, *P + l2 / 2, *m + k2 / 2);
+    k3 = h * fun_m(r + h / 2, *P + l2 / 2, tipo_politropica);
+    l3 = h * fun_P(r + h / 2, *P + l2 / 2, *m + k2 / 2, tipo_politropica);
 
-    k4 = h * fun_m(r + h, *P + l3);
-    l4 = h * fun_P(r + h, *P + l3, *m + k3);
+    k4 = h * fun_m(r + h, *P + l3, tipo_politropica);
+    l4 = h * fun_P(r + h, *P + l3, *m + k3, tipo_politropica);
 
     *m += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
     *P += (l1 + 2 * l2 + 2 * l3 + l4) / 6;
