@@ -1,29 +1,73 @@
 \documentclass[a4paper, titlepage]{article}
 
 \input{packages}
-\input{frontespizio}
+%\input{frontespizio}
 
 
 \begin{document}
 
 \section{Introduzione}
-Studio readshift di stelle di neutroni. Le euqazioni che descrivono la stabilità di una stella di neutroni sono
+Studiamo la stabilità delle stelle di neutroni in regime relativistico considerando 3 possibili equazioni di stato per la materia.
+Una volta risolte le equazioni è possibile ottenere l'espressione del potenziale gravitazione della stella e calcolare l'effetto sulla radiazione emessa dalla stella.
 
+
+Viene calcolata la radianza per ogni stella a 3 distanze diverse e la potenza totale di emissione in funzione della distanza dalla stella.
+Viene quindi calcolata la temperatura apparente delle 3 stelle più massive in funzione di quella effettiva e poi viene studiata la temperatura apparente in funzione della pressione centrale della stella.
+
+\section{Stabilità}
+
+Le equazioni che descrivono la stabilità di una stella sono quelle di Tolman-Oppenheimer-Volkoff
 \begin{equation}
     \begin{dcases}
         \dv[]{P(r)}{r} = - G \frac{m(r) \epsilon (r)}{r^2 c^2} \left(1 + \frac{P(r)}{\epsilon (r)} \right) \left(\ + \frac{4 \pi r^3 P(r)}{m(r) c^2} \right) \left(1 - \frac{2 G m(r)}{r c^2} \right)^{-1} \\
-        \dv[]{m(r)}{r} = 4 \pi r^2 \frac{\epsilon (r)}{c^2}
+        \dv[]{m(r)}{r} = 4 \pi r^2 \frac{\epsilon (r)}{c^2} \\
+        \dv[]{\Phi(r)}{r} = - \frac{1}{P(r) + \epsilon (r)} \dv[]{P(r)}{r}
     \end{dcases}
     \label{eq:sistema_corr}
 \end{equation}
 
-Come densità di energia interna usiamo
+Dove la terza equazione è l'equazione disaccoppiata e descrive il potenziale gravitazionale della stella.
+Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:energia1} viene presa con due coppie di valori diversi di $\Gamma$ e $K$):
 
+%\epsilon (n) &= a n ^{\alpha} + b n ^{\beta} \\
+\begin{align}
+    \epsilon (n) &= a \left( \frac{n}{n_0} \right) ^{\alpha} + \left( \frac{n}{n_0} \right) ^{\beta} \\
+    \epsilon (n) &= \mu c^2n+Kc^2n^\Gamma
+    \label{eq:energia1}
+\end{align}
 \begin{equation}
-    \epsilon (\rho) = a \rho ^{\alpha} + b \rho ^{\beta}
+    \text{con} \quad a = 13.4 \unit{\mega\electronvolt\per\femto\cubic\meter}, \quad
+    \alpha = 0.514, \quad
+    b = 5.62 \unit{\mega\electronvolt\per\femto\cubic\meter}, \quad
+    \beta = 2.436, \quad
+    n_0 = 0.16 \unit{\per\femto\cubic\meter} \\
 \end{equation}
 
-Prendiamo \ref{eq:sistema_corr} e lo adimensioniamo con
+dove $n$ è la densità numerica, $\mu$ la massa di una singola particella e quindi $\rho = \mu n$ è la densità di massa.
+
+
+Visto che la densità di energia è in funzione di $\rho$ e l'incognita del sistema \ref{eq:sistema_corr} è $P$ e $m$ possiamo scrivere la densità di energia in funzione di $P$ e $m$ partendo dalla relazione termodinamica
+
+\begin{equation}
+    P = - \dv[]{E}{V} \quad \Rightarrow \quad
+    \begin{cases}
+        P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} \\
+        n = \left( \frac{P}{K(\Gamma - 1) c^2} \right) ^ {1 / \Gamma}
+    \end{cases}
+\end{equation}
+
+Nel primo caso non è stato possibile invertire l'equazione per trovare $n$ in funzione di $P$ e $m$ quindi utilizzeremo un metodo numerico per trovare $n$ di volta in volta.
+
+
+Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con valori più vicini a 0
+
+\begin{equation*}
+    m=M_0\hat{m}, \quad 
+    r=R_0\hat{r}, \quad 
+    P=P_0\hat{P}, \quad
+    \rho=\rho_0 \hat{\rho}, \quad
+    K = \hat{K}\frac{\mu^\Gamma}{\rho_0^{\Gamma-1}},
+\end{equation*}
 
 \begin{equation}
     \begin{dcases}
