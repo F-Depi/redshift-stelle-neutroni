@@ -1,10 +1,39 @@
 \documentclass[a4paper, titlepage]{article}
-\input{packages}
 
-%%% Il documento vero e proprio %%%
-\begin{document}
+\input{packages}
 \input{frontespizio}
-\newcommand{\sch}[0]{Schrödinger }
+
+
+\begin{document}
 
 \section{Introduzione}
-Studio readshift di stelle di neutroni
+Studio readshift di stelle di neutroni. Le euqazioni che descrivono la stabilità di una stella di neutroni sono
+
+\begin{equation}
+    \begin{dcases}
+        \dv[]{P(r)}{r} = - G \frac{m(r) \epsilon (r)}{r^2 c^2} \left(1 + \frac{P(r)}{\epsilon (r)} \right) \left(\ + \frac{4 \pi r^3 P(r)}{m(r) c^2} \right) \left(1 - \frac{2 G m(r)}{r c^2} \right)^{-1} \\
+        \dv[]{m(r)}{r} = 4 \pi r^2 \frac{\epsilon (r)}{c^2}
+    \end{dcases}
+    \label{eq:sistema_corr}
+\end{equation}
+
+Come densità di energia interna usiamo
+
+\begin{equation}
+    \epsilon (\rho) = a \rho ^{\alpha} + b \rho ^{\beta}
+\end{equation}
+
+Prendiamo \ref{eq:sistema_corr} e lo adimensioniamo con
+
+\begin{equation}
+    \begin{dcases}
+        \dv[]{\hat{P}}{\hat{r}}=-\frac{(\hat{P}+\hat{\epsilon})(\hat{m}+\hat{r}^3\hat{P})}{\hat{r}^2-2\hat{m}\hat{r}}\\
+        \dv[]{\hat{m}}{\hat{r}}= \hat{r}^2 \hat{\epsilon}
+    \end{dcases}
+    \label{eq:sistema_adim}
+\end{equation}
+
+otteniamo \ref{eq:sistema_adim} con
+
+
+\end{document}
