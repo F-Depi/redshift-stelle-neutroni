@@ -1,3 +1,7 @@
+% Run this command from vim
+% :!pdflatex -interaction=batchmode main.tex && evince main.pdf &
+% then to run the last command that starts with :! just do :!!
+
 \documentclass[a4paper, titlepage]{article}
 
 \input{packages}
@@ -31,8 +35,8 @@ Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:en
 
 %\epsilon (n) &= a n ^{\alpha} + b n ^{\beta} \\
 \begin{align}
-    \epsilon (n) &= a \left( \frac{n}{n_0} \right) ^{\alpha} + \left( \frac{n}{n_0} \right) ^{\beta} \\
-    \epsilon (n) &= \mu c^2n+Kc^2n^\Gamma
+    \epsilon_1 (n) &= a \left( \frac{n}{n_0} \right) ^{\alpha} + b \left( \frac{n}{n_0} \right) ^{\beta} \\
+    \epsilon_{2/3} (n) &= \mu c^2n+Kc^2n^\Gamma
     \label{eq:energia1}
 \end{align}
 \begin{equation}
@@ -46,13 +50,13 @@ Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:en
 dove $n$ è la densità numerica, $\mu$ la massa di una singola particella e quindi $\rho = \mu n$ è la densità di massa.
 
 
-Visto che la densità di energia è in funzione di $\rho$ e l'incognita del sistema \ref{eq:sistema_corr} è $P$ e $m$ possiamo scrivere la densità di energia in funzione di $P$ e $m$ partendo dalla relazione termodinamica
+Visto che la densità di energia è in funzione di $\rho$ e le incognite del sistema \ref{eq:sistema_corr} sono $P$ e $m$ possiamo scrivere la densità di energia in funzione di $P$ e $m$ partendo dalla relazione termodinamica
 
 \begin{equation}
     P = - \dv[]{E}{V} \quad \Rightarrow \quad
     \begin{cases}
-        P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} \\
-        n = \left( \frac{P}{K(\Gamma - 1) c^2} \right) ^ {1 / \Gamma}
+        P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} & \text{per } \epsilon_1 \\
+        n = \left( \frac{P}{K(\Gamma - 1) c^2} \right) ^ {1 / \Gamma} & \text{per } \epsilon_{1/2}
     \end{cases}
 \end{equation}
 
@@ -77,7 +81,13 @@ Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con v
     \label{eq:sistema_adim}
 \end{equation}
 
-otteniamo \ref{eq:sistema_adim} con
+otteniamo \ref{eq:sistema_adim}, dove si è scelto
+
+\begin{equation}
+    M_0 = 12.655756 M_\odot \quad R_0 = 20.06145 \unit{\kilo\meter} \quad P_0 = \rho_0 c^2 = 150.174 \frac{\unit{\mega\electronvolt}}{c^2 \unit{\femto\meter}}
+\end{equation}
 
 
 \end{document}
+
+
