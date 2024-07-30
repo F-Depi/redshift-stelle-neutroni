@@ -20,7 +20,7 @@ Viene quindi calcolata la temperatura apparente delle 3 stelle più massive in f
 
 \section{Stabilità}
 
-Le equazioni che descrivono la stabilità di una stella sono quelle di Tolman-Oppenheimer-Volkoff
+Le equazioni che descrivono la stabilità di una stella in funzione della massa ($m$) e della pressione ($P$) sono quelle di Tolman-Oppenheimer-Volkoff
 \begin{equation}
     \begin{dcases}
         \dv[]{P(r)}{r} = - G \frac{m(r) \epsilon (r)}{r^2 c^2} \left(1 + \frac{P(r)}{\epsilon (r)} \right) \left(\ + \frac{4 \pi r^3 P(r)}{m(r) c^2} \right) \left(1 - \frac{2 G m(r)}{r c^2} \right)^{-1} \\
@@ -32,8 +32,6 @@ Le equazioni che descrivono la stabilità di una stella sono quelle di Tolman-Op
 
 Dove la terza equazione è l'equazione disaccoppiata e descrive il potenziale gravitazionale della stella.
 Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:energia1} viene presa con due coppie di valori diversi di $\Gamma$ e $K$):
-
-%\epsilon (n) &= a n ^{\alpha} + b n ^{\beta} \\
 \begin{align}
     \epsilon_1 (n) &= a \left( \frac{n}{n_0} \right) ^{\alpha} + b \left( \frac{n}{n_0} \right) ^{\beta} \\
     \epsilon_{2/3} (n) &= \mu c^2n+Kc^2n^\Gamma
@@ -58,35 +56,44 @@ Visto che la densità di energia è in funzione di $\rho$ e le incognite del sis
         P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} & \text{per } \epsilon_1 \\
         n = \left( \frac{P}{K(\Gamma - 1) c^2} \right) ^ {1 / \Gamma} & \text{per } \epsilon_{1/2}
     \end{cases}
+    \label{eq:eps(r)}
 \end{equation}
 
 Nel primo caso non è stato possibile invertire l'equazione per trovare $n$ in funzione di $P$ e $m$ quindi utilizzeremo un metodo numerico per trovare $n$ di volta in volta.
 
 
-Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con valori più vicini a 0
+Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con valori più vicini a 0.
 
 \begin{equation*}
-    m=M_0\hat{m}, \quad 
-    r=R_0\hat{r}, \quad 
-    P=P_0\hat{P}, \quad
+    m=M_0\hat m, \quad 
+    r=R_0\hat r, \quad 
+    P=P_0\hat P, \quad
     \rho=\rho_0 \hat{\rho}, \quad
     K = \hat{K}\frac{\mu^\Gamma}{\rho_0^{\Gamma-1}},
 \end{equation*}
 
 \begin{equation}
     \begin{dcases}
-        \dv[]{\hat{P}}{\hat{r}}=-\frac{(\hat{P}+\hat{\epsilon})(\hat{m}+\hat{r}^3\hat{P})}{\hat{r}^2-2\hat{m}\hat{r}}\\
-        \dv[]{\hat{m}}{\hat{r}}= \hat{r}^2 \hat{\epsilon}
+        \dv[]{\hat P}{\hat r} = - \frac{(\hat P + \hat{\epsilon})(\hat m + \hat r^3 \hat P)}{\hat r^2-2\hat m\hat r}\\
+        \dv[]{\hat m}{\hat r} = \hat r^2 \hat{\epsilon} \\
+        \dv[]{\Phi}{\hat r} = - \frac{1}{\hat P + \hat{\epsilon}} \dv[]{\hat P}{\hat r}
     \end{dcases}
     \label{eq:sistema_adim}
 \end{equation}
 
-otteniamo \ref{eq:sistema_adim}, dove si è scelto
+Otteniamo il sistema \ref{eq:sistema_adim} dove, grazie alle equazioni in \ref{eq:eps(r)}, $\hat m$, $\hat P$ e $\hat{\epsilon}$ sono funzioni di $\hat r$. Come valori delle costanti sono stati usati
 
 \begin{equation}
-    M_0 = 12.655756 M_\odot \quad R_0 = 20.06145 \unit{\kilo\meter} \quad P_0 = \rho_0 c^2 = 150.174 \frac{\unit{\mega\electronvolt}}{c^2 \unit{\femto\meter}}
+    M_0 = 12.655756 M_\odot \quad R_0 = 20.06145 \unit{\kilo\meter} \quad \epsilon = P_0 = \rho_0 c^2 = 150.174 \frac{\unit{\mega\electronvolt}}{c^2 \unit{\femto\meter}}
 \end{equation}
 
+Per il potenziale gravitazionale $\Phi$ si può inoltre trovare una soluzione analitica all'esterno della stella che possiamo mettere in forma adimensionale (eq. \ref{eq:Phi_ext}), dove $\hat{M}$ e $\hat R$ sono rispettivamente la massa totale e il raggio della stella in forma adimensionale.
+
+\begin{equation}
+    \Phi_\text{ext} (r) = \frac{1}{2} \log(1 - \frac{2 G M}{r c^2})
+    \implies \Phi_\text{ext} (\hat r) = \frac{1}{2} \log(1 - \frac{2 \hat{M}}{\hat r}) \quad \quad \hat r \geq \hat{R}
+    \label{eq:Phi_ext}
+\end{equation}
 
 \end{document}
 
