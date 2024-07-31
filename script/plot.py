@@ -1,3 +1,5 @@
+## Run when opening a new buffer
+## :setlocal makeprg=cd\ script\ &&\ python3.12\ plot.py
 from matplotlib.lines import lineStyles
 import pandas as pd
 import matplotlib.pyplot as plt

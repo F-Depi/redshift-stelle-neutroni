@@ -125,3 +125,23 @@ void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica)
     *m += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
     *P += (l1 + 2 * l2 + 2 * l3 + l4) / 6;
 }
+
+
+// Simpson method to integrate
+double integrale_simpson(double a, double b, int N, double alpha, double (*fun)(double, double)){
+    // assume a > b
+    double h = (b - a)/N;
+    double integral = ((*fun)(a, alpha) + (*fun)(b, alpha)) * h / 3;
+
+    // assume N pari
+    for (int i = 1; i <= N/2 - 1; i++) {
+        integral += (2*h /3 )* (*fun)(a + 2*i * h, alpha);
+        integral += (4*h /3 )* (*fun)(a + (2*i-1) * h, alpha);
+    }
+
+
+    integral += (4*h /3 )* (*fun)(a + (N-1) * h, alpha);
+
+    return integral;
+}
+

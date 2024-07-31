@@ -33,7 +33,7 @@ void get_MR(int tipo_politropica){
     char filename[50];
     sprintf(filename, "../data/MR_%d.csv", tipo_politropica);
     FILE *f = fopen(filename, "w");
-    fprintf(f, "h,P0,R,M\n");
+    fprintf(f, "h,P0,R,lenfile\n");
 
     double startP, P, prevM, m, r;
     double RM[2] = {};
@@ -79,12 +79,95 @@ void get_MR(int tipo_politropica){
 }
 
 
-int main(){
+// Salva in 3 file diversi r,P,m di 3 stelle con 3 politropiche diverse, date le 3 pressioni iniziali
+void gen_maxM_data(double *startP){
 
     #pragma omp parallel for num_threads(3)
-    for (int i = 1; i < 3; i++){
-        get_MR(i);
+    for (int i = 0; i < 3; i++){
+    int tipo_politropica = i;
+    double h = 1e-5;
+    double r = 0;
+    double m = 0;
+    double P = startP[i];
+
+    char fdata_name[50];
+    sprintf(fdata_name, "../data/maxM_%d.csv", tipo_politropica);
+    FILE *f = fopen(fdata_name, "w");
+    fprintf(f, "r,P,m\n");
+
+    while (P > 0){
+        fprintf(f, "%.10e,%.10e,%.10e\n", r * R0, P * P0, m * M0);
+        r += h;
+        rungeKutta4(h, r, &P, &m, tipo_politropica);
     }
+    fclose(f);
+
+    }
+}
+
+
+
+// Legge i dati generati nei 3 file sopra, serve solo la lunghezza del file -1 come input
+int read_maxM_data(int tipo_politropica, int lenfile, double *r, double *P, double *m){
+
+    char fdata_name[50];
+    sprintf(fdata_name, "../data/maxM_%d.csv", tipo_politropica);
+
+    // Open file where the data computed above is stored
+    FILE *file = fopen(fdata_name, "r");
+    if (file == NULL) {
+        printf("Error opening file\n");
+        return 1;
+    }
+    
+    // Read R, m
+    double temp;
+    if (fscanf(file, "%c,%c,%c", &temp, &temp, &temp) != 3) {
+            printf("Error reading header from file\n");
+            return 1;
+    }
+    for (int i = 0; i < lenfile; i++) {
+        double col1, col2, col3;
+        if (fscanf(file, "%lf,%lf,%lf", &col1, &col2, &col3) != 3) {
+            printf("i = %d\n", i);
+            printf("Error reading data from file\n");
+            return 1;
+        }
+        r[i] = col1 / R0;
+        P[i] = col2 / P0;
+        m[i] = col3 / M0;
+    }
+    
+    fclose(file); // close file
+
+    return 0;
+}
+
+int main(){
+
+    /* Genera i dati per costruire il grafico massa raggio, richiesto dal punto 2 */
+    // #pragma omp parallel for num_threads(3)
+    // for (int i = 0; i < 3; i++){
+    //     get_MR(i);
+    // }
+
+
+    /* Genera dati per fare Grafico del potenziale, richiesto dal punto 3 */
+    // double startP[3] = {43.31065 / P0, 217.0675 / P0, 947.5339 / P0};
+    // gen_maxM_data(startP);
+
+
+
+    /* Legge i dati dai 3 file generati sopra */
+    int len_files[3] = {294288, 54348, 42666};
+    int tipo_politropica = 0;
+
+    int lenfile = len_files[tipo_politropica];
+    double r[lenfile] = {};
+    double P[lenfile] = {};
+    double m[lenfile] = {};
+
+    read_maxM_data(tipo_politropica, lenfile, r, P, m);
 
     return 0;
 }
