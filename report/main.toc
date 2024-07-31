@@ -3,6 +3,6 @@
 \contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
 \contentsline {section}{\numberline {2}Stabilità}{2}{section.2}%
 \contentsline {section}{\numberline {3}Curva massa raggio}{3}{section.3}%
-\contentsline {section}{\numberline {4}Potenziale gravitazionele}{4}{section.4}%
+\contentsline {section}{\numberline {4}Potenziale gravitazionale}{4}{section.4}%
 \contentsline {section}{\numberline {A}RK4}{5}{appendix.Alph1}%
 \contentsline {section}{\numberline {B}Risoluzione numerica di $\hat P (\rho )$}{5}{appendix.Alph2}%
