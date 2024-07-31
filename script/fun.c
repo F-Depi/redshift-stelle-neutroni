@@ -21,27 +21,34 @@
  rho(P) is found by numerically
  */
 
+
+// f_m = r^3 E
 double fun_m(double r, double P, int tipo_politropica){
     return r * r * fun_E(P, tipo_politropica);
 }
 
 
+// f_P = - (P + E)(m + r^3 P)/(r^2 - 2mr)
 double fun_P(double r, double P, double m, int tipo_politropica){
     if (m == 0)
         return 0;
-    return (fun_E(P, tipo_politropica) + P) * (m + pow(r, 3) * P) / ((2 * m - r) * r);
+    return (P + fun_E(P, tipo_politropica)) * (m + pow(r, 3) * P) / ((2 * m - r) * r);
 }
 
 
+// This is for findRho()
 double P_of_rho(double rho){
     return ALPHA1 * A * pow(rho, ALPHA) + BETA1 * B * pow(rho, BETA);
 }
 
 
+// This is for findRho(), it's the analitic derivative of the function above
 double DP_of_rho(double rho){
     return ALPHA * ALPHA1 * A * pow(rho, ALPHA - 1) + BETA * BETA1 * B * pow(rho, BETA - 1);
 }
 
+
+// Since E = E(rho), we need to find rho from P to evaluate E
 double findRho(double P){
 
     // Newton-Raphson method to find rho
@@ -54,7 +61,7 @@ double findRho(double P){
         return rho;
     }
 
-    // Bisect method
+    // for small P it's safer to use the bisect method
     double rho_sx = 0.7, rho_dx = 1.;
     double rho = (rho_sx + rho_dx) / 2;
     while (fabs(P - P_of_rho(rho)) > 1e-6){
@@ -67,6 +74,9 @@ double findRho(double P){
     return rho;
 }
 
+
+// Evaluates the energy for 3 differents matter state functions
+// tipo_politropica = 1, 2, 3
 double fun_E(double P, int tipo_politropica){
     // Politropica quasi realistica (a*rho^alpha + b*rho^beta)
     if (tipo_politropica == 0){
@@ -93,6 +103,9 @@ double fun_E(double P, int tipo_politropica){
 }
 
 
+//RK4 algorithm to advance 1 step of length h, in a sistem like dP/dr = fun_P dm/dr = fun_m 
+// Updates the values of m, P given
+// tipo_politropica = 1, 2, 3
 void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica){
 
     double k1, k2, k3, k4, l1, l2, l3, l4;

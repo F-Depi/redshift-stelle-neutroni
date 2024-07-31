@@ -10,6 +10,8 @@
 
 \begin{document}
 
+\tableofcontents
+
 \section{Introduzione}
 Studiamo la stabilità delle stelle di neutroni in regime relativistico considerando 3 possibili equazioni di stato per la materia.
 Una volta risolte le equazioni è possibile ottenere l'espressione del potenziale gravitazione della stella e calcolare l'effetto sulla radiazione emessa dalla stella.
@@ -31,18 +33,19 @@ Le equazioni che descrivono la stabilità di una stella in funzione della massa 
 \end{equation}
 
 Dove la terza equazione è l'equazione disaccoppiata e descrive il potenziale gravitazionale della stella.
-Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:energia1} viene presa con due coppie di valori diversi di $\Gamma$ e $K$):
+Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:energia23} viene presa con due coppie di valori diversi di $\Gamma$ e $K$):
+\begin{subequations}
 \begin{align}
-    \epsilon_1 (n) &= a \left( \frac{n}{n_0} \right) ^{\alpha} + b \left( \frac{n}{n_0} \right) ^{\beta} \\
-    \epsilon_{2/3} (n) &= \mu c^2n+Kc^2n^\Gamma
-    \label{eq:energia1}
+    \epsilon_1 (n) &= a \left( \frac{n}{n_0} \right) ^{\alpha} + b \left( \frac{n}{n_0} \right) ^{\beta} \label{eq:energia1} \\
+    \epsilon_{2/3} (n) &= \mu c^2n+Kc^2n^\Gamma \label{eq:energia23}
 \end{align}
+\end{subequations}
 \begin{equation}
-    \text{con} \quad a = 13.4 \unit{\mega\electronvolt\per\femto\cubic\meter}, \quad
+    \text{con} \quad a = 13.4 \unit{\mega\electronvolt\per\femto\cubic\meter} \ , \quad
     \alpha = 0.514, \quad
-    b = 5.62 \unit{\mega\electronvolt\per\femto\cubic\meter}, \quad
-    \beta = 2.436, \quad
-    n_0 = 0.16 \unit{\per\femto\cubic\meter} \\
+    b = 5.62 \unit{\mega\electronvolt\per\femto\cubic\meter} \ , \quad
+    \beta = 2.436 \ , \quad
+    n_0 = 0.16 \unit{\per\femto\cubic\meter}
 \end{equation}
 
 dove $n$ è la densità numerica, $\mu$ la massa di una singola particella e quindi $\rho = \mu n$ è la densità di massa.
@@ -50,17 +53,15 @@ dove $n$ è la densità numerica, $\mu$ la massa di una singola particella e qui
 
 Visto che la densità di energia è in funzione di $\rho$ e le incognite del sistema \ref{eq:sistema_corr} sono $P$ e $m$ possiamo scrivere la densità di energia in funzione di $P$ e $m$ partendo dalla relazione termodinamica
 
-\begin{equation}
-    P = - \dv[]{E}{V} \quad \Rightarrow \quad
-    \begin{cases}
-        P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} & \text{per } \epsilon_1 \\
-        n = \left( \frac{P}{K(\Gamma - 1) c^2} \right) ^ {1 / \Gamma} & \text{per } \epsilon_{1/2}
-    \end{cases}
+\begin{subequations}
     \label{eq:eps(r)}
-\end{equation}
+    \begin{align}[left = {P = - \dv[]{E}{V} \Rightarrow \empheqlbrace}]
+        P &= (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} + (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} && \text{per } \epsilon_1 \label{eq:eps(r)1} \\
+        n &= \left( \frac{P}{K(\Gamma - 1) c^2} \right)^{1 / \Gamma} && \text{per } \epsilon_{1/2} \label{eq:eps(r)23}
+    \end{align}
+\end{subequations}
 
-Nel primo caso non è stato possibile invertire l'equazione per trovare $n$ in funzione di $P$ e $m$ quindi utilizzeremo un metodo numerico per trovare $n$ di volta in volta.
-
+Nel primo caso (eq. \ref{eq:eps(r)1}) non è stato possibile invertire l'equazione per trovare $n$ in funzione di $P$ e $m$ quindi utilizzeremo un metodo numerico per trovare $n$ di volta in volta.
 
 Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con valori più vicini a 0.
 
@@ -72,19 +73,20 @@ Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con v
     K = \hat{K}\frac{\mu^\Gamma}{\rho_0^{\Gamma-1}},
 \end{equation*}
 
-\begin{equation}
-    \begin{dcases}
-        \dv[]{\hat P}{\hat r} = - \frac{(\hat P + \hat{\epsilon})(\hat m + \hat r^3 \hat P)}{\hat r^2-2\hat m\hat r}\\
-        \dv[]{\hat m}{\hat r} = \hat r^2 \hat{\epsilon} \\
-        \dv[]{\Phi}{\hat r} = - \frac{1}{\hat P + \hat{\epsilon}} \dv[]{\hat P}{\hat r}
-    \end{dcases}
+\begin{subequations}
+    \begin{align}[left = {\empheqlbrace}]
+        \dv[]{\hat P}{\hat r} &= - \frac{(\hat P + \hat{\epsilon})(\hat m + \hat r^3 \hat P)}{\hat r^2-2\hat m\hat r} \label{eq:P_ad} \\
+        \dv[]{\hat m}{\hat r} &= \hat r^2 \hat{\epsilon} \label{eq:m_ad} \\
+        \dv[]{\Phi}{\hat r} &= - \frac{1}{\hat P + \hat{\epsilon}} \dv[]{\hat P}{\hat r} \label{eq:Phi_ad}
+    \end{align}
     \label{eq:sistema_adim}
-\end{equation}
+\end{subequations}
 
 Otteniamo il sistema \ref{eq:sistema_adim} dove, grazie alle equazioni in \ref{eq:eps(r)}, $\hat m$, $\hat P$ e $\hat{\epsilon}$ sono funzioni di $\hat r$. Come valori delle costanti sono stati usati
 
 \begin{equation}
     M_0 = 12.655756 M_\odot \quad R_0 = 20.06145 \unit{\kilo\meter} \quad \epsilon = P_0 = \rho_0 c^2 = 150.174 \frac{\unit{\mega\electronvolt}}{c^2 \unit{\femto\meter}}
+    \label{eq:val_cost}
 \end{equation}
 
 Per il potenziale gravitazionale $\Phi$ si può inoltre trovare una soluzione analitica all'esterno della stella che possiamo mettere in forma adimensionale (eq. \ref{eq:Phi_ext}), dove $\hat{M}$ e $\hat R$ sono rispettivamente la massa totale e il raggio della stella in forma adimensionale.
@@ -94,6 +96,167 @@ Per il potenziale gravitazionale $\Phi$ si può inoltre trovare una soluzione an
     \implies \Phi_\text{ext} (\hat r) = \frac{1}{2} \log(1 - \frac{2 \hat{M}}{\hat r}) \quad \quad \hat r \geq \hat{R}
     \label{eq:Phi_ext}
 \end{equation}
+
+
+\section{Curva massa raggio}
+Cominciamo con il risolvere le prime due equazioni \ref{eq:P_ad} e \ref{eq:m_ad} del sistema adimensionale con il metodo \texttt{RK4} (appendice \ref{ap:RK4}).
+Per il caso con equzione di stato più complessa (eq. \ref{eq:energia1}) viene risolta numericamente l'equazione \ref{eq:eps(r)1} per trovare $\rho$ da $P$ (Appendice \ref{ap:eps(r)1}).
+
+Segliamo massa iniziale 0 e pressioni iniziali differenti in modo da trovare soluzioni con $R$ compreso tra i 3 e i 60 \unit{\kilo\meter}. Il grafico massa raggio trovato viene riportato in figura \ref{fig:MR}.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width = 0.6 \textwidth]{Figures/MR.eps}
+        \caption{Caption}
+        \label{fig:MR}
+\end{figure}
+
+Durante l'esecuzione del programma abbiamo inoltre smesso di incrementare la pressione centrale iniziale quando la condizione di stabilità $\dv[]{M}{r} > 0$ veniva meno.
+
+Notiamo subito che con l'equazione di stato \ref{eq:energia1} il modello prevede stelle con massa e raggio maggiore rispetto al limite previsto dagli altri modelli.
+%\begin{figure}[h]
+%    \begin{minipage}{0.48\textwidth}
+%        \centering
+%        \includegraphics[width = \textwidth]{Figures/Figure_rho0.91.png}
+%        \caption{Coordinate x e y delle particelle.
+%        Sullla stessa fiura sono state plottate le posizioni delle particelle per ogni instante temporale successivo a \texttt{nsteps/2} e per ogni valore di $z$.
+%        A $\rho = 0.91$ le particelle sono disposte in modo disordinato. \\}
+%        \label{fig:rho0.91}
+%    \end{minipage}
+%    \hspace{0.015\textwidth}    
+%    \begin{minipage}{0.48\textwidth}
+%        \centering
+%        \includegraphics[width = \linewidth]{Figures/Figure_rho0.97.png}
+%        \caption{Coordinate x e y delle particelle.
+%        Sullla stessa fiura sono state plottate le posizioni delle particelle per ogni instante temporale successivo a \texttt{nsteps/2} e per ogni valore di $z$.
+%        A $\rho = 0.97$ la struttura \texttt{BCC} è ben visibile e per ogni posizione si vede quanto può oscillare una particelle.}
+%        \label{fig:rho0.97}
+%    \end{minipage}
+%\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\appendix
+
+\section{RK4} \label{ap:RK4}
+Codice con cui è stato implementato il metodo \texttt{RK4}. \texttt{fun\_P()} e \texttt{fun\_m()} sono le funzioni presenti a destra dell'uguale nella prima e nella seconda riga del sistema \ref{eq:sistema_adim}.
+
+\begin{lstlisting}[language=C]
+void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica){
+
+    double k1, k2, k3, k4, l1, l2, l3, l4;
+
+    k1 = h * fun_m(r, *P, tipo_politropica);
+    l1 = h * fun_P(r, *P, *m, tipo_politropica);
+
+    k2 = h * fun_m(r + h / 2, *P + l1 / 2, tipo_politropica);
+    l2 = h * fun_P(r + h / 2, *P + l1 / 2, *m + k1 / 2, tipo_politropica);
+
+    k3 = h * fun_m(r + h / 2, *P + l2 / 2, tipo_politropica);
+    l3 = h * fun_P(r + h / 2, *P + l2 / 2, *m + k2 / 2, tipo_politropica);
+
+    k4 = h * fun_m(r + h, *P + l3, tipo_politropica);
+    l4 = h * fun_P(r + h, *P + l3, *m + k3, tipo_politropica);
+
+    *m += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+    *P += (l1 + 2 * l2 + 2 * l3 + l4) / 6;
+}
+\end{lstlisting}
+
+\section{Risoluzione numerica di $\hat P (\rho)$} \label{ap:eps(r)1}
+
+Quando si calcola il valore della derivata di $P$ o $m$ ad un dato $r$ serve anche il valore dell'energia interna, infatti
+\begin{lstlisting}[language=C]
+// fun_m = r^3 E
+double fun_m(double r, double P, int tipo_politropica){
+    return r * r * fun_E(P, tipo_politropica);
+}
+
+
+// fun_P = - (P + E)(m + r^3 P)/(r^2 - 2mr)
+double fun_P(double r, double P, double m, int tipo_politropica){
+    if (m == 0)
+        return 0;
+    return (P + fun_E(P, tipo_politropica)) * (m + pow(r, 3) * P) / ((2 * m - r) * r);
+}
+\end{lstlisting}
+Dove la funzione \texttt{fun\_E()} è definita come
+\begin{lstlisting}[language=C]
+double fun_E(double P, int tipo_politropica){
+    // Politropica quasi realistica (a*rho^alpha + b*rho^beta)
+    if (tipo_politropica == 0){
+        double rho = findRho(P);
+        return A * pow(rho, ALPHA) + B * pow(rho, BETA);
+    }
+
+    double lambda, K;
+
+    // Politropiche semplici
+    if (tipo_politropica == 1){
+        lambda = 5. / 3.;
+        K = 0.05;
+    } else if (tipo_politropica == 2){
+        lambda = 2.54;
+        K = 0.01;
+    } else {
+        printf("Tipo politropica non riconosciuto\n");
+        return 0;
+    }
+
+    double a1 = P / (lambda - 1);
+    return a1 + pow(a1 / K, 1. / lambda);
+}
+\end{lstlisting}
+
+Per le politropiche semplici (eq. \ref{eq:energia23}) abbiamo potuto trovare un'espressione analitica per $\rho (P)$ (eq. \ref{eq:eps(r)23}). L'energia può quindi essere calcolata in modo diretto come viene fatto nelle righe 22-23 del codice sopra riportato.
+
+Per la politropica \ref{eq:energia1}, la relazione tra $\rho$ e $P$ che si trova è data in \ref{eq:eps(r)1}, che riportiamo
+
+\begin{equation}
+        P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} + (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} \ .
+        \label{ap:eq:1}
+\end{equation}
+
+Data una certa pressione $P$ bisopgna quindi risolvere numericamente l'equazione per trovare il valore $n$ che la soddisfa. Per fare ciò utiliziamo la funzione \texttt{findRho()} così definita
+
+\begin{lstlisting}[language=C]
+double findRho(double P){
+
+    // Cominciamo prima con il metodo di Newton-Raphson
+    if (P > 0.01){
+
+        double rho = pow(P / (BETA1 * B), 1 / BETA);    // buona approx. iniziale
+        while (fabs(P - P_of_rho(rho)) > 1e-6){
+            rho -= (P_of_rho(rho) - P) / DP_of_rho(rho);
+        }
+        return rho;
+    }
+
+    // Per P piccoli meglio usare bisezione
+    double rho_sx = 0.7, rho_dx = 1.;
+    double rho = (rho_sx + rho_dx) / 2;
+    while (fabs(P - P_of_rho(rho)) > 1e-6){
+        if (P_of_rho(rho) > P)
+            rho_dx = rho;
+        else
+            rho_sx = rho;
+        rho = (rho_sx + rho_dx) / 2;
+    }
+    return rho;
+}
+\end{lstlisting}
+
+dove \texttt{P\_odf\_rho()} e \texttt{DP\_of\_rho()} sono rispettivamente la funzione \ref{ap:eq:1} e la sua derivata. In questo modo possiamo sempre trasformare $\epsilon (\rho)$ in $\epsilon (P)$.
 
 \end{document}
 

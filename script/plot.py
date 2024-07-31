@@ -1,7 +1,19 @@
+from matplotlib.lines import lineStyles
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+SMALL_SIZE = 13
+MEDIUM_SIZE = 13
+BIGGER_SIZE = 13
+
+plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
 
 def test_P_rhi():
     data = pd.read_csv('../data/rho-P.csv')
@@ -138,6 +150,33 @@ def plot_MR():
     plt.show()
 
 
+def plot_MR_rela():
+    plt.figure()
+
+    data = np.genfromtxt('../data/MR_0.csv', delimiter=',', skip_header=1, dtype=float)
+    R = data[:, 2]
+    M = data[:, 3]
+    plt.plot(R, R/2, linestyle='-', color='black', label='Raggio di Shwarzschild')
+    plt.plot(R, M, linestyle='', marker='.', color='r', label = r'$\epsilon_1$')
+    data = np.genfromtxt('../data/MR_1.csv', delimiter=',', skip_header=1, dtype=float)
+    R = data[:, 2]
+    M = data[:, 3]
+    plt.plot(R, M, linestyle='', marker='.', color='b', label = r'$\epsilon_2$')
+    data = np.genfromtxt('../data/MR_2.csv', delimiter=',', skip_header=1, dtype=float)
+    R = data[:, 2]
+    M = data[:, 3]
+    plt.plot(R, M, linestyle='', marker='.', color='g', label = r'$\epsilon_3$')
+
+    plt.title('Curva massa raggio per stelle con 3 equazioni di stato diverse')
+    plt.xlabel('Raggio [km]')
+    plt.ylabel(r'Massa [$M_\odot$]')
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.grid()
+    plt.legend()
+    plt.show()
+
+
 ''' P(rho) vs rho(P) '''
 #test_P_rhi()
 
@@ -147,8 +186,10 @@ def plot_MR():
 ''' h diversi '''
 #test_cvg()
 
-''' Grafico M-R '''
-plot_MR()
+''' Grafico M-R e altro'''
+##plot_MR()
 
 ''' Grafico M-R generale '''
+plot_MR_rela()
+
 

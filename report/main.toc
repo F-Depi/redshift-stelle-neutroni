@@ -1,0 +1,7 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Introduzione}{1}{section.1}%
+\contentsline {section}{\numberline {2}Stabilità}{1}{section.2}%
+\contentsline {section}{\numberline {3}Curva massa raggio}{2}{section.3}%
+\contentsline {section}{\numberline {A}RK4}{3}{appendix.Alph1}%
+\contentsline {section}{\numberline {B}Risoluzione numerica di $\hat P (\rho )$}{3}{appendix.Alph2}%
