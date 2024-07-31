@@ -1,7 +1,9 @@
+// :setlocal makeprg=cd\ script\ &&\ make\ main\ &&\ ./main.x
 #include <stdio.h>
 #include <math.h>
 #include <omp.h>
 #include "fun.h"
+#include <stdlib.h>
 #define P0 150.174          // = E_0, MeV/c^2/fm^3
 #define R0 20.06145         // km
 #define M0 12.655756        // solar masses
@@ -82,29 +84,30 @@ void get_MR(int tipo_politropica){
 // Salva in 3 file diversi r,P,m di 3 stelle con 3 politropiche diverse, date le 3 pressioni iniziali
 void gen_maxM_data(double *startP){
 
-    #pragma omp parallel for num_threads(3)
-    for (int i = 0; i < 3; i++){
-    int tipo_politropica = i;
-    double h = 1e-5;
-    double r = 0;
-    double m = 0;
-    double P = startP[i];
+    for (int tipo_politropica = 0; tipo_politropica < 3; tipo_politropica++){
+        double h = 1e-5;
+        double r = 0;
+        double m = 0;
+        double P = startP[tipo_politropica];
 
-    char fdata_name[50];
-    sprintf(fdata_name, "../data/maxM_%d.csv", tipo_politropica);
-    FILE *f = fopen(fdata_name, "w");
-    fprintf(f, "r,P,m\n");
+        char fdata_name[50];
+        sprintf(fdata_name, "../data/maxM_%d.csv", tipo_politropica);
+        FILE *f = fopen(fdata_name, "w");
+        fprintf(f, "r,P,m\n");
 
-    while (P > 0){
-        fprintf(f, "%.10e,%.10e,%.10e\n", r * R0, P * P0, m * M0);
-        r += h;
-        rungeKutta4(h, r, &P, &m, tipo_politropica);
-    }
-    fclose(f);
+        while (P > 0){
+            fprintf(f, "%.10e,%.10e,%.10e\n", r * R0, P * P0, m * M0);
+            r += h;
+            rungeKutta4(h, r, &P, &m, tipo_politropica);
+            if (r < 2 * m){
+                printf("BH");
+                break;
+            }
+        }
+        fclose(f);
 
     }
 }
-
 
 
 // Legge i dati generati nei 3 file sopra, serve solo la lunghezza del file -1 come input
@@ -143,6 +146,73 @@ int read_maxM_data(int tipo_politropica, int lenfile, double *r, double *P, doub
     return 0;
 }
 
+
+double fun_Phi_ext(double r, double M){
+    return log(1 - 2 * M / r) / 2;
+}
+
+
+double fun_to_integrate(double r, double m, double P){
+    return (m + pow(r, 3) * P) / (r * (2 * m - r));
+    }
+
+
+// Fa un sacco di cose per calcolare potenziale gravitazionale esterno ed interno date lunghezze dei 3 file dove ci sono r, m, P generati dalla funzione gen_maxM_data()
+void Phi_int_ext_012(int *len_files){
+
+    for (int tipo_politropica = 0; tipo_politropica < 3; tipo_politropica++){
+        int lenfile = len_files[tipo_politropica];
+        double *r = (double*)malloc(lenfile * sizeof(double));
+        double *P = (double*)malloc(lenfile * sizeof(double));
+        double *m = (double*)malloc(lenfile * sizeof(double));
+        double *Phi = (double*)malloc(lenfile * sizeof(double));
+
+        read_maxM_data(tipo_politropica, lenfile, r, P, m);
+
+        double R = r[lenfile - 1];
+        double M = m[lenfile - 1];
+        double Phi_ext = fun_Phi_ext(R, M);
+        double integral = 0;
+        double h = 1e-5;
+
+        // Partiamo a calcolare Phi dalla fine (r = R) perché è quando l'integrale è più piccolo
+        for (int i = lenfile - 1; i > 0; i--){
+            integral += h / 2 * (fun_to_integrate(r[i], m[i], P[i]) + fun_to_integrate(r[i - 1], m[i - 1], P[i - 1]));
+            Phi[i] = Phi_ext + integral;
+        }
+
+        char Phi_int_filename[50];
+        sprintf(Phi_int_filename, "../data/Phi_int_%d.csv", tipo_politropica);
+        FILE *f_Phi_int = fopen(Phi_int_filename, "w");
+        fprintf(f_Phi_int, "r,Phi\n");
+        for (int i = 0; i < lenfile; i++)
+            fprintf(f_Phi_int, "%.10e,%.10e\n", r[i] * R0, Phi[i]);
+        fclose(f_Phi_int);
+
+        free(r);
+        free(P);
+        free(m);
+        free(Phi);
+
+        // Calcoliamo anche Phi_ext(r) per r > R
+        double r_ext = R;
+
+        char Phi_ext_filename[50];
+        sprintf(Phi_ext_filename, "../data/Phi_ext_%d.csv", tipo_politropica);
+        FILE *f_Phi_ext = fopen(Phi_ext_filename, "w");
+        fprintf(f_Phi_ext, "r,Phi\n");
+
+        while (r_ext < 150 / R0){
+        // for (int i = 0; i < lenfile; i++){
+            fprintf(f_Phi_ext, "%.10e,%.10e\n", r_ext * R0, fun_Phi_ext(r_ext, M));
+            r_ext += h;
+        }
+
+        fclose(f_Phi_ext);
+    }
+}
+
+
 int main(){
 
     /* Genera i dati per costruire il grafico massa raggio, richiesto dal punto 2 */
@@ -152,22 +222,16 @@ int main(){
     // }
 
 
-    /* Genera dati per fare Grafico del potenziale, richiesto dal punto 3 */
+    /************** Punto 3 **************/
+
+    /* Genera dati per fare Grafico del potenziale*/
     // double startP[3] = {43.31065 / P0, 217.0675 / P0, 947.5339 / P0};
     // gen_maxM_data(startP);
 
-
-
-    /* Legge i dati dai 3 file generati sopra */
+    /* Calcolo del potenziale gravitazionale */
     int len_files[3] = {294288, 54348, 42666};
-    int tipo_politropica = 0;
+    Phi_int_ext_012(len_files);
 
-    int lenfile = len_files[tipo_politropica];
-    double r[lenfile] = {};
-    double P[lenfile] = {};
-    double m[lenfile] = {};
-
-    read_maxM_data(tipo_politropica, lenfile, r, P, m);
 
     return 0;
 }

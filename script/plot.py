@@ -179,6 +179,30 @@ def plot_MR_rela():
     plt.show()
 
 
+def plot_Phi():
+    colors = [['purple', '#32CD32'], ['orange', 'b'], ['r', 'cyan']]
+    k = 0
+    plt.figure()
+    for i in ['0', '1', '2']:
+        data = np.genfromtxt('../data/Phi_int_' + i + '.csv', delimiter=',', skip_header=1, dtype=float)
+        r_int = data[:, 0]
+        Phi_int = data[:, 1]
+
+        data = np.genfromtxt('../data/Phi_ext_' + i + '.csv', delimiter=',', skip_header=1, dtype=float)
+        r_ext = data[:, 0]
+        Phi_ext = data[:, 1]
+
+        plt.plot(r_int, Phi_int, color=colors[k][0], label=r'$\Phi_\text{int} (r)$ per $\epsilon_{'+str(k+1)+'}$')
+        plt.plot(r_ext, Phi_ext, color=colors[k][1], label=r'$\Phi_\text{ext} (r)$ per $\epsilon_{'+str(k+1)+'}$')
+
+        k += 1
+    plt.title('Potenziale gravitazionale delle stelle con massa maggiore')
+    plt.xlabel('Raggio [km]')
+    plt.ylabel(r'$\Phi$')
+    plt.grid()
+    plt.legend()
+    plt.show()
+
 ''' P(rho) vs rho(P) '''
 #test_P_rhi()
 
@@ -192,6 +216,9 @@ def plot_MR_rela():
 ##plot_MR()
 
 ''' Grafico M-R generale '''
-plot_MR_rela()
+##plot_MR_rela()
+
+''' Grafico potenziale gravitazionale '''
+plot_Phi()
 
 
