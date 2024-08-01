@@ -4,6 +4,7 @@
 
 \documentclass[a4paper, titlepage]{article}
 \newcommand{\Punit}[0]{\frac{\unit{\mega\electronvolt}}{c^2 \unit{\femto\meter}}}
+\newcommand{\Sh}[0]{Schwarzschild }
 
 \input{packages}
 %\input{frontespizio}
@@ -170,6 +171,27 @@ Il potenziale $\Phi$ (che fa parte del termine $e^{\Phi (r)} c^2 \mathrm{d}t^2$ 
 
 
 
+
+\newpage
+\section{Radianza}
+
+In metrica di \Sh un fotone emesso a distanza $r$ con frequenza $\nu_\text{em}$ viene ricevuto da un osservatore a distanza $r'$ con una frequeza $\nu_\text{ric}$ data da
+
+\begin{equation}
+    \frac{\nu_\text{ric}}{\nu_\text{em}} = e^{\Phi (r) - \Phi (r')} \, .
+\label{eq:redshift}
+\end{equation}
+
+Dove $\Phi (r)$ è propio il potenziale gravitazionale mostrato in figura \ref{fig:Phi}.
+
+La radianza di una stella si può esprimere con l'equazione di Plank per il corpo nero
+
+\begin{equation}
+    B(\nu, T) = \frac{2 h \nu ^3}{c^2} \frac{1}{e^{h \nu / (k_B T)} - 1}
+    \label{eq:rad}
+\end{equation}
+
+dove $T$ è la temperatura della stella e $h$ la costante di Plank.
 
 
 
