@@ -1,4 +1,3 @@
-## Run when opening a new buffer
 ## :setlocal makeprg=cd\ script\ &&\ python3.12\ plot.py
 from matplotlib.lines import lineStyles
 import pandas as pd
@@ -203,6 +202,31 @@ def plot_Phi():
     plt.legend()
     plt.show()
 
+
+def plot_B():
+    M = [r'$14\text{M}_\odot$', r'$0.93\text{M}_\odot$', r'$1.5\text{M}_\odot$']
+    R = [r'$59$km', r'$11$km', r'$8.6$km']
+    kk = 0
+
+    for tipo in ['1', '2', '3']:
+        data = np.genfromtxt('../data/radianza/B.csv', delimiter=',', skip_header=1, dtype=float)
+        data_corr1 = np.genfromtxt('../data/radianza/Bcorr_'+tipo+'_1.5.csv', delimiter=',', skip_header=1, dtype=float)
+        data_corr2 = np.genfromtxt('../data/radianza/Bcorr_'+tipo+'_8.0.csv', delimiter=',', skip_header=1, dtype=float)
+        data_corr3 = np.genfromtxt('../data/radianza/Bcorr_'+tipo+'_-1.0.csv', delimiter=',', skip_header=1, dtype=float)
+        plt.figure()
+        plt.plot(data[:,0], data[:,1], label=r'B$(\nu)$')
+        plt.plot(data_corr1[:,0], data_corr1[:,1], label=rf'$B_{tipo}(\nu)$, $r = 1.5R$')
+        plt.plot(data_corr2[:,0], data_corr2[:,1], color='purple', label=rf'$B_{tipo}(\nu)$, $r = 8R$')
+        plt.plot(data_corr3[:,0], data_corr3[:,1], 'g--', label=rf'$B_{tipo}(\nu)$, $r = \infty$')
+        plt.ticklabel_format(axis='y', scilimits=(-3, -3))
+        plt.title(f'Radianza in funzione della frequenza, M = {M[kk]} R = {R[kk]}')
+        plt.xlabel('f [Hz]')
+        plt.ylabel(r'Radianza $[\frac{\text{MeV}}{\text{fm}^2}]$')
+        plt.legend()
+
+        kk += 1
+    plt.show()
+
 ''' P(rho) vs rho(P) '''
 #test_P_rhi()
 
@@ -219,6 +243,9 @@ def plot_Phi():
 ##plot_MR_rela()
 
 ''' Grafico potenziale gravitazionale '''
-plot_Phi()
+##plot_Phi()
+
+''' Grafico della radianza '''
+plot_B()
 
 

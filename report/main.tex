@@ -1,9 +1,8 @@
-% Run this command from vim
-% :setlocal makeprg=cd\ report\ &&\ pdflatex\ -interaction=batchmode\ main.tex\ &&\ xdg-open\ main.pdf
+%% :setlocal makeprg=cd\ report\ &&\ pdflatex\ -interaction=batchmode\ main.tex\ &&\ xdg-open\ main.pdf
 % then to compile and open the file just run :make (or press F8)
 
 \documentclass[a4paper, titlepage]{article}
-\newcommand{\Punit}[0]{\frac{\unit{\mega\electronvolt}}{c^2 \unit{\femto\meter}}}
+\newcommand{\Punit}[0]{\frac{\unit{\mega\electronvolt}}{c^2 \unit{\femto\cubic\meter}}}
 \newcommand{\Sh}[0]{Schwarzschild }
 
 \input{packages}
@@ -191,11 +190,54 @@ La radianza di una stella si può esprimere con l'equazione di Plank per il corp
     \label{eq:rad}
 \end{equation}
 
-dove $T$ è la temperatura della stella e $h$ la costante di Plank.
+dove $T$ è la temperatura della stella e $h$ la costante di Plank. Considerando solo il caso con $K_B T = 1 \unit{\mega\electronvolt}$ e mettendo l'equzione \ref{eq:rad} in funzione di variabili adimensionali otteniamo
 
+\begin{equation}
+    B(\hat \nu) = A \frac{\hat \nu ^3 }{e^{\hat \nu} - 1}
+    \label{eq:rad_ad}
+\end{equation}
+dove abbiamo definito
+\begin{equation}
+    \nu_0 = \frac{\nu}{\hat \nu} = \frac{h}{1\unit{\mega\electronvolt}} \simeq \num{2.417989e20} \unit{\hertz}\, ,
+    \quad
+    A = \frac{2 h \nu_0^3}{c^2} = \frac{2 \unit{\mega\electronvolt}}{(h c)^2} \simeq \num{1.613108e3} \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}}
+\end{equation}
 
+Infine, se consideriamo l'effetto doppler dovuto al potenziale gravitazionale descritto in eq. \ref{eq:redshift} e utilizziamo la formula analitica per il potenziale gravitazionale all'esterno della stella (eq. \ref{eq:Phi_ext}), otteniamo
 
+\begin{equation}
+    \hat \nu_\text{em} = \hat \nu_\text{ric} \left ( \frac{1 - \frac{2 \hat M}{r}}{1 - \frac{2 \hat M}{\hat R}}\right )^{1/2}
+    \quad
+    \implies
+    \quad
+    B(\hat \nu_\text{ric}, \hat r) = A \frac{\left ( \hat \nu_\text{ric} \left ( \frac{1 - \frac{2 \hat M}{\hat r}}{1 - \frac{2 \hat M}{\hat R}}\right )^{1/2} \right ) ^3 }{\exp({\hat \nu_\text{ric} \left ( \frac{1 - \frac{2 \hat M}{r}}{1 - \frac{2 \hat M}{\hat R}}\right )^{1/2}}) - 1}
+\end{equation}
 
+Nel figure \ref{fig:rad1}, \ref{fig:rad2} e \ref{fig:rad3} viene studiato lo spettro della radiazione emessa per le 3 stelle massive di cui abbiamo studiato il potenziale in \ref{fig:Phi} a distanze diverse dalla stella.
+
+\begin{figure}[h]
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width = \textwidth]{Figures/radianza1.eps}
+        \caption{caption}
+        \label{fig:rad1}
+    \end{minipage}
+    \hspace{0.015\textwidth}    
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width = \textwidth]{Figures/radianza3.eps}
+        \caption{caption}
+        \label{fig:rad1}
+    \end{minipage}
+\end{figure}
+
+La curva in tutti e 3 i casi subisce uno spostamento verso le frequenze più basse, \textit{redshift} per l'appunto, e l'effetto è tanto maggiore quanto più la stella è massiva e l'osservatore distante. Già a una distanza di 8 volte il raggio della stella la curva della radianza è molto simile a quella all'inifinito, in cui il termine $\Phi (r')$ in eq. \ref{eq:redshift} è trascurabile.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 0.5 \textwidth]{Figures/radianza2.eps}
+    \caption{caption}
+    \label{fig:rad1}
+\end{figure}
 
 
 
