@@ -1,4 +1,4 @@
-// :setlocal makeprg=cd\ script\ &&\ make\ main\ &&\ ./main.x
+// ::setlocal makeprg=cd\ script\ &&\ make\ main\ &&\ ./main.x
 #include <stdio.h>
 #include <math.h>
 #include <omp.h>
@@ -162,10 +162,8 @@ void Phi_int_ext_012(int *len_files){
 
     for (int tipo_politropica = 0; tipo_politropica < 3; tipo_politropica++){
         int lenfile = len_files[tipo_politropica];
-        double *r = (double*)malloc(lenfile * sizeof(double));
-        double *P = (double*)malloc(lenfile * sizeof(double));
-        double *m = (double*)malloc(lenfile * sizeof(double));
-        double *Phi = (double*)malloc(lenfile * sizeof(double));
+
+        double r[lenfile], P[lenfile], m[lenfile], Phi[lenfile];
 
         read_maxM_data(tipo_politropica, lenfile, r, P, m);
 
@@ -188,11 +186,6 @@ void Phi_int_ext_012(int *len_files){
         for (int i = 0; i < lenfile; i++)
             fprintf(f_Phi_int, "%.10e,%.10e\n", r[i] * R0, Phi[i]);
         fclose(f_Phi_int);
-
-        free(r);
-        free(P);
-        free(m);
-        free(Phi);
 
         // Calcoliamo anche Phi_ext(r) per r > R
         double r_ext = R;

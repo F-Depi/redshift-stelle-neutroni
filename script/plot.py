@@ -1,4 +1,4 @@
-## :setlocal makeprg=cd\ script\ &&\ python3.12\ plot.py
+## ::setlocal makeprg=cd\ script\ &&\ python3.12\ plot.py
 from matplotlib.lines import lineStyles
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -151,7 +151,7 @@ def plot_MR():
     plt.show()
 
 
-def plot_MR_rela():
+def plot_MR_rela(save=['yes', 'no']):
     plt.figure()
 
     data = np.genfromtxt('../data/MR_0.csv', delimiter=',', skip_header=1, dtype=float)
@@ -175,10 +175,12 @@ def plot_MR_rela():
     plt.yscale('log')
     plt.grid()
     plt.legend()
+    plt.legend()
+    if save == 'yes': plt.savefig('../report/Figures/MR.eps', format='eps')
     plt.show()
 
 
-def plot_Phi():
+def plot_Phi(save=['yes', 'no']):
     colors = [['purple', '#32CD32'], ['orange', 'b'], ['r', 'cyan']]
     k = 0
     plt.figure()
@@ -200,10 +202,11 @@ def plot_Phi():
     plt.ylabel(r'$\Phi$')
     plt.grid()
     plt.legend()
+    if save == 'yes': plt.savefig('../report/Figures/Phi.eps', format='eps')
     plt.show()
 
 
-def plot_B():
+def plot_B(save=['yes', 'no']):
     M = [r'$14\text{M}_\odot$', r'$0.93\text{M}_\odot$', r'$1.5\text{M}_\odot$']
     R = [r'$59$km', r'$11$km', r'$8.6$km']
     kk = 0
@@ -218,14 +221,63 @@ def plot_B():
         plt.plot(data_corr1[:,0], data_corr1[:,1], label=rf'$B_{tipo}(\nu)$, $r = 1.5R$')
         plt.plot(data_corr2[:,0], data_corr2[:,1], color='purple', label=rf'$B_{tipo}(\nu)$, $r = 8R$')
         plt.plot(data_corr3[:,0], data_corr3[:,1], 'g--', label=rf'$B_{tipo}(\nu)$, $r = \infty$')
-        plt.ticklabel_format(axis='y', scilimits=(-3, -3))
-        plt.title(f'Radianza in funzione della frequenza, M = {M[kk]} R = {R[kk]}')
+        #plt.ticklabel_format(axis='y', scilimits=(-3, -3))
+        plt.title(rf'Radianza in funzione della frequenza, $M_{tipo} = ${M[kk]} $R_{tipo} = ${R[kk]}')
         plt.xlabel('f [Hz]')
         plt.ylabel(r'Radianza $[\frac{\text{MeV}}{\text{fm}^2}]$')
         plt.legend()
 
         kk += 1
+
+        if save == 'yes': plt.savefig('../report/Figures/radianza'+tipo+'.eps', format='eps')
     plt.show()
+
+
+def plt_P_test_cvgN(save=['yes', 'no']):
+    dataT = np.genfromtxt('../data/potenza/test_cvg_N_trap.csv', delimiter=',', skip_header=1, dtype=float)
+    dataS = np.genfromtxt('../data/potenza/test_cvg_N_simp.csv', delimiter=',', skip_header=1, dtype=float)
+
+    plt.figure()
+
+    metodo = ['T:   ', 'S:   ']
+    kk = 0
+
+    for data in [dataT, dataS]:
+        P = abs(dataT[-1,0] - data[:,0]) / dataT[-1,0]
+        N = data[:,1]
+
+        plt.plot(N, P, linestyle='', marker='o', label=metodo[kk] + r'$\frac{| \mathcal{P} - \mathcal{P}_{N = 1e7} |}{\mathcal{P}_{N = 1e7}}$')
+        kk += 1
+    plt.title(r"Convergenza dell'integrale per $r = 1.5R$, $R = 59km$, $M = 14 M_\odot$")
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.xlabel('log(N)')
+    plt.ylabel(r'$\log_{10} \left( \frac{Potenza}{\text{MeVs}^{-1}\text{fm}^{-2}} \right)$')
+    plt.legend(fontsize=20)
+    plt.tight_layout()
+    if save == 'yes': plt.savefig('../report/Figures/Pot_cvgN.eps', format='eps')
+    plt.show()
+
+
+def plt_P_test_cvgA(save=['yes', 'no']):
+    data = np.genfromtxt('../data/potenza/test_cvg_A_trap.csv', delimiter=',', skip_header=1, dtype=float)
+
+    P = abs(data[-1,0] - data[:,0]) / data[-1,0]
+    nu_max = data[:,2]
+
+    plt.figure()
+    plt.plot(nu_max, P, linestyle='', marker='o', label=r'$\frac{| \mathcal{P} - \mathcal{P} _{\hat \nu_\text{max} = 200} |}{\mathcal{P} _{\hat \nu_\text{max} = 200}}$')
+    plt.axvline(20, color='r')
+    plt.title(r"Convergenza dell'integrale per $r = 1.5R$, $R = 59km$, $M = 14 M_\odot$")
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.xlabel(r'$\log(\hat \nu_\text{max}$)')
+    plt.ylabel(r'$\log_{10} \left( \frac{Potenza}{\text{MeVs}^{-1}\text{fm}^{-2}} \right)$')
+    plt.legend(fontsize=25)
+    plt.tight_layout()
+    if save == 'yes': plt.savefig('../report/Figures/Pot_cvgA.eps', format='eps')
+    plt.show()
+
 
 ''' P(rho) vs rho(P) '''
 #test_P_rhi()
@@ -237,15 +289,19 @@ def plot_B():
 #test_cvg()
 
 ''' Grafico M-R e altro'''
-##plot_MR()
+#plot_MR()
 
 ''' Grafico M-R generale '''
-##plot_MR_rela()
+#plot_MR_rela()
 
 ''' Grafico potenziale gravitazionale '''
-##plot_Phi()
+#plot_Phi()
 
 ''' Grafico della radianza '''
-plot_B()
+#plot_B()
+
+''' Convergenza dell'integrale della potenza'''
+#plt_P_test_cvgN('yes')
+plt_P_test_cvgA()
 
 

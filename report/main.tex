@@ -1,4 +1,4 @@
-%% :setlocal makeprg=cd\ report\ &&\ pdflatex\ -interaction=batchmode\ main.tex\ &&\ xdg-open\ main.pdf
+% ::setlocal makeprg=cd\ report\ &&\ pdflatex\ -interaction=batchmode\ main.tex\ &&\ xdg-open\ main.pdf
 % then to compile and open the file just run :make (or press F8)
 
 \documentclass[a4paper, titlepage]{article}
@@ -155,12 +155,12 @@ dove siamo stati attenti a rendere $\Phi (r)$ continuo per ogni $r \geq 0$ usand
     \label{eq:Phi_int2}
 \end{equation}
 
-Dati i valori di $\hat P (\hat r)$ e $\hat m (\hat r)$ che si ottengono risolvendo le equazioni di stabilità possiamo quindi disegnare il grafico del potenziale gravitazionale, mostrato in figura \ref{fig:Phi}.
+Dati i valori di $\hat P (\hat r)$ e $\hat m (\hat r)$ che si ottengono risolvendo le equazioni di stabilità possiamo quindi risolvere l'integrale con il metodo dei trapezi per ottenere il valore di $Phi$ a ogni $r$ (Appendice \ref{ap:Phi}). Il grafico del potenziale gravitazionale ottenuto è mostrato in figura \ref{fig:Phi}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width = \textwidth]{Figures/Phi.eps}
-    \caption{Grafico del potenziale gravitazionale all'interno e all'esterno della stella. Per $r < R$ è stato ottenuto integrando con il metodo dei trapezzi l'eq. \ref{eq:Phi_int2}, per $r \geq R$ è stata plottata l'eq. \ref{eq:Phi_ext}}
+    \caption{Grafico del potenziale gravitazionale all'interno e all'esterno della stella. Per $r < R$ è stato ottenuto integrando con il metodo dei trapezi l'eq. \ref{eq:Phi_int2}, per $r \geq R$ è stata plottata l'eq. \ref{eq:Phi_ext}}
     \label{fig:Phi}
 \end{figure}
 
@@ -170,9 +170,7 @@ Il potenziale $\Phi$ (che fa parte del termine $e^{\Phi (r)} c^2 \mathrm{d}t^2$ 
 
 
 
-
-\newpage
-\section{Radianza}
+\section{Radianza} \label{sec:rad}
 
 In metrica di \Sh un fotone emesso a distanza $r$ con frequenza $\nu_\text{em}$ viene ricevuto da un osservatore a distanza $r'$ con una frequeza $\nu_\text{ric}$ data da
 
@@ -190,18 +188,18 @@ La radianza di una stella si può esprimere con l'equazione di Plank per il corp
     \label{eq:rad}
 \end{equation}
 
-dove $T$ è la temperatura della stella e $h$ la costante di Plank. Considerando solo il caso con $K_B T = 1 \unit{\mega\electronvolt}$ e mettendo l'equzione \ref{eq:rad} in funzione di variabili adimensionali otteniamo
+dove $T$ è la temperatura della stella e $h$ la costante di Plank.
+Per fare i conti considerando solo il caso con $K_B T = 1 \unit{\mega\electronvolt}$ e mettiamo l'equzione \ref{eq:rad} in funzione di variabili adimensionali. Otteniamo
 
-\begin{equation}
-    B(\hat \nu) = A \frac{\hat \nu ^3 }{e^{\hat \nu} - 1}
+\begin{equation*}
+    \hat B(\hat \nu) = \frac{\hat \nu ^3 }{e^{\hat \nu} - 1}
     \label{eq:rad_ad}
-\end{equation}
+\end{equation*}
 dove abbiamo definito
-\begin{equation}
-    \nu_0 = \frac{\nu}{\hat \nu} = \frac{h}{1\unit{\mega\electronvolt}} \simeq \num{2.417989e20} \unit{\hertz}\, ,
-    \quad
-    A = \frac{2 h \nu_0^3}{c^2} = \frac{2 \unit{\mega\electronvolt}}{(h c)^2} \simeq \num{1.613108e3} \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}}
-\end{equation}
+\begin{align*}
+    \nu_0 &= \frac{\nu}{\hat \nu} = \frac{h}{1\unit{\mega\electronvolt}} \simeq \num{2.417989e20} \unit{\hertz} \\
+    B_0 &= \frac{B}{\hat B} = \frac{2 h \nu_0^3}{c^2} = \frac{2 \unit{\mega\electronvolt}}{(h c)^2} \simeq \num{1.301059e-6} \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}}
+\end{align*}
 
 Infine, se consideriamo l'effetto doppler dovuto al potenziale gravitazionale descritto in eq. \ref{eq:redshift} e utilizziamo la formula analitica per il potenziale gravitazionale all'esterno della stella (eq. \ref{eq:Phi_ext}), otteniamo
 
@@ -210,7 +208,10 @@ Infine, se consideriamo l'effetto doppler dovuto al potenziale gravitazionale de
     \quad
     \implies
     \quad
-    B(\hat \nu_\text{ric}, \hat r) = A \frac{\left ( \hat \nu_\text{ric} \left ( \frac{1 - \frac{2 \hat M}{\hat r}}{1 - \frac{2 \hat M}{\hat R}}\right )^{1/2} \right ) ^3 }{\exp({\hat \nu_\text{ric} \left ( \frac{1 - \frac{2 \hat M}{r}}{1 - \frac{2 \hat M}{\hat R}}\right )^{1/2}}) - 1}
+    \hat B(\hat \nu_\text{ric}, \hat r) =
+    \frac{\hat \nu_\text{ric}^3 \left(1 - \frac{2 \hat M}{\hat r}\right)^{3/2} \left(1 - \frac{2 \hat M}{\hat R}\right)^{-3/2} }
+    {\exp( \hat \nu_\text{ric} \left(1 - \frac{2 \hat M}{\hat r} \right)^{1/2} \left(1 - \frac{2 \hat M}{\hat R}\right)^{-1/2} ) - 1}
+    \label{eq:B_corr}
 \end{equation}
 
 Nel figure \ref{fig:rad1}, \ref{fig:rad2} e \ref{fig:rad3} viene studiato lo spettro della radiazione emessa per le 3 stelle massive di cui abbiamo studiato il potenziale in \ref{fig:Phi} a distanze diverse dalla stella.
@@ -220,14 +221,16 @@ In blu è plottata l'eq. \ref{eq:rad}, ovvero la radianza senza correzioni relat
     \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/radianza1.eps}
-        \caption{Radianza da una stella con $M = 14M_\odot$ e $R = 59\unit{\kilo\meter}$. Essendo la stella con massa maggiore è anche quella in cui il redshift è più visibile.}
+        \caption{Radianza di una stella con $M = 14M_\odot$ e $R = 59\unit{\kilo\meter}$, percepita a $88.6 \unit{\kilo\meter}$, $472 \unit{\kilo\meter}$ e a distanza infinita.
+        Essendo la stella con massa maggiore è anche quella in cui il redshift è più visibile.}
         \label{fig:rad1}
     \end{minipage}
     \hspace{0.015\textwidth}    
     \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/radianza3.eps}
-        \caption{Radianza da una stella con $M = 1.5M_\odot$ e $R = 8.6\unit{\kilo\meter}$. In blu la radianza senza correzioni relativistiche.\\}
+        \caption{Radianza da una stella con $M = 1.5M_\odot$ e $R = 8.6\unit{\kilo\meter}$, percepita a $12.8 \unit{\kilo\meter}$, $68.5 \unit{\kilo\meter}$ e a distanza infinita.
+        In blu la radianza senza correzioni relativistiche.\\}
         \label{fig:rad2}
     \end{minipage}
 \end{figure}
@@ -235,16 +238,72 @@ In blu è plottata l'eq. \ref{eq:rad}, ovvero la radianza senza correzioni relat
 La curva in tutti e 3 i casi subisce uno spostamento verso le frequenze più basse, \textit{redshift} per l'appunto, e l'effetto è tanto maggiore quanto più la stella è massiva e l'osservatore distante. Già a una distanza di 8 volte il raggio della stella la curva della radianza è molto simile a quella all'inifinito, in cui il termine $\Phi (r')$ in eq. \ref{eq:redshift} è trascurabile.
 \begin{figure}[h]
     \centering
-    \includegraphics[width = 0.5 \textwidth]{Figures/radianza2.eps}
-    \caption{Radianza da una stella con $M = 0.93M_\odot$ e $R = 11\unit{\kilo\meter}$. In blu la radianza senza correzioni relativistiche.}
+    \includegraphics[width = 0.6 \textwidth]{Figures/radianza2.eps}
+    \caption{Radianza da una stella con $M = 0.93M_\odot$ e $R = 11\unit{\kilo\meter}$, percepita a 16.4, 87.2 \unit{\kilo\meter} e a distanza infinita.
+    In blu la radianza senza correzioni relativistiche.}
     \label{fig:rad3}
 \end{figure}
 
 
 
+\section{Potenza emessa}
 
+La potenza totale emessa dalla stella, per unità di area, si può ottenere integrando la radianza $B(\nu, T)$ sulle frequenze e sulla superficie della sfera centrata nella stella, eq. \ref{eq:Pot}.
 
+\begin{equation}
+    \mathcal P = \int_0^\infty \; \mathrm{d}\nu \int B(\nu, T) \cos(\theta) \; \mathrm{d}\Omega
+    = 4 \pi \int_0^{A k_B T} B(\nu, T) \; \mathrm{d}\nu
+    \label{eq:Pot}
+\end{equation}
 
+Utilizzando la stessa temperatura della sezione \ref{sec:rad}, $k_B T = 1 \unit{\mega\electronvolt}$, e le unità adimensionali, l'integrale in \ref{eq:Pot} può essere riscritto come
+
+\begin{equation}
+    \hat{\mathcal P}(\hat r) = \int_o^{\frac{A \unit{\mega\electronvolt}}{\nu_0}} \hat B (\hat \nu_\text{ric}, \hat r) \; \mathrm{d} \hat \nu
+    \label{eq:Pot_ad}
+\end{equation}
+
+dove $\hat B (\hat \nu_\text{ric}, \hat r)$ è definita in \ref{eq:B_corr} e
+
+\begin{equation}
+    \mathcal P_0 = \frac{\mathcal P}{\hat {\mathcal P}} = 2 \pi B_0 \nu_0 \simeq \num{1.976658e+15} \, \frac{\unit{\mega\electronvolt}}{\unit{\second\femto\meter\squared}}
+\end{equation}
+
+Dal momento che numericamente non è possibile integrare sulle frequenze fino a $\nu = + \infty$ si sceglie $A$ sufficientemente grande da poter approssimare in modo ragionevole l'integrale.
+Facendo riferimento alla figura \ref{fig:rad2}, possiamo vedere che per $\nu > \num{3.5e21} \unit{\hertz}$ la radianza è quasi nulla.
+In quell'occasione era stata calcolata $\hat B(\hat \nu)$ tra $0$ e $15$. Come stima iniziale possiamo quindi integrare fino a $\hat \nu = 20$ che corrisponde a
+
+\begin{equation}
+    \frac{A \unit{\mega\electronvolt}}{\nu_0} = 20
+    \quad \iff \quad
+    A = 20 \nu_0 \unit{\per\mega\electronvolt} \simeq \num{4.835978} \, \unit{\per\second\per\mega\electronvolt}
+    \label{eq:A}
+\end{equation}
+
+Possiamo ottenere un valore migliore valutando la convergenza dell'integrale. Per prima cosa verifichiamo per quale \texttt{N} (numero di step nell'integrazione) il valore di $\mathcal{P}$ converge (il codice si trova in Appendice \ref{ap:integrali}).
+
+Utilizzando una delle stelle come esempio, a una distanza $r = 1.5R_1 = 86.6 \unit{\kilo\meter}$ e con $\hat \nu_\text{max} = 20$ otteniamo il grafico in figura \ref{fig:Pot_cvgN}. I valori sono degli scarti rispetto a $\mathcal{P}_{N = 1e7}$ (la potenza calcolata con $N = \num{1e7}$) e sono normalizzati rispetto alla stessa.
+Come ci aspettavamo io metodo simpson converge più velocemente dei trapezi (e con un costo computazionale maggiore), per entrambi i metodi comunque $\texttt{N} = \num{1e3}$ in un intervallo $\Delta \hat \nu = 20$ è più che sufficienti per garantire una precisione di $\num{1e-8}$.
+\begin{figure}[h]
+    \begin{minipage}{0.49 \textwidth}
+        \centering
+        \includegraphics[width = \textwidth]{Figures/Pot_cvgN.eps}
+        \caption{Errore relativo sul calcolo della potenza per diversi \texttt{N} (numero di step nell'integrazione con i trapezi \textbf{T} e con simpson \textbf{S}). Per $N > \num{1e3}$ otteniamo una precisione maggiore di \num{1e-8}.}
+        \label{fig:Pot_cvgN}
+    \end{minipage}
+    \hspace{0.01 \textwidth}
+    \begin{minipage}{0.49 \textwidth}
+        \centering
+        \includegraphics[width = \textwidth]{Figures/Pot_cvgA.eps}
+        \caption{Errore relativo sul calcolo della potenza per diversi valori di $\hat \nu_\text{max}$.
+        Per $\hat \nu_\text{max} > \num{20}$ (line verticale rossa) otteniamo una precisione maggiore di \num{1e-8}, il valore di A trovato in \ref{eq:A} è quindi una buon upperboud.}
+        \label{fig:Pot_cvgA}
+    \end{minipage}
+\end{figure}
+
+Fissato $\texttt{N} = \num{1e3}$ per un intervallo $\Delta \hat \nu = 20$ proponiamo quindi in figura \ref{fig:Pot_cvgA} lo stesso tipo di grafico degli scarti fatto però in funzione della scelta di $\nu_\text{max}$, questa volta viene utilizzato solo il metodo dei trapezi in quanto è irrilevante.
+
+Alla luce del grafico la scelta di $\hat \nu_\text{max} = 20$ e quindi $A \simeq \num{4.835978} \, \unit{\per\second\per\mega\electronvolt}$ si rivela sufficentemente buona.
 
 
 
@@ -287,6 +346,8 @@ void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica)
     *P += (l1 + 2 * l2 + 2 * l3 + l4) / 6;
 }
 \end{lstlisting}
+
+
 
 \section{Risoluzione numerica di $\hat P (\rho)$} \label{ap:eps(r)1}
 
@@ -372,6 +433,148 @@ double findRho(double P){
 \end{lstlisting}
 
 dove \texttt{P\_odf\_rho()} e \texttt{DP\_of\_rho()} sono rispettivamente la funzione \ref{ap:eq:1} e la sua derivata. In questo modo possiamo sempre trasformare $\epsilon (\rho)$ in $\epsilon (P)$.
+
+
+
+\section{Risoluzione dell'integrale del potenziale gravitazionale} \label{ap:Phi}
+
+Per ognuna delle 3 stelle trovate (la più massiva per ogni diversa equazione di stato) salviamo ogni valore di $r$, $m$ e $P$ in un file che successivamente importiamo (riga 3) e utiliziamo per calcolare l'integrale
+
+\begin{lstlisting}[language=C]
+double r[lenfile], P[lenfile], m[lenfile], Phi[lenfile];
+
+read_maxM_data(tipo_politropica, lenfile, r, P, m);
+
+double R = r[lenfile - 1];
+double M = m[lenfile - 1];
+double Phi_ext = fun_Phi_ext(R, M);
+double integral = 0;
+double h = 1e-5;
+
+// Partiamo a calcolare Phi dalla fine (r = R) perche' e' quando l'integrale e' piu' piccolo
+for (int i = lenfile - 1; i > 0; i--){
+    integral += h / 2 * (fun_to_integrate(r[i], m[i], P[i]) + fun_to_integrate(r[i - 1], m[i - 1], P[i - 1]));
+    Phi[i] = Phi_ext + integral;
+}
+
+char Phi_int_filename[50];
+sprintf(Phi_int_filename, "../data/Phi_int_%d.csv", tipo_politropica);
+FILE *f_Phi_int = fopen(Phi_int_filename, "w");
+fprintf(f_Phi_int, "r,Phi\n");
+for (int i = 0; i < lenfile; i++)
+    fprintf(f_Phi_int, "%.10e,%.10e\n", r[i] * R0, Phi[i]);
+fclose(f_Phi_int);
+
+// Calcoliamo anche Phi_ext(r) per r > R
+double r_ext = R;
+
+char Phi_ext_filename[50];
+sprintf(Phi_ext_filename, "../data/Phi_ext_%d.csv", tipo_politropica);
+FILE *f_Phi_ext = fopen(Phi_ext_filename, "w");
+fprintf(f_Phi_ext, "r,Phi\n");
+
+while (r_ext < 150 / R0){
+// for (int i = 0; i < lenfile; i++){
+    fprintf(f_Phi_ext, "%.10e,%.10e\n", r_ext * R0, fun_Phi_ext(r_ext, M));
+    r_ext += h;
+}
+
+fclose(f_Phi_ext);
+\end{lstlisting}
+
+L'integrale (calcolato esplicitamente nella riga 13) può essere valutato solo nei punti $r$ che sono stati utilizzati durante la risoluzione delle equazioni di stabilità della stella.
+
+Per ottimizzare il codice, invece che calcolare l'intero integrale per ogni punto $r$ del grafico di $\Phi(r)$, partiamo da $r = R$ (ovvero quando l'integrale è nullo) e aggiungiamo il valore di 1 trapezio per volta alla variabile \texttt{integral}. In contemporanea, durante una iterazione del ciclo \texttt{for} possiamo utilizzare il valore (parziale) di \texttt{integral} per calcolare $\Phi_\text{int}$ in $r$.
+
+Infine dalla riga 25 calcoliamo $\Phi_\text{ext}$ utilizzando la funzione analitica.
+
+
+
+\section{Integrali con trapezi e simpson} \label{ap:integrali}
+
+Le funzioni che fanno l'integrale con i due metodi sono
+
+\begin{lstlisting}[language=C]
+// Metodo Trapezi
+double integrale_trapezio(double a, double b, int N, double r, double R, double M, double (*fun)(double, double, double, double)){
+    // assume a < b
+    double h = (b - a)/ (double)N;
+    double integral = ((*fun)(a, r, R, M) + (*fun)(b, r, R, M)) * h / 2;
+
+    for (int i = 1; i < N; i++) {
+    integral += h * (*fun)(a + i * h, r, R, M);
+    }
+
+
+    return integral;
+}
+
+// Metodo Simpson
+double integrale_simpson(double a, double b, int N, double r, double R, double M, double (*fun)(double, double, double, double)){
+    // assume a > b
+    double h = (b - a)/N;
+    double integral = ((*fun)(a, r, R, M) + (*fun)(b, r, R, M)) * h / 3;
+
+    // assume N pari
+    for (int i = 1; i <= N/2 - 1; i++) {
+        integral += (2 * h /3) * (*fun)(a + 2 * i * h, r, R, M);
+        integral += (4 * h / 3) * (*fun)(a + (2 * i - 1) * h, r, R, M);
+    }
+
+
+    integral += (4 * h / 3 ) * (*fun)(a + (N - 1) * h, r, R, M);
+
+    return integral;
+}
+\end{lstlisting}
+
+e per controllare la convergenza del valore della potenza usiamo
+
+\begin{lstlisting}[language=C]
+double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};
+double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};
+double r[3] = {1.5, 8., -1};
+int N = 10;
+double Pot, nu_max = 20.;
+
+// Test cvg per N trapezi
+FILE *f0 = fopen("../data/potenza/test_cvg_N_trap.csv", "w");
+fprintf(f0, "Pot,N,nu_max\n");
+while(N <= 1e6){
+    Pot = integrale_trapezio(1e-10, nu_max, N, r[0] * R[0], R[0], M[0], &funB_corrected);
+    fprintf(f0, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max * nu0);
+    N *= 1.1;
+}
+fclose(f0);
+
+N = 10;
+
+// Test cvg per N simpson
+FILE *f1 = fopen("../data/potenza/test_cvg_N_simp.csv", "w");
+fprintf(f1, "Pot,N,nu_max\n");
+while(2 * N <= 1e6){
+    Pot = integrale_simpson(1e-10, nu_max, 2 * N, r[0] * R[0], R[0], M[0], &funB_corrected);
+    fprintf(f1, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max * nu0);
+    N *= 1.1;
+}
+fclose(f1);
+
+// Come N va bene
+N = 1e3;
+// Test cvg per nu_max (A)
+nu_max = 10;
+int Nrel = (double)N / nu_max;
+// Test cvg per A (ovvero nu_max)
+FILE *f2 = fopen("../data/potenza/test_cvg_A_trap.csv", "w");
+fprintf(f2, "Pot,N,nu_max[ad]\n");
+while(nu_max <= 1e2){
+    N = Nrel * nu_max;
+    Pot = integrale_trapezio(1e-10, nu_max, N, r[0] * R[0], R[0], M[0], &funB_corrected);
+    fprintf(f2, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max);
+    nu_max *= 1.1;
+}
+fclose(f2);
+\end{lstlisting}
 
 \end{document}
 
