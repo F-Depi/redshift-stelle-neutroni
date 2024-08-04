@@ -247,14 +247,15 @@ La curva in tutti e 3 i casi subisce uno spostamento verso le frequenze più bas
 
 
 \section{Potenza emessa}
+La potenza totale emessa dalla stella per un elemento della sua superficie, si può ottenere integrando la radianza $B(\nu, T)$ sulle frequenze e sull'angolo solido, con l'accortezza di moltiplicare per un fattore $\cos(\theta)$ (Legge di Lambert) per proiettare la radiazione lungo la normale alla superficie sottesa da $\mathrm{d}\Omega$.
 
-La potenza totale emessa dalla stella, per unità di area, si può ottenere integrando la radianza $B(\nu, T)$ sulle frequenze e sulla superficie della sfera centrata nella stella, eq. \ref{eq:Pot}.
-
-\begin{equation}
-    \mathcal P = \int_0^\infty \; \mathrm{d}\nu \int B(\nu, T) \cos(\theta) \; \mathrm{d}\Omega
-    = 4 \pi \int_0^{A k_B T} B(\nu, T) \; \mathrm{d}\nu
+\begin{align}
+    \mathcal P &= \int_0^\infty \mathrm{d}\nu \int B(\nu, T) \cos(\theta) \; \mathrm{d}\Omega
+    =  \int_0^{A k_B T} B(\nu, T) \; \mathrm{d}\nu ~ 
+    \int_0^{2 \pi} \mathrm{d}\phi \int_0^1 \mathrm{d}(\cos(\theta)) \; \cos(\theta) \\
+    &= \pi \int_0^{A k_B T} B(\nu, T) \; \mathrm{d}\nu
     \label{eq:Pot}
-\end{equation}
+\end{align}
 
 Utilizzando la stessa temperatura della sezione \ref{sec:rad}, $k_B T = 1 \unit{\mega\electronvolt}$, e le unità adimensionali, l'integrale in \ref{eq:Pot} può essere riscritto come
 
@@ -266,29 +267,32 @@ Utilizzando la stessa temperatura della sezione \ref{sec:rad}, $k_B T = 1 \unit{
 dove $\hat B (\hat \nu_\text{ric}, \hat r)$ è definita in \ref{eq:B_corr} e
 
 \begin{equation}
-    \mathcal P_0 = \frac{\mathcal P}{\hat {\mathcal P}} = 2 \pi B_0 \nu_0 \simeq \num{1.976658e+15} \, \frac{\unit{\mega\electronvolt}}{\unit{\second\femto\meter\squared}}
+    \mathcal P_0 = \frac{\mathcal P}{\hat {\mathcal P}} = \pi B_0 \nu_0 \simeq \num{9.883290e+14} \, \frac{\unit{\mega\electronvolt}}{\unit{\second\femto\meter\squared}}
 \end{equation}
 
+\subsection{Convergenza dell'integrale}
 Dal momento che numericamente non è possibile integrare sulle frequenze fino a $\nu = + \infty$ si sceglie $A$ sufficientemente grande da poter approssimare in modo ragionevole l'integrale.
 Facendo riferimento alla figura \ref{fig:rad2}, possiamo vedere che per $\nu > \num{3.5e21} \unit{\hertz}$ la radianza è quasi nulla.
 In quell'occasione era stata calcolata $\hat B(\hat \nu)$ tra $0$ e $15$. Come stima iniziale possiamo quindi integrare fino a $\hat \nu = 20$ che corrisponde a
 
 \begin{equation}
-    \frac{A \unit{\mega\electronvolt}}{\nu_0} = 20
+    \frac{A \, \unit{\mega\electronvolt}}{\nu_0} = 20
     \quad \iff \quad
-    A = 20 \nu_0 \unit{\per\mega\electronvolt} \simeq \num{4.835978} \, \unit{\per\second\per\mega\electronvolt}
+    A = 20 \, \nu_0 \, \unit{\per\mega\electronvolt} \simeq \num{4.835978e21} \, \unit{\per\mega\electronvolt\per\second}
     \label{eq:A}
 \end{equation}
 
 Possiamo ottenere un valore migliore valutando la convergenza dell'integrale. Per prima cosa verifichiamo per quale \texttt{N} (numero di step nell'integrazione) il valore di $\mathcal{P}$ converge (il codice si trova in Appendice \ref{ap:integrali}).
 
-Utilizzando una delle stelle come esempio, a una distanza $r = 1.5R_1 = 86.6 \unit{\kilo\meter}$ e con $\hat \nu_\text{max} = 20$ otteniamo il grafico in figura \ref{fig:Pot_cvgN}. I valori sono degli scarti rispetto a $\mathcal{P}_{N = 1e7}$ (la potenza calcolata con $N = \num{1e7}$) e sono normalizzati rispetto alla stessa.
-Come ci aspettavamo io metodo simpson converge più velocemente dei trapezi (e con un costo computazionale maggiore), per entrambi i metodi comunque $\texttt{N} = \num{1e3}$ in un intervallo $\Delta \hat \nu = 20$ è più che sufficienti per garantire una precisione di $\num{1e-8}$.
+Studiamo il caso in cui è necessario un \texttt{N} maggiore, ovvero quello in cui la curva è più ripida: $r = \infty$, $M_1 = 14.3M_\odot$ e con $\hat \nu_\text{max} = 20$.
+Otteniamo il grafico in figura \ref{fig:Pot_cvgN}.
+I valori sono degli scarti rispetto a $\mathcal{P}_{N = 1e7}$ (la potenza calcolata con $N = \num{1e7}$) e sono normalizzati rispetto alla stessa.
+Al contriario di quello che succede di solito, il metodo Simpson (che ha un costo computazionale maggiore), non presenta vantaggi rispetto a quello dei trapezi. Dal codice (Appendice \ref{ap:integrali}) che genera i dati mostrati in figura \ref{fig:Pot_cvgN} otteniamo un errore relativo minore di $\num{1e-5}$ per \texttt{N\_trap = 62} e \texttt{N\_simp = 82}.
 \begin{figure}[h]
     \begin{minipage}{0.49 \textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/Pot_cvgN.eps}
-        \caption{Errore relativo sul calcolo della potenza per diversi \texttt{N} (numero di step nell'integrazione con i trapezi \textbf{T} e con simpson \textbf{S}). Per $N > \num{1e3}$ otteniamo una precisione maggiore di \num{1e-8}.}
+        \caption{Errore relativo sul calcolo della potenza per diversi \texttt{N} (numero di step nell'integrazione con i trapezi \textbf{T} e con simpson \textbf{S}).}
         \label{fig:Pot_cvgN}
     \end{minipage}
     \hspace{0.01 \textwidth}
@@ -301,12 +305,88 @@ Come ci aspettavamo io metodo simpson converge più velocemente dei trapezi (e c
     \end{minipage}
 \end{figure}
 
-Fissato $\texttt{N} = \num{1e3}$ per un intervallo $\Delta \hat \nu = 20$ proponiamo quindi in figura \ref{fig:Pot_cvgA} lo stesso tipo di grafico degli scarti fatto però in funzione della scelta di $\nu_\text{max}$, questa volta viene utilizzato solo il metodo dei trapezi in quanto è irrilevante.
+Fissati \texttt{N\_trap} e \texttt{N\_simp} per un intervallo $\Delta \hat \nu = 20$ proponiamo quindi in figura \ref{fig:Pot_cvgA} lo stesso tipo di grafico degli scarti fatto però in funzione della scelta di $\nu_\text{max}$, dove abbiamo tenuto costante il valore \texttt{N / nu\_max} apena ottenuto.
+Questa volta si studia il caso in cui $r = R_1$, ovvero quello in cui la curva è più spostata verso destra e serve un upper bound maggiore.
 
-Alla luce del grafico la scelta di $\hat \nu_\text{max} = 20$ e quindi $A \simeq \num{4.835978} \, \unit{\per\second\per\mega\electronvolt}$ si rivela sufficentemente buona.
+Dallo script per generare i dati mostrati in figura \ref{fig:Pot_cvgA} otteniamo un errore di $\num{1e-5}$ per
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccc}
+         & N & $\hat \nu_\text{max}$ \\
+        \hline
+        Trapezi & 64 & 20.7892818 \\
+        \hline
+        Simpson & 78 & 17.9585633 \\
+    \end{tabular}
+\end{table}
+
+Per comodità decidiamo di utilizzare lo stesso valore di $\hat \nu_\text{max} = 21$ per entrambi i metodi 
+\footnote{Si noti che Simpson tende a convergere prima al variare di \texttt{nu\_max} perché, in questo caso, approssima la curva per eccesso e quindi compensa il tratto di funzione che viene escluso dall'integrazione.
+La scelta di aumentare \texttt{nu\_max} anche per questo metodo mantiene comunque l'errore minore di $\num{1e-5}$ vista figura \ref{fig:Pot_cvgN}.}
+e quindi, per eccesso, 
+\begin{equation}
+    \texttt{N\_trap} = \frac{64}{20.7892818} \times 21 = 67
+    \quad \text{e} \quad
+    \texttt{N\_simp} = \frac{78}{17.9585633} \times 21 = 92
+\end{equation}
+
+Di conseguenza possiamo valutare
+
+\begin{equation}
+    A = 21 \, \nu_0 \, \unit{\per\mega\electronvolt} \simeq \num{5.077769e21} \, \unit{\per\mega\electronvolt\per\second}
+    \label{eq:A_giusto}
+\end{equation}
 
 
 
+\subsection{Potenza totale in funzione della distanza}
+
+Ottenuti i parametri per integrare numericamente l'equazione \ref{eq:Pot_ad} possiamo usarli per generare i grafico di $\mathcal{P}$ in funzione di $r$ (distanza dal centro della stella) per le stelle più massive descritte in \ref{tab:Mgrosso}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{width = 0.8 \textwidth}{Figures/Pot.eps}
+    \caption{\textbf{FINALMENTE}}
+    \label{fig:Poi}
+\end{figure}
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccc} 
+        \toprule
+        Stella & $r [\unit{\kilo\meter}]$ & $\mathcal{P}(r) [\unit{\mega\electronvolt\per\second\per\femto\meter\squared}]$ & Metodo \\
+        \midrule
+
+        \multirow{6}{*}{\makecell{ $M_1 = 14.3M_\odot$ \\ $R_1 = 59.0 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$88.6$} & $\num{4.426067202e+15}$ & Trapezi \\
+         & & $\num{4.426067212e+15}$ & Simpson \\ 
+         & \multirow{2}{*}{$472.3$} & $\num{3.252180370e+15}$ & Trapezi \\
+         & & $\num{3.252180396e+15}$ & Simpson \\
+         & \multirow{2}{*}{$\infty$} & $\num{3.092162593e+15}$ & Trapezi \\
+         & & $\num{3.092162623e+15}$ & Simpson \\
+        \hline
+
+        \multirow{6}{*}{\makecell{ $M_2 = 0.925M_\odot$ \\ $R_2 = 10.9 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$16.4$} & $\num{6.057276926e+15}$ & Trapezi \\
+         & & $\num{6.057276930e+15}$ & Simpson \\ 
+         & \multirow{2}{*}{$87.2$} & $\num{5.581867348e+15}$ & Trapezi \\
+         & & $\num{5.581867353e+15}$ & Simpson \\
+         & \multirow{2}{*}{$\infty$} & $\num{5.487198980e+15}$ & Trapezi \\
+         & & $\num{5.487198986e+15}$ & Simpson \\
+        \hline
+
+        \multirow{6}{*}{\makecell{ $M_3 = 1.53M_\odot$ \\ $R_3 = 8.56 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$12.8$} & $\num{5.357438539e+15}$ & Trapezi \\
+         & & $\num{5.357438544e+15}$ & Simpson \\ 
+         & \multirow{2}{*}{$68.5$} & $\num{4.384963175e+15}$ & Trapezi \\
+         & & $\num{4.384963185e+15}$ & Simpson \\
+         & \multirow{2}{*}{$\infty$} & $\num{4.226926032e+15}$ & Trapezi \\
+         & & $\num{4.226926043e+15}$ & Simpson \\
+
+        \bottomrule
+    \end{tabular}
+    \caption{Risultati integrazione numerica}
+    \label{tab:integrals}
+\end{table}
 
 
 
@@ -505,7 +585,6 @@ double integrale_trapezio(double a, double b, int N, double r, double R, double 
     integral += h * (*fun)(a + i * h, r, R, M);
     }
 
-
     return integral;
 }
 
@@ -521,60 +600,148 @@ double integrale_simpson(double a, double b, int N, double r, double R, double M
         integral += (4 * h / 3) * (*fun)(a + (2 * i - 1) * h, r, R, M);
     }
 
-
     integral += (4 * h / 3 ) * (*fun)(a + (N - 1) * h, r, R, M);
 
     return integral;
 }
 \end{lstlisting}
 
-e per controllare la convergenza del valore della potenza usiamo
+La funzione da integrare (la radianza) è stata definita come
+\begin{lstlisting}[language=C]
+double funB_corrected(double nu, double r, double R, double M){
+    double corr;
+    // To simulate r = infinity
+    if (r < 0)
+        corr = pow(1. - 2 * M / R, - 1. / 2);
+    else
+        corr = pow((1. - 2 * M / r) / (1. - 2 * M / R), 1. / 2);
+    nu *= corr;
+    return pow(nu, 3) / (exp(nu) - 1.);
+}
+\end{lstlisting}
+Per controllare la convergenza del valore della potenza usiamo inizialmente \texttt{nu\_max} (ovvero $\hat \nu_\text{max}$) uguale a 20. Verifichiamo per quale \texttt{N} si ottiene un errore minore di quello voluto prima per i trapezi e poi per Simpson e stampiamo i valori sul terminale.
 
 \begin{lstlisting}[language=C]
-double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};
-double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};
-double r[3] = {1.5, 8., -1};
+double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};        // Raggi delle 3 stelle
+double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};       // Masse delle 3 stelle
 int N = 10;
+int N_trap, N_simp;
 double Pot, nu_max = 20.;
+double r = R[0];
+double Pot_cvg = integrale_trapezio(1e-10, nu_max, 1e7,  r, R[0], M[0], &funB_corrected); // Aggiunto dopo, e' quello ottenuto con N = 1e6
+double errore_max = 1e-5;
+int kk = 0;
 
-// Test cvg per N trapezi
+// Dati per grafico cvg per N trapezi
 FILE *f0 = fopen("../data/potenza/test_cvg_N_trap.csv", "w");
 fprintf(f0, "Pot,N,nu_max\n");
 while(N <= 1e6){
-    Pot = integrale_trapezio(1e-10, nu_max, N, r[0] * R[0], R[0], M[0], &funB_corrected);
+    Pot = integrale_trapezio(1e-10, nu_max, N, r, R[0], M[0], &funB_corrected);
     fprintf(f0, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max * nu0);
+
+    if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
+        printf("Per trapezi N = %d e' sufficiente\n", N);
+        N_trap = N;
+        kk++;
+    }
+
     N *= 1.1;
+    if (N % 2 != 0) N += 1;
 }
 fclose(f0);
 
-N = 10;
 
-// Test cvg per N simpson
+N = 10;
+kk = 0;
+// Dati per grafico cvg per N simpson
 FILE *f1 = fopen("../data/potenza/test_cvg_N_simp.csv", "w");
 fprintf(f1, "Pot,N,nu_max\n");
-while(2 * N <= 1e6){
-    Pot = integrale_simpson(1e-10, nu_max, 2 * N, r[0] * R[0], R[0], M[0], &funB_corrected);
+while(N <= 1e6){
+    Pot = integrale_simpson(1e-12, nu_max, N, r, R[0], M[0], &funB_corrected);
     fprintf(f1, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max * nu0);
+
+    if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
+        printf("Per Simpson N = %d e' sufficiente\n", N);
+        N_simp = N;
+        kk++;
+    }
+
     N *= 1.1;
+    if (N % 2 != 0) N += 1;
 }
 fclose(f1);
 
-// Come N va bene
-N = 1e3;
-// Test cvg per nu_max (A)
-nu_max = 10;
-int Nrel = (double)N / nu_max;
+// Decidiamo che va bene N_trap e N_simp risultati del codice sopra
+Pot_cvg = integrale_trapezio(1e-12, 1000, 1e7, R[0], R[0], M[0], &funB_corrected);
+nu_max = 20.;
+int Nrel_trap = (double)N_trap / nu_max; // Teniamo la stella densita'
+int Nrel_simp = (double)N_simp / nu_max; // di N / nu_max
+
+// partiamo da
+nu_max = 10.;
+kk = 0;
 // Test cvg per A (ovvero nu_max)
 FILE *f2 = fopen("../data/potenza/test_cvg_A_trap.csv", "w");
 fprintf(f2, "Pot,N,nu_max[ad]\n");
 while(nu_max <= 1e2){
-    N = Nrel * nu_max;
-    Pot = integrale_trapezio(1e-10, nu_max, N, r[0] * R[0], R[0], M[0], &funB_corrected);
+    N = Nrel_trap * nu_max;
+    if (N % 2 != 0) N += 1;
+
+    Pot = integrale_trapezio(1e-10, nu_max, N, R[0], R[0], M[0], &funB_corrected);
     fprintf(f2, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max);
+
+    if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
+        printf("Per trapezi N = %d, nu_max = %.2f sono sufficienti\n", N, nu_max);
+        kk++;
+    }
+
     nu_max *= 1.1;
 }
 fclose(f2);
+
+nu_max = 10.;
+kk = 0;
+// Test cvg per A (ovvero nu_max)
+FILE *f3 = fopen("../data/potenza/test_cvg_A_simp.csv", "w");
+fprintf(f2, "Pot,N,nu_max[ad]\n");
+while(nu_max <= 1e2){
+    N = Nrel_simp * nu_max;
+    if (N % 2 != 0) N += 1;
+
+    Pot = integrale_simpson(1e-10, nu_max, N, R[0], R[0], M[0], &funB_corrected);
+    fprintf(f3, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max);
+
+    if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
+        printf("Per Simpson N = %d, nu_max = %.2f sono sufficienti\n", N, nu_max);
+        kk++;
+    }
+
+    nu_max *= 1.1;
+}
+fclose(f3);
 \end{lstlisting}
+
+In \texttt{stdout} otteniamo
+
+\begin{lstlisting}
+Per trapezi N = 62 e' sufficiente
+Per Simpson N = 82 e' sufficiente
+Per trapezi N = 62, nu_max = 20.7892818 sono sufficienti
+Per Simpson N = 72, nu_max = 17.9585633 sono sufficienti
+\end{lstlisting}
+
+Dalla riga 50 viene utilizzato un codice molto simile a quello sopra controllare la convergenza per diversi valori di \texttt{nu\_max}, in più bisogna assicurarsi che \texttt{N / nu\_max} rimanga costante al variare di \texttt{nu\_max}.
+Inoltre invece che integrare per $r = \infty$ integriamo per $r = R_1$, ovvero il caso in cui la curva della radianza è più spostata verso destra e che quindi richiede di integrare fino a un \texttt{nu\_max} maggiore.
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
 

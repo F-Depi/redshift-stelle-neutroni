@@ -243,7 +243,7 @@ def plt_P_test_cvgN(save=['yes', 'no']):
     kk = 0
 
     for data in [dataT, dataS]:
-        P = abs(dataT[-1,0] - data[:,0]) / dataT[-1,0]
+        P = abs(data[-1,0] - data[:,0]) / data[-1,0]
         N = data[:,1]
 
         plt.plot(N, P, linestyle='', marker='o', label=metodo[kk] + r'$\frac{| \mathcal{P} - \mathcal{P}_{N = 1e7} |}{\mathcal{P}_{N = 1e7}}$')
@@ -260,20 +260,27 @@ def plt_P_test_cvgN(save=['yes', 'no']):
 
 
 def plt_P_test_cvgA(save=['yes', 'no']):
-    data = np.genfromtxt('../data/potenza/test_cvg_A_trap.csv', delimiter=',', skip_header=1, dtype=float)
-
-    P = abs(data[-1,0] - data[:,0]) / data[-1,0]
-    nu_max = data[:,2]
+    dataT = np.genfromtxt('../data/potenza/test_cvg_A_trap.csv', delimiter=',', skip_header=1, dtype=float)
+    dataS = np.genfromtxt('../data/potenza/test_cvg_A_simp.csv', delimiter=',', skip_header=1, dtype=float)
 
     plt.figure()
-    plt.plot(nu_max, P, linestyle='', marker='o', label=r'$\frac{| \mathcal{P} - \mathcal{P} _{\hat \nu_\text{max} = 200} |}{\mathcal{P} _{\hat \nu_\text{max} = 200}}$')
+
+    metodo = ['T:   ', 'S:   ']
+    kk = 0
+
+    for data in [dataT, dataS]:
+        P = abs(data[-1,0] - data[:,0]) / data[-1,0]
+        nu_max = data[:,2]
+
+        plt.plot(nu_max, P, linestyle='', marker='o', label=metodo[kk]+r'$\frac{| \mathcal{P} - \mathcal{P} _{\hat \nu_\text{max} = 200} |}{\mathcal{P} _{\hat \nu_\text{max} = 200}}$')
+        kk += 1
     plt.axvline(20, color='r')
     plt.title(r"Convergenza dell'integrale per $r = 1.5R$, $R = 59km$, $M = 14 M_\odot$")
     plt.xscale('log')
     plt.yscale('log')
     plt.xlabel(r'$\log(\hat \nu_\text{max}$)')
     plt.ylabel(r'$\log_{10} \left( \frac{Potenza}{\text{MeVs}^{-1}\text{fm}^{-2}} \right)$')
-    plt.legend(fontsize=25)
+    plt.legend(fontsize=20)
     plt.tight_layout()
     if save == 'yes': plt.savefig('../report/Figures/Pot_cvgA.eps', format='eps')
     plt.show()
@@ -301,7 +308,7 @@ def plt_P_test_cvgA(save=['yes', 'no']):
 #plot_B()
 
 ''' Convergenza dell'integrale della potenza'''
-#plt_P_test_cvgN('yes')
-plt_P_test_cvgA()
+plt_P_test_cvgN('yes')
+plt_P_test_cvgA('yes')
 
 
