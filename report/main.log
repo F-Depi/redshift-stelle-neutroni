@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.2)  5 AUG 2024 00:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.2)  5 AUG 2024 00:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1585,15 +1585,20 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [5 <./Figures/radianza1-eps-converted-to.pdf> <./Figures/radianza3-eps-converte
 d-to.pdf>]
 Package epstopdf Info: Source file: <Figures/Pot_cvgN.eps>
-(epstopdf)                    date: 2024-08-05 00:07:12
-(epstopdf)                    size: 57930 bytes
+(epstopdf)                    date: 2024-08-05 00:28:49
+(epstopdf)                    size: 57944 bytes
 (epstopdf)             Output file: <Figures/Pot_cvgN-eps-converted-to.pdf>
 (epstopdf)                    date: 2024-08-05 00:07:40
 (epstopdf)                    size: 58647 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Pot_cvgN-eps-conve
 rted-to.pdf Figures/Pot_cvgN.eps>
 (epstopdf)             \includegraphics on input line 294.
-Package epstopdf Info: Output file is already uptodate.
+runsystem(repstopdf --outfile=Figures/Pot_cvgN-eps-converted-to.pdf Figures/Pot
+_cvgN.eps)...executed safely (allowed).
+
+Package epstopdf Info: Result file: <Figures/Pot_cvgN-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-08-05 00:29:01
+(epstopdf)                    size: 57192 bytes.
 <Figures/Pot_cvgN-eps-converted-to.pdf, id=392, 462.72874pt x 347.2975pt>
 File: Figures/Pot_cvgN-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Pot_cvgN-eps-converted-to.pdf>
@@ -1601,7 +1606,7 @@ Package pdftex.def Info: Figures/Pot_cvgN-eps-converted-to.pdf  used on input l
 ine 294.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
 Package epstopdf Info: Source file: <Figures/Pot_cvgA.eps>
-(epstopdf)                    date: 2024-08-05 00:07:17
+(epstopdf)                    date: 2024-08-05 00:28:52
 (epstopdf)                    size: 47798 bytes
 (epstopdf)             Output file: <Figures/Pot_cvgA-eps-converted-to.pdf>
 (epstopdf)                    date: 2024-08-05 00:07:40
@@ -1609,7 +1614,12 @@ Package epstopdf Info: Source file: <Figures/Pot_cvgA.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/Pot_cvgA-eps-conve
 rted-to.pdf Figures/Pot_cvgA.eps>
 (epstopdf)             \includegraphics on input line 301.
-Package epstopdf Info: Output file is already uptodate.
+runsystem(repstopdf --outfile=Figures/Pot_cvgA-eps-converted-to.pdf Figures/Pot
+_cvgA.eps)...executed safely (allowed).
+
+Package epstopdf Info: Result file: <Figures/Pot_cvgA-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-08-05 00:29:01
+(epstopdf)                    size: 39877 bytes.
 <Figures/Pot_cvgA-eps-converted-to.pdf, id=393, 462.72874pt x 347.2975pt>
 File: Figures/Pot_cvgA-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Pot_cvgA-eps-converted-to.pdf>
@@ -1749,7 +1759,7 @@ are/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on main.pdf (13 pages, 899632 bytes).
+Output written on main.pdf (13 pages, 898199 bytes).
 PDF statistics:
  1139 PDF objects out of 1200 (max. 8388607)
  708 compressed objects within 8 object streams

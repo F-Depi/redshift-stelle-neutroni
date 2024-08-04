@@ -11,10 +11,13 @@
 #define POT0 (PI * B0 * nu0)
 
 
+// Radianza
 double funB(double nu){
     return pow(nu, 3) / (exp(nu) - 1.);
 }
 
+
+// Radianza corretta con redshift gravitazionale
 double funB_corrected(double nu, double r, double R, double M){
     double corr;
     // To simulate r = infinity
@@ -24,6 +27,45 @@ double funB_corrected(double nu, double r, double R, double M){
         corr = pow((1. - 2 * M / r) / (1. - 2 * M / R), 1. / 2);
     nu *= corr;
     return pow(nu, 3) / (exp(nu) - 1.);
+}
+
+
+// Radianza
+void tutto_su_radianza(){
+    // Calcolo una semplice radianza
+    int N = 1000;
+    double B, nu, nu_max = 15.;
+
+    FILE *f1 = fopen("../data/radianza/B.csv", "w");
+    fprintf(f1, "nu,B\n");
+    for (int i = 0; i < N; i++){
+        nu = nu_max * (double)i / (double)N;
+        B = funB(nu);
+        fprintf(f1, "%.10e,%.10e\n", nu * nu0, funB(nu) * B0);
+    }
+    fclose(f1);
+
+
+    // Prendo i dati di Phi dal file (a mano)
+    double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};
+    double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};
+    double r[3] = {1.5, 8., -1};
+    // Cicla sulle 3 stelle
+    for (int i = 0; i < 3; i++){
+        // Cicla sulle 3 distanze
+        for (int j = 0; j < 3; j++){
+
+            char filename3[50]; sprintf(filename3, "../data/radianza/Bcorr_%d_%.1f.csv", i + 1, r[j]);
+            FILE *f = fopen(filename3, "w");
+            fprintf(f, "nu,B\n");
+            for (int k = 0; k < N; k++){
+                nu = nu_max * (double)k / (double)N;
+                B = funB_corrected(nu, r[j] * R[i], R[i], M[i]);
+                fprintf(f, "%.10e,%.10e\n", nu * nu0, B * B0);
+            }
+            fclose(f);
+        }
+    }
 }
 
 
@@ -42,7 +84,7 @@ double integrale_trapezio(double a, double b, int N, double r, double R, double 
 }
 
 
-// Simpson method to integrate
+// Metodo Simpson
 double integrale_simpson(double a, double b, int N, double r, double R, double M, double (*fun)(double, double, double, double)){
     // assume a > b
     double h = (b - a)/N;
@@ -72,7 +114,7 @@ void test_cvg(){
     int N_trap, N_simp;
     double Pot, nu_max = 20.;
     double r = R[0];
-    double Pot_cvg = integrale_trapezio(1e-10, nu_max, 1e8,  r, R[0], M[0], &funB_corrected); // Aggiunto dopo, e' quello ottenuto con N = 1e6
+    double Pot_cvg = integrale_trapezio(1e-12, nu_max, 1e8,  r, R[0], M[0], &funB_corrected); // Aggiunto dopo, e' quello ottenuto con N = 1e6
     double errore_max = 1e-5;
     int kk = 0;
 
@@ -80,7 +122,7 @@ void test_cvg(){
     FILE *f0 = fopen("../data/potenza/test_cvg_N_trap.csv", "w");
     fprintf(f0, "Pot,N,nu_max\n");
     while(N <= 1e6){
-        Pot = integrale_trapezio(1e-10, nu_max, N, r, R[0], M[0], &funB_corrected);
+        Pot = integrale_trapezio(1e-12, nu_max, N, r, R[0], M[0], &funB_corrected);
         fprintf(f0, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max * nu0);
 
         if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -133,7 +175,7 @@ void test_cvg(){
         N = Nrel_trap * nu_max;
         if (N % 2 != 0) N += 1;
 
-        Pot = integrale_trapezio(1e-10, nu_max, N, R[0], R[0], M[0], &funB_corrected);
+        Pot = integrale_trapezio(1e-12, nu_max, N, R[0], R[0], M[0], &funB_corrected);
         fprintf(f2, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max);
 
         if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -155,7 +197,7 @@ void test_cvg(){
         N = Nrel_simp * nu_max;
         if (N % 2 != 0) N += 1;
 
-        Pot = integrale_simpson(1e-10, nu_max, N, R[0], R[0], M[0], &funB_corrected);
+        Pot = integrale_simpson(1e-12, nu_max, N, R[0], R[0], M[0], &funB_corrected);
         fprintf(f3, "%.13e,%d,%.13e\n", Pot * POT0, N, nu_max);
 
         if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -170,66 +212,32 @@ void test_cvg(){
 
 }
 
+
 int main(){
 
-    /*
-    // Calcolo una semplice radianza
-    int N = 1000;
-    double B, nu, nu_max = 15.;
-
-    FILE *f1 = fopen("../data/radianza/B.csv", "w");
-    fprintf(f1, "nu,B\n");
-    for (int i = 0; i < N; i++){
-        nu = nu_max * (double)i / (double)N;
-        B = funB(nu);
-        fprintf(f1, "%.10e,%.10e\n", nu * nu0, funB(nu) * B0);
-    }
-    fclose(f1);
-    */
-
-
     /****************** Radianza corretta ********************/
-    /*
-    // Prendo i dati di Phi dal file (a mano)
-    double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};
-    double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};
-    double r[3] = {1.5, 8., -1};
-    // Cicla sulle 3 stelle
-    for (int i = 0; i < 3; i++){
-        // Cicla sulle 3 distanze
-        for (int j = 0; j < 3; j++){
-
-            char filename3[50]; sprintf(filename3, "../data/radianza/Bcorr_%d_%.1f.csv", i + 1, r[j]);
-            FILE *f = fopen(filename3, "w");
-            fprintf(f, "nu,B\n");
-            for (int k = 0; k < N; k++){
-                nu = nu_max * (double)k / (double)N;
-                B = funB_corrected(nu, r[j] * R[i], R[i], M[i]);
-                fprintf(f, "%.10e,%.10e\n", nu * nu0, B * B0);
-            }
-            fclose(f);
-        }
-    }
-    */
+    // tutto_su_radianza();
 
     
     /****************** Potenza Totale ********************/
     test_cvg();
 
-    // Actual exercise
-    //N = 1e3;
-    //nu_max = 20.;
+    //double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};        // Raggi delle 3 stelle
+    //double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};       // Masse delle 3 stelle
+
+    //int N_trap = 67;
+    //int N_simp = 92;
+    //double nu_max = 21.;
 
     ////// Trapezi
     //// Cicla sulle 3 stelle
-    //char filename3[50]; sprintf(filename3, "../data/potenza/Pot_simp_%d.csv", i);
-    //FILE *f3 = fopen(filename3, "w");
-    //fprintf(f3, "r,R,M,Pot,Int,N,nu_max[ad]\n");
-
     //for (int i = 0; i < 3; i++){
-    //    // Cicla sulle 3 distanze
-    //    for (int j = 0; j < 3; j++){
+    //    char filename3[50]; sprintf(filename3, "../data/potenza/Pot_trap_%d.csv", i);
+    //    FILE *f_trap = fopen(filename3, "w");
+    //    fprintf(f_trap, "r,Pot\n");
 
+    //    double r = R[i];
+    //    while (r < 1000 / R0){
     //        Pot = integrale_trapezio(1e-10, nu_max, N, r[j] * R[i], R[i], M[i], &funB_corrected);
     //        fprintf(f3, "%.10e,%.10e,%.10e,%.10e,%s,%d,%.0f\n", r[j] * R[i] * R0, R[i] * R0, M[i] * M0, Pot * POT0, "simpson", N, nu_max);
     //        Pot = integrale_simpson(1e-10, nu_max, N, r[j] * R[i], R[i], M[i], &funB_corrected);
