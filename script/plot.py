@@ -243,10 +243,10 @@ def plt_P_test_cvgN(save=['yes', 'no']):
     kk = 0
 
     for data in [dataT, dataS]:
-        P = abs(data[-1,0] - data[:,0]) / data[-1,0]
-        N = data[:,1]
+        P = abs(data[-1,0] - data[:-1,0]) / data[-1,0]
+        N = data[:-1,1]
 
-        plt.plot(N, P, linestyle='', marker='o', label=metodo[kk] + r'$\frac{| \mathcal{P} - \mathcal{P}_{N = 1e7} |}{\mathcal{P}_{N = 1e7}}$')
+        plt.plot(N, P, linestyle='', marker='o', label=metodo[kk] + r'$\frac{| \mathcal{P} - \mathcal{P}_{N = 1e8} |}{\mathcal{P}_{N = 1e8}}$')
         kk += 1
     plt.title(r"Convergenza dell'integrale per $r = 1.5R$, $R = 59km$, $M = 14 M_\odot$")
     plt.xscale('log')
@@ -269,8 +269,8 @@ def plt_P_test_cvgA(save=['yes', 'no']):
     kk = 0
 
     for data in [dataT, dataS]:
-        P = abs(data[-1,0] - data[:,0]) / data[-1,0]
-        nu_max = data[:,2]
+        P = abs(data[-1,0] - data[:-1,0]) / data[-1,0]
+        nu_max = data[:-1,2]
 
         plt.plot(nu_max, P, linestyle='', marker='o', label=metodo[kk]+r'$\frac{| \mathcal{P} - \mathcal{P} _{\hat \nu_\text{max} = 200} |}{\mathcal{P} _{\hat \nu_\text{max} = 200}}$')
         kk += 1
@@ -283,6 +283,35 @@ def plt_P_test_cvgA(save=['yes', 'no']):
     plt.legend(fontsize=20)
     plt.tight_layout()
     if save == 'yes': plt.savefig('../report/Figures/Pot_cvgA.eps', format='eps')
+    plt.show()
+
+
+def plt_Pot(save=['yes','no']):
+
+    plt.figure(figsize=(12,6))
+    colors = ['orange', 'purple', 'black', 'g', 'r', 'b']
+
+    kk = 0
+    for metodo in ['simp', 'trap']:
+        for i in ['1', '2', '3']:
+            data = np.genfromtxt('../data/potenza/Pot_'+metodo+'_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
+            r = data[:-1,0]
+            Pot = data[:-1,1]
+            # The last row contains R_star and Pot ad infinity
+            R = data[-1,0]
+            Pot_inf = data[-1,1]
+
+            plt.plot(r, Pot, color=colors[kk], marker='.', linestyle='', label=metodo[0].upper()+': 'r'$\mathcal{P}_'+i+r'(r)$')
+            plt.axvline(R, color=colors[kk], linestyle='-')
+            plt.axhline(Pot_inf, color=colors[kk], linestyle='--')
+            kk += 1
+
+    plt.title('Potenza irradiata dalle 3 stelle più massive')
+    plt.xlabel('raggio [km]')
+    plt.ylabel(r'potenza $\left[ \frac{\text{MeV}}{\text{sfm}^3} \right]$')
+    plt.legend(loc='upper right')
+    plt.tight_layout()
+    if save == 'yes': plt.savefig('../report/Figures/Pot.eps', format='eps')
     plt.show()
 
 
@@ -308,7 +337,10 @@ def plt_P_test_cvgA(save=['yes', 'no']):
 #plot_B()
 
 ''' Convergenza dell'integrale della potenza'''
-plt_P_test_cvgN('yes')
-plt_P_test_cvgA('yes')
+#plt_P_test_cvgN('yes')
+#plt_P_test_cvgA('yes')
+
+''' Potenza in funzione di r '''
+#plt_Pot('yes')
 
 

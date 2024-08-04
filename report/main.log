@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.2)  5 AUG 2024 00:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.2)  5 AUG 2024 01:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1585,140 +1585,80 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [5 <./Figures/radianza1-eps-converted-to.pdf> <./Figures/radianza3-eps-converte
 d-to.pdf>]
 Package epstopdf Info: Source file: <Figures/Pot_cvgN.eps>
-(epstopdf)                    date: 2024-08-05 00:28:49
-(epstopdf)                    size: 57944 bytes
+(epstopdf)                    date: 2024-08-05 01:27:29
+(epstopdf)                    size: 53912 bytes
 (epstopdf)             Output file: <Figures/Pot_cvgN-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-05 00:07:40
-(epstopdf)                    size: 58647 bytes
+(epstopdf)                    date: 2024-08-05 01:27:43
+(epstopdf)                    size: 57028 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Pot_cvgN-eps-conve
 rted-to.pdf Figures/Pot_cvgN.eps>
 (epstopdf)             \includegraphics on input line 294.
-runsystem(repstopdf --outfile=Figures/Pot_cvgN-eps-converted-to.pdf Figures/Pot
-_cvgN.eps)...executed safely (allowed).
-
-Package epstopdf Info: Result file: <Figures/Pot_cvgN-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-05 00:29:01
-(epstopdf)                    size: 57192 bytes.
+Package epstopdf Info: Output file is already uptodate.
 <Figures/Pot_cvgN-eps-converted-to.pdf, id=392, 462.72874pt x 347.2975pt>
 File: Figures/Pot_cvgN-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Pot_cvgN-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/Pot_cvgN-eps-converted-to.pdf  used on input l
 ine 294.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 295--295
+
+ []
+
 Package epstopdf Info: Source file: <Figures/Pot_cvgA.eps>
-(epstopdf)                    date: 2024-08-05 00:28:52
-(epstopdf)                    size: 47798 bytes
+(epstopdf)                    date: 2024-08-05 01:27:31
+(epstopdf)                    size: 47586 bytes
 (epstopdf)             Output file: <Figures/Pot_cvgA-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-05 00:07:40
-(epstopdf)                    size: 39877 bytes
+(epstopdf)                    date: 2024-08-05 01:27:43
+(epstopdf)                    size: 39973 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Pot_cvgA-eps-conve
 rted-to.pdf Figures/Pot_cvgA.eps>
 (epstopdf)             \includegraphics on input line 301.
-runsystem(repstopdf --outfile=Figures/Pot_cvgA-eps-converted-to.pdf Figures/Pot
-_cvgA.eps)...executed safely (allowed).
-
-Package epstopdf Info: Result file: <Figures/Pot_cvgA-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-05 00:29:01
-(epstopdf)                    size: 39877 bytes.
+Package epstopdf Info: Output file is already uptodate.
 <Figures/Pot_cvgA-eps-converted-to.pdf, id=393, 462.72874pt x 347.2975pt>
 File: Figures/Pot_cvgA-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Pot_cvgA-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/Pot_cvgA-eps-converted-to.pdf  used on input l
 ine 301.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
-[6 <./Figures/radianza2-eps-converted-to.pdf>]
-! Missing endcsname inserted.
-<to be read again> 
-                   textwidth 
-l.349     \includegraphics{width = 0.8 \textwidth}
-                                                  {Figures/Pot.eps}
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Use of ??? doesn't match its definition.
-<argument> ???  
-                ! LaTeX Error: textwidth invalid in file name. Lost: .
-l.349     \includegraphics{width = 0.8 \textwidth}
-                                                  {Figures/Pot.eps}
-If you say, e.g., `\def\a1{...}', then you must always
-put `1' after `\a', since control sequence names are
-made up of letters only. The macro here has not been
-followed by the required stuff, so I'm ignoring it.
-
-! Missing endcsname inserted.
-<to be read again> 
-                   textwidth 
-l.349     \includegraphics{width = 0.8 \textwidth}
-                                                  {Figures/Pot.eps}
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Use of ??? doesn't match its definition.
-<argument> ???  
-                ! LaTeX Error: textwidth invalid in file name. Lost: .
-l.349     \includegraphics{width = 0.8 \textwidth}
-                                                  {Figures/Pot.eps}
-If you say, e.g., `\def\a1{...}', then you must always
-put `1' after `\a', since control sequence names are
-made up of letters only. The macro here has not been
-followed by the required stuff, so I'm ignoring it.
-
-! Missing endcsname inserted.
-<to be read again> 
-                   textwidth 
-l.349     \includegraphics{width = 0.8 \textwidth}
-                                                  {Figures/Pot.eps}
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-! Use of ??? doesn't match its definition.
-<argument> ???  
-                ! LaTeX Error: textwidth invalid in file name. Lost: .
-l.349     \includegraphics{width = 0.8 \textwidth}
-                                                  {Figures/Pot.eps}
-If you say, e.g., `\def\a1{...}', then you must always
-put `1' after `\a', since control sequence names are
-made up of letters only. The macro here has not been
-followed by the required stuff, so I'm ignoring it.
-
-
-LaTeX Warning: File `width = 0.8 \textwidth ' not found on input line 349.
-
-
-! LaTeX Error: Unknown graphics extension: .8.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.349     \includegraphics{width = 0.8 \textwidth}
-                                                  {Figures/Pot.eps}
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[7 <./Figures/Pot_cvgN-eps-converted-to.pdf> <./Figures/Pot_cvgA-eps-converted-
-to.pdf>] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[6 <./Figures/radianza2-eps-converted-to.pdf>] [7 <./Figures/Pot_cvgN-eps-conve
+rted-to.pdf> <./Figures/Pot_cvgA-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/Pot.eps>
+(epstopdf)                    date: 2024-08-05 01:27:32
+(epstopdf)                    size: 290057 bytes
+(epstopdf)             Output file: <Figures/Pot-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-08-05 01:27:43
+(epstopdf)                    size: 1788572 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/Pot-eps-converted-
+to.pdf Figures/Pot.eps>
+(epstopdf)             \includegraphics on input line 350.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/Pot-eps-converted-to.pdf, id=634, 867.24pt x 433.62pt>
+File: Figures/Pot-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/Pot-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/Pot-eps-converted-to.pdf  used on input line 3
+50.
+(pdftex.def)             Requested size: 441.01772pt x 220.50809pt.
+[8 <./Figures/Pot-eps-converted-to.pdf>] (/usr/share/texlive/texmf-dist/tex/lat
+ex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 432.
+(hyperref)                removing `math shift' on input line 413.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\rho' on input line 432.
+(hyperref)                removing `\rho' on input line 413.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 432.
+(hyperref)                removing `math shift' on input line 413.
 
-[8{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [9
-] [10] [11] [12] [13] (./main.aux)
+[9{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [1
+0] [11] [12] [13] [14] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: E5C098BCB713427766970D720DCA369D;1992.
 Package logreq Info: Writing requests to 'main.run.xml'.
@@ -1726,13 +1666,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 51753 strings out of 476041
- 1137621 string characters out of 5793165
- 2733928 words of memory out of 6000000
- 71073 multiletter control sequences out of 15000+600000
+ 51713 strings out of 476041
+ 1137079 string characters out of 5793165
+ 2717369 words of memory out of 6000000
+ 71047 multiletter control sequences out of 15000+600000
  534899 words of font info for 93 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 99i,19n,134p,1149b,2565s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,17n,134p,1149b,2563s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texl
@@ -1759,10 +1699,10 @@ are/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on main.pdf (13 pages, 898199 bytes).
+Output written on main.pdf (14 pages, 2682079 bytes).
 PDF statistics:
- 1139 PDF objects out of 1200 (max. 8388607)
- 708 compressed objects within 8 object streams
+ 1193 PDF objects out of 1200 (max. 8388607)
+ 719 compressed objects within 8 object streams
  353 named destinations out of 1000 (max. 500000)
- 144 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 149 words of extra memory for PDF output out of 10000 (max. 10000000)
 

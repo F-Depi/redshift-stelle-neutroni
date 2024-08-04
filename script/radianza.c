@@ -220,31 +220,58 @@ int main(){
 
     
     /****************** Potenza Totale ********************/
-    test_cvg();
+    // test_cvg();
 
-    //double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};        // Raggi delle 3 stelle
-    //double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};       // Masse delle 3 stelle
+    double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};        // Raggi delle 3 stelle
+    double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};       // Masse delle 3 stelle
 
-    //int N_trap = 67;
-    //int N_simp = 92;
-    //double nu_max = 21.;
+    int N_trap = 67;
+    int N_simp = 92;
+    double nu_max = 21.;
 
-    ////// Trapezi
-    //// Cicla sulle 3 stelle
+    //// Trapezi
+    // Cicla sulle 3 stelle
     //for (int i = 0; i < 3; i++){
-    //    char filename3[50]; sprintf(filename3, "../data/potenza/Pot_trap_%d.csv", i);
-    //    FILE *f_trap = fopen(filename3, "w");
+    //    char filename_trap[50]; sprintf(filename_trap, "../data/potenza/Pot_trap_%d.csv", i + 1);
+    //    FILE *f_trap = fopen(filename_trap, "w");
     //    fprintf(f_trap, "r,Pot\n");
 
     //    double r = R[i];
-    //    while (r < 1000 / R0){
-    //        Pot = integrale_trapezio(1e-10, nu_max, N, r[j] * R[i], R[i], M[i], &funB_corrected);
-    //        fprintf(f3, "%.10e,%.10e,%.10e,%.10e,%s,%d,%.0f\n", r[j] * R[i] * R0, R[i] * R0, M[i] * M0, Pot * POT0, "simpson", N, nu_max);
-    //        Pot = integrale_simpson(1e-10, nu_max, N, r[j] * R[i], R[i], M[i], &funB_corrected);
-    //        fprintf(f3, "%.10e,%.10e,%.10e,%.10e,%s,%d,%.0f\n", r[j] * R[i] * R0, R[i] * R0, M[i] * M0, Pot * POT0, "trapezi", N / 2, nu_max);
+    //    double Pot = 0;
+    //    while (r < 500 / R0){
+    //        Pot = integrale_trapezio(1e-12, nu_max, N_trap, r, R[i], M[i], &funB_corrected);
+    //        fprintf(f_trap, "%.5e,%.5e\n", r * R0, Pot * POT0);
+    //        r += 0.01;
     //    }
+
+    //    // r = \infty
+    //    Pot = integrale_trapezio(1e-12, nu_max, N_trap, - 1, R[i], M[i], &funB_corrected);
+    //    fprintf(f_trap, "%.5e,%.5e\n", R[i] * R0, Pot * POT0);
+
+    //    fclose(f_trap);
     //}
-    //fclose(f3);
+
+    //// Simpson
+    // Cicla sulle 3 stelle
+    for (int i = 0; i < 3; i++){
+        char filename_simp[50]; sprintf(filename_simp, "../data/potenza/Pot_simp_%d.csv", i + 1);
+        FILE *f_simp = fopen(filename_simp, "w");
+        fprintf(f_simp, "r,Pot\n");
+
+        double r = R[i];
+        double Pot = 0;
+        while (r < 500 / R0){
+            Pot = integrale_simpson(1e-12, nu_max, N_simp, r, R[i], M[i], &funB_corrected);
+            fprintf(f_simp, "%.5e,%.5e\n", r * R0, Pot * POT0);
+            r += 0.01;
+        }
+
+        // r = \infty
+        Pot = integrale_simpson(1e-12, nu_max, N_simp, - 1, R[i], M[i], &funB_corrected);
+        fprintf(f_simp, "%.5e,%.5e\n", R[i] * R0, Pot * POT0);
+
+        fclose(f_simp);
+    }
 
 
     return 0;

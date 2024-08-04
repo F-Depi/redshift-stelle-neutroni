@@ -286,13 +286,13 @@ Possiamo ottenere un valore migliore valutando la convergenza dell'integrale. Pe
 
 Studiamo il caso in cui è necessario un \texttt{N} maggiore, ovvero quello in cui la curva è più ripida: $r = \infty$, $M_1 = 14.3M_\odot$ e con $\hat \nu_\text{max} = 20$.
 Otteniamo il grafico in figura \ref{fig:Pot_cvgN}.
-I valori sono degli scarti rispetto a $\mathcal{P}_{N = 1e7}$ (la potenza calcolata con $N = \num{1e7}$) e sono normalizzati rispetto alla stessa.
+I valori sono degli scarti rispetto a $\mathcal{P}_{N = 1e8}$ (la potenza calcolata con $N = \num{1e8}$) e sono normalizzati rispetto alla stessa.
 Al contriario di quello che succede di solito, il metodo Simpson (che ha un costo computazionale maggiore), non presenta vantaggi rispetto a quello dei trapezi. Dal codice (Appendice \ref{ap:integrali}) che genera i dati mostrati in figura \ref{fig:Pot_cvgN} otteniamo un errore relativo minore di $\num{1e-5}$ per \texttt{N\_trap = 62} e \texttt{N\_simp = 82}.
 \begin{figure}[h]
     \begin{minipage}{0.49 \textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/Pot_cvgN.eps}
-        \caption{Errore relativo sul calcolo della potenza per diversi \texttt{N} (numero di step nell'integrazione con i trapezi \textbf{T} e con simpson \textbf{S}).}
+        \caption{Errore relativo sul calcolo della potenza per diversi \texttt{N} (numero di step nell'integrazione con i trapezi, \textbf{T}, e con simpson, \textbf{S}). \\ \\}
         \label{fig:Pot_cvgN}
     \end{minipage}
     \hspace{0.01 \textwidth}
@@ -300,7 +300,7 @@ Al contriario di quello che succede di solito, il metodo Simpson (che ha un cost
         \centering
         \includegraphics[width = \textwidth]{Figures/Pot_cvgA.eps}
         \caption{Errore relativo sul calcolo della potenza per diversi valori di $\hat \nu_\text{max}$.
-        Per $\hat \nu_\text{max} > \num{20}$ (line verticale rossa) otteniamo una precisione maggiore di \num{1e-8}, il valore di A trovato in \ref{eq:A} è quindi una buon upperboud.}
+        Poco dopo la stima iniziale di  $\hat \nu_\text{max} = \num{20}$ (line verticale rossa) l'errore si stabilizza. L'errore non diminuisce come prima perché c'è una sorta di offset dato dall'aver fissato il rapporto \texttt{N / nu\_max}}
         \label{fig:Pot_cvgA}
     \end{minipage}
 \end{figure}
@@ -340,53 +340,34 @@ Di conseguenza possiamo valutare
 
 
 
+\newpage
 \subsection{Potenza totale in funzione della distanza}
 
-Ottenuti i parametri per integrare numericamente l'equazione \ref{eq:Pot_ad} possiamo usarli per generare i grafico di $\mathcal{P}$ in funzione di $r$ (distanza dal centro della stella) per le stelle più massive descritte in \ref{tab:Mgrosso}.
+Ottenuti i parametri per integrare numericamente l'equazione \ref{eq:Pot_ad} possiamo usarli per generare il grafico di $\mathcal{P}$ in funzione di $r$ (distanza dal centro della stella) per le stelle più massive descritte in \ref{tab:Mgrosso}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics{width = 0.8 \textwidth}{Figures/Pot.eps}
-    \caption{\textbf{FINALMENTE}}
+    \includegraphics[width = \textwidth]{Figures/Pot.eps}
+    \caption{Potenza in funzione della distanza per le 3 stelle: $(R_1 = 59.0 \unit{\kilo\meter},~M_1 = 14.3 M_\odot)$, $(R_2 = 10.9 \unit{\kilo\meter},~M_2 = 0.926 M_\odot)$ e $(R_3 = 8.56 \unit{\kilo\meter},~M_3 = 1.53 M_\odot)$.
+    La linea continua verticale rappresenta il raggio della stella, la linea tratteggiata orizzontate il valore di $\mathcal{P}$ a $r = \infty$.
+    Sono riportati con 2 colori diversi i punti ottenuti integrando con Simpson \textbf{S} e con i trapezi \textbf{T} e, giustamente, non è apprezzabile la differenza.}
     \label{fig:Poi}
 \end{figure}
 
+Abbiamo riportato nella stessa figura i punti ottenuti con il metodo dei trapezi e quelli ottenuti con il metodo di Simpson e, visto l'errore massimo scelto in precendeza, non è apprezzabile la differenza.
+Con linea tratteggiata e linea continua sono rispettivamente rappresentati raggio e valore della potenza all'infinito per ogni stella analizzata.
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{cccc} 
-        \toprule
-        Stella & $r [\unit{\kilo\meter}]$ & $\mathcal{P}(r) [\unit{\mega\electronvolt\per\second\per\femto\meter\squared}]$ & Metodo \\
-        \midrule
 
-        \multirow{6}{*}{\makecell{ $M_1 = 14.3M_\odot$ \\ $R_1 = 59.0 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$88.6$} & $\num{4.426067202e+15}$ & Trapezi \\
-         & & $\num{4.426067212e+15}$ & Simpson \\ 
-         & \multirow{2}{*}{$472.3$} & $\num{3.252180370e+15}$ & Trapezi \\
-         & & $\num{3.252180396e+15}$ & Simpson \\
-         & \multirow{2}{*}{$\infty$} & $\num{3.092162593e+15}$ & Trapezi \\
-         & & $\num{3.092162623e+15}$ & Simpson \\
-        \hline
 
-        \multirow{6}{*}{\makecell{ $M_2 = 0.925M_\odot$ \\ $R_2 = 10.9 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$16.4$} & $\num{6.057276926e+15}$ & Trapezi \\
-         & & $\num{6.057276930e+15}$ & Simpson \\ 
-         & \multirow{2}{*}{$87.2$} & $\num{5.581867348e+15}$ & Trapezi \\
-         & & $\num{5.581867353e+15}$ & Simpson \\
-         & \multirow{2}{*}{$\infty$} & $\num{5.487198980e+15}$ & Trapezi \\
-         & & $\num{5.487198986e+15}$ & Simpson \\
-        \hline
 
-        \multirow{6}{*}{\makecell{ $M_3 = 1.53M_\odot$ \\ $R_3 = 8.56 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$12.8$} & $\num{5.357438539e+15}$ & Trapezi \\
-         & & $\num{5.357438544e+15}$ & Simpson \\ 
-         & \multirow{2}{*}{$68.5$} & $\num{4.384963175e+15}$ & Trapezi \\
-         & & $\num{4.384963185e+15}$ & Simpson \\
-         & \multirow{2}{*}{$\infty$} & $\num{4.226926032e+15}$ & Trapezi \\
-         & & $\num{4.226926043e+15}$ & Simpson \\
 
-        \bottomrule
-    \end{tabular}
-    \caption{Risultati integrazione numerica}
-    \label{tab:integrals}
-\end{table}
+
+
+
+
+
+
+
 
 
 
@@ -748,35 +729,41 @@ Inoltre invece che integrare per $r = \infty$ integriamo per $r = R_1$, ovvero i
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%\begin{table}[h]
+%    \centering
+%    \begin{tabular}{cccc} 
+%        \toprule
+%        Stella & $r [\unit{\kilo\meter}]$ & $\mathcal{P}(r) [\unit{\mega\electronvolt\per\second\per\femto\meter\squared}]$ & Metodo \\
+%        \midrule
+%
+%        \multirow{6}{*}{\makecell{ $M_1 = 14.3M_\odot$ \\ $R_1 = 59.0 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$88.6$} & $\num{4.426067202e+15}$ & Trapezi \\
+%         & & $\num{4.426067212e+15}$ & Simpson \\ 
+%         & \multirow{2}{*}{$472.3$} & $\num{3.252180370e+15}$ & Trapezi \\
+%         & & $\num{3.252180396e+15}$ & Simpson \\
+%         & \multirow{2}{*}{$\infty$} & $\num{3.092162593e+15}$ & Trapezi \\
+%         & & $\num{3.092162623e+15}$ & Simpson \\
+%        \hline
+%
+%        \multirow{6}{*}{\makecell{ $M_2 = 0.925M_\odot$ \\ $R_2 = 10.9 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$16.4$} & $\num{6.057276926e+15}$ & Trapezi \\
+%         & & $\num{6.057276930e+15}$ & Simpson \\ 
+%         & \multirow{2}{*}{$87.2$} & $\num{5.581867348e+15}$ & Trapezi \\
+%         & & $\num{5.581867353e+15}$ & Simpson \\
+%         & \multirow{2}{*}{$\infty$} & $\num{5.487198980e+15}$ & Trapezi \\
+%         & & $\num{5.487198986e+15}$ & Simpson \\
+%        \hline
+%
+%        \multirow{6}{*}{\makecell{ $M_3 = 1.53M_\odot$ \\ $R_3 = 8.56 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$12.8$} & $\num{5.357438539e+15}$ & Trapezi \\
+%         & & $\num{5.357438544e+15}$ & Simpson \\ 
+%         & \multirow{2}{*}{$68.5$} & $\num{4.384963175e+15}$ & Trapezi \\
+%         & & $\num{4.384963185e+15}$ & Simpson \\
+%         & \multirow{2}{*}{$\infty$} & $\num{4.226926032e+15}$ & Trapezi \\
+%         & & $\num{4.226926043e+15}$ & Simpson \\
+%
+%        \bottomrule
+%    \end{tabular}
+%    \caption{Risultati integrazione numerica}
+%    \label{tab:integrals}
+%\end{table}
 
 
 %% Snippets cos I'm too lazy to set the Lsp the right way
