@@ -1,0 +1,223 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.2)  5 AUG 2024 11:05
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**frontespizio.tex
+(./frontespizio.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22>
+
+! LaTeX Error: Environment frontespizio undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \begin{frontespizio}
+                        
+? 
+! Undefined control sequence.
+l.2 \Universita
+               {Trento} % CTT
+? 
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 \Universita{T
+                 rento} % CTT
+? 
+Missing character: There is no T in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+! Undefined control sequence.
+l.3 \Logo
+         {Figures/logo_unitn} % CTT
+? 
+Missing character: There is no F in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.3 \Logo{Figures/logo_
+                       unitn} % CTT
+? 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+! Extra }, or forgotten $.
+l.3 \Logo{Figures/logo_unitn}
+                              % CTT
+? 
+! Undefined control sequence.
+l.4 \Divisione
+              {Fisica Computazionale} % CTT
+? 
+! Undefined control sequence.
+l.5 \Corso
+          [Laurea Triennale]{Fisica} % CTT, a meno che non cambi la denomina...
+
+? 
+! Undefined control sequence.
+l.6 \Annoaccademico
+                   {2023-2024}
+? 
+! Undefined control sequence.
+l.7 \Titoletto
+              {Progetto Finale} % CTT
+? 
+! Undefined control sequence.
+l.8 \Titolo
+           {Calcolo redshift nell'emissione di fotoni da una stella di neutr...
+
+? 
+! Undefined control sequence.
+l.9 \Sottotitolo
+                {\today}
+? 
+! Undefined control sequence.
+l.9 \Sottotitolo{\today
+                       }
+? 
+! Undefined control sequence.
+l.10 \Candidato
+               [227552]{Federico De Paoli, \textsf {federico.depaoli@student...
+
+? 
+! Undefined control sequence.
+l.11 \NRelatore
+               {Docente}{} % CTT
+? 
+! Undefined control sequence.
+l.12 \Relatore
+              {Prof. Alessandro Roggero} % CTT, a meno che non sia cambiato ...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{frontespizio}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 \end{frontespizio}
+                       
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.13 \end{frontespizio}
+                       
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.13 \end{frontespizio}
+                       
+? 
+runsystem(pdflatex frontespizio-frn)...disabled (restricted).
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 2--16
+[]
+ []
+
+
+Overfull \hbox (1040.4732pt too wide) in paragraph at lines 2--16
+[]\OML/cmm/m/it/10 nitn[]\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 LaureaTriennale\OT1/
+cmr/m/n/10 ][][][][][][227552][][][][]$
+ []
+
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.17 \newpage
+             
+? 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+! Emergency stop.
+<*> 
+    
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 28 strings out of 476041
+ 584 string characters out of 5793165
+ 1850388 words of memory out of 6000000
+ 20578 multiletter control sequences out of 15000+600000
+ 512592 words of font info for 33 fonts, out of 8000000 for 9000
+ 1137 hyphenation exceptions out of 8191
+ 23i,5n,23p,141b,105s stack positions out of 10000i,1000n,20000p,200000b,200000s
+!  ==> Fatal error occurred, no output PDF file produced!

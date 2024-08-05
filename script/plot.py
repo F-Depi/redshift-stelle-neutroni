@@ -5,16 +5,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 SMALL_SIZE = 13
-MEDIUM_SIZE = 13
-BIGGER_SIZE = 13
+MEDIUM_SIZE = 18
+BIGGER_SIZE = 18
 
 plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
-plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', titlesize=BIGGER_SIZE)     # fontsize of the axes title
 plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
 plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
-plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
 
 def test_P_rhi():
     data = pd.read_csv('../data/rho-P.csv')
@@ -246,13 +245,13 @@ def plt_P_test_cvgN(save=['yes', 'no']):
         P = abs(data[-1,0] - data[:-1,0]) / data[-1,0]
         N = data[:-1,1]
 
-        plt.plot(N, P, linestyle='', marker='o', label=metodo[kk] + r'$\frac{| \mathcal{P} - \mathcal{P}_{N = 1e8} |}{\mathcal{P}_{N = 1e8}}$')
+        plt.plot(N, P, linestyle='', marker='o', label=metodo[kk] + r'$\frac{| \mathcal{I} - \mathcal{I}_{N = 1e8} |}{\mathcal{I}_{N = 1e8}}$')
         kk += 1
-    plt.title(r"Convergenza dell'integrale per $r = 1.5R$, $R = 59km$, $M = 14 M_\odot$")
+    plt.title('Errore sul metodo di integrazione')
     plt.xscale('log')
     plt.yscale('log')
     plt.xlabel('log(N)')
-    plt.ylabel(r'$\log_{10} \left( \frac{Potenza}{\text{MeVs}^{-1}\text{fm}^{-2}} \right)$')
+    plt.ylabel(r'$\log_{10} \left( \text{Errore relativo} \right)$')
     plt.legend(fontsize=20)
     plt.tight_layout()
     if save == 'yes': plt.savefig('../report/Figures/Pot_cvgN.eps', format='eps')
@@ -272,14 +271,14 @@ def plt_P_test_cvgA(save=['yes', 'no']):
         P = abs(data[-1,0] - data[:-1,0]) / data[-1,0]
         nu_max = data[:-1,2]
 
-        plt.plot(nu_max, P, linestyle='', marker='o', label=metodo[kk]+r'$\frac{| \mathcal{P} - \mathcal{P} _{\hat \nu_\text{max} = 200} |}{\mathcal{P} _{\hat \nu_\text{max} = 200}}$')
+        plt.plot(nu_max, P, linestyle='', marker='o', label=metodo[kk]+r'$\frac{| \mathcal{I} - \mathcal{I} _{\hat \nu_\text{max} = 200} |}{\mathcal{I} _{\hat \nu_\text{max} = 200}}$')
         kk += 1
     plt.axvline(20, color='r')
-    plt.title(r"Convergenza dell'integrale per $r = 1.5R$, $R = 59km$, $M = 14 M_\odot$")
+    plt.title('Errore sul metodo di integrazione')
     plt.xscale('log')
     plt.yscale('log')
     plt.xlabel(r'$\log(\hat \nu_\text{max}$)')
-    plt.ylabel(r'$\log_{10} \left( \frac{Potenza}{\text{MeVs}^{-1}\text{fm}^{-2}} \right)$')
+    plt.ylabel(r'$\log_{10} \left( \text{Errore relativo} \right)$')
     plt.legend(fontsize=20)
     plt.tight_layout()
     if save == 'yes': plt.savefig('../report/Figures/Pot_cvgA.eps', format='eps')
@@ -289,26 +288,25 @@ def plt_P_test_cvgA(save=['yes', 'no']):
 def plt_Pot(save=['yes','no']):
 
     plt.figure(figsize=(12,6))
-    colors = ['orange', 'purple', 'black', 'g', 'r', 'b']
+    colors = ['g', 'r', 'b']
 
     kk = 0
-    for metodo in ['simp', 'trap']:
-        for i in ['1', '2', '3']:
-            data = np.genfromtxt('../data/potenza/Pot_'+metodo+'_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
-            r = data[:-1,0]
-            Pot = data[:-1,1]
-            # The last row contains R_star and Pot ad infinity
-            R = data[-1,0]
-            Pot_inf = data[-1,1]
+    for i in ['1', '2', '3']:
+        data = np.genfromtxt('../data/potenza/Pot_trap_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
+        r = data[:-1,0]
+        Pot = data[:-1,1]
+        # The last row contains R_star and Pot ad infinity
+        R = data[-1,0]
+        Pot_inf = data[-1,1]
 
-            plt.plot(r, Pot, color=colors[kk], marker='.', linestyle='', label=metodo[0].upper()+': 'r'$\mathcal{P}_'+i+r'(r)$')
-            plt.axvline(R, color=colors[kk], linestyle='-')
-            plt.axhline(Pot_inf, color=colors[kk], linestyle='--')
-            kk += 1
+        plt.plot(r, Pot, color=colors[kk], marker='.', linestyle='', label=r'$\mathcal{P}_'+i+r'(r)$')
+        plt.axvline(R, color=colors[kk], linestyle='-')
+        plt.axhline(Pot_inf, color=colors[kk], linestyle='--')
+        kk += 1
 
     plt.title('Potenza irradiata dalle 3 stelle più massive')
     plt.xlabel('raggio [km]')
-    plt.ylabel(r'potenza $\left[ \frac{\text{MeV}}{\text{sfm}^3} \right]$')
+    plt.ylabel(r'potenza $\left[ \frac{\text{MeV}}{\text{s fm}^3} \right]$')
     plt.legend(loc='upper right')
     plt.tight_layout()
     if save == 'yes': plt.savefig('../report/Figures/Pot.eps', format='eps')
@@ -341,6 +339,6 @@ def plt_Pot(save=['yes','no']):
 #plt_P_test_cvgA('yes')
 
 ''' Potenza in funzione di r '''
-#plt_Pot('yes')
+plt_Pot('yes')
 
 
