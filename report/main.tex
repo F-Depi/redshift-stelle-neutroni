@@ -205,10 +205,10 @@ Per fare i conti considerando solo il caso con $K_B T = 1 \unit{\mega\electronvo
     \label{eq:B_ad}
 \end{equation}
 dove abbiamo definito
-\begin{align*}
-    \nu_0 &= \frac{\nu}{\hat \nu} = \frac{1\unit{\mega\electronvolt}}{h} \simeq \num{2.417989e20} \unit{\hertz} \\
-    B_0 &= \frac{B}{\hat B} = \frac{2 h \nu_0^3}{c^2} = \frac{2 \unit{\mega\electronvolt}}{(h c)^2} \simeq \num{1.301059e-6} \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}}
-\end{align*}
+\begin{align}
+    \nu_0 &= \frac{\nu}{\hat \nu} = \frac{1\unit{\mega\electronvolt}}{h} \simeq \num{2.417989e20} \unit{\hertz} \label{eq:B0def}\\
+    B_0 &= \frac{B}{\hat B} = \frac{2 h \nu_0^3}{c^2} = \frac{2 \unit{\mega\electronvolt}}{(h c)^2} \simeq \num{1.301059e-6} \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}} \label{eq:nu0def}
+\end{align}
 
 Infine, se consideriamo l'effetto doppler dovuto al potenziale gravitazionale descritto in eq. \ref{eq:redshift} e utilizziamo la formula analitica per il potenziale gravitazionale all'esterno della stella (eq. \ref{eq:Phi_ext}), otteniamo
 
@@ -382,14 +382,21 @@ A conferma che il metodo di Simpson in questo caso tende a sovrastimare l'area d
 
 \subsection{Potenza totale in funzione della distanza}
 
-Ottenuto il valore dell'integrale in equazione \ref{eq:Pot_ad} possiamo generare il grafico di $\mathcal{P}$ in funzione di $r$ (distanza dal centro della stella) per le stelle più massive descritte in \ref{tab:Mgrosso}.
+Studiato l'integrale che serve per il calcolo della potenza possiamo riscrivere $\mathcal{\hat P}$ così
+
+\begin{equation}
+    \mathcal{\hat P} (\hat r, \hat T) = \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2} \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2} \mathcal I (\hat T)
+    \label{eq:Pot_I}
+\end{equation}
+
+Riportiamo quindi in figura \ref{fig:Pot} il l'andamento di $\mathcal P (r, \hat T = 1)$ per le stelle più massive descritte in \ref{tab:Mgrosso}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width = \textwidth]{Figures/Pot.eps}
     \caption{Potenza in funzione della distanza per le 3 stelle: $(R_1 = 59.0 \unit{\kilo\meter},~M_1 = 14.3 M_\odot)$, $(R_2 = 10.9 \unit{\kilo\meter},~M_2 = 0.926 M_\odot)$ e $(R_3 = 8.56 \unit{\kilo\meter},~M_3 = 1.53 M_\odot)$.
     La linea continua verticale rappresenta il raggio della stella, la linea tratteggiata orizzontate il valore di $\mathcal{P}$ a $r = \infty$.}
-    \label{fig:Poi}
+    \label{fig:Pot}
 \end{figure}
 
 Con linea tratteggiata e linea continua sono rispettivamente rappresentati raggio e valore della potenza all'infinito per ogni stella analizzata.
@@ -402,33 +409,39 @@ Con linea tratteggiata e linea continua sono rispettivamente rappresentati raggi
 Una volta ottenuta la potenza totale irradiata da una stella è possibile calcolare la sua temperatura, grazie alla relazione
 
 \begin{equation}
-    k_B T_{eff} = \left( \mathcal{P} (T) \frac{15 c^2 h^3}{2 \pi^2} \right)^{1/4}
-    = \left(\frac{15 c^2 h^3}{2 \pi} \; \int_0^{A k_B T} B(\nu, T) \; \mathrm{d}\nu \right)^{1/4}
+    k_B T_{eff} = \left( \mathcal{P} (T) \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4}
     \label{eq:Teff}
 \end{equation}
 
 Dove $T_{eff}$ è la temperatura percepita a una certa distanza dalla stella e $T$ la temperatura reale, che si misurerebbe a $r = R$.
-Mettendo le variabili adimensionali, sostituendo poi a $\hat B(\hat \nu, \hat T)$ l'espressione in \ref{eq:B_corr} e facendo il limite per $r \to \infty$ otteniamo
+
+Mettendo le variabili adimensionali, sostituendo a $\mathcal{\hat P}$ l'espressione in \ref{eq:Pot_I} e ricordando le espressioni di $\mathcal{\hat P}_0$ (eq. \ref{eq:PT_ad}), $B_0$ (eq. \ref{eq:B0def}) $\nu_0$ (eq. \ref{eq:nu0def}) e che $T_0 = \unit{\mega\electronvolt}$, otteniamo
+
+\begin{align}
+    T_0 \hat T_{eff} &= \left( \mathcal P_0 \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4} \mathcal{\hat P}^{1/4}
+    = \frac{15^{1/4}}{\pi} \unit{\mega\electronvolt} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/8} \mathcal{I} (\hat T)^{1/4} \\
+    \hat T_{eff}(\hat r, \hat T) &= \frac{15^{1/4}}{\pi} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/8} \mathcal{I} (\hat T)^{1/4}
+    \label{eq:Teff_ad}
+\end{align}
+
+Possiamo quindi studiare l'equzione \ref{eq:Teff_ad} per le 3 stelle studiate in precedenza, questa volta però fissiamo $r = \infty$ e studiamo la $T_{eff}$ in funzione di $T$, la temperatura propria della stella, facendo il limite
 
 \begin{equation}
-    \hat T_{eff} = \left( \frac{15}{\pi} \right)^{1/4} \;
-    \scaleint{10ex}_0^{\hat \nu_\text{max} \hat T}
-    \frac{\hat \nu_\text{ric}^2 \left(1 - 2 \hat M / \hat R \right)^{-3/2} }
-    {\exp(\hat \nu_\text{ric} \left(1 - 2 \hat M / \hat R \right)^{-1/2} \hat T^{-1} ) - 1} \;
-    \mathrm{d}\hat \nu
-    \label{eq:Teff}
+    \hat T_{eff}(\hat r, \hat T) = \frac{15^{1/4}}{\pi} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \mathcal{I} (\hat T)^{1/4}
 \end{equation}
 
-Dove abbiamo definito $T_0 = T / \hat T = 1 \unit{\mega\electronvolt}$
-Possiamo quindi studiare l'andamento di $T_{eff}$ in funzione di $T$, per le 3 stelle studiate in precedenza. Presentiamo il grafico in figura \ref{fig:Teff}.
+Presentiamo il grafico in figura \ref{fig:Teff}, il codice si trova nell'appendice \ref{ap:Teff}.
 
-%\begin{figure}[h]
-%    \centering
-%    \includegraphics[width = \textwidth]{Figures/Teff.eps}
-%    \caption{mmmmmmmmmmmmmmmmmmmm}
-%    \label{fig:Teff}
-%\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = \textwidth]{Figures/Teff.eps}
+    \caption{Temperatura percepita all'infinito delle 3 stelle con masse $M_1 = 14.3 M_\odot$, $M_2 = 0.925 M_\odot$ e $M_3 = 1.53 M_\odot$. Come ci aspettavamo la temperatura misurata all'infinito è sempre minore di quella propria della stella.}
+    \label{fig:Teff}
+\end{figure}
 
+Come ci aspettavamo la temperatura percepita all'infinito è sempre minore di quella propria della stella.
+Il grafico mostra anche un'incidenza diversa del redshift per le 3 stelle.
+In accordo con quello osservato in figura \ref{fig:Phi} e \ref{fig:Pot} i fotoni subiscono il redshift maggiore per la stella più massiva $M_1 = 14.3 M_\odot$ e seguono in ordine (sempre di massa) effetti minori per $M_3 = 1.53 M_\odot$ e $M_2 = 0.925 M_\odot$.
 
 
 
@@ -782,6 +795,46 @@ Per Simpson N = 312, nu\_max = 24.0661923 sono sufficienti \\
 Dalla riga 51 viene utilizzato un codice molto simile a quello sopra controllare la convergenza per diversi valori di \texttt{nu\_max}, in più bisogna assicurarsi che \texttt{N / nu\_max} rimanga costante al variare di \texttt{nu\_max}.
 
 
+\section{Calcolo Temperatura efficace} \label{ap:Teff}
+
+Per calcolare la temperatura efficace si riutilizzano molte delle funzioni scritte per l'appendice \ref{ap:integrali}.
+Per fare gli integrali possiamo affidarci ai parametri \texttt{N\_trap} e \texttt{nu\_max} trovati in \ref{ap:integrali} poiché sono stati studiati apposta per valere nel intervallo di temperature che va da 0 a 1.
+
+Vista l'equivalenza dei due metodi di integrazione in quanto a precisione, ma non in quanto a costo computazionale, per questo calcolo utilizziamo solamente il metodo dei trapezi.
+
+Il codice è il seguente:
+
+\begin{lstlisting}
+#define PI 3.1415926535     // \pi
+
+int N_trap = 271;
+double nu_max = 30.;
+double T_min = 0.001;
+double T_max = 1;
+
+double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};        // Raggi delle 3 stelle
+double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};       // Masse delle 3 stelle
+
+
+// ciclo sulle stelle
+for (int i = 0; i < 3; i++){
+    char filename[50]; sprintf(filename, "../data/potenza/Teff_%d.csv", i + 1);
+    FILE *f = fopen(filename, "w");
+    fprintf(f, "T,Teff\n");
+
+    double T = T_min;
+    double Integrale, Teff;
+
+    while (T <= T_max){
+        Integrale = integrale_trapezio(1e-12, nu_max, N_trap, T, &funB);
+        Teff = pow(15, 1. / 4.) / PI * pow(1. - 2. * M[i] / R[i], 1. / 8.);
+        Teff *= pow(Integrale, 1. / 4.);
+        fprintf(f, "%.7e,%.7e\n", T, Teff);
+        T += 0.001;
+    }
+    fclose(f);
+}
+\end{lstlisting}
 
 
 

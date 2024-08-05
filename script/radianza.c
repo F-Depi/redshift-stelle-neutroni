@@ -472,6 +472,32 @@ void dati_grafico_Pot(int N_trap, int N_simp, double nu_max, double r_max){
 }
 
 
+void Teff_su_T(int N_trap, double nu_max, double T_min, double T_max){
+    double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};        // Raggi delle 3 stelle
+    double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};       // Masse delle 3 stelle
+
+
+    // ciclo sulle stelle
+    for (int i = 0; i < 3; i++){
+        char filename[50]; sprintf(filename, "../data/potenza/Teff_%d.csv", i + 1);
+        FILE *f = fopen(filename, "w");
+        fprintf(f, "T,Teff\n");
+
+        double T = T_min;
+        double Integrale, Teff;
+
+        while (T <= T_max){
+            Integrale = integrale_trapezio(1e-12, nu_max, N_trap, T, &funB);
+            Teff = pow(15, 1. / 4.) / PI * pow(1. - 2. * M[i] / R[i], 1. / 8.);
+            Teff *= pow(Integrale, 1. / 4.);
+            fprintf(f, "%.7e,%.7e\n", T, Teff);
+            T += 0.001;
+        }
+        fclose(f);
+    }
+}
+
+
 int main(){
 
     /***************** Radianza corretta *****************/
@@ -481,14 +507,19 @@ int main(){
     /******************* Potenza Totale ******************/
     // test_cvg();
 
-    int N_trap = 271;
-    int N_simp = 388;
-    double nu_max = 30.;
-    double r_max = 500;
-    dati_grafico_Pot(N_trap, N_simp, nu_max, r_max);
+    // int N_trap = 271;
+    // int N_simp = 388;
+    // double nu_max = 30.;
+    // double r_max = 500;
+    // dati_grafico_Pot(N_trap, N_simp, nu_max, r_max);
     
 
     /*************** Temperatura Percepita ***************/
+    int N_trap = 271;
+    double nu_max = 30.;
+    double T_min = 0.001;
+    double T_max = 1;
+    Teff_su_T(N_trap, nu_max, T_min, T_max);
 
 
 

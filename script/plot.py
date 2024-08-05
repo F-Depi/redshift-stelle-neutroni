@@ -313,6 +313,29 @@ def plt_Pot(save=['yes','no']):
     plt.show()
 
 
+def plt_Teff(save=['yes','no']):
+
+    plt.figure(figsize=(12,6))
+    colors = ['g', 'r', 'b']
+
+    kk = 0
+    for i in ['1', '2', '3']:
+        data = np.genfromtxt('../data/potenza/Teff_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
+        T = data[:,0]
+        Teff = data[:,1]
+
+        plt.plot(T, Teff, color=colors[kk], marker='.', linestyle='', label=r'$T_{eff} (r = \infty, T)$, stella '+i)
+        kk += 1
+    plt.plot(T, T, color = 'black', linestyle='--', label='T = T')
+
+    plt.title('Temperatura efficace dalle 3 stelle più massive')
+    plt.xlabel('Temperatura Propria [MeV]')
+    plt.ylabel('Temperatura all\'infinito [MeV]')
+    plt.legend(loc='upper left', fontsize=16)
+    plt.tight_layout()
+    if save == 'yes': plt.savefig('../report/Figures/Teff.eps', format='eps')
+    plt.show()
+
 ''' P(rho) vs rho(P) '''
 #test_P_rhi()
 
@@ -339,6 +362,9 @@ def plt_Pot(save=['yes','no']):
 #plt_P_test_cvgA('yes')
 
 ''' Potenza in funzione di r '''
-plt_Pot('yes')
+#plt_Pot('yes')
+
+''' Temperatura efficace '''
+plt_Teff('yes')
 
 
