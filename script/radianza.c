@@ -1,5 +1,4 @@
 // ::setlocal makeprg=cd\ script\ &&\ gcc\ radianza.c\ -lm\ &&\ ./a.out\ &&\ rm\ a.out
-#include <complex.h>
 #include <stdio.h>
 #include <math.h>
 #define PI 3.1415926535     // \pi
@@ -305,7 +304,7 @@ double integrale_simpson(double a, double b, int N, double T, double (*fun)(doub
 // Versione semplificata e con solo l'integrale dell'omonima funzione usata sopra
 // Viene lasciata la variabile double Pot a indicare il valore dell'integrale solamente
 void test_cvg(){
-    double T = 1.;
+    double T = 0.01;
     int N = 10;
     int N_trap, N_simp;
     double Pot, nu_max = 20.;
@@ -505,7 +504,7 @@ int main(){
 
     
     /******************* Potenza Totale ******************/
-    // test_cvg();
+    test_cvg();
 
     // int N_trap = 271;
     // int N_simp = 388;
@@ -515,11 +514,11 @@ int main(){
     
 
     /*************** Temperatura Percepita ***************/
-    int N_trap = 271;
-    double nu_max = 30.;
-    double T_min = 0.001;
-    double T_max = 1;
-    Teff_su_T(N_trap, nu_max, T_min, T_max);
+    // int N_trap = 271;
+    // double nu_max = 30.;
+    // double T_min = 0.001;
+    // double T_max = 1;
+    // Teff_su_T(N_trap, nu_max, T_min, T_max);
 
 
 

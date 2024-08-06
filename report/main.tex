@@ -302,7 +302,7 @@ A priori gli estremi di integrazione dipendono da $\hat T$, dal momento che stia
 In particolare non di troppo superiori a $k_B T = 1 \unit{\mega\electronvolt}$, ovvero $\hat T = 1$ che decidiamo essere il nostro upperbound per la temperatura.
 Per temperature inferiori la funzione va a 0 più velocemente e quindi l'approssimazione di $A$ come finito è ancora migliore.
 
-Facendo riferimento alla figura \ref{fig:rad2} dove in blu è plottata la funzione che dobbiamo integrare proprio per $\hat T = 1$, possiamo vedere che per $\nu > \num{3.5e21} \unit{\hertz}$ la radianza è quasi nulla.
+Facendo riferimento alla figura \ref{fig:rad2} dove in blu è plottata la funzione che dobbiamo integrare per $\hat T = 1$, possiamo vedere che per $\nu > \num{3.5e21} \unit{\hertz}$ la radianza è quasi nulla.
 In quell'occasione era stata calcolata $\hat B(\hat \nu)$ con $\hat \nu$ tra $0$ e $15$. Come stima iniziale possiamo quindi integrare fino a $\hat \nu = 20$ che corrisponde a
 
 \begin{equation}
@@ -312,7 +312,10 @@ In quell'occasione era stata calcolata $\hat B(\hat \nu)$ con $\hat \nu$ tra $0$
     \label{eq:A}
 \end{equation}
 
-Possiamo ottenere un valore migliore valutando la convergenza dell'integrale. Per prima cosa verifichiamo per quale \texttt{N} (numero di step nell'integrazione) il valore di $\mathcal{I}$ converge (il codice si trova in Appendice \ref{ap:integrali}).
+Possiamo ottenere un valore migliore valutando la convergenza dell'integrale.
+
+Per prima cosa verifichiamo per quale \texttt{N} (numero di step nell'integrazione) il valore di $\mathcal{I}$ converge (il codice si trova in Appendice \ref{ap:integrali}).
+In questo caso la situazione peggiore è quella per temperature molto piccole, scegliamo come lowerbound $\hat T = 0.01$, poiché la curva è molto piccola e stretta.
 Otteniamo il grafico in figura \ref{fig:Pot_cvgN}.
 I valori sono degli scarti rispetto a $\mathcal{I}_{N = 1e8}$ (l'integrale calcolato con $N = \num{1e8}$) e sono normalizzati rispetto allo stesso.
 Al contriario di quello che succede di solito, il metodo Simpson (che ha un costo computazionale maggiore), non presenta vantaggi rispetto a quello dei trapezi.
@@ -444,6 +447,25 @@ Il grafico mostra anche un'incidenza diversa del redshift per le 3 stelle.
 In accordo con quello osservato in figura \ref{fig:Phi} e \ref{fig:Pot} i fotoni subiscono il redshift maggiore per la stella più massiva $M_1 = 14.3 M_\odot$ e seguono in ordine (sempre di massa) effetti minori per $M_3 = 1.53 M_\odot$ e $M_2 = 0.925 M_\odot$.
 
 
+
+
+\section{Temperatura efficace in funzione della pressione centrale}
+
+\begin{figure}[h]
+    \begin{minipage}{0.49 \textwidth}
+        \centering
+        \includegraphics[width = \textwidth]{Figures/Teff1_su_P.eps}
+        \caption{wow}
+        \label{fig:Teff1_su_P}
+    \end{minipage}
+    \hspace{0.015 \textwidth}
+    \begin{minipage}{0.49 \textwidth}
+        \centering
+        \includegraphics[width = \textwidth]{Figures/Teff001_su_P.eps}
+        \caption{wow}
+        \label{fig:Teff1_su_P}
+    \end{minipage}
+\end{figure}
 
 
 

@@ -336,6 +336,51 @@ def plt_Teff(save=['yes','no']):
     if save == 'yes': plt.savefig('../report/Figures/Teff.eps', format='eps')
     plt.show()
 
+
+def plt_Teff1_su_Pressione(save=['yes','no']):
+    plt.figure()
+    colors = ['g', 'r', 'b']
+
+    kk = 0
+    for i in ['1', '2', '3']:
+        data = np.genfromtxt('../data/punto7/Teff1_su_P_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
+        P = data[:,0]
+        Teff = data[:,1]
+
+        plt.plot(P, Teff, color=colors[kk], marker='.', linestyle='', label=r'$T_{eff} (r = \infty, T = 1 \text{MeV}, P)$, politropica '+i)
+        kk += 1
+
+    plt.title('Temperatura - pressione centrale')
+    plt.xlabel(r'Pressione $\left[ \frac{\text{MeV}}{\text{fm}^3} \right]$')
+    plt.ylabel(r'Temperatura $\left[ \text{MeV} \right]$')
+    plt.legend(loc='lower right')
+    plt.tight_layout()
+    if save == 'yes': plt.savefig('../report/Figures/Teff1_su_P.eps', format='eps')
+    plt.show()
+
+
+def plt_Teff001_su_Pressione(save=['yes','no']):
+    plt.figure()
+    colors = ['g', 'r', 'b']
+
+    kk = 0
+    for i in ['1', '2', '3']:
+        data = np.genfromtxt('../data/punto7/Teff001_su_P_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
+        P = data[:,0]
+        Teff = data[:,1]
+
+        plt.plot(P, Teff, color=colors[kk], marker='.', linestyle='', label=r'$T_{eff} (r = \infty, T = 0.01 \text{MeV}, P)$, politropica '+i)
+        kk += 1
+
+    plt.title('Temperatura - pressione centrale')
+    plt.xlabel(r'Pressione $\left[ \frac{\text{MeV}}{\text{fm}^3} \right]$')
+    plt.ylabel(r'Temperatura $\left[ \text{MeV} \right]$')
+    plt.legend(loc='lower right')
+    plt.tight_layout()
+    if save == 'yes': plt.savefig('../report/Figures/Teff001_su_P.eps', format='eps')
+    plt.show()
+
+
 ''' P(rho) vs rho(P) '''
 #test_P_rhi()
 
@@ -358,13 +403,17 @@ def plt_Teff(save=['yes','no']):
 #plot_B()
 
 ''' Convergenza dell'integrale della potenza'''
-#plt_P_test_cvgN('yes')
+plt_P_test_cvgN('no')
 #plt_P_test_cvgA('yes')
 
 ''' Potenza in funzione di r '''
 #plt_Pot('yes')
 
 ''' Temperatura efficace '''
-plt_Teff('yes')
+#plt_Teff('no')
+
+''' Temperatura efficace rispetto a Pressione centrale delle stelle '''
+#plt_Teff1_su_Pressione('yes')
+#plt_Teff001_su_Pressione('yes')
 
 

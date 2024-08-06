@@ -9,8 +9,9 @@
 \contentsline {subsection}{\numberline {6.1}Convergenza dell'integrale}{7}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Potenza totale in funzione della distanza}{8}{subsection.6.2}%
 \contentsline {section}{\numberline {7}Temperatura Percepita}{9}{section.7}%
-\contentsline {section}{\numberline {A}RK4}{10}{appendix.Alph1}%
-\contentsline {section}{\numberline {B}Risoluzione numerica di $\hat P (\rho )$}{10}{appendix.Alph2}%
-\contentsline {section}{\numberline {C}Risoluzione dell'integrale del potenziale gravitazionale}{11}{appendix.Alph3}%
-\contentsline {section}{\numberline {D}Integrali con trapezi e simpson}{12}{appendix.Alph4}%
-\contentsline {section}{\numberline {E}Calcolo Temperatura efficace}{15}{appendix.Alph5}%
+\contentsline {section}{\numberline {8}Temperatura efficace in funzione della pressione centrale}{10}{section.8}%
+\contentsline {section}{\numberline {A}RK4}{11}{appendix.Alph1}%
+\contentsline {section}{\numberline {B}Risoluzione numerica di $\hat P (\rho )$}{11}{appendix.Alph2}%
+\contentsline {section}{\numberline {C}Risoluzione dell'integrale del potenziale gravitazionale}{12}{appendix.Alph3}%
+\contentsline {section}{\numberline {D}Integrali con trapezi e simpson}{13}{appendix.Alph4}%
+\contentsline {section}{\numberline {E}Calcolo Temperatura efficace}{16}{appendix.Alph5}%
