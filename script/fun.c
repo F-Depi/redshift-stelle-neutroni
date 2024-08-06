@@ -1,23 +1,21 @@
 #include <stdio.h>
 #include <math.h>
 #include "fun.h"
-#define P0 150.174          // = E_0, MeV/c^2/fm^3
-#define R0 20.06145         // km
-#define M0 12.655756        // solar masses
-#define RHO0 0.16           // fm^-3
-#define A (13.4 / P0)       // energy density parameters
-#define B (5.6 / P0)       
-#define ALPHA 0.514
-#define BETA 3.436
-#define ALPHA1 (ALPHA - 1)
-#define BETA1 (BETA - 1)
+#define P0 150.33046048         // = E_0, MeV/fm^3
+#define R0 19.996542543         // km
+#define M0 13.542058427         // solar masses
+#define N0 0.16                 // fm^-3
+#define A (13.4 * 0.16 / P0)    // energy density parameter
+#define B (5.6 * 0.16 / P0)     // energy density parameter  
+#define ALPHA 0.514             // energy density exponent
+#define BETA 3.436              // energy density exponent
 
 /*
  The system to solve is
  dm/dr = f_m = r^3 E(rho)
  dP/dr = f_P = - [m(r) E(rho)/r^2] * [1 + P(r)/E(rho)] * [1 + r^3 P(r)/m(r)] / [1 - 2m(r)/r^2]
 
- P(rho) = (ALPHA - 1)A rho^ALPHA + (BETA - 1)B rho^BETA
+ P(rho) = ALPHA A rho^(ALPHA+1) + BETA B rho^(BETA+1)
  rho(P) is found by numerically
  */
 
@@ -38,13 +36,13 @@ double fun_P(double r, double P, double m, int tipo_politropica){
 
 // This is for findRho()
 double P_of_rho(double rho){
-    return ALPHA1 * A * pow(rho, ALPHA) + BETA1 * B * pow(rho, BETA);
+    return ALPHA * A * pow(rho, ALPHA + 1) + BETA * B * pow(rho, BETA + 1);
 }
 
 
 // This is for findRho(), it's the analitic derivative of the function above
 double DP_of_rho(double rho){
-    return ALPHA * ALPHA1 * A * pow(rho, ALPHA - 1) + BETA * BETA1 * B * pow(rho, BETA - 1);
+    return ALPHA * (ALPHA + 1) * A * pow(rho, ALPHA) + BETA * (BETA + 1) * B * pow(rho, BETA);
 }
 
 
@@ -52,24 +50,10 @@ double DP_of_rho(double rho){
 double findRho(double P){
 
     // Newton-Raphson method to find rho
-    if (P > 0.01){
-
-        double rho = pow(P / (BETA1 * B), 1 / BETA);    // good approximation
-        while (fabs(P - P_of_rho(rho)) > 1e-6){
-            rho -= (P_of_rho(rho) - P) / DP_of_rho(rho);
-        }
-        return rho;
-    }
-
-    // for small P it's safer to use the bisect method
-    double rho_sx = 0.7, rho_dx = 1.;
-    double rho = (rho_sx + rho_dx) / 2;
-    while (fabs(P - P_of_rho(rho)) > 1e-6){
-        if (P_of_rho(rho) > P)
-            rho_dx = rho;
-        else
-            rho_sx = rho;
-        rho = (rho_sx + rho_dx) / 2;
+    double rho = pow(P / 0.15, 1 / 3.);    // decent approximation for P
+                                           
+    while (fabs(P - P_of_rho(rho)) > 1e-8){
+        rho -= (P_of_rho(rho) - P) / DP_of_rho(rho);
     }
     return rho;
 }
@@ -81,7 +65,7 @@ double fun_E(double P, int tipo_politropica){
     // Politropica quasi realistica (a*rho^alpha + b*rho^beta)
     if (tipo_politropica == 0){
         double rho = findRho(P);
-        return A * pow(rho, ALPHA) + B * pow(rho, BETA);
+        return A * pow(rho, ALPHA + 1) + B * pow(rho, BETA + 1);
     }
 
     double lambda, K;

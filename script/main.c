@@ -4,16 +4,14 @@
 #include <omp.h>
 #include "fun.h"
 #include <stdlib.h>
-#define P0 150.174          // = E_0, MeV/c^2/fm^3
-#define R0 20.06145         // km
-#define M0 12.655756        // solar masses
-#define RHO0 0.16           // fm^-3
-#define A (13.4 / P0)       // energy density parameters
-#define B (5.6 / P0)       
-#define ALPHA 0.514
-#define BETA 3.436
-#define ALPHA1 (ALPHA - 1)
-#define BETA1 (BETA - 1)
+#define P0 150.33046048         // = E_0, MeV/fm^3
+#define R0 19.996542543         // km
+#define M0 13.542058427         // solar masses
+#define N0 0.16                 // fm^-3
+#define A (13.4 * 0.16 / P0)    // energy density parameter
+#define B (5.6 * 0.16 / P0)     // energy density parameter  
+#define ALPHA 0.514             // energy density exponent
+#define BETA 3.436              // energy density exponent
 
 
 void solve_system(double h, double r, double P, double m, double RM[2], int tipo_politropica){
