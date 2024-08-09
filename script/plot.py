@@ -15,67 +15,89 @@ plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
 
-def test_P_rhi():
-    data = pd.read_csv('../data/rho-P.csv')
-    data2 = pd.read_csv('../data/P-rho.csv')
+def test_P_rho():
+    data = pd.read_csv('../data/test/rho_of_P.csv')
+    data2 = pd.read_csv('../data/test/P_of_rho.csv')
 
-    plt.plot(data['rho'], data['P'], linestyle='', marker='.')
-    plt.plot(data2['rho'], data2['P'], linestyle='', marker='.')
+    plt.plot(data['rho'], data['P'], linestyle='', marker='.', label=r'($\rho$, P_of_rho()')
+    plt.plot(data2['rho'], data2['P'], linestyle='', marker='.', label='(findRho(P), P)')
     plt.axhline(y=0, color='k')
     plt.xlabel('Density')
     plt.ylabel('Pressure')
+    plt.legend()
     plt.show()
 
 
-def test_stella():
-    data = pd.read_csv('../data/data0.csv')
+def compare_eneries():
+    plt.figure()
+
+    labels = [r'Modello $a \alpha b \beta$', r'$\lambda = 2.54, K = 0.01$', r'$\lambda = 5/3, K = 0.05$']
+    for i in [0, 1, 2]:
+        data = np.genfromtxt('../data/test/E_of_P_'+str(i+1)+'.csv', delimiter=',', skip_header=1, dtype=float)
+        P = data[:,0]
+        E = data[:,1]
+        plt.plot(P, E, label=labels[i])
+
+    plt.title('Confronto tra le densità di energia E(P)')
+    plt.xlabel(r'P $\left[ \frac{Mev}{fm^3} \right]$')
+    plt.ylabel(r'E $\left[ \frac{Mev}{fm^3} \right]$')
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+
+def test_cvg_stella():
+    data = pd.read_csv('../data/test/data1.csv')
 
     print("M = " + str(data['m'].iloc[-1]))
     print("R = " + str(data['r'].iloc[-1]))
 
     fig, axs = plt.subplots(1, 3, figsize=(20, 5))
-    axs[0].plot(data['r'], data['P'], linestyle='', marker='.')
+    axs[0].plot(data['r'], data['P'], linestyle='', marker='.', label=r'Modello $a \alpha b \beta$')
     axs[0].axhline(y=0, color='k')
     #axs[0].set_ylim(-5, 200)
-    axs[0].set_xlabel('Raggio')
-    axs[0].set_ylabel('Pressione')
+    axs[0].set_xlabel('Raggio [km]')
+    axs[0].set_ylabel(r'Pressione $\left[ \frac{Mev}{fm^3} \right]$')
     axs[0].set_title('P(r)')
 
-    axs[1].plot(data['r'], data['m'], linestyle='', marker='.')
+    axs[1].plot(data['r'], data['m'], linestyle='', marker='.', label=r'Modello $a \alpha b \beta$')
     #axs[1].set_ylim(-0.1, 1)
-    axs[1].set_xlabel('Raggio')
-    axs[1].set_ylabel('Massa')
+    axs[1].set_xlabel('Raggio [km]')
+    axs[1].set_ylabel(r'Massa $[M_\odot]$')
     axs[1].set_title('m(r)')
 
-    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.')
+    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.', label=r'Modello $a \alpha b \beta$')
     #axs[2].set_ylim(-1, 15)
-    axs[2].set_xlabel('Raggio')
-    axs[2].set_ylabel('Densità')
+    axs[2].set_xlabel('Raggio [km]')
+    axs[2].set_ylabel(r'Densità $\left[ \frac{Mev}{fm^3} \right]$')
     axs[2].set_title('rho(r)')
 
-    data = pd.read_csv('../data/data1.csv')
+    data = pd.read_csv('../data/test/data2.csv')
 
     print("M = " + str(data['m'].iloc[-1]))
     print("R = " + str(data['r'].iloc[-1]))
 
-    axs[0].plot(data['r'], data['P'], linestyle='', marker='.')
-    axs[1].plot(data['r'], data['m'], linestyle='', marker='.')
-    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.')
+    axs[0].plot(data['r'], data['P'], linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
+    axs[1].plot(data['r'], data['m'], linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
+    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
 
-    data = pd.read_csv('../data/data2.csv')
+    data = pd.read_csv('../data/test/data3.csv')
 
     print("M = " + str(data['m'].iloc[-1]))
     print("R = " + str(data['r'].iloc[-1]))
 
-    axs[0].plot(data['r'], data['P'], linestyle='', marker='.')
-    axs[1].plot(data['r'], data['m'], linestyle='', marker='.')
-    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.')
+    axs[0].plot(data['r'], data['P'], linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
+    axs[1].plot(data['r'], data['m'], linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
+    axs[2].plot(data['r'], data['rho'], linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
 
+    axs[0].legend()
+    axs[1].legend()
+    axs[2].legend()
     plt.show()
 
 
-def test_cvg():
-    data_cvg = pd.read_csv('../data/data_cvg.csv')
+def test_cvg_h():
+    data_cvg = pd.read_csv('../data/test/cvg_1.csv')
 
     fig, axs = plt.subplots(1, 2, figsize=(15, 5))
     axs[0].plot(data_cvg['h'], data_cvg['R'], linestyle='', marker='.')
@@ -92,35 +114,38 @@ def test_cvg():
 
 
 def plot_MR():
-    data = np.genfromtxt('../data/MR_0.csv', delimiter=',', skip_header=1, dtype=float)
-    P0 = data[:, 1] * 1.733e15
+    cvg = 0.01
+    data = np.genfromtxt('../data/MR_0_test_'+str(cvg)+'.csv', delimiter=',', skip_header=1, dtype=float)
+    P0 = data[:, 1]
     R = data[:, 2]
     M = data[:, 3]
 
     fig, axs = plt.subplots(3, 1, figsize=(18, 10))
 
-    axs[0].plot(R, M, linestyle='', marker='.')
-    axs[0].plot(R, R/2, linestyle='-', color='red')
-    axs[1].plot(R, P0, linestyle='', marker='.')
-    axs[2].plot(P0, M, linestyle='', marker='.')
+    axs[0].plot(R, M, linestyle='', marker='.', label=r'Modello $a \alpha b \beta$')
+    axs[1].plot(R, P0, linestyle='', marker='.', label=r'Modello $a \alpha b \beta$')
+    axs[2].plot(P0, M, linestyle='', marker='.', label=r'Modello $a \alpha b \beta$')
 
-    data = np.genfromtxt('../data/MR_1.csv', delimiter=',', skip_header=1, dtype=float)
-    P0 = data[:, 1] * 1.733e15
+    data = np.genfromtxt('../data/MR_1_test.csv', delimiter=',', skip_header=1, dtype=float)
+    P0 = data[:, 1]
     R = data[:, 2]
     M = data[:, 3]
 
-    axs[0].plot(R, M, linestyle='', marker='.')
-    axs[1].plot(R, P0, linestyle='', marker='.')
-    axs[2].plot(P0, M, linestyle='', marker='.')
+    axs[0].plot(R, M, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
+    axs[1].plot(R, P0, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
+    axs[2].plot(P0, M, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
 
-    data = np.genfromtxt('../data/MR_2.csv', delimiter=',', skip_header=1, dtype=float)
-    P0 = data[:, 1] * 1.733e15
+    data = np.genfromtxt('../data/MR_2_test.csv', delimiter=',', skip_header=1, dtype=float)
+    P0 = data[:, 1]
     R = data[:, 2]
     M = data[:, 3]
 
-    axs[0].plot(R, M, linestyle='', marker='.')
-    axs[1].plot(R, P0, linestyle='', marker='.')
-    axs[2].plot(P0, M, linestyle='', marker='.')
+    axs[0].plot(R, M, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
+    axs[1].plot(R, P0, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
+    axs[2].plot(P0, M, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
+
+    R = np.arange(3, 50, 0.01)
+    axs[0].plot(R, R/2, linestyle='-', color='red', label='Shwarzschild Radius')
 
     ## Make it nicer
 
@@ -130,23 +155,25 @@ def plot_MR():
     axs[0].set_xlabel('Raggio [km]')
     axs[0].set_ylabel('Massa [M_sun]')
     axs[0].set_ylabel(r'Massa $[M_{\odot}]$')
-    axs[0].legend([r'Modello $a \alpha b \beta$', 'Shwarzschild Radius', r'$\lambda = 5/3, K = 0.05$', r'$\lambda = 2.54, K = 0.01$'])
+    axs[0].set_title(r'Codice politropica $a \alpha b \beta$ bloccato a P < '+str(cvg*150)+r'$\left[ \frac{Mev}{fm^3} \right]$, le altre a P < 0')
+    axs[0].legend()
 
     axs[1].set_xscale('log')
     axs[1].set_yscale('log')
     axs[1].grid('on')
     axs[1].set_xlabel('Raggio [km]')
-    # axs[1].set_ylabel(r'Pressione iniziale $\left[\frac{Mev}{c^2 fm^3}\right]$')
-    axs[1].set_ylabel(r'Pressione iniziale $\left[\frac{Kg}{m^3}\right]$')
+    axs[1].set_ylabel(r'Pressione iniziale $\left[ \frac{Mev}{fm^3} \right]$')
+    axs[1].legend()
 
     axs[2].set_xscale('log')
     axs[2].set_yscale('log')
     #axs[2].set_xlim(-2, 1e18)
     axs[2].grid('on')
-    #axs[2].set_xlabel(r'Pressione iniziale $\left[\frac{Mev}{c^2 fm^3}\right]$')
-    axs[2].set_xlabel(r'Pressione iniziale $\left[\frac{Kg}{m^3}\right]$')
+    axs[2].set_xlabel(r'Pressione iniziale $\left[ \frac{Mev}{fm^3} \right]$')
     axs[2].set_ylabel(r'Massa $[M_{\odot}]$')
+    axs[2].legend()
 
+    plt.tight_layout()
     plt.show()
 
 
@@ -382,13 +409,14 @@ def plt_Teff001_su_Pressione(save=['yes','no']):
 
 
 ''' P(rho) vs rho(P) '''
-#test_P_rhi()
+#test_P_rho()
+#compare_eneries()
 
-''' Andamento P(r), m(r), rho(r) di una stella '''
-#test_stella()
+''' Andamento P(r), m(r), rho(r) per 3 politropiche a 1 pressione '''
+test_cvg_stella()
 
 ''' h diversi '''
-#test_cvg()
+#test_cvg_h()
 
 ''' Grafico M-R e altro'''
 #plot_MR()
@@ -403,7 +431,7 @@ def plt_Teff001_su_Pressione(save=['yes','no']):
 #plot_B()
 
 ''' Convergenza dell'integrale della potenza'''
-plt_P_test_cvgN('no')
+#plt_P_test_cvgN('no')
 #plt_P_test_cvgA('yes')
 
 ''' Potenza in funzione di r '''

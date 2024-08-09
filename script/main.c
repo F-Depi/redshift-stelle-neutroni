@@ -8,14 +8,17 @@
 #define R0 19.996542543         // km
 #define M0 13.542058427         // solar masses
 #define N0 0.16                 // fm^-3
-#define A (13.4 * 0.16 / P0)    // energy density parameter
-#define B (5.6 * 0.16 / P0)     // energy density parameter  
+#define A (13.4 * N0 / P0)      // energy density parameter
+#define B (5.62 * N0 / P0)      // energy density parameter  
 #define ALPHA 0.514             // energy density exponent
-#define BETA 3.436              // energy density exponent
+#define BETA 2.436              // energy density exponent
 
 
 void solve_system(double h, double r, double P, double m, double RM[2], int tipo_politropica){
-    while (P > 0){
+    double prevP = P + 1;
+
+    while (P > 0.01 && prevP > P){
+        prevP = P;
         RM[0] = r;
         RM[1] = m;
         r += h;
@@ -31,27 +34,32 @@ void solve_system(double h, double r, double P, double m, double RM[2], int tipo
 void get_MR(int tipo_politropica){
 
     char filename[50];
-    sprintf(filename, "../data/MR_%d.csv", tipo_politropica);
+    sprintf(filename, "../data/MR_%d_test_0.01.csv", tipo_politropica);
     FILE *f = fopen(filename, "w");
     fprintf(f, "h,P0,R,lenfile\n");
 
-    double startP, P, prevM, m, r;
+    double prevM;
     double RM[2] = {};
     double h = 1e-5;
 
     int start_i;
     if (tipo_politropica == 0){
-        start_i = -450;
+        start_i = -188;
     } else if (tipo_politropica == 1){
         start_i = -600;
     } else if (tipo_politropica == 2){
         start_i = -650;
     }
 
-    for (int i = start_i; i < 500; i++){
+    #pragma omp parallel for num_threads(15), private(RM), schedule(dynamic)
+    for (int i = start_i; i < 200; i++){
 
-        prevM = RM[1];
-        startP = pow(10, i / 100.);
+        double startP, P, m, r;
+
+        // prevM = RM[1];
+        startP = pow(10., (double)i / 100.);
+        if (tipo_politropica == 0)
+            printf("%d) startP = %e[ad], %e Mev/fm^3\n", i, startP, startP * P0);
         P = startP;
         m = 0;
         r = 0;
@@ -60,18 +68,21 @@ void get_MR(int tipo_politropica){
 
         solve_system(h, r, P, m, RM, tipo_politropica);
 
-        if (RM[1] < prevM){
-            printf("Limit reached at P = %.2e MeV c^-3 fm^-3\n", startP * P0);
-            break;
-        }
+        // if (RM[1] < prevM){
+        //     printf("Limit reached at P = %.2e MeV fm^-3\n", startP * P0);
+        //     break;
+        // }
         if (RM[0] * R0 < 3){
             printf("Star too small, not saving the data\n");
             continue;
         }
 
+        #pragma omp critical
+        {
         fprintf(f, "%e,%e,%e,%e\n", h, startP * P0, RM[0] * R0, RM[1] * M0);
         fflush(f);
-        printf("i = %d, P = %.2e\n", i, startP);
+        }
+        // printf("i = %d, P = %.2e\n", i, startP);
     }
 
     fclose(f);
@@ -208,9 +219,9 @@ int main(){
 
     /* Genera i dati per costruire il grafico massa raggio, richiesto dal punto 2 */
     // #pragma omp parallel for num_threads(3)
-    // for (int i = 0; i < 3; i++){
-    //     get_MR(i);
-    // }
+    for (int i = 0; i < 1; i++){
+        get_MR(i);
+    }
 
 
     /************** Punto 3 **************/
@@ -220,8 +231,8 @@ int main(){
     // gen_maxM_data(startP);
 
     /* Calcolo del potenziale gravitazionale */
-    int len_files[3] = {294288, 54348, 42666};
-    Phi_int_ext_012(len_files);
+    // int len_files[3] = {294288, 54348, 42666};
+    // Phi_int_ext_012(len_files);
 
 
     return 0;

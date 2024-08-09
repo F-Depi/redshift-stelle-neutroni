@@ -70,6 +70,7 @@ double funTeff(double R, double M, double integral_T){
     return pow(15., 1. / 4.) / PI * pow(1. - 2. * M / R, 1. / 8.) * pow(integral_T, 1. / 4.);
 }
 
+
 int main(){
 
     int file_lens[3] = {395, 617, 717};

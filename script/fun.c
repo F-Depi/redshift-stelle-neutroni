@@ -5,10 +5,10 @@
 #define R0 19.996542543         // km
 #define M0 13.542058427         // solar masses
 #define N0 0.16                 // fm^-3
-#define A (13.4 * 0.16 / P0)    // energy density parameter
-#define B (5.6 * 0.16 / P0)     // energy density parameter  
+#define A (13.4 * N0 / P0)      // energy density parameter
+#define B (5.62 * N0 / P0)      // energy density parameter  
 #define ALPHA 0.514             // energy density exponent
-#define BETA 3.436              // energy density exponent
+#define BETA 2.436              // energy density exponent
 
 /*
  The system to solve is
@@ -36,13 +36,13 @@ double fun_P(double r, double P, double m, int tipo_politropica){
 
 // This is for findRho()
 double P_of_rho(double rho){
-    return ALPHA * A * pow(rho, ALPHA + 1) + BETA * B * pow(rho, BETA + 1);
+    return ALPHA * A * pow(rho, ALPHA + 1.) + BETA * B * pow(rho, BETA + 1.);
 }
 
 
 // This is for findRho(), it's the analitic derivative of the function above
 double DP_of_rho(double rho){
-    return ALPHA * (ALPHA + 1) * A * pow(rho, ALPHA) + BETA * (BETA + 1) * B * pow(rho, BETA);
+    return ALPHA * (ALPHA + 1.) * A * pow(rho, ALPHA) + BETA * (BETA + 1.) * B * pow(rho, BETA);
 }
 
 
@@ -65,7 +65,8 @@ double fun_E(double P, int tipo_politropica){
     // Politropica quasi realistica (a*rho^alpha + b*rho^beta)
     if (tipo_politropica == 0){
         double rho = findRho(P);
-        return A * pow(rho, ALPHA + 1) + B * pow(rho, BETA + 1);
+        //printf("%.2f\n", rho);
+        return A * pow(rho, ALPHA + 1.) + B * pow(rho, BETA + 1.);
     }
 
     double lambda, K;

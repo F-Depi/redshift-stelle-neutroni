@@ -1,16 +1,14 @@
+// ::setlocal makeprg=cd\ script\ &&\ make\ test\ &&\ ./test.x
 #include <stdio.h>
-#include <math.h>
 #include "fun.h"
-#define P0 150.174          // = E_0, MeV/c^2/fm^3
-#define R0 20.06145         // km
-#define M0 12.655756        // solar masses
-#define RHO0 0.16           // fm^-3
-#define A (13.4 / P0)       // energy density parameters
-#define B (5.6 / P0)       
-#define ALPHA 0.514
-#define BETA 3.436
-#define ALPHA1 (ALPHA - 1)
-#define BETA1 (BETA - 1)
+#define P0 150.33046048         // = E_0, MeV/fm^3
+#define R0 19.996542543         // km
+#define M0 13.542058427         // solar masses
+#define N0 0.16                 // fm^-3
+#define A (13.4 * N0 / P0)      // energy density parameter
+#define B (5.62 * N0 / P0)      // energy density parameter  
+#define ALPHA 0.514             // energy density exponent
+#define BETA 2.436              // energy density exponent
 
 
 
@@ -24,62 +22,93 @@
  */
 
 
-void test_cnts_findRho(){
+void print_constants(){
     printf("a = %f\n", A);
     printf("b = %f\n", B);
     printf("alpha = %f\n", ALPHA);
+    printf("alpha + 1 = %f\n", ALPHA + 1);
     printf("beta = %f\n", BETA);
-    printf("alpha - 1 = %f\n", ALPHA1);
-    printf("beta - 1 = %f\n", BETA1);
-    printf("alpha1 * a = %f\n", ALPHA1 * A);
-    printf("beta1 * b = %f\n", BETA1 * B);
+    printf("alpha * a = %f\n", ALPHA * A);
+    printf("beta * b = %f\n", BETA * B);
+    printf("b beta /a /alhpa = %f\n", 5.62 * BETA / 13.4 / ALPHA);
+    printf("P(rho = 0.16 fm^-3) = %f\n", P_of_rho(1.));
+}
 
 
-    double rho, P;
-    FILE *f1 = fopen("../data/rho-P.csv", "w");
+void test_rhovsP(){
+    double rho = 0.001;
+    double P = 0;
+    FILE *f1 = fopen("../data/test/rho_of_P.csv", "w");
     fprintf(f1, "rho,P\n");
-    for (int i = 0; i < 1000; i++){
-        rho = i*0.01;
-        fprintf(f1, "%e,%e\n", rho * R0, P_of_rho(rho) * P0);
+    while (P < 0.1){
+        P = P_of_rho(rho);
+        fprintf(f1, "%e,%e\n", rho * N0, P_of_rho(rho) * P0);
+        rho += 0.001;
     }
 
-    FILE *f2 = fopen("../data/P-rho.csv", "w");
+    P = 0.0001;
+    FILE *f2 = fopen("../data/test/P_of_rho.csv", "w");
     fprintf(f2, "P,rho\n");
-    for (int i = 0; i < 25000; i++){
-        P = i*0.01;
-        fprintf(f2, "%e,%e\n", P * P0, findRho(P) * RHO0);
+    while(P < 1){
+        fprintf(f2, "%e,%e\n", P * P0, findRho(P) * N0);
+        P *= 1.1;
     }
 
 }
 
 
-void test_cvg(){
+void compare_eneries(){
+    for (int i = 0; i < 3; i++){
+        char filename[50]; sprintf(filename, "../data/test/E_of_P_%d.csv", i + 1);
+        FILE *f = fopen(filename, "w");
+        fprintf(f, "rho,P\n");
+
+        double P = 0;
+        while(P <= 1){
+            fprintf(f, "%e,%e\n", P * P0, fun_E(P, i) * P0);
+            P += 0.01;
+        }
+        fclose(f);
+    }
+}
+
+
+void test_cvg_stella(double startP, double smallestP, int tipo_politropica){
     double m = 0;
-    double P = 1;
+    double P = startP;
     double r = 0;
     double rho = findRho(P);
     double h = 1e-5;
 
 
-    FILE *f = fopen("../data/data2.csv", "w");
+    char filename[50]; sprintf(filename, "../data/test/data%d.csv", tipo_politropica + 1);
+    FILE *f = fopen(filename, "w");
     fprintf(f, "r,P,m,rho\n");
-    fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * RHO0);
+    fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * N0);
 
-    while (P > 0){           // Analizzando la curva di P si vede che non si scende di molto sotto 0.01 (si arriva circa a 0.004), quindi 0.01 va bene.
+    while (P > smallestP){
         r += h;
-        rungeKutta4(h, r, &P, &m, 2);
+        rungeKutta4(h, r, &P, &m, tipo_politropica);
+        double prevP = P;
         rho = findRho(P);
-        fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * RHO0);
-        fflush(f);
+        fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * N0);
+        if (r < 2 * m){
+            printf("BH");
+            break;
+        }
+        if (P > prevP){
+            printf("sei arrivato in superficie\n");
+            break;
+        }
     }
 
     fclose(f);
 }
 
 
-void test_h(){
-    FILE *f2 = fopen("../data/data_cvg_1.csv", "w");
-    fprintf(f2, "h,R,M,P\n");
+void test_cvg_h(){
+    FILE *f = fopen("../data/test/cvg_1.csv", "w");
+    fprintf(f, "h,R,M,P\n");
 
     for (double h = 1e-2; h > 1e-8; h /= 2){
         printf("h = %e\n", h);
@@ -87,7 +116,7 @@ void test_h(){
         double M_stella = -3.14;
         double P_supercifie = -3.14;
         double m = 0;
-        double P = P0;
+        double P = 0.1;
         double r = 0;
 
         while (P > 0){
@@ -97,28 +126,39 @@ void test_h(){
             P_supercifie = P;
 
             r += h;
-            rungeKutta4(h, r, &P, &m, 1);
+            rungeKutta4(h, r, &P, &m, 0);
         }
-        fprintf(f2, "%e,%e,%e,%e\n", h, R_stella * R0, M_stella * M0, P_supercifie * P0);
+        fprintf(f, "%e,%e,%e,%e\n", h, R_stella * R0, M_stella * M0, P_supercifie * P0);
     }
 
-    fclose(f2);
+    fclose(f);
 }
 
 
 int main(){
 
-    // Test findRho
-    //test_cnts_findRho();
+    /************** Test findRho **************/
+    // Test is the energy equations plus related are correct
+    // Test if the constant are written properly
+    // Test if the results at least appears self consistent
+    // print_constants();
+    // test_rhovsP();
+    // compare_eneries();
 
     
-    // Funziona? Converge?
-    //test_cvg();
-    // Sì
+    /************** First simulation *************/
+    // Tries to solve the equations once for 1 star, to see if
+    // everything is ok and the pressure converges to 0.
+    // Take the politropic type as input
+    test_cvg_stella(2., 0.001, 0);
+    test_cvg_stella(2., 0., 1);
+    test_cvg_stella(2., 0., 2);
 
 
-    // What's the best h increment?
-    //test_h();
+    /*************** Test h ***********************/
+    // Tries different increments to see how that affects the results
+    // only for 1 star, it shouldn't matter
+    // test_cvg_h();
     // h = 1e-4 should be fine, but let's use 1e-5 to be sure
 }
 
