@@ -355,10 +355,12 @@ void test_cvg(){
     fclose(f1);
 
     // Decidiamo che va bene N_trap e N_simp risultati del codice sopra
+    // Ora verifichiamo la convergenza di nu_max nel caso peggiore, ovvero
+    T = 1;
     Pot_cvg = integrale_trapezio(1e-12, 200, 1e8, T, &funB);
     nu_max = 20.;
     int Nrel_trap = (double)N_trap / nu_max; // Teniamo la stessa densita'
-    int Nrel_simp = (double)N_simp / nu_max; // di N / nu_max
+    int Nrel_simp = (double)N_simp / nu_max; // di trapezi: N / nu_max
 
     // partiamo da
     nu_max = 10.;
@@ -418,7 +420,7 @@ void dati_grafico_Pot(int N_trap, int N_simp, double nu_max, double r_max){
     double T = 1.;
 
     double Integrale_trap = integrale_trapezio(1e-12, nu_max, N_trap, T, &funB);
-    printf("I con trapezi, N = %d, nu_max = %.1f, vale %.7e\n", N_trap, nu_max, Integrale_trap);
+    printf("I con trapezi, N = %d, nu_max = %.1f, vale %.12e\n", N_trap, nu_max, Integrale_trap);
     double corr, Pot;
 
     //// Trapezi
@@ -446,7 +448,8 @@ void dati_grafico_Pot(int N_trap, int N_simp, double nu_max, double r_max){
 
     //// Simpson
     double Integrale_simp = integrale_simpson(1e-12, nu_max, N_simp, T, &funB);
-    printf("I con Simpson, N = %d, nu_max = %.1f, vale %.7e\n", N_simp, nu_max, Integrale_simp);
+    printf("I con Simpson, N = %d, nu_max = %.1f, vale %.12e\n", N_simp, nu_max, Integrale_simp);
+    /*
     // Cicla sulle 3 stelle
     for (int i = 0; i < 3; i++){
         char filename_simp[50]; sprintf(filename_simp, "../data/potenza/Pot_simp_%d.csv", i + 1);
@@ -468,6 +471,7 @@ void dati_grafico_Pot(int N_trap, int N_simp, double nu_max, double r_max){
 
         fclose(f_simp);
     }
+    */
 }
 
 
@@ -504,21 +508,21 @@ int main(){
 
     
     /******************* Potenza Totale ******************/
-    test_cvg();
+    // test_cvg();
 
-    // int N_trap = 271;
-    // int N_simp = 388;
-    // double nu_max = 30.;
+    // int N_trap = 22936;
+    // int N_simp = 30516;
+    // double nu_max = 24.0661923;
     // double r_max = 500;
     // dati_grafico_Pot(N_trap, N_simp, nu_max, r_max);
     
 
     /*************** Temperatura Percepita ***************/
-    // int N_trap = 271;
-    // double nu_max = 30.;
-    // double T_min = 0.001;
-    // double T_max = 1;
-    // Teff_su_T(N_trap, nu_max, T_min, T_max);
+    int N_trap = 22936;
+    double nu_max = 24.0661923;
+    double T_min = 0.01;
+    double T_max = 1.;
+    Teff_su_T(N_trap, nu_max, T_min, T_max);
 
 
 

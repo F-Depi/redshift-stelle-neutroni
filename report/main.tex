@@ -1,4 +1,4 @@
-% ::setlocal makeprg=cd\ report\ &&\ pdflatex\ -interaction=batchmode\ main.tex\ &&\ xdg-open\ main.pdf
+% ::setlocal makeprg=cd\ report\ &&\ pdflatex\ -interaction=batchmode\ main.tex\ &&\ xdg-open\ main.pdf\ &&\ exit
 % then to compile and open the file just run :make (or press F8)
 
 \documentclass[a4paper, titlepage]{article}
@@ -30,6 +30,7 @@ Una volta risolte le equazioni è possibile ottenere l'espressione del potenzial
 
 Viene calcolata la radianza per ogni stella a 3 distanze diverse e la potenza totale di emissione in funzione della distanza dalla stella.
 Viene quindi calcolata la temperatura apparente delle 3 stelle più massive in funzione di quella effettiva e poi viene studiata la temperatura apparente in funzione della pressione centrale della stella.
+
 
 \section{Stabilità}
 
@@ -178,7 +179,6 @@ Vediamo dalla figura \ref{fig:Phi} che in tutti e 3 i casi $\Phi (r)$ è continu
 Il potenziale $\Phi$ (che fa parte del termine $e^{\Phi (r)} c^2 \mathrm{d}t^2$ della metrica $\mathrm{d}s^2$, che descrive la geometria dello spazio vicino alla stella) assume un andamento famigliare: raggiunge valori più bassi per le stelle più massive al diminuire di $r$ e tende a 0 per $r$ grandi.
 
 
-
 \section{Radianza} \label{sec:rad}
 
 In metrica di \Sh un fotone emesso a distanza $r$ con frequenza $\nu_\text{em}$ viene ricevuto da un osservatore a distanza $r'$ con una frequeza $\nu_\text{ric}$ data da
@@ -254,7 +254,6 @@ La curva in tutti e 3 i casi subisce uno spostamento verso le frequenze più bas
 \end{figure}
 
 
-
 \section{Potenza emessa}
 La potenza totale emessa dalla stella per un elemento della sua superficie, si può ottenere integrando la radianza $B(\nu, T)$ sulle frequenze e sull'angolo solido, con l'accortezza di moltiplicare per un fattore $\cos(\theta)$ (Legge di Lambert) per proiettare la radiazione lungo la normale alla superficie sottesa da $\mathrm{d}\Omega$.
 
@@ -319,7 +318,7 @@ In questo caso la situazione peggiore è quella per temperature molto piccole, s
 Otteniamo il grafico in figura \ref{fig:Pot_cvgN}.
 I valori sono degli scarti rispetto a $\mathcal{I}_{N = 1e8}$ (l'integrale calcolato con $N = \num{1e8}$) e sono normalizzati rispetto allo stesso.
 Al contriario di quello che succede di solito, il metodo Simpson (che ha un costo computazionale maggiore), non presenta vantaggi rispetto a quello dei trapezi.
-Dal codice (Appendice \ref{ap:integrali}) che genera i dati mostrati in figura \ref{fig:Pot_cvgN} otteniamo un errore relativo minore di $\num{1e-7}$ per \texttt{N\_trap = 196} e \texttt{N\_simp = 262}.
+Dal codice (Appendice \ref{ap:integrali}) che genera i dati mostrati in figura \ref{fig:Pot_cvgN} otteniamo un errore relativo minore di $\num{1e-7}$ per \texttt{N\_trap = 19060} e \texttt{N\_simp = 25368}.
 \begin{figure}[h]
     \begin{minipage}{0.49 \textwidth}
         \centering
@@ -348,26 +347,16 @@ Dallo script per generare i dati mostrati in figura \ref{fig:Pot_cvgA} otteniamo
     \begin{tabular}{ccc}
          & N & $\hat \nu_\text{max}$ \\
         \hline
-        Trapezi & 264 & 29.2526072 \\
+        Trapezi & 22936 & 24.0661923 \\
         \hline
-        Simpson & 312 & 24.0661923 \\
+        Simpson & 30516 & 24.0661923 \\
     \end{tabular}
 \end{table}
-
-Per comodità decidiamo di utilizzare lo stesso valore di $\hat \nu_\text{max} = 30$ per entrambi i metodi 
-\footnote{Si noti che Simpson tende a convergere prima al variare di \texttt{nu\_max} perché, in questo caso, approssima la curva per eccesso e quindi compensa il tratto di funzione che viene escluso dall'integrazione.
-La scelta di aumentare \texttt{nu\_max} anche per questo metodo mantiene comunque l'errore minore di $\num{1e-5}$ vista figura \ref{fig:Pot_cvgN}.}
-e quindi, per eccesso, 
-\begin{equation}
-    \texttt{N\_trap} = \frac{264}{29.2526072} \times 30 = 271
-    \quad \text{e} \quad
-    \texttt{N\_simp} = \frac{312}{24.0661923} \times 30 = 390
-\end{equation}
 
 Di conseguenza possiamo valutare
 
 \begin{equation}
-    A = 30 \, \nu_0 \, \unit{\per\mega\electronvolt} \simeq \num{7.253967e21} \, \unit{\per\mega\electronvolt\per\second}
+    A = 24.0661923 \, \nu_0 \, \unit{\per\mega\electronvolt} \simeq \num{5.819179e21} \, \unit{\per\mega\electronvolt\per\second}
     \label{eq:A_giusto}
 \end{equation}
 
@@ -376,11 +365,13 @@ Con questi parametri otteniamo i valori $\mathcal I_T$, per i trapezi, e $\mathc
 \begin{equation}
     \mathcal I_T (1) = 6.4939388
     \quad \quad \quad
-    \mathcal I_S (1) = 6.4939300 \, .
+    \mathcal I_S (1) = 6.4939388 \, .
     \label{eq:val_I}
 \end{equation}
 
-A conferma che il metodo di Simpson in questo caso tende a sovrastimare l'area della curva.
+Gli integrali hanno lo stesso valore poiché ci siamo assicurati di avere una
+precisione di $\num{1e-7}$ per il caso perggiore a $\hat T = 0.01$, che servirà
+nella sezione \ref{sec:temp_perc}.
 
 
 \subsection{Potenza totale in funzione della distanza}
@@ -407,7 +398,10 @@ Con linea tratteggiata e linea continua sono rispettivamente rappresentati raggi
 
 
 \newpage
+
+
 \section{Temperatura Percepita}
+\label{sec:temp_perc}
 
 Una volta ottenuta la potenza totale irradiata da una stella è possibile calcolare la sua temperatura, grazie alla relazione
 
@@ -447,24 +441,34 @@ Il grafico mostra anche un'incidenza diversa del redshift per le 3 stelle.
 In accordo con quello osservato in figura \ref{fig:Phi} e \ref{fig:Pot} i fotoni subiscono il redshift maggiore per la stella più massiva $M_1 = 14.3 M_\odot$ e seguono in ordine (sempre di massa) effetti minori per $M_3 = 1.53 M_\odot$ e $M_2 = 0.925 M_\odot$.
 
 
-
-
 \section{Temperatura efficace in funzione della pressione centrale}
+
+Si presentano in fine i grafici della temperatura efficacie in funzione della
+pressione centrale della stella.
+Vengono mostrati i grafici per tutti i 3 i tipi di politropico.
+Viene inoltre mostrato sia il caso per la temperatura della stella
+$\hat T = 1$ (Figura \ref{fig:Teff1_su_P} che quello per $\hat T = 0.01$
+(Figura \ref{fig:Teff001_su_P}.
+Come ci si poteva aspettare una pressione centrale maggiore porta a una stella
+più massiva, il cui redshift gravitazionale è più forte.
+
 
 \begin{figure}[h]
     \begin{minipage}{0.49 \textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/Teff1_su_P.eps}
-        \caption{wow}
         \label{fig:Teff1_su_P}
     \end{minipage}
     \hspace{0.015 \textwidth}
     \begin{minipage}{0.49 \textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/Teff001_su_P.eps}
-        \caption{wow}
-        \label{fig:Teff1_su_P}
+        \label{fig:Teff001_su_P}
     \end{minipage}
+    \caption{Fissata la temperatura della stella ($\hat T = 1$ a sinistra e
+    $\hat T = 0.01$ a destra) è possibile utilizzare la temperatura misurata
+    all'infinito come parametro per stimare la pressione centrale, data una
+    politropica.}
 \end{figure}
 
 
@@ -480,12 +484,15 @@ In accordo con quello osservato in figura \ref{fig:Phi} e \ref{fig:Pot} i fotoni
 
 
 
+
+\newpage
+\appendix
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%                APPENDICI               %%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
-\appendix
 
 \section{RK4} \label{ap:RK4}
 Codice con cui è stato implementato il metodo \texttt{RK4}. \texttt{fun\_P()} e \texttt{fun\_m()} sono le funzioni presenti a destra dell'uguale nella prima e nella seconda riga del sistema \ref{eq:sistema_adim}.
@@ -511,7 +518,6 @@ void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica)
     *P += (l1 + 2 * l2 + 2 * l3 + l4) / 6;
 }
 \end{lstlisting}
-
 
 
 \section{Risoluzione numerica di $\hat P (\rho)$} \label{ap:eps(r)1}
@@ -600,7 +606,6 @@ double findRho(double P){
 dove \texttt{P\_odf\_rho()} e \texttt{DP\_of\_rho()} sono rispettivamente la funzione \ref{ap:eq:1} e la sua derivata. In questo modo possiamo sempre trasformare $\epsilon (\rho)$ in $\epsilon (P)$.
 
 
-
 \section{Risoluzione dell'integrale del potenziale gravitazionale} \label{ap:Phi}
 
 Per ognuna delle 3 stelle trovate (la più massiva per ogni diversa equazione di stato) salviamo ogni valore di $r$, $m$ e $P$ in un file che successivamente importiamo (riga 3) e utiliziamo per calcolare l'integrale
@@ -654,7 +659,6 @@ Per ottimizzare il codice, invece che calcolare l'intero integrale per ogni punt
 Infine dalla riga 25 calcoliamo $\Phi_\text{ext}$ utilizzando la funzione analitica.
 
 
-
 \section{Integrali con trapezi e simpson} \label{ap:integrali}
 
 Le funzioni che fanno l'integrale con i due metodi sono
@@ -700,10 +704,16 @@ double funB(double nu, double T){
     return pow(nu, 3) / (exp(nu / T) - 1.);
 }
 \end{lstlisting}
-Per controllare la convergenza del valore della potenza usiamo inizialmente \texttt{nu\_max} (ovvero $\hat \nu_\text{max}$) uguale a 20. Verifichiamo per quale \texttt{N} si ottiene un errore minore di quello voluto prima per i trapezi e poi per Simpson e stampiamo i valori sul terminale.
+Per controllare la convergenza del valore della potenza usiamo inizialmente
+\texttt{nu\_max} (ovvero $\hat \nu_\text{max}$) uguale a 20.
+Prendiamo il caso in cui l'integrale è più piccolo e difficile da valutare con
+precisione, ovvero per $\hat T = 0.01$.
+Verifichiamo per quale \texttt{N} si ottiene un errore minore di quello voluto
+prima per i trapezi e poi per Simpson.
+I risultati vengono stampati sul terminale.
 
 \begin{lstlisting}[language=C]
-double T = 1.;
+double T = 0.01;
 int N = 10;
 int N_trap, N_simp;
 double Pot, nu_max = 20.;
@@ -754,6 +764,8 @@ fprintf(f1, "%.13e,%d,%.13e\n", Pot_cvg, (int)1e8, nu_max * nu0);
 fclose(f1);
 
 // Decidiamo che va bene N_trap e N_simp risultati del codice sopra
+// Ora verifichiamo la convergenza di nu_max nel caso peggiore, ovvero
+T = 1;
 Pot_cvg = integrale_trapezio(1e-12, 200, 1e8, T, &funB);
 nu_max = 20.;
 int Nrel_trap = (double)N_trap / nu_max; // Teniamo la stessa densita'
@@ -808,19 +820,26 @@ fclose(f3);
 In \texttt{stdout} otteniamo \\ \\
 \texttt{
 Errore massimo scelto = 1e-07 \\
-Per trapezi N = 196 e' sufficiente \\
-Per Simpson N = 262 e' sufficiente \\
-Per trapezi N = 264, nu\_max = 29.2526072 sono sufficienti \\
-Per Simpson N = 312, nu\_max = 24.0661923 sono sufficienti \\
+Per trapezi N = 19060 e' sufficiente \\
+Per Simpson N = 25368 e' sufficiente \\
+Per trapezi N = 22936, nu\_max = 24.0661923 sono sufficienti \\
+Per Simpson N = 30516, nu\_max = 24.0661923 sono sufficienti \\
 }
 
-Dalla riga 51 viene utilizzato un codice molto simile a quello sopra controllare la convergenza per diversi valori di \texttt{nu\_max}, in più bisogna assicurarsi che \texttt{N / nu\_max} rimanga costante al variare di \texttt{nu\_max}.
+Dalla riga 51 viene utilizzato un codice molto simile a quello sopra controllare
+la convergenza per diversi valori di \texttt{nu\_max}.
+L'unica differenza sta nel fatto che questa volta usiamo $\hat T = 1$, che è il
+caso in cui la funzione è più spostata verso destra e ci assicuriamo che
+la densità di trapezi \texttt{N / nu\_max} rimanga costante al variare di
+\texttt{nu\_max}.
 
 
 \section{Calcolo Temperatura efficace} \label{ap:Teff}
 
 Per calcolare la temperatura efficace si riutilizzano molte delle funzioni scritte per l'appendice \ref{ap:integrali}.
-Per fare gli integrali possiamo affidarci ai parametri \texttt{N\_trap} e \texttt{nu\_max} trovati in \ref{ap:integrali} poiché sono stati studiati apposta per valere nel intervallo di temperature che va da 0 a 1.
+Per fare gli integrali possiamo affidarci ai parametri \texttt{N\_trap} e
+\texttt{nu\_max} trovati in \ref{ap:integrali} poiché sono stati studiati
+apposta per valere nel intervallo di temperature che va da 0.1 a 1.
 
 Vista l'equivalenza dei due metodi di integrazione in quanto a precisione, ma non in quanto a costo computazionale, per questo calcolo utilizziamo solamente il metodo dei trapezi.
 
@@ -829,9 +848,9 @@ Il codice è il seguente:
 \begin{lstlisting}
 #define PI 3.1415926535     // \pi
 
-int N_trap = 271;
-double nu_max = 30.;
-double T_min = 0.001;
+int N_trap = 22936;
+double nu_max = 24.0661923;
+double T_min = 0.01;
 double T_max = 1;
 
 double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};        // Raggi delle 3 stelle

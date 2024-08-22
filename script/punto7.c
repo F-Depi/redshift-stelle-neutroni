@@ -74,8 +74,8 @@ double funTeff(double R, double M, double integral_T){
 int main(){
 
     int file_lens[3] = {395, 617, 717};
-    int N_trap = 271;
-    double nu_max = 30.;
+    int N_trap = 22936;
+    double nu_max = 24.0661923;
     double T;
 
     double integral_T1 = integrale_trapezio(1e-12, nu_max, N_trap, 1.,  &funB);

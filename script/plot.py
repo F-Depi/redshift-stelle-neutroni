@@ -413,7 +413,7 @@ def plt_Teff001_su_Pressione(save=['yes','no']):
 #compare_eneries()
 
 ''' Andamento P(r), m(r), rho(r) per 3 politropiche a 1 pressione '''
-test_cvg_stella()
+#test_cvg_stella()
 
 ''' h diversi '''
 #test_cvg_h()
@@ -431,14 +431,14 @@ test_cvg_stella()
 #plot_B()
 
 ''' Convergenza dell'integrale della potenza'''
-#plt_P_test_cvgN('no')
+#plt_P_test_cvgN('yes')
 #plt_P_test_cvgA('yes')
 
 ''' Potenza in funzione di r '''
 #plt_Pot('yes')
 
 ''' Temperatura efficace '''
-#plt_Teff('no')
+#plt_Teff('yes')
 
 ''' Temperatura efficace rispetto a Pressione centrale delle stelle '''
 #plt_Teff1_su_Pressione('yes')
