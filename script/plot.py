@@ -413,7 +413,7 @@ def plt_Teff001_su_Pressione(save=['yes','no']):
 #compare_eneries()
 
 ''' Andamento P(r), m(r), rho(r) per 3 politropiche a 1 pressione '''
-#test_cvg_stella()
+test_cvg_stella()
 
 ''' h diversi '''
 #test_cvg_h()

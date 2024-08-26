@@ -14,11 +14,11 @@
 
 /*
  The system to solve is
- dm/dr = f_m = r^3 E(rho)
- dP/dr = f_P = - [m(r) E(rho)/r^2] * [1 + P(r)/E(rho)] * [1 + r^3 P(r)/m(r)] / [1 - 2m(r)/r^2]
+ dm/dr = f_m = r^2 E(rho)
+ dP/dr = f_P = - (P + E)(m + r^3 P)/(r^2 - 2mr)
 
- P(rho) = (alpha - 1)a rho^alpha + (beta - 1)b rho^beta
- rho(P) is found by numerically
+ P(rho) = ALPHA A rho^(ALPHA+1) + BETA B rho^(BETA+1)
+ rho(P) is found numerically
  */
 
 
@@ -87,11 +87,11 @@ void test_cvg_stella(double startP, double smallestP, int tipo_politropica){
     fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * N0);
 
     while (P > smallestP){
+        fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * N0);
         r += h;
         rungeKutta4(h, r, &P, &m, tipo_politropica);
         double prevP = P;
         rho = findRho(P);
-        fprintf(f, "%e,%e,%e,%e\n", r * R0, P * P0, m * M0, rho * N0);
         if (r < 2 * m){
             printf("BH");
             break;
@@ -150,7 +150,7 @@ int main(){
     // Tries to solve the equations once for 1 star, to see if
     // everything is ok and the pressure converges to 0.
     // Take the politropic type as input
-    test_cvg_stella(2., 0.001, 0);
+    test_cvg_stella(2., 0.1, 0);
     test_cvg_stella(2., 0., 1);
     test_cvg_stella(2., 0., 2);
 
