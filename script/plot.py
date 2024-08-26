@@ -131,18 +131,18 @@ def plot_MR():
     R = data[:, 2]
     M = data[:, 3]
 
-    axs[0].plot(R, M, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
-    axs[1].plot(R, P0, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
-    axs[2].plot(P0, M, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
+    axs[0].plot(R, M, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
+    axs[1].plot(R, P0, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
+    axs[2].plot(P0, M, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
 
     data = np.genfromtxt('../data/MR_2_test.csv', delimiter=',', skip_header=1, dtype=float)
     P0 = data[:, 1]
     R = data[:, 2]
     M = data[:, 3]
 
-    axs[0].plot(R, M, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
-    axs[1].plot(R, P0, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
-    axs[2].plot(P0, M, linestyle='', marker='.', label=r'$\lambda = 5/3, K = 0.05$')
+    axs[0].plot(R, M, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
+    axs[1].plot(R, P0, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
+    axs[2].plot(P0, M, linestyle='', marker='.', label=r'$\lambda = 2.54, K = 0.01$')
 
     R = np.arange(3, 50, 0.01)
     axs[0].plot(R, R/2, linestyle='-', color='red', label='Shwarzschild Radius')
@@ -156,7 +156,7 @@ def plot_MR():
     axs[0].set_ylabel('Massa [M_sun]')
     axs[0].set_ylabel(r'Massa $[M_{\odot}]$')
     axs[0].set_title(r'Codice politropica $a \alpha b \beta$ bloccato a P < '+str(cvg*150)+r'$\left[ \frac{Mev}{fm^3} \right]$, le altre a P < 0')
-    axs[0].legend()
+    axs[0].legend(loc='lower right')
 
     axs[1].set_xscale('log')
     axs[1].set_yscale('log')
@@ -413,13 +413,13 @@ def plt_Teff001_su_Pressione(save=['yes','no']):
 #compare_eneries()
 
 ''' Andamento P(r), m(r), rho(r) per 3 politropiche a 1 pressione '''
-test_cvg_stella()
+#test_cvg_stella()
 
 ''' h diversi '''
 #test_cvg_h()
 
 ''' Grafico M-R e altro'''
-#plot_MR()
+plot_MR()
 
 ''' Grafico M-R generale '''
 #plot_MR_rela()

@@ -1,15 +1,14 @@
 // ::setlocal makeprg=cd\ script\ &&\ make\ test\ &&\ ./test.x
 #include <stdio.h>
 #include "fun.h"
-#define P0 150.33046048         // = E_0, MeV/fm^3
-#define R0 19.996542543         // km
-#define M0 13.542058427         // solar masses
-#define N0 0.16                 // fm^-3
-#define A (13.4 * N0 / P0)      // energy density parameter
-#define B (5.62 * N0 / P0)      // energy density parameter  
-#define ALPHA 0.514             // energy density exponent
-#define BETA 2.436              // energy density exponent
-
+#define P0 150.33046048             // = E_0, MeV/fm^3
+#define R0 19.996542543             // km
+#define M0 13.542058427             // solar masses
+#define N0 0.16                     // fm^-3
+#define A (13.4 * N0 / P0)          // energy density parameter
+#define B (5.62 * N0 / P0)          // energy density parameter  
+#define ALPHA 0.514                 // energy density exponent
+#define BETA 2.436                  // energy density exponent
 
 
 /*
@@ -150,9 +149,9 @@ int main(){
     // Tries to solve the equations once for 1 star, to see if
     // everything is ok and the pressure converges to 0.
     // Take the politropic type as input
-    test_cvg_stella(2., 0.1, 0);
-    test_cvg_stella(2., 0., 1);
-    test_cvg_stella(2., 0., 2);
+    // test_cvg_stella(2, 0.00001, 0);
+    // test_cvg_stella(2., 0., 1);
+    // test_cvg_stella(2., 0., 2);
 
 
     /*************** Test h ***********************/

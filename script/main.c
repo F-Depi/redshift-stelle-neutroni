@@ -17,7 +17,7 @@
 void solve_system(double h, double r, double P, double m, double RM[2], int tipo_politropica){
     double prevP = P + 1;
 
-    while (P > 0.01 && prevP > P){
+    while (P > 0 && prevP > P){
         prevP = P;
         RM[0] = r;
         RM[1] = m;
@@ -44,7 +44,7 @@ void get_MR(int tipo_politropica){
 
     int start_i;
     if (tipo_politropica == 0){
-        start_i = -188;
+        start_i = -700;
     } else if (tipo_politropica == 1){
         start_i = -600;
     } else if (tipo_politropica == 2){
