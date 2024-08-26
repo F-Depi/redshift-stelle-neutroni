@@ -31,7 +31,9 @@ def test_P_rho():
 def compare_eneries():
     plt.figure()
 
-    labels = [r'Modello $a \alpha b \beta$', r'$\lambda = 2.54, K = 0.01$', r'$\lambda = 5/3, K = 0.05$']
+    labels = [r'Modello $a \alpha b \beta$',
+              r'$\lambda = 5/3, K = 0.05$',
+              r'$\lambda = 2.54, K = 0.01$']
     for i in [0, 1, 2]:
         data = np.genfromtxt('../data/test/E_of_P_'+str(i+1)+'.csv', delimiter=',', skip_header=1, dtype=float)
         P = data[:,0]
@@ -410,7 +412,7 @@ def plt_Teff001_su_Pressione(save=['yes','no']):
 
 ''' P(rho) vs rho(P) '''
 #test_P_rho()
-#compare_eneries()
+compare_eneries()
 
 ''' Andamento P(r), m(r), rho(r) per 3 politropiche a 1 pressione '''
 #test_cvg_stella()
@@ -419,7 +421,7 @@ def plt_Teff001_su_Pressione(save=['yes','no']):
 #test_cvg_h()
 
 ''' Grafico M-R e altro'''
-plot_MR()
+#plot_MR()
 
 ''' Grafico M-R generale '''
 #plot_MR_rela()

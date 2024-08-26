@@ -1,15 +1,6 @@
 // ::setlocal makeprg=cd\ script\ &&\ make\ test\ &&\ ./test.x
 #include <stdio.h>
 #include "fun.h"
-#define P0 150.33046048             // = E_0, MeV/fm^3
-#define R0 19.996542543             // km
-#define M0 13.542058427             // solar masses
-#define N0 0.16                     // fm^-3
-#define A (13.4 * N0 / P0)          // energy density parameter
-#define B (5.62 * N0 / P0)          // energy density parameter  
-#define ALPHA 0.514                 // energy density exponent
-#define BETA 2.436                  // energy density exponent
-
 
 /*
  The system to solve is
@@ -18,7 +9,7 @@
 
  P(rho) = ALPHA A rho^(ALPHA+1) + BETA B rho^(BETA+1)
  rho(P) is found numerically
- */
+*/
 
 
 void print_constants(){
@@ -39,7 +30,7 @@ void test_rhovsP(){
     double P = 0;
     FILE *f1 = fopen("../data/test/rho_of_P.csv", "w");
     fprintf(f1, "rho,P\n");
-    while (P < 0.1){
+    while (P < 1){
         P = P_of_rho(rho);
         fprintf(f1, "%e,%e\n", rho * N0, P_of_rho(rho) * P0);
         rho += 0.001;
@@ -65,7 +56,7 @@ void compare_eneries(){
         double P = 0;
         while(P <= 1){
             fprintf(f, "%e,%e\n", P * P0, fun_E(P, i) * P0);
-            P += 0.01;
+            P += 0.001;
         }
         fclose(f);
     }
@@ -142,7 +133,7 @@ int main(){
     // Test if the results at least appears self consistent
     // print_constants();
     // test_rhovsP();
-    // compare_eneries();
+    compare_eneries();
 
     
     /************** First simulation *************/
