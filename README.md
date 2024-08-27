@@ -13,7 +13,7 @@ Gli script in C che generano i dati sono:
  gli step fatti da $\texttt{RK4}$ risolvano le TOV fino ad arrivare a $P \sim 0$
  e verifica la dipendenza del risultato dallo step di integrazione $h$.
  - ```main.c``` genera i dati per il grafico MR ($\texttt{get\\_MR()}$ è
- abbastanza lenta), genera tutti i dati $(r,~P(r),~m(r))$ per le stelle di massa
+ abbastanza lenta quando non lavora in parallelo), genera tutti i dati $(r,~P(r),~m(r))$ per le stelle di massa
  massima e poi calcola il potenziale gravitazionale con quest'ultimi.
  - ```radianza.c``` calcola la radianza delle 3 stelle, controlla i giusti
  parametri da utilizzare per fare l'integrale relativo alla potenza e poi li usa
