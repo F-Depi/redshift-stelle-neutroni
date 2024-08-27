@@ -258,19 +258,22 @@ def plot_B(save=['yes', 'no']):
 
 
 def plt_P_test_cvgN(save=['yes', 'no']):
-    dataT = np.genfromtxt('../data/potenza/test_cvg_N_trap.csv', delimiter=',', skip_header=1, dtype=float)
-    dataS = np.genfromtxt('../data/potenza/test_cvg_N_simp.csv', delimiter=',', skip_header=1, dtype=float)
+    dataT = np.genfromtxt('../data/potenza/test_cvg_N_trap.csv',
+                          delimiter=',', skip_header=1, dtype=float)
+    dataS = np.genfromtxt('../data/potenza/test_cvg_N_simp.csv',
+                          delimiter=',', skip_header=1, dtype=float)
 
     plt.figure()
 
     metodo = ['T:   ', 'S:   ']
+    lab = r'$\frac{|\mathcal{I} - \mathcal{I}_{N =1e8}|}{\mathcal{I}_{N =1e8}}$'
     kk = 0
 
     for data in [dataT, dataS]:
         P = abs(data[-1,0] - data[:-1,0]) / data[-1,0]
         N = data[:-1,1]
 
-        plt.plot(N, P, linestyle='', marker='o', label=metodo[kk] + r'$\frac{| \mathcal{I} - \mathcal{I}_{N = 1e8} |}{\mathcal{I}_{N = 1e8}}$')
+        plt.plot(N, P, linestyle='', marker='o', label=metodo[kk] + lab)
         kk += 1
     plt.title('Errore sul metodo di integrazione')
     plt.xscale('log')
@@ -279,24 +282,30 @@ def plt_P_test_cvgN(save=['yes', 'no']):
     plt.ylabel(r'$\log_{10} \left( \text{Errore relativo} \right)$')
     plt.legend(fontsize=20)
     plt.tight_layout()
-    if save == 'yes': plt.savefig('../report/Figures/Pot_cvgN.eps', format='eps')
+    if save == 'yes':
+        plt.savefig('../report/Figures/Pot_cvgN.eps', format='eps')
     plt.show()
 
 
 def plt_P_test_cvgA(save=['yes', 'no']):
-    dataT = np.genfromtxt('../data/potenza/test_cvg_A_trap.csv', delimiter=',', skip_header=1, dtype=float)
-    dataS = np.genfromtxt('../data/potenza/test_cvg_A_simp.csv', delimiter=',', skip_header=1, dtype=float)
+    dataT = np.genfromtxt('../data/potenza/test_cvg_A_trap.csv',
+                          delimiter=',', skip_header=1, dtype=float)
+    dataS = np.genfromtxt('../data/potenza/test_cvg_A_simp.csv',
+                          delimiter=',', skip_header=1, dtype=float)
 
     plt.figure()
 
-    metodo = ['T:   ', 'S:   ']
+    lab_num = r'| \mathcal{I} - \mathcal{I} _{\hat \nu_\text{max} = 200} |'
+    lab_den = r'\mathcal{I} _{\hat \nu_\text{max} = 200}'
+    lab = r'$\frac{' + lab_num + r'}{' + lab_den + r'}$'
+    metodo = ['T:   ' + lab, 'S:   ' + lab]
     kk = 0
 
     for data in [dataT, dataS]:
         P = abs(data[-1,0] - data[:-1,0]) / data[-1,0]
         nu_max = data[:-1,2]
 
-        plt.plot(nu_max, P, linestyle='', marker='o', label=metodo[kk]+r'$\frac{| \mathcal{I} - \mathcal{I} _{\hat \nu_\text{max} = 200} |}{\mathcal{I} _{\hat \nu_\text{max} = 200}}$')
+        plt.plot(nu_max, P, linestyle='', marker='o', label = metodo[kk])
         kk += 1
     plt.axvline(20, color='r')
     plt.title('Errore sul metodo di integrazione')
@@ -306,7 +315,8 @@ def plt_P_test_cvgA(save=['yes', 'no']):
     plt.ylabel(r'$\log_{10} \left( \text{Errore relativo} \right)$')
     plt.legend(fontsize=20)
     plt.tight_layout()
-    if save == 'yes': plt.savefig('../report/Figures/Pot_cvgA.eps', format='eps')
+    if save == 'yes':
+        plt.savefig('../report/Figures/Pot_cvgA.eps', format='eps')
     plt.show()
 
 
@@ -362,48 +372,30 @@ def plt_Teff(save=['yes','no']):
     plt.show()
 
 
-def plt_Teff1_su_Pressione(save=['yes','no']):
+def plt_Teff_su_Pressione(T0, save=['yes','no']):
     plt.figure()
-    colors = ['g', 'r', 'b']
+    #colors = ['g', 'r', 'b']
+    lab = r'$T_{eff} (r = \infty, T = 1 \text{MeV}, P), ~ \epsilon_'
 
-    kk = 0
-    for i in ['1', '2', '3']:
-        data = np.genfromtxt('../data/punto7/Teff1_su_P_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
+    for kk in [1, 2, 3]:
+        data = np.genfromtxt(f'../data/punto7/Teff{T0:.2f}_su_P_{kk:d}.csv',
+                             delimiter=',', skip_header=1, dtype=float)
         P = data[:,0]
         Teff = data[:,1]
 
-        plt.plot(P, Teff, color=colors[kk], marker='.', linestyle='', label=r'$T_{eff} (r = \infty, T = 1 \text{MeV}, P)$, politropica '+i)
-        kk += 1
+        plt.plot(P, Teff, marker='.', linestyle='', label = lab+str(kk)+r'$')
 
-    plt.title('Temperatura - pressione centrale')
+    plt.title('Temperatura efficacie - pressione centrale\n'
+              rf'stelle con $k_b T^* = {T0:.2f}$MeV')
     plt.xlabel(r'Pressione $\left[ \frac{\text{MeV}}{\text{fm}^3} \right]$')
     plt.ylabel(r'Temperatura $\left[ \text{MeV} \right]$')
-    plt.legend(loc='lower right')
+    plt.legend(loc='upper right')
     plt.tight_layout()
-    if save == 'yes': plt.savefig('../report/Figures/Teff1_su_P.eps', format='eps')
+    if save == 'yes':
+        plt.savefig(f'../report/Figures/Teff{T0:.2f}_su_P.eps', format='eps')
     plt.show()
 
 
-def plt_Teff001_su_Pressione(save=['yes','no']):
-    plt.figure()
-    colors = ['g', 'r', 'b']
-
-    kk = 0
-    for i in ['1', '2', '3']:
-        data = np.genfromtxt('../data/punto7/Teff001_su_P_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
-        P = data[:,0]
-        Teff = data[:,1]
-
-        plt.plot(P, Teff, color=colors[kk], marker='.', linestyle='', label=r'$T_{eff} (r = \infty, T = 0.01 \text{MeV}, P)$, politropica '+i)
-        kk += 1
-
-    plt.title('Temperatura - pressione centrale')
-    plt.xlabel(r'Pressione $\left[ \frac{\text{MeV}}{\text{fm}^3} \right]$')
-    plt.ylabel(r'Temperatura $\left[ \text{MeV} \right]$')
-    plt.legend(loc='lower right')
-    plt.tight_layout()
-    if save == 'yes': plt.savefig('../report/Figures/Teff001_su_P.eps', format='eps')
-    plt.show()
 
 
 ## I dati sono generati con gli script in C indicati
@@ -433,7 +425,7 @@ def plt_Teff001_su_Pressione(save=['yes','no']):
 
 ################################## radianza.c ##################################
 ''' Grafico della radianza '''
-plot_B('yes')
+#plot_B('yes')
 
 ''' Convergenza dell'integrale della potenza'''
 #plt_P_test_cvgN('yes')
@@ -445,8 +437,10 @@ plot_B('yes')
 ''' Temperatura efficace '''
 #plt_Teff('yes')
 
+
+################################### punto7.c ###################################
 ''' Temperatura efficace rispetto a Pressione centrale delle stelle '''
-#plt_Teff1_su_Pressione('yes')
-#plt_Teff001_su_Pressione('yes')
+plt_Teff_su_Pressione(1, 'yes')
+plt_Teff_su_Pressione(0.01, 'yes')
 
 

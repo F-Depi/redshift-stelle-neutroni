@@ -222,6 +222,9 @@ riportati nella tabella \ref{tab:Mgrosso}.
     \label{tab:Mgrosso}
 \end{table}
 
+Ci riferiremo alla stella più massiva ottenuta con la politropica 1 (politropica
+realistica) come \textit{stella 1} che ha mass $M_1$ raggio $R_1$, alla stella
+con la politropica 2 \textit{ stella 2} e così via.
 
 \section{Potenziale gravitazionale}
 
@@ -564,90 +567,97 @@ Con linea tratteggiata e linea continua sono rispettivamente rappresentati raggi
 \section{Temperatura Percepita}
 \label{sec:temp_perc}
 
-Una volta ottenuta la potenza totale irradiata da una stella è possibile calcolare la sua temperatura, grazie alla relazione
+Una volta ottenuta la potenza totale irradiata da una stella è possibile
+calcolare la sua temperatura, grazie alla relazione
 
 \begin{equation}
-    k_B T_{eff} = \left( \mathcal{P} (T) \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4}
+    k_B T_{eff} = \left( \mathcal P (T) \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4}
     \label{eq:Teff}
 \end{equation}
 
-Dove $T_{eff}$ è la temperatura percepita a una certa distanza dalla stella e $T$ la temperatura reale, che si misurerebbe a $r = R$.
+Dove $T_{eff}$ è la temperatura percepita a una certa distanza dalla stella e
+$T$ la temperatura reale, che si misurerebbe a $r = R$.
 
-Mettendo le variabili adimensionali, sostituendo a $\mathcal{\hat P}$ l'espressione in \ref{eq:Pot_I} e ricordando le espressioni di $\mathcal{\hat P}_0$ (eq. \ref{eq:PT_ad}), $B_0$ (eq. \ref{eq:B0def}) $\nu_0$ (eq. \ref{eq:nu0def}) e che $T_0 = \unit{\mega\electronvolt}$, otteniamo
+Mettendo le variabili adimensionali, sostituendo a $\mathcal{\hat P}$
+l'espressione in \ref{eq:Pot_I} e ricordando le espressioni di
+$\mathcal{\hat P}_0$ (eq. \ref{eq:PT_ad}), $B_0$ (eq. \ref{eq:B0def}) $\nu_0$
+(eq. \ref{eq:nu0def}) e che $T_0 = \unit{\mega\electronvolt}$, otteniamo
 
 \begin{align}
-    T_0 \hat T_{eff} &= \left( \mathcal P_0 \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4} \mathcal{\hat P}^{1/4}
-    = \frac{15^{1/4}}{\pi} \unit{\mega\electronvolt} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/8} \mathcal{I} (\hat T)^{1/4} \\
-    \hat T_{eff}(\hat r, \hat T) &= \frac{15^{1/4}}{\pi} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/8} \mathcal{I} (\hat T)^{1/4}
+    T_0 \hat T_{eff}
+    &= \left( \mathcal P_0 \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4}
+    \mathcal{\hat P}^{1/4}
+    = \frac{15^{1/4}}{\pi} \unit{\mega\electronvolt}
+    \left(1 - \frac{2 \hat M}{\hat R}\right)^{1/8}
+    \left(1 - \frac{2 \hat M}{\hat r}\right)^{-1/8} \mathcal I (\hat T)^{1/4} \\
+    %
+    \hat T_{eff}(\hat r, \hat T)
+    &= \frac{15^{1/4}}{\pi} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8}
+    \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/8} \mathcal{I} (\hat T)^{1/4}
     \label{eq:Teff_ad}
 \end{align}
 
-Possiamo quindi studiare l'equzione \ref{eq:Teff_ad} per le 3 stelle studiate in precedenza, questa volta però fissiamo $r = \infty$ e studiamo la $T_{eff}$ in funzione di $T$, la temperatura propria della stella, facendo il limite
+Possiamo quindi studiare l'equzione \ref{eq:Teff_ad} per le 3 stelle studiate in
+precedenza, questa volta però fissiamo $r = \infty$ e studiamo la $T_{eff}$ in
+funzione di $T$, la temperatura propria della stella, facendo il limite
 
 \begin{equation}
-    \hat T_{eff}(\hat r, \hat T) = \frac{15^{1/4}}{\pi} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \mathcal{I} (\hat T)^{1/4}
+    \hat T_{eff}(\hat r, \hat T) = \frac{15^{1/4}}{\pi}
+    \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \mathcal{I} (\hat T)^{1/4}
 \end{equation}
 
-Presentiamo il grafico in figura \ref{fig:Teff}, il codice si trova nell'appendice \ref{ap:Teff}.
+Presentiamo il grafico in figura \ref{fig:Teff}, il codice si trova
+nell'appendice \ref{ap:Teff}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width = \textwidth]{Figures/Teff.eps}
-    \caption{Temperatura percepita all'infinito delle 3 stelle con masse $M_1 = 14.3 M_\odot$, $M_2 = 0.925 M_\odot$ e $M_3 = 1.53 M_\odot$. Come ci aspettavamo la temperatura misurata all'infinito è sempre minore di quella propria della stella.}
+    \caption{Temperatura percepita all'infinito delle 3 stelle con masse
+    $M_1 = 2.46 M_\odot$, $M_2 = 0.99 M_\odot$ e $M_3 = 1.64 M_\odot$.
+    Come ci aspettavamo la temperatura misurata all'infinito è sempre minore di
+    quella propria della stella.}
     \label{fig:Teff}
 \end{figure}
 
-Come ci aspettavamo la temperatura percepita all'infinito è sempre minore di quella propria della stella.
+Come ci aspettavamo la temperatura percepita all'infinito è sempre minore d
+quella propria della stella.
 Il grafico mostra anche un'incidenza diversa del redshift per le 3 stelle.
-In accordo con quello osservato in figura \ref{fig:Phi} e \ref{fig:Pot} i fotoni subiscono il redshift maggiore per la stella più massiva $M_1 = 14.3 M_\odot$ e seguono in ordine (sempre di massa) effetti minori per $M_3 = 1.53 M_\odot$ e $M_2 = 0.925 M_\odot$.
+In accordo con quello osservato in figura \ref{fig:Phi} e \ref{fig:Pot} i fotoni
+subiscono il redshift maggiore per la stella più massiva $M_1 = 2.46 M_\odot$ e
+seguono in ordine (sempre di massa) effetti minori per
+$M_3 = 1.64 M_\odot$ e $M_2 = 0.995 M_\odot$.
 
 
 \section{Temperatura efficace in funzione della pressione centrale}
 
-Si presentano in fine i grafici della temperatura efficacie in funzione della
+Si presentano infine i grafici della temperatura efficacie in funzione della
 pressione centrale della stella.
-Vengono mostrati i grafici per tutti i 3 i tipi di politropico.
-Viene inoltre mostrato sia il caso per la temperatura della stella
-$\hat T = 1$ (Figura \ref{fig:Teff1_su_P} che quello per $\hat T = 0.01$
-(Figura \ref{fig:Teff001_su_P}.
+Vengono mostrati i grafici per tutte e 3 le politropiche.
+Viene inoltre mostrato il caso per la temperatura della stella $\hat T = 1$ a
+sinistra e quello per $\hat T = 0.01$ a destra.
 Come ci si poteva aspettare una pressione centrale maggiore porta a una stella
-più massiva, il cui redshift gravitazionale è più forte.
+più massiva, il cui redshift gravitazionale è più forte e quindi la temperatura
+efficacie più bassa.
 
 
 \begin{figure}[h]
     \begin{minipage}{0.49 \textwidth}
         \centering
-        \includegraphics[width = \textwidth]{Figures/Teff1_su_P.eps}
-        \label{fig:Teff1_su_P}
+        \includegraphics[width = \textwidth]{Figures/Teff1.00_su_P.eps}
     \end{minipage}
-    \hspace{0.015 \textwidth}
     \begin{minipage}{0.49 \textwidth}
         \centering
-        \includegraphics[width = \textwidth]{Figures/Teff001_su_P.eps}
-        \label{fig:Teff001_su_P}
+        \includegraphics[width = \textwidth]{Figures/Teff0.01_su_P.eps}
     \end{minipage}
     \caption{Fissata la temperatura della stella ($\hat T = 1$ a sinistra e
-    $\hat T = 0.01$ a destra) è possibile utilizzare la temperatura misurata
-    all'infinito come parametro per stimare la pressione centrale, data una
-    politropica.}
+    $\hat T = 0.01$ a destra) è possibile esprimere la temperatura misurata
+    all'infinito in funzione della pressione centrale che, data una
+    politropica, ne determina la massa.}
 \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \newpage
 \appendix
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -766,7 +776,8 @@ funzione \ref{ap:eq:1} e la sua derivata. In questo modo possiamo sempre
 trasformare $\epsilon (\rho)$ in $\epsilon (P)$.
 
 
-\section{Risoluzione dell'integrale del potenziale gravitazionale} \label{ap:Phi}
+\section{Risoluzione dell'integrale del potenziale gravitazionale}
+\label{ap:Phi}
 
 Per ognuna delle 3 stelle trovate (la più massiva per ogni diversa equazione di
 stato) salviamo ogni valore di $r$, $m$ e $P$ in un file che successivamente
@@ -841,7 +852,8 @@ Le funzioni che fanno l'integrale con i due metodi sono
 
 \begin{lstlisting}[language=C]
 // Metodo Trapezi
-double integrale_trapezio(double a, double b, int N, double T, double (*fun)(double, double)){
+double integrale_trapezio(double a, double b, int N, double T,
+                                                double (*fun)(double, double)){
     // assume a < b
     double h = (b - a)/ (double)N;
     double integral = ((*fun)(a, T) + (*fun)(b, T)) * h / 2;
@@ -854,7 +866,8 @@ double integrale_trapezio(double a, double b, int N, double T, double (*fun)(dou
 }
 
 // Metodo Simpson
-double integrale_simpson(double a, double b, int N, double T, double (*fun)(double, double)){
+double integrale_simpson(double a, double b, int N, double T,
+                                                double (*fun)(double, double)){
     // assume a < b
     double h = (b - a)/N;
     double integral = ((*fun)(a, T) + (*fun)(b, T)) * h / 3;
@@ -945,7 +958,7 @@ T = 1;
 Pot_cvg = integrale_trapezio(1e-12, 200, 1e8, T, &funB);
 nu_max = 20.;
 int Nrel_trap = (double)N_trap / nu_max; // Teniamo la stessa densita'
-int Nrel_simp = (double)N_simp / nu_max; // di N / nu_max
+int Nrel_simp = (double)N_simp / nu_max; // di trapezi: N / nu_max
 
 // partiamo da
 nu_max = 10.;
@@ -961,7 +974,8 @@ while(nu_max <= 1e2){
     fprintf(f2, "%.13e,%d,%.13e\n", Pot, N, nu_max);
 
     if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
-        printf("Per trapezi N = %d, nu_max = %.7f sono sufficienti\n", N, nu_max);
+        printf("Per trapezi N = %d, nu_max = %.7f sono sufficienti\n",
+                                                                N, nu_max);
         kk++;
     }
 
@@ -983,7 +997,8 @@ while(nu_max <= 1e2){
     fprintf(f3, "%.13e,%d,%.13e\n", Pot, N, nu_max);
 
     if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
-        printf("Per Simpson N = %d, nu_max = %.7f sono sufficienti\n", N, nu_max);
+        printf("Per Simpson N = %d, nu_max = %.7f sono sufficienti\n",
+                                                                N, nu_max);
         kk++;
     }
 
@@ -1012,12 +1027,15 @@ la densità di trapezi \texttt{N / nu\_max} rimanga costante al variare di
 
 \section{Calcolo Temperatura efficace} \label{ap:Teff}
 
-Per calcolare la temperatura efficace si riutilizzano molte delle funzioni scritte per l'appendice \ref{ap:integrali}.
+Per calcolare la temperatura efficace si riutilizzano molte delle funzioni
+scritte per l'appendice \ref{ap:integrali}.
 Per fare gli integrali possiamo affidarci ai parametri \texttt{N\_trap} e
 \texttt{nu\_max} trovati in \ref{ap:integrali} poiché sono stati studiati
 apposta per valere nel intervallo di temperature che va da 0.1 a 1.
 
-Vista l'equivalenza dei due metodi di integrazione in quanto a precisione, ma non in quanto a costo computazionale, per questo calcolo utilizziamo solamente il metodo dei trapezi.
+Vista l'equivalenza dei due metodi di integrazione in quanto a precisione, ma
+non in quanto a costo computazionale, per questo calcolo utilizziamo solamente
+il metodo dei trapezi.
 
 Il codice è il seguente:
 
@@ -1029,8 +1047,8 @@ double nu_max = 24.0661923;
 double T_min = 0.01;
 double T_max = 1;
 
-double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};        // Raggi delle 3 stelle
-double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};       // Masse delle 3 stelle
+double R[3] = {11.04289 / R0, 10.86752 / R0, 8.531525 / R0}; // Raggi stelle
+double M[3] = {2.456841 / M0, 0.990100 / M0, 1.635845 / M0}; // Masse stelle
 
 
 // ciclo sulle stelle
@@ -1054,88 +1072,4 @@ for (int i = 0; i < 3; i++){
 \end{lstlisting}
 
 
-
-
-
-
-
-
-
 \end{document}
-
-
-
-
-%\begin{table}[h]
-%    \centering
-%    \begin{tabular}{cccc} 
-%        \toprule
-%        Stella & $r [\unit{\kilo\meter}]$ & $\mathcal{P}(r) [\unit{\mega\electronvolt\per\second\per\femto\meter\squared}]$ & Metodo \\
-%        \midrule
-%
-%        \multirow{6}{*}{\makecell{ $M_1 = 14.3M_\odot$ \\ $R_1 = 59.0 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$88.6$} & $\num{4.426067202e+15}$ & Trapezi \\
-%         & & $\num{4.426067212e+15}$ & Simpson \\ 
-%         & \multirow{2}{*}{$472.3$} & $\num{3.252180370e+15}$ & Trapezi \\
-%         & & $\num{3.252180396e+15}$ & Simpson \\
-%         & \multirow{2}{*}{$\infty$} & $\num{3.092162593e+15}$ & Trapezi \\
-%         & & $\num{3.092162623e+15}$ & Simpson \\
-%        \hline
-%
-%        \multirow{6}{*}{\makecell{ $M_2 = 0.925M_\odot$ \\ $R_2 = 10.9 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$16.4$} & $\num{6.057276926e+15}$ & Trapezi \\
-%         & & $\num{6.057276930e+15}$ & Simpson \\ 
-%         & \multirow{2}{*}{$87.2$} & $\num{5.581867348e+15}$ & Trapezi \\
-%         & & $\num{5.581867353e+15}$ & Simpson \\
-%         & \multirow{2}{*}{$\infty$} & $\num{5.487198980e+15}$ & Trapezi \\
-%         & & $\num{5.487198986e+15}$ & Simpson \\
-%        \hline
-%
-%        \multirow{6}{*}{\makecell{ $M_3 = 1.53M_\odot$ \\ $R_3 = 8.56 \unit{\kilo\meter}$ }} & \multirow{2}{*}{$12.8$} & $\num{5.357438539e+15}$ & Trapezi \\
-%         & & $\num{5.357438544e+15}$ & Simpson \\ 
-%         & \multirow{2}{*}{$68.5$} & $\num{4.384963175e+15}$ & Trapezi \\
-%         & & $\num{4.384963185e+15}$ & Simpson \\
-%         & \multirow{2}{*}{$\infty$} & $\num{4.226926032e+15}$ & Trapezi \\
-%         & & $\num{4.226926043e+15}$ & Simpson \\
-%
-%        \bottomrule
-%    \end{tabular}
-%    \caption{Risultati integrazione numerica}
-%    \label{tab:integrals}
-%\end{table}
-
-
-%% Snippets cos I'm too lazy to set the Lsp the right way
-
-
-%\begin{figure}[h]
-%    \begin{minipage}{0.48\textwidth}
-%        \centering
-%        \includegraphics[width = \textwidth]{Figures/Figure_rho0.91.png}
-%        \caption{Coordinate x e y delle particelle.
-%        Sullla stessa fiura sono state plottate le posizioni delle particelle per ogni instante temporale successivo a \texttt{nsteps/2} e per ogni valore di $z$.
-%        A $\rho = 0.91$ le particelle sono disposte in modo disordinato. \\}
-%        \label{fig:rho0.91}
-%    \end{minipage}
-%    \hspace{0.015\textwidth}    
-%    \begin{minipage}{0.48\textwidth}
-%        \centering
-%        \includegraphics[width = \linewidth]{Figures/Figure_rho0.97.png}
-%        \caption{Coordinate x e y delle particelle.
-%        Sullla stessa fiura sono state plottate le posizioni delle particelle per ogni instante temporale successivo a \texttt{nsteps/2} e per ogni valore di $z$.
-%        A $\rho = 0.97$ la struttura \texttt{BCC} è ben visibile e per ogni posizione si vede quanto può oscillare una particelle.}
-%        \label{fig:rho0.97}
-%    \end{minipage}
-%\end{figure}
-
-
-%\begin{table}[h!]
-%    \centering
-%    \begin{tabular}{c|c|c|c}
-%          & SC & BCC & FCC \\
-%         \hline
-%         $N$ & $n^3$ & $2 n^3$ & $4 n^3$ \\
-%         \hline
-%         $a$ & $\rho^{-1/3}$ & $\left( \frac{\rho}{2} \right)^{-1/3}$ & $\left( \frac{\rho}{4} \right)^{-1/3}$ \\
-%    \end{tabular}
-%    \caption{Dipendenza di $N$ e $a$ da $n$ e $\rho$}
-%    \label{tab:my_label}
-%\end{table}
