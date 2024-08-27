@@ -14,7 +14,7 @@
 \def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
 \def\bs{\mkern-12mu} % and set amount of backspacing for lower limit of integration
 
-%\input{frontespizio.tex}
+\input{frontespizio.tex}
 
 
 \begin{document}
@@ -23,10 +23,10 @@
 \newpage
 
 \section{Introduzione}
-Studiamo la stabilità delle stelle di neutroni in regime relativistico
+Studiamo la stabilità delle stelle di neutroni in regime relativistico,
 considerando 3 possibili equazioni di stato per la materia.
 Una volta risolte le equazioni è possibile ottenere l'espressione del potenziale
-gravitazione della stella e calcolare l'effetto sulla radiazione emessa dalla
+gravitazionale della stella e calcolare l'effetto sulla radiazione emessa dalla
 stessa.
 
 
@@ -82,7 +82,7 @@ $\rho = \mu n$ è la densità di massa.
 
 Visto che la densità di energia è in funzione di $n$ e le incognite del
 sistema \ref{eq:sistema_corr} sono $P$ e $m$ dobbiamo scrivere la densità di
-energia in funzione di queste ultime partendo dalla relazione termodinamica
+energia in funzione di queste ultime, partendo dalla relazione termodinamica
 
 \begin{subequations}
     \label{eq:eps(r)}
@@ -163,6 +163,13 @@ adimensionali sono i seguenti
     \label{eq:val_cost}
 \end{equation}
 
+scelti in modo da soddisfare
+
+\begin{equation}
+    1 = G \frac{M_0}{R_0 c^2} = 4 \pi \frac{R_0^3 P_0}{M_0 c^2}
+    = \frac{P_0}{\epsilon_0}
+\end{equation}
+
 Per il potenziale gravitazionale $\Phi$ si può inoltre trovare una soluzione
 analitica all'esterno della stella che possiamo mettere in forma adimensionale
 (eq. \ref{eq:Phi_ext}), dove $\hat{M}$ e $\hat R$ sono rispettivamente la massa
@@ -177,7 +184,7 @@ totale e il raggio della stella in forma adimensionale.
 
 
 \section{Curva massa raggio}
-Cominciamo con il risolvere le prime due equazioni \ref{eq:P_ad} e \ref{eq:m_ad}
+Cominciamo risolvendo le prime due equazioni \ref{eq:P_ad} e \ref{eq:m_ad}
 del sistema adimensionale con il metodo \texttt{RK4} (appendice \ref{ap:RK4}).
 Per il caso con equzione di stato più complessa (eq. \ref{eq:e1_ad}) viene
 risolta numericamente l'equazione $\hat P(\hat n)$ a fianco per trovare $\hat n$
@@ -211,7 +218,7 @@ riportati nella tabella \ref{tab:Mgrosso}.
 \begin{table}[h!]
     \centering
     \begin{tabular}{c|c|c|c}
-        & $P_0~[\Punit]$ & $R~[\unit{\kilo\meter}]$ & $M~[M_\odot]$ \\
+        & $P_0~\left[\Punit\right]$ & $R~[\unit{\kilo\meter}]$ & $M~[M_\odot]$ \\
          \hline
          $\epsilon_1$ & 885.2114 & 11.04289 & 2.456841 \\
          \hline
@@ -225,13 +232,13 @@ riportati nella tabella \ref{tab:Mgrosso}.
 \end{table}
 
 Ci riferiremo alla stella più massiva ottenuta con la politropica 1 (politropica
-realistica) come \textit{stella 1} che ha mass $M_1$ raggio $R_1$, alla stella
-con la politropica 2 \textit{ stella 2} e così via.
+realistica) come \textit{stella 1} che ha massa $M_1$ raggio $R_1$, alla stella
+con la politropica 2 \textit{stella 2} e così via.
 
 
 \section{Potenziale gravitazionale}
 
-Come mostrato nel sistema \ref{eq:sistema_corr}, l'equzione che determina il
+Come mostrato nel sistema \ref{eq:sistema_corr}, l'equazione che determina il
 potenziale gravitazionale è disaccoppiata dalle altre due e, per $r \geq R$,
 può anche essere risolta analiticamente.
 Utilizzando le equazioni \ref{eq:Phi_ad} e \ref{eq:Phi_ext} possiamo trovare
@@ -248,7 +255,7 @@ eq. \ref{eq:Phi_int1}.
     \label{eq:Phi_int1}
 \end{equation}
 
-dove siamo stati attenti a rendere $\Phi (r)$ continuo per ogni $r \geq 0$
+Dove siamo stati attenti a rendere $\Phi (r)$ continuo per ogni $r \geq 0$
 usando il valore di $\Phi_\text{ext}$ in $\hat R$. Infine sostituendo alla
 derivata della pressione l'espressione in \ref{eq:P_ad} otteniamo
 
@@ -272,7 +279,7 @@ Il grafico del potenziale gravitazionale ottenuto è mostrato in figura
     \caption{Grafico del potenziale gravitazionale all'interno e all'esterno
     della stella.
     Per $r < R$ è stato ottenuto integrando con il metodo dei trapezi l'eq.
-    \ref{eq:Phi_int2}, per $r \geq R$ è stata plottata l'eq. \ref{eq:Phi_ext}}
+    \ref{eq:Phi_int2}, per $r \geq R$ è stata plottata l'eq. \ref{eq:Phi_ext}.}
     \label{fig:Phi}
 \end{figure}
 
@@ -308,23 +315,28 @@ nero
 \end{equation}
 
 dove $T$ è la temperatura della stella e $h$ la costante di Plank.
-Per fare i conti considerando solo il caso con $K_B T = 1
-\unit{\mega\electronvolt}$ e mettiamo l'equzione \ref{eq:rad} in funzione di
-variabili adimensionali. Otteniamo
+Immaginando di considerare temperature cha vanno fino a $k_B T = 1
+\unit{\mega\electronvolt}$, definiamo le seguenti variabili adimensionali:
 
-\begin{equation}
-    \hat B(\hat \nu) = \frac{\hat \nu ^3 }{e^{\hat \nu} - 1}
-    \label{eq:B_ad}
-\end{equation}
-dove abbiamo definito
+\begin{subequations}
 \begin{align}
     \nu_0 &= \frac{\nu}{\hat \nu} = \frac{1\unit{\mega\electronvolt}}{h} \simeq
-    \num{2.417989e20} \unit{\hertz} \label{eq:B0def}\\
+    \num{2.417989e20} \unit{\hertz} \label{eq:nu0def} \\
     B_0 &= \frac{B}{\hat B} = \frac{2 h \nu_0^3}{c^2}
     = \frac{2 \unit{\mega\electronvolt}}{(h c)^2} \simeq \num{1.301059e-6}
-    \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}}
-    \label{eq:nu0def}
+    \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}} \\
+    T_0 &= \frac{T}{\hat T} = \frac{\unit{\mega\electronvolt}}{k_B} \, .
 \end{align}
+\label{eq:B0def}
+\end{subequations}
+
+L'equazione \ref{eq:rad} in forma adimensionale è
+
+\begin{equation}
+    \hat B(\hat \nu) = \frac{\hat \nu ^3}{e^{\hat \nu / \hat T} - 1}
+    \label{eq:B_ad}
+\end{equation}
+
 
 Infine, se consideriamo l'effetto doppler dovuto al potenziale gravitazionale
 descritto in eq. \ref{eq:redshift} e utilizziamo la formula analitica per il
@@ -334,18 +346,16 @@ otteniamo
 \begin{equation}
     \hat \nu_\text{em} = \hat \nu_\text{ric}
     \left(\frac{1 - \frac{2 \hat M}{r}}{1 - \frac{2 \hat M}{\hat R}}\right)^{1/2}
-    \quad
     \implies
-    \quad
     \hat B(\hat \nu_\text{ric}, \hat r) =
     \frac{\hat \nu_\text{ric}^3 \left(1 - \frac{2 \hat M}{\hat r}\right)^{3/2}
     \left(1 - \frac{2 \hat M}{\hat R}\right)^{-3/2} }
     {\exp( \hat \nu_\text{ric} \left(1 - \frac{2 \hat M}{\hat r} \right)^{1/2}
-    \left(1 - \frac{2 \hat M}{\hat R}\right)^{-1/2} ) - 1}
+    \left(1 - \frac{2 \hat M}{\hat R}\right)^{-1/2} \hat T^{-1}) - 1}
     \label{eq:B_corr}
 \end{equation}
 
-Nel figure \ref{fig:rad1}, \ref{fig:rad2} e \ref{fig:rad3} viene studiato lo
+Nelle figure \ref{fig:rad1}, \ref{fig:rad2} e \ref{fig:rad3} viene studiato lo
 spettro della radiazione emessa per le 3 stelle massive di cui abbiamo studiato
 il potenziale in \ref{fig:Phi} a distanze diverse dalla stella.
 In blu è plottata l'eq. \ref{eq:rad}, ovvero la radianza senza correzioni
@@ -390,6 +400,8 @@ trascurabile.
     \label{fig:rad3}
 \end{figure}
 
+\newpage
+
 
 \section{Potenza emessa}
 La potenza totale emessa dalla stella per un elemento della sua superficie, si
@@ -414,7 +426,7 @@ fatta su $\nu_\text{ric}$, ovvero le frequenze misurate a distanza r, abbiamo
 messo un upperbound finito all'integrale e, per semplificare i calcoli per il
 prossimo punto, abbiamo lasciato la dipendenza da $\nu_\text{em}$ in $B$.
 
-Passiamo quindi alle unità adimensionali, riportate in eq. \ref{eq:PT_ad}, e
+Passiamo quindi alle unità adimensionali, riportate in eq. \ref{eq:B0def} e \ref{eq:PT_ad}, e
 facciamo un cambio di variabile all'interno dell'integrale utilizzando la
 formula del redshift $\nu_\text{ric} = \nu_\text{em} e^{\Phi(R) - \Phi(r)}$:
 
@@ -447,7 +459,7 @@ Dove sono state usate le definizioni di $B(\hat \nu, \hat T)$ (eq.
 Nel passaggio \ref{eq:passaggio1} si è utilizzato il fatto che nell'integrale
 $A \to \infty$ e che $e^{\Phi(R) - \Phi(r)} < 1$, ignorare il termine migliora
 quindi la nostra approssimazione. \\
-Infine del passaggio \ref{eq:passaggio2} abbiamo fatto un cambio di variabile
+Infine nel passaggio \ref{eq:passaggio2} abbiamo fatto un cambio di variabile
 $\nu / \hat T \rightarrow \nu$ per eliminare la dipendenza dalla temperatura
 nell'intergrale.
 
@@ -455,8 +467,6 @@ nell'intergrale.
     \mathcal P_0 = \frac{\mathcal P}{\hat {\mathcal P}}
     = \pi B_0 \nu_0 \simeq \num{9.883290e+14} \,
     \frac{\unit{\mega\electronvolt}}{\unit{\second\femto\meter\squared}} \, ,
-    \quad \quad
-    T_0 = T / \hat T = \frac{\unit{\mega\electronvolt}}{k_B} \, .
     \label{eq:PT_ad}
 \end{equation}
 
@@ -484,7 +494,8 @@ corrisponde a
 \begin{equation}
     \frac{A \, T_0}{\nu_0} = 20
     \quad \iff \quad
-    A = 20 \, \frac{\nu_0}{T_0} \simeq \num{4.835978e21} \, \unit{\per\mega\electronvolt\per\second}
+    A = 20 \, \frac{\nu_0}{T_0} \simeq \num{4.835978e21} \,
+    \unit{\per\mega\electronvolt\per\second} \, .
     \label{eq:A}
 \end{equation}
 
@@ -502,6 +513,7 @@ trapezi.
 Dal codice (Appendice \ref{ap:integrali}) che genera i dati mostrati in figura
 \ref{fig:Pot_cvgN} otteniamo un errore relativo minore di $\num{1e-7}$ per
 \texttt{N\_trap = 196} e \texttt{N\_simp = 262}.
+
 \begin{figure}[h]
     \begin{minipage}{0.49 \textwidth}
         \centering
@@ -517,7 +529,7 @@ Dal codice (Appendice \ref{ap:integrali}) che genera i dati mostrati in figura
         \includegraphics[width = \textwidth]{Figures/Pot_cvgA.eps}
         \caption{Errore relativo sul calcolo di $\mathcal I (1)$ per diversi
         valori di $\hat \nu_\text{max}$.
-        Poco dopo la stima iniziale di  $\hat \nu_\text{max} = \num{20}$ (line
+        Poco dopo la stima iniziale di  $\hat \nu_\text{max} = \num{20}$ (linea
         verticale rossa) l'errore si stabilizza.
         L'errore non diminuisce come prima perché c'è una sorta di offset dato
         dall'aver fissato il rapporto \texttt{N / nu\_max}.}
@@ -550,20 +562,21 @@ calcolare $A$ rispetto a quest'ultimo
 
 \begin{equation}
     A = 29.2526072 \, \nu_0 \, \unit{\per\mega\electronvolt} \simeq
-    \num{7.073248e21} \, \unit{\per\mega\electronvolt\per\second}
+    \num{7.073248e21} \, \unit{\per\mega\electronvolt\per\second} \, .
     \label{eq:A_giusto}
 \end{equation}
 
-Con questi parametri otteniamo che $\mathcal I$ vale:
+Con questi parametri otteniamo
 
 \begin{equation}
-    \mathcal I = 6.4939388
+    \mathcal I = 6.4939388 \, .
     \label{eq:val_I}
 \end{equation}
 
 L'integrale calcolato con Simpson ha lo stesso valore visto l'errore di
 $\num{1e-7}$ scelto.
 
+\newpage
 
 \subsection{Potenza totale in funzione della distanza}
 
@@ -577,7 +590,7 @@ $\mathcal{\hat P}$ così
     \label{eq:Pot_I}
 \end{equation}
 
-Riportiamo quindi in figura \ref{fig:Pot} il l'andamento di
+Riportiamo quindi in figura \ref{fig:Pot} l'andamento di
 $\mathcal P (r, \hat T = 1)$ per le stelle più massive descritte in
 \ref{tab:Mgrosso}.
 
@@ -585,9 +598,9 @@ $\mathcal P (r, \hat T = 1)$ per le stelle più massive descritte in
     \centering
     \includegraphics[width = \textwidth]{Figures/Pot.eps}
     \caption{Potenza in funzione della distanza per le 3 stelle:
-    $(R_1 = 59.0 \unit{\kilo\meter},~M_1 = 14.3 M_\odot)$,
-    $(R_2 = 10.9 \unit{\kilo\meter},~M_2 = 0.926 M_\odot)$ e
-    $(R_3 = 8.56 \unit{\kilo\meter},~M_3 = 1.53 M_\odot)$.
+    $(R_1 = 11.0 \unit{\kilo\meter},~M_1 = 2.46 M_\odot)$,
+    $(R_2 = 10.9 \unit{\kilo\meter},~M_2 = 0.99 M_\odot)$ e
+    $(R_3 = 8.53 \unit{\kilo\meter},~M_3 = 1.64 M_\odot)$.
     La linea continua verticale rappresenta il raggio della stella, la linea
     tratteggiata orizzontate il valore di $\mathcal{P}$ a $r = \infty$.
     Si noti che la potenza totale emessa è estremamente alta, infatti
@@ -621,27 +634,27 @@ calcolando $\mathcal I$).
 \newpage
 
 
-\section{Temperatura Percepita}
+\section{Temperatura percepita}
 \label{sec:temp_perc}
 
 Una volta ottenuta la potenza totale irradiata da una stella è possibile
 calcolare la sua temperatura, grazie alla relazione
 
 \begin{equation}
-    k_B T_{eff} = \left( \mathcal P (T) \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4}
+    k_B T_{\rm eff} = \left( \mathcal P (T) \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4}
     \label{eq:Teff}
 \end{equation}
 
-Dove $T_{eff}$ è la temperatura percepita a una certa distanza dalla stella e
+Dove $T_{\rm eff}$ è la temperatura percepita a una certa distanza dalla stella e
 $T$ la temperatura reale, che si misurerebbe a $r = R$.
 
 Mettendo le variabili adimensionali, sostituendo a $\mathcal{\hat P}$
 l'espressione in \ref{eq:Pot_I} e ricordando le espressioni di
-$\mathcal{\hat P}_0$ (eq. \ref{eq:PT_ad}), $B_0$ (eq. \ref{eq:B0def}) $\nu_0$
-(eq. \ref{eq:nu0def}) e che $T_0 = \unit{\mega\electronvolt}$, otteniamo
+$\mathcal{\hat P}_0$ (eq. \ref{eq:PT_ad}), $B_0$, $\nu_0$ e $T_0$ (eq.
+\ref{eq:B0def}) otteniamo
 
 \begin{align}
-    T_0 \hat T_{eff}
+    T_0 \hat T_{\rm eff}
     &= \left( \mathcal P_0 \frac{15 c^2 h^3}{2 \pi^5} \right)^{1/4}
     \mathcal{\hat P}^{1/4}
     = \frac{15^{1/4}}{\pi} \unit{\mega\electronvolt}
@@ -649,20 +662,20 @@ $\mathcal{\hat P}_0$ (eq. \ref{eq:PT_ad}), $B_0$ (eq. \ref{eq:B0def}) $\nu_0$
     \left(1 - \frac{2 \hat M}{\hat r}\right)^{-1/8}
     (\hat T^4 ~ \mathcal I)^{1/4} \\
     %
-    \hat T_{eff}(\hat r, \hat T)
+    \hat T_{\rm eff}(\hat r, \hat T)
     &= \frac{15^{1/4}}{\pi} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8}
     \left(1 - \frac{2 \hat M}{\hat r}\right)^{-1/8} \mathcal I^{1/4} ~ \hat T \\
     \label{eq:Teff_ad}
 \end{align}
 
 Possiamo quindi studiare l'equzione \ref{eq:Teff_ad} per le 3 stelle studiate in
-precedenza, questa volta però fissiamo $r = \infty$ e studiamo la $T_{eff}$ in
-funzione di $T$, la temperatura propria della stella.
+precedenza, questa volta però fissiamo $r = \infty$ e studiamo la $T_{\rm eff}$
+in funzione di $T$, la temperatura propria della stella.
 Facendo il limite
 
 \begin{equation}
-    \hat T_{eff}(\hat r, \hat T) = \frac{15^{1/4}}{\pi}
-    \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \mathcal I^{1/4} ~ \hat T
+    \hat T_{\rm eff}(\hat r, \hat T) = \frac{15^{1/4}}{\pi}
+    \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \mathcal I^{1/4} ~ \hat T \, .
     \label{eq:Teff_inf}
 \end{equation}
 
@@ -679,7 +692,7 @@ nell'appendice \ref{ap:Teff}.
     \label{fig:Teff}
 \end{figure}
 
-Come ci aspettavamo la temperatura percepita all'infinito è sempre minore d
+Come ci aspettavamo la temperatura percepita all'infinito è sempre minore di
 quella propria della stella.
 Il grafico mostra anche un'incidenza diversa del redshift per le 3 stelle.
 In accordo con quello osservato in figura \ref{fig:Phi} e \ref{fig:Pot} i fotoni
@@ -690,7 +703,7 @@ $M_3 = 1.64 M_\odot$ e $M_2 = 0.995 M_\odot$.
 
 \section{Temperatura efficace in funzione della pressione centrale}
 
-Si presentano infine i grafici della temperatura efficacie in funzione della
+Si presentano infine i grafici della temperatura efficace in funzione della
 pressione centrale della stella.
 Per farlo possiamo usare sempre l'equazione \ref{eq:Teff_inf} e utilizzare i
 dati del grafico MR in figura \ref{fig:MR}.
@@ -699,7 +712,7 @@ Viene inoltre mostrato il caso per la temperatura della stella $\hat T = 1$ a
 sinistra e quello per $\hat T = 0.01$ a destra.
 Come ci si poteva aspettare una pressione centrale maggiore porta a una stella
 più massiva, il cui redshift gravitazionale è più forte e quindi la temperatura
-efficacie più bassa.
+efficace più bassa.
 
 
 \begin{figure}[h]
@@ -814,12 +827,12 @@ Per la politropica \ref{eq:energia1}, la relazione tra $\rho$ e $P$ che si trova
 è data in \ref{eq:eps(r)1}, che riportiamo
 
 \begin{equation}
-        P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha}
-        + (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} \ .
+        P = \alpha a n_0 \left( \frac{n}{n_0} \right)^{\alpha + 1}
+        + \beta b n_0 \left( \frac{n}{n_0} \right)^{\beta + 1} \ .
         \label{ap:eq:1}
 \end{equation}
 
-Data una certa pressione $P$ bisopgna quindi risolvere numericamente l'equazione
+Data una certa pressione $P$ bisogna quindi risolvere numericamente l'equazione
 per trovare il valore $n$ che la soddisfa.
 Per fare ciò utiliziamo la funzione \texttt{findRho()} così definita
 
@@ -896,18 +909,18 @@ for (int tipo_politropica = 1; tipo_politropica < 4; tipo_politropica++){
 }
 \end{lstlisting}
 
-L'integrale (calcolato esplicitamente nella righe 17-18) può essere valutato
+L'integrale (calcolato esplicitamente nelle righe 17-18) può essere valutato
 solo nei punti $r$ che sono stati utilizzati durante la risoluzione delle
 equazioni di stabilità della stella.
 
 Per ottimizzare il codice, invece che calcolare l'intero integrale per ogni
 punto $r$ del grafico di $\Phi(r)$, partiamo da $r = R$ (ovvero quando
 l'integrale è nullo) e aggiungiamo il valore di 1 trapezio per volta alla
-variabile \texttt{integral}. In contemporanea, durante una iterazione del ciclo
+variabile \texttt{integral}. In contemporanea, durante un'iterazione del ciclo
 \texttt{for} possiamo utilizzare il valore (parziale) di \texttt{integral} per
 calcolare $\Phi_\text{int}$ in $r$.
 
-Infine dalla riga 30 calcoliamo $\Phi_\text{ext}$ utilizzando la funzione
+Infine, dalla riga 30 calcoliamo $\Phi_\text{ext}$ utilizzando la funzione
 analitica.
 
 
@@ -1078,19 +1091,16 @@ Per trapezi N = 264, nu\_max = 29.2526072 sono sufficienti \\
 Per Simpson N = 312, nu\_max = 24.0661923 sono sufficienti \\
 }
 
-Dalla riga 50 viene utilizzato un codice molto simile a quello sopra controllare
-la convergenza per diversi valori di \texttt{nu\_max}.
+Dalla riga 50 viene utilizzato un codice molto simile a quello sopra per
+controllare la convergenza per diversi valori di \texttt{nu\_max}.
 L'unica differenza sta nel fatto che ci assicuriamo che la densità di trapezi
 \texttt{N / nu\_max} rimanga costante al variare di \texttt{nu\_max}.
 
 
-\section{Calcolo Temperatura efficace} \label{ap:Teff}
+\section{Calcolo temperatura efficace} \label{ap:Teff}
 
 Per calcolare la temperatura efficace si riutilizzano molte delle funzioni
 scritte per l'appendice \ref{ap:integrali}.
-Per fare gli integrali possiamo affidarci ai parametri \texttt{N\_trap} e
-\texttt{nu\_max} trovati in \ref{ap:integrali} poiché sono stati studiati
-apposta per valere nel intervallo di temperature che va da 0.1 a 1.
 
 Vista l'equivalenza dei due metodi di integrazione in quanto a precisione, ma
 non in quanto a costo computazionale, per questo calcolo utilizziamo solamente

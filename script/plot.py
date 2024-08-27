@@ -359,7 +359,7 @@ def plt_Teff(save=['yes','no']):
         T = data[:,0]
         Teff = data[:,1]
 
-        plt.plot(T, Teff, color=colors[kk], marker='.', linestyle='', label=r'$T_{eff} (r = \infty, T)$, stella '+i)
+        plt.plot(T, Teff, color=colors[kk], marker='.', linestyle='', label=r'$T_{\rm eff} (r = \infty, T)$, stella '+i)
         kk += 1
     plt.plot(T, T, color = 'black', linestyle='--', label='T = T')
 
@@ -385,7 +385,7 @@ def plt_Teff_su_Pressione(T0, save=['yes','no']):
 
         plt.plot(P, Teff, marker='.', linestyle='', label = lab+str(kk)+r'$')
 
-    plt.title('Temperatura efficacie - pressione centrale\n'
+    plt.title('Temperatura efficace - pressione centrale\n'
               rf'stelle con $k_b T^* = {T0:.2f}$MeV')
     plt.xlabel(r'Pressione $\left[ \frac{\text{MeV}}{\text{fm}^3} \right]$')
     plt.ylabel(r'Temperatura $\left[ \text{MeV} \right]$')
@@ -435,12 +435,12 @@ def plt_Teff_su_Pressione(T0, save=['yes','no']):
 #plt_Pot('yes')
 
 ''' Temperatura efficace '''
-#plt_Teff('yes')
+plt_Teff('yes')
 
 
 ################################### punto7.c ###################################
 ''' Temperatura efficace rispetto a Pressione centrale delle stelle '''
-#plt_Teff_su_Pressione(1, 'yes')
-#plt_Teff_su_Pressione(0.01, 'yes')
+plt_Teff_su_Pressione(1, 'yes')
+plt_Teff_su_Pressione(0.01, 'yes')
 
 
