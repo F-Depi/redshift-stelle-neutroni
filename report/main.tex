@@ -27,7 +27,7 @@ Studiamo la stabilità delle stelle di neutroni in regime relativistico
 considerando 3 possibili equazioni di stato per la materia.
 Una volta risolte le equazioni è possibile ottenere l'espressione del potenziale
 gravitazione della stella e calcolare l'effetto sulla radiazione emessa dalla
-stella.
+stessa.
 
 
 Viene calcolata la radianza per ogni stella a 3 distanze diverse e la potenza
@@ -56,8 +56,11 @@ Le equazioni che descrivono la stabilità di una stella in funzione della massa
 \label{eq:sistema_corr}
 \end{subequations}
 
-Dove la terza equazione è l'equazione disaccoppiata e descrive il potenziale gravitazionale della stella.
-Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:energia23} viene presa con due coppie di valori diversi di $\Gamma$ e $K$):
+Dove la terza equazione è disaccoppiata e descrive il potenziale gravitazionale
+della stella.
+Usiamo 3 diverse densità di energia per la materia della stella (eq.
+\ref{eq:energia23} viene presa con due coppie di valori diversi di $\Gamma$ e
+$K$):
 \begin{subequations}
 \begin{align}
     \epsilon_1 (n) &= \mu c^2 n
@@ -77,9 +80,9 @@ Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:en
 dove $n$ è la densità numerica, $\mu$ la massa del neutrone e quindi
 $\rho = \mu n$ è la densità di massa.
 
-Visto che la densità di energia è in funzione di $\rho$ e le incognite del
-sistema \ref{eq:sistema_corr} sono $P$ e $m$ possiamo scrivere la densità di
-energia in funzione di $P$ e $m$ partendo dalla relazione termodinamica
+Visto che la densità di energia è in funzione di $n$ e le incognite del
+sistema \ref{eq:sistema_corr} sono $P$ e $m$ dobbiamo scrivere la densità di
+energia in funzione di queste ultime partendo dalla relazione termodinamica
 
 \begin{subequations}
     \label{eq:eps(r)}
@@ -93,8 +96,7 @@ energia in funzione di $P$ e $m$ partendo dalla relazione termodinamica
 \end{subequations}
 
 Nel primo caso (eq. \ref{eq:eps(r)1}) non è stato possibile invertire
-l'equazione per trovare $n$ in funzione di $P$ e $m$ quindi utilizzeremo un
-metodo numerico per trovare $n$ di volta in volta.
+l'equazione per trovare $n$ in funzione di $P$.
 
 Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con
 valori più vicini a 0.
@@ -121,7 +123,7 @@ valori più vicini a 0.
     \label{eq:sistema_adim}
 \end{subequations}
 
-Otteniamo il sistema \ref{eq:sistema_adim}, dove le densità di energia sono
+Otteniamo il sistema \ref{eq:sistema_adim}, dove le densità di energia diventano
 
 \begin{subequations}
 \begin{align}
@@ -152,7 +154,7 @@ Per le politropiche $\epsilon_2$ e $\epsilon_3$ si utilizzano i seguenti valori
     \end{tabular}
 \end{table}
 
-Infine, i valori delle costati utilizzate per definire le variabili
+Infine, i valori delle costanti utilizzate per definire le variabili
 adimensionali sono i seguenti
 
 \begin{equation}
@@ -178,8 +180,8 @@ totale e il raggio della stella in forma adimensionale.
 Cominciamo con il risolvere le prime due equazioni \ref{eq:P_ad} e \ref{eq:m_ad}
 del sistema adimensionale con il metodo \texttt{RK4} (appendice \ref{ap:RK4}).
 Per il caso con equzione di stato più complessa (eq. \ref{eq:e1_ad}) viene
-risolta numericamente l'equazione $\hat P(\hat n)$ a fianco per trovare $\rho$
-da un $P$ fissato (Appendice \ref{ap:eps(r)1}).
+risolta numericamente l'equazione $\hat P(\hat n)$ a fianco per trovare $\hat n$
+da un $\hat P$ fissato (Appendice \ref{ap:eps(r)1}).
 
 Segliamo massa iniziale 0 e pressioni iniziali differenti in modo da trovare
 soluzioni con $R$ compreso tra i 3 e i 40 \unit{\kilo\meter}.
@@ -196,8 +198,8 @@ Il grafico massa raggio trovato viene riportato in figura \ref{fig:MR}.
 \end{figure}
 
 Durante l'esecuzione del programma abbiamo inoltre smesso di incrementare la
-pressione centrale iniziale quando la condizione di stabilità $\dv[]{M}{r} > 0$
-veniva meno.
+pressione centrale iniziale $P_c$ quando la condizione di stabilità
+$\dv{M}{P_c} > 0$ veniva meno.
 
 Notiamo subito che con l'equazione di stato \ref{eq:energia1} il modello prevede
 stelle con massa e raggio maggiore rispetto al limite previsto dagli altri
@@ -226,6 +228,7 @@ Ci riferiremo alla stella più massiva ottenuta con la politropica 1 (politropic
 realistica) come \textit{stella 1} che ha mass $M_1$ raggio $R_1$, alla stella
 con la politropica 2 \textit{ stella 2} e così via.
 
+
 \section{Potenziale gravitazionale}
 
 Come mostrato nel sistema \ref{eq:sistema_corr}, l'equzione che determina il
@@ -237,9 +240,11 @@ eq. \ref{eq:Phi_int1}.
 
 \begin{equation}
     \Phi_\text{int} (\hat r) =
-    \Phi_\text{ext} (\hat R) - \int_{\hat r}^{\hat R} \dv[]{\Phi}{x} \;\mathrm{d}x =
+    \Phi_\text{ext} (\hat R) - \int_{\hat r}^{\hat R} \dv[]{\Phi}{x}
+    \;\mathrm{d}x =
     \frac{1}{2} \log(1 - \frac{2 \hat M}{\hat R})
-    + \int_{\hat r}^{\hat R} \frac{1}{\hat P (x) + \hat \epsilon (x)} \dv[]{\hat P (x)}{x} \;\mathrm{d}x
+    + \int_{\hat r}^{\hat R} \frac{1}{\hat P (x) + \hat \epsilon (x)}
+    \dv[]{\hat P (x)}{x} \;\mathrm{d}x
     \label{eq:Phi_int1}
 \end{equation}
 
@@ -256,7 +261,7 @@ derivata della pressione l'espressione in \ref{eq:P_ad} otteniamo
 
 Dati i valori di $\hat P (\hat r)$ e $\hat m (\hat r)$ che si ottengono
 risolvendo le equazioni di stabilità possiamo quindi risolvere l'integrale con
-il metodo dei trapezi per ottenere il valore di $Phi$ a ogni $r$ (Appendice
+il metodo dei trapezi per ottenere il valore di $\Phi$ per ogni $r$ (Appendice
 \ref{ap:Phi}).
 Il grafico del potenziale gravitazionale ottenuto è mostrato in figura
 \ref{fig:Phi}.
@@ -328,7 +333,7 @@ otteniamo
 
 \begin{equation}
     \hat \nu_\text{em} = \hat \nu_\text{ric}
-    \left ( \frac{1 - \frac{2 \hat M}{r}}{1 - \frac{2 \hat M}{\hat R}}\right )^{1/2}
+    \left(\frac{1 - \frac{2 \hat M}{r}}{1 - \frac{2 \hat M}{\hat R}}\right)^{1/2}
     \quad
     \implies
     \quad
@@ -413,6 +418,7 @@ Passiamo quindi alle unità adimensionali, riportate in eq. \ref{eq:PT_ad}, e
 facciamo un cambio di variabile all'interno dell'integrale utilizzando la
 formula del redshift $\nu_\text{ric} = \nu_\text{em} e^{\Phi(R) - \Phi(r)}$:
 
+\begin{subequations}
 \begin{align}
     \hat{\mathcal P}(\hat r)
     &= \int_{\hat \nu_\text{ric} = 0}^{\hat \nu_\text{ric} = \frac{A T_0}{\nu_0}}
@@ -427,22 +433,30 @@ formula del redshift $\nu_\text{ric} = \nu_\text{em} e^{\Phi(R) - \Phi(r)}$:
     &= \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2}
     \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2}
     \int_0^{\frac{A T_0 \hat T}{\nu_0}} \frac{\nu^3}{e^{\nu / \hat T} - 1} \;
-    \mathrm{d} \nu \, .
-    \label{eq:Pot_ad}
+    \mathrm{d} \nu \label{eq:passaggio1} \\
+    &= \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2}
+    \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2} \hat T^4
+    \int_0^{\frac{A T_0}{\nu_0}} \frac{\nu^3}{e^{\nu} - 1} \;
+    \mathrm{d} \nu \, . \label{eq:passaggio2}
 \end{align}
+\label{eq:Pot_ad}
+\end{subequations}
 
 Dove sono state usate le definizioni di $B(\hat \nu, \hat T)$ (eq.
-\ref{eq:B_ad}) e quella di $\Phi (r)$ (eq. \ref{eq:Phi_ext}) e nell'ultimo
-passaggio in \ref{eq:Pot_ad} si è utilizzato il fatto che nell'integrale
+\ref{eq:B_ad}) e quella di $\Phi (r)$ (eq. \ref{eq:Phi_ext}). \\
+Nel passaggio \ref{eq:passaggio1} si è utilizzato il fatto che nell'integrale
 $A \to \infty$ e che $e^{\Phi(R) - \Phi(r)} < 1$, ignorare il termine migliora
-quindi la nostra approssimazione.
+quindi la nostra approssimazione. \\
+Infine del passaggio \ref{eq:passaggio2} abbiamo fatto un cambio di variabile
+$\nu / \hat T \rightarrow \nu$ per eliminare la dipendenza dalla temperatura
+nell'intergrale.
 
 \begin{equation}
     \mathcal P_0 = \frac{\mathcal P}{\hat {\mathcal P}}
     = \pi B_0 \nu_0 \simeq \num{9.883290e+14} \,
     \frac{\unit{\mega\electronvolt}}{\unit{\second\femto\meter\squared}} \, ,
     \quad \quad
-    T_0 = T / \hat T = 1 \unit{\mega\electronvolt} \, .
+    T_0 = T / \hat T = \frac{\unit{\mega\electronvolt}}{k_B} \, .
     \label{eq:PT_ad}
 \end{equation}
 
@@ -451,22 +465,21 @@ quindi la nostra approssimazione.
 Dal momento che numericamente non è possibile integrare sulle frequenze fino a
 $\nu = + \infty$, nei passaggi in eq. \ref{eq:Pot} e poi in eq. \ref{eq:Pot_ad}
 abbiamo utilizzato un parametro $A$ che deve essere sufficientemente grande da
-poter approssimare in modo ragionevole l'integrale, per i valori di $\hat T$
-utili.
+poter approssimare in modo ragionevole l'integrale.
 Riportiamo in eq. \ref{eq:integrale} l'integrale da calcolare.
 
 \begin{equation}
-    \mathcal{I} (\hat T) = \int_0^{\frac{A T_0 \hat T}{\nu_0}} \frac{\nu^3}{e^{\nu / \hat T} - 1} \; \mathrm{d} \nu 
-    = \int_0^{\frac{A T_0}{\nu_0}} \frac{\nu^3}{e^{\nu / \hat T} - 1} \; \mathrm{d} \nu \, .
+    \mathcal{I} = \int_0^{\frac{A T_0}{\nu_0}}
+    \frac{\nu^3}{e^{\nu} - 1} \; \mathrm{d} \nu 
     \label{eq:integrale}
 \end{equation}
 
-A priori gli estremi di integrazione dipendono da $\hat T$, dal momento che stiamo studiando la radiazione emessa da stelle di neutroni siamo interessati a studiare un range di temperature più piccolo.
-In particolare non di troppo superiori a $k_B T = 1 \unit{\mega\electronvolt}$, ovvero $\hat T = 1$ che decidiamo essere il nostro upperbound per la temperatura.
-Per temperature inferiori la funzione va a 0 più velocemente e quindi l'approssimazione di $A$ come finito è ancora migliore.
-
-Facendo riferimento alla figura \ref{fig:rad2} dove in blu è plottata la funzione che dobbiamo integrare per $\hat T = 1$, possiamo vedere che per $\nu > \num{3.5e21} \unit{\hertz}$ la radianza è quasi nulla.
-In quell'occasione era stata calcolata $\hat B(\hat \nu)$ con $\hat \nu$ tra $0$ e $15$. Come stima iniziale possiamo quindi integrare fino a $\hat \nu = 20$ che corrisponde a
+Facendo riferimento alla figura \ref{fig:rad2} dove in blu è plottata la
+funzione che dobbiamo integrare possiamo vedere che per
+$\nu > \num{3.5e21} \unit{\hertz}$ la radianza è quasi nulla.
+In quell'occasione era stata calcolata $\hat B(\hat \nu)$ con $\hat \nu$ tra $0$
+e $15$. Come stima iniziale possiamo quindi integrare fino a $\hat \nu = 20$ che
+corrisponde a
 
 \begin{equation}
     \frac{A \, T_0}{\nu_0} = 20
@@ -477,88 +490,132 @@ In quell'occasione era stata calcolata $\hat B(\hat \nu)$ con $\hat \nu$ tra $0$
 
 Possiamo ottenere un valore migliore valutando la convergenza dell'integrale.
 
-Per prima cosa verifichiamo per quale \texttt{N} (numero di step nell'integrazione) il valore di $\mathcal{I}$ converge (il codice si trova in Appendice \ref{ap:integrali}).
-In questo caso la situazione peggiore è quella per temperature molto piccole, scegliamo come lowerbound $\hat T = 0.01$, poiché la curva è molto piccola e stretta.
+Per prima cosa verifichiamo per quale \texttt{N} (numero di step
+nell'integrazione) il valore di $\mathcal{I}$ converge (il codice si trova in
+Appendice \ref{ap:integrali}).
 Otteniamo il grafico in figura \ref{fig:Pot_cvgN}.
-I valori sono degli scarti rispetto a $\mathcal{I}_{N = 1e8}$ (l'integrale calcolato con $N = \num{1e8}$) e sono normalizzati rispetto allo stesso.
-Al contriario di quello che succede di solito, il metodo Simpson (che ha un costo computazionale maggiore), non presenta vantaggi rispetto a quello dei trapezi.
-Dal codice (Appendice \ref{ap:integrali}) che genera i dati mostrati in figura \ref{fig:Pot_cvgN} otteniamo un errore relativo minore di $\num{1e-7}$ per \texttt{N\_trap = 19060} e \texttt{N\_simp = 25368}.
+I valori sono degli scarti rispetto a $\mathcal{I}_{N = 1e8}$ (l'integrale
+calcolato con $N = \num{1e8}$) e sono normalizzati rispetto allo stesso.
+Al contriario di quello che succede di solito, il metodo Simpson (che ha un
+costo computazionale maggiore), non presenta vantaggi rispetto a quello dei
+trapezi.
+Dal codice (Appendice \ref{ap:integrali}) che genera i dati mostrati in figura
+\ref{fig:Pot_cvgN} otteniamo un errore relativo minore di $\num{1e-7}$ per
+\texttt{N\_trap = 196} e \texttt{N\_simp = 262}.
 \begin{figure}[h]
     \begin{minipage}{0.49 \textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/Pot_cvgN.eps}
-        \caption{Errore relativo sul calcolo di $\mathcal I(1)$ per diversi \texttt{N} (numero di step nell'integrazione con i trapezi, \textbf{T}, e con simpson, \textbf{S}).  \\ \\}
+        \caption{Errore relativo sul calcolo di $\mathcal I(1)$ per diversi
+        \texttt{N} (numero di step nell'integrazione con i trapezi, \textbf{T},
+        e con simpson, \textbf{S}).  \\ \\}
         \label{fig:Pot_cvgN}
     \end{minipage}
     \hspace{0.01 \textwidth}
     \begin{minipage}{0.49 \textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/Pot_cvgA.eps}
-        \caption{Errore relativo sul calcolo di $\mathcal I (1)$ per diversi valori di $\hat \nu_\text{max}$.
-        Poco dopo la stima iniziale di  $\hat \nu_\text{max} = \num{20}$ (line verticale rossa) l'errore si stabilizza.
-        L'errore non diminuisce come prima perché c'è una sorta di offset dato dall'aver fissato il rapporto \texttt{N / nu\_max}.}
+        \caption{Errore relativo sul calcolo di $\mathcal I (1)$ per diversi
+        valori di $\hat \nu_\text{max}$.
+        Poco dopo la stima iniziale di  $\hat \nu_\text{max} = \num{20}$ (line
+        verticale rossa) l'errore si stabilizza.
+        L'errore non diminuisce come prima perché c'è una sorta di offset dato
+        dall'aver fissato il rapporto \texttt{N / nu\_max}.}
         \label{fig:Pot_cvgA}
     \end{minipage}
 \end{figure}
 
-Fissati \texttt{N\_trap} e \texttt{N\_simp} per un intervallo $\Delta \hat \nu = 20$ proponiamo quindi in figura \ref{fig:Pot_cvgA} lo stesso tipo di grafico degli scarti fatto però in funzione della scelta di $\nu_\text{max}$, dove abbiamo tenuto costante il valore \texttt{N / nu\_max} apena ottenuto.
-Questa volta si studia il caso in cui $r = R_1$, ovvero quello in cui la curva è più spostata verso destra e serve un upper bound maggiore.
+Fissati \texttt{N\_trap} e \texttt{N\_simp} per un intervallo
+$\Delta \hat \nu = 20$ proponiamo quindi in figura \ref{fig:Pot_cvgA} lo stesso
+tipo di grafico degli scarti fatto però in funzione della scelta di
+$\nu_\text{max}$, dove abbiamo tenuto costante il valore \texttt{N / nu\_max}
+apena ottenuto.
 
-Dallo script per generare i dati mostrati in figura \ref{fig:Pot_cvgA} otteniamo un errore di $\num{1e-7}$ per
+Dallo script per generare i dati mostrati in figura \ref{fig:Pot_cvgA} otteniamo
+un errore di $\num{1e-7}$ per
 
 \begin{table}[h]
     \centering
     \begin{tabular}{ccc}
          & N & $\hat \nu_\text{max}$ \\
         \hline
-        Trapezi & 22936 & 24.0661923 \\
+        Trapezi & 264 & 29.2526072 \\
         \hline
-        Simpson & 30516 & 24.0661923 \\
+        Simpson & 312 & 24.0661923 \\
     \end{tabular}
 \end{table}
 
-Di conseguenza possiamo valutare
+Visto che in questo caso il metodo dei trapezi risulta più efficiente possiamo
+calcolare $A$ rispetto a quest'ultimo
 
 \begin{equation}
-    A = 24.0661923 \, \nu_0 \, \unit{\per\mega\electronvolt} \simeq \num{5.819179e21} \, \unit{\per\mega\electronvolt\per\second}
+    A = 29.2526072 \, \nu_0 \, \unit{\per\mega\electronvolt} \simeq
+    \num{7.073248e21} \, \unit{\per\mega\electronvolt\per\second}
     \label{eq:A_giusto}
 \end{equation}
 
-Con questi parametri otteniamo i valori $\mathcal I_T$, per i trapezi, e $\mathcal I_S$, per Simpson:
+Con questi parametri otteniamo che $\mathcal I$ vale:
 
 \begin{equation}
-    \mathcal I_T (1) = 6.4939388
-    \quad \quad \quad
-    \mathcal I_S (1) = 6.4939388 \, .
+    \mathcal I = 6.4939388
     \label{eq:val_I}
 \end{equation}
 
-Gli integrali hanno lo stesso valore poiché ci siamo assicurati di avere una
-precisione di $\num{1e-7}$ per il caso perggiore a $\hat T = 0.01$, che servirà
-nella sezione \ref{sec:temp_perc}.
+L'integrale calcolato con Simpson ha lo stesso valore visto l'errore di
+$\num{1e-7}$ scelto.
 
 
 \subsection{Potenza totale in funzione della distanza}
 
-Studiato l'integrale che serve per il calcolo della potenza possiamo riscrivere $\mathcal{\hat P}$ così
+Studiato l'integrale che serve per il calcolo della potenza possiamo riscrivere
+$\mathcal{\hat P}$ così
 
 \begin{equation}
-    \mathcal{\hat P} (\hat r, \hat T) = \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2} \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2} \mathcal I (\hat T)
+    \mathcal{\hat P} (\hat r, \hat T)
+    = \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2}
+    \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2} \mathcal I ~ \hat T^4
     \label{eq:Pot_I}
 \end{equation}
 
-Riportiamo quindi in figura \ref{fig:Pot} il l'andamento di $\mathcal P (r, \hat T = 1)$ per le stelle più massive descritte in \ref{tab:Mgrosso}.
+Riportiamo quindi in figura \ref{fig:Pot} il l'andamento di
+$\mathcal P (r, \hat T = 1)$ per le stelle più massive descritte in
+\ref{tab:Mgrosso}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width = \textwidth]{Figures/Pot.eps}
-    \caption{Potenza in funzione della distanza per le 3 stelle: $(R_1 = 59.0 \unit{\kilo\meter},~M_1 = 14.3 M_\odot)$, $(R_2 = 10.9 \unit{\kilo\meter},~M_2 = 0.926 M_\odot)$ e $(R_3 = 8.56 \unit{\kilo\meter},~M_3 = 1.53 M_\odot)$.
-    La linea continua verticale rappresenta il raggio della stella, la linea tratteggiata orizzontate il valore di $\mathcal{P}$ a $r = \infty$.}
+    \caption{Potenza in funzione della distanza per le 3 stelle:
+    $(R_1 = 59.0 \unit{\kilo\meter},~M_1 = 14.3 M_\odot)$,
+    $(R_2 = 10.9 \unit{\kilo\meter},~M_2 = 0.926 M_\odot)$ e
+    $(R_3 = 8.56 \unit{\kilo\meter},~M_3 = 1.53 M_\odot)$.
+    La linea continua verticale rappresenta il raggio della stella, la linea
+    tratteggiata orizzontate il valore di $\mathcal{P}$ a $r = \infty$.
+    Si noti che la potenza totale emessa è estremamente alta, infatti
+    $\num{1e15} \unit{\mega\electronvolt\per\second\per\femto\meter\squared}
+    \sim \num{1e32} \unit{\watt\per\meter\squared}$, ma questo perché abbiamo
+    considerato una temperatura di $k_B T = 1 \unit{\mega\electronvolt}$ che
+    corrisponde a $\sim \num{1e10} \unit{\kelvin}$.}
     \label{fig:Pot}
 \end{figure}
 
-Con linea tratteggiata e linea continua sono rispettivamente rappresentati raggio e valore della potenza all'infinito per ogni stella analizzata.
+Con linea tratteggiata e linea continua sono rispettivamente rappresentati
+raggio e valore della potenza all'infinito per ogni stella analizzata.
 
+Vale infine la pena di notare che se consideriamo l'equzione \ref{eq:Pot_I} e
+trascuriamo le correzioni relativistiche otteniamo la legge di Stefan–Boltzmann.
+Infatti rimettendo le variabili dimensionali
+
+\begin{equation}
+    \mathcal P (T) = P_0 \mathcal I ~ \frac{T}{T_0}^4
+    = \frac{P_0 \mathcal I k_B}{\unit{\mega\electronvolt}} ~ T^4
+    \quad \quad
+    \sigma = \frac{P_0 \mathcal I k_B^4}{(\unit{\mega\electronvolt})^4}
+    = 5.670374 \unit{\joule\per\second\per\meter\squared\per\kelvin\tothe4}
+\end{equation}
+
+e convertendo $P_0$ e $T_0$ in unità del sistema internazionale otteniamo il
+valore tabulato di $\sigma$ per le prime 6 cifre decimali (precisione scelta
+calcolando $\mathcal I$).
 
 
 \newpage
@@ -589,21 +646,24 @@ $\mathcal{\hat P}_0$ (eq. \ref{eq:PT_ad}), $B_0$ (eq. \ref{eq:B0def}) $\nu_0$
     \mathcal{\hat P}^{1/4}
     = \frac{15^{1/4}}{\pi} \unit{\mega\electronvolt}
     \left(1 - \frac{2 \hat M}{\hat R}\right)^{1/8}
-    \left(1 - \frac{2 \hat M}{\hat r}\right)^{-1/8} \mathcal I (\hat T)^{1/4} \\
+    \left(1 - \frac{2 \hat M}{\hat r}\right)^{-1/8}
+    (\hat T^4 ~ \mathcal I)^{1/4} \\
     %
     \hat T_{eff}(\hat r, \hat T)
     &= \frac{15^{1/4}}{\pi} \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8}
-    \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/8} \mathcal{I} (\hat T)^{1/4}
+    \left(1 - \frac{2 \hat M}{\hat r}\right)^{-1/8} \mathcal I^{1/4} ~ \hat T \\
     \label{eq:Teff_ad}
 \end{align}
 
 Possiamo quindi studiare l'equzione \ref{eq:Teff_ad} per le 3 stelle studiate in
 precedenza, questa volta però fissiamo $r = \infty$ e studiamo la $T_{eff}$ in
-funzione di $T$, la temperatura propria della stella, facendo il limite
+funzione di $T$, la temperatura propria della stella.
+Facendo il limite
 
 \begin{equation}
     \hat T_{eff}(\hat r, \hat T) = \frac{15^{1/4}}{\pi}
-    \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \mathcal{I} (\hat T)^{1/4}
+    \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/8} \mathcal I^{1/4} ~ \hat T
+    \label{eq:Teff_inf}
 \end{equation}
 
 Presentiamo il grafico in figura \ref{fig:Teff}, il codice si trova
@@ -632,6 +692,8 @@ $M_3 = 1.64 M_\odot$ e $M_2 = 0.995 M_\odot$.
 
 Si presentano infine i grafici della temperatura efficacie in funzione della
 pressione centrale della stella.
+Per farlo possiamo usare sempre l'equazione \ref{eq:Teff_inf} e utilizzare i
+dati del grafico MR in figura \ref{fig:MR}.
 Vengono mostrati i grafici per tutte e 3 le politropiche.
 Viene inoltre mostrato il caso per la temperatura della stella $\hat T = 1$ a
 sinistra e quello per $\hat T = 0.01$ a destra.
@@ -666,7 +728,9 @@ efficacie più bassa.
 
 
 \section{RK4} \label{ap:RK4}
-Codice con cui è stato implementato il metodo \texttt{RK4}. \texttt{fun\_P()} e \texttt{fun\_m()} sono le funzioni presenti a destra dell'uguale nella prima e nella seconda riga del sistema \ref{eq:sistema_adim}.
+Codice con cui è stato implementato il metodo \texttt{RK4}. \texttt{fun\_P()} e
+\texttt{fun\_m()} sono le funzioni presenti a destra dell'uguale nella prima e
+nella seconda riga del sistema \ref{eq:sistema_adim}.
 
 \begin{lstlisting}[language=C]
 void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica){
@@ -693,7 +757,8 @@ void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica)
 
 \section{Risoluzione numerica di $\hat P (\rho)$} \label{ap:eps(r)1}
 
-Quando si calcola il valore della derivata di $P$ o $m$ ad un dato $r$ serve anche il valore dell'energia interna, infatti
+Quando si calcola il valore della derivata di $P$ o $m$ ad un dato $r$ serve
+anche il valore dell'energia interna, infatti
 \begin{lstlisting}[language=C]
 // f_m = r^2 E
 double fun_m(double r, double P, int tipo_politropica){
@@ -895,18 +960,15 @@ double funB(double nu, double T){
 \end{lstlisting}
 Per controllare la convergenza del valore della potenza usiamo inizialmente
 \texttt{nu\_max} (ovvero $\hat \nu_\text{max}$) uguale a 20.
-Prendiamo il caso in cui l'integrale è più piccolo e difficile da valutare con
-precisione, ovvero per $\hat T = 0.01$.
 Verifichiamo per quale \texttt{N} si ottiene un errore minore di quello voluto
 prima per i trapezi e poi per Simpson.
 I risultati vengono stampati sul terminale.
 
 \begin{lstlisting}[language=C]
-double T = 0.01;
 int N = 10;
 int N_trap, N_simp;
 double Pot, nu_max = 20.;
-double Pot_cvg = integrale_trapezio(1e-12, nu_max, 1e8, T, &funB);
+double Pot_cvg = integrale_trapezio(1e-12, nu_max, 1e8, 1., &funB);
 double errore_max = 1e-7;
 printf("Errore massimo scelto = %.0e\n", errore_max);
 int kk = 0;
@@ -915,7 +977,7 @@ int kk = 0;
 FILE *f0 = fopen("../data/potenza/test_cvg_N_trap.csv", "w");
 fprintf(f0, "I,N,nu_max\n");
 while(N <= 1e6){
-    Pot = integrale_trapezio(1e-12, nu_max, N, T, &funB);
+    Pot = integrale_trapezio(1e-12, nu_max, N, 1., &funB);
     fprintf(f0, "%.13e,%d,%.13e\n", Pot, N, nu_max * nu0);
 
     if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -937,7 +999,7 @@ kk = 0;
 FILE *f1 = fopen("../data/potenza/test_cvg_N_simp.csv", "w");
 fprintf(f1, "Pot,N,nu_max\n");
 while(N <= 1e6){
-    Pot = integrale_simpson(1e-12, nu_max, N, T, &funB);
+    Pot = integrale_simpson(1e-12, nu_max, N, 1., &funB);
     fprintf(f1, "%.13e,%d,%.13e\n", Pot, N, nu_max * nu0);
 
     if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -954,8 +1016,7 @@ fclose(f1);
 
 // Decidiamo che va bene N_trap e N_simp risultati del codice sopra
 // Ora verifichiamo la convergenza di nu_max nel caso peggiore, ovvero
-T = 1;
-Pot_cvg = integrale_trapezio(1e-12, 200, 1e8, T, &funB);
+Pot_cvg = integrale_trapezio(1e-12, 200, 1e8, 1., &funB);
 nu_max = 20.;
 int Nrel_trap = (double)N_trap / nu_max; // Teniamo la stessa densita'
 int Nrel_simp = (double)N_simp / nu_max; // di trapezi: N / nu_max
@@ -970,7 +1031,7 @@ while(nu_max <= 1e2){
     N = Nrel_trap * nu_max;
     if (N % 2 != 0) N += 1;
 
-    Pot = integrale_trapezio(1e-12, nu_max, N, T, &funB);
+    Pot = integrale_trapezio(1e-12, nu_max, N, 1., &funB);
     fprintf(f2, "%.13e,%d,%.13e\n", Pot, N, nu_max);
 
     if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -993,7 +1054,7 @@ while(nu_max <= 1e2){
     N = Nrel_simp * nu_max;
     if (N % 2 != 0) N += 1;
 
-    Pot = integrale_simpson(1e-12, nu_max, N, T, &funB);
+    Pot = integrale_simpson(1e-12, nu_max, N, 1., &funB);
     fprintf(f3, "%.13e,%d,%.13e\n", Pot, N, nu_max);
 
     if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -1011,18 +1072,16 @@ fclose(f3);
 In \texttt{stdout} otteniamo \\ \\
 \texttt{
 Errore massimo scelto = 1e-07 \\
-Per trapezi N = 19060 e' sufficiente \\
-Per Simpson N = 25368 e' sufficiente \\
-Per trapezi N = 22936, nu\_max = 24.0661923 sono sufficienti \\
-Per Simpson N = 30516, nu\_max = 24.0661923 sono sufficienti \\
+Per trapezi N = 196 e' sufficiente \\
+Per Simpson N = 262 e' sufficiente \\
+Per trapezi N = 264, nu\_max = 29.2526072 sono sufficienti \\
+Per Simpson N = 312, nu\_max = 24.0661923 sono sufficienti \\
 }
 
-Dalla riga 51 viene utilizzato un codice molto simile a quello sopra controllare
+Dalla riga 50 viene utilizzato un codice molto simile a quello sopra controllare
 la convergenza per diversi valori di \texttt{nu\_max}.
-L'unica differenza sta nel fatto che questa volta usiamo $\hat T = 1$, che è il
-caso in cui la funzione è più spostata verso destra e ci assicuriamo che
-la densità di trapezi \texttt{N / nu\_max} rimanga costante al variare di
-\texttt{nu\_max}.
+L'unica differenza sta nel fatto che ci assicuriamo che la densità di trapezi
+\texttt{N / nu\_max} rimanga costante al variare di \texttt{nu\_max}.
 
 
 \section{Calcolo Temperatura efficace} \label{ap:Teff}

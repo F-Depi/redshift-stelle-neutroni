@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.2)  5 AUG 2024 11:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.2)  27 AUG 2024 15:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**frontespizio.tex
+**frontespizio
 (./frontespizio.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22>
@@ -17,8 +17,8 @@ l.1 \begin{frontespizio}
                         
 ? 
 ! Undefined control sequence.
-l.2 \Universita
-               {Trento} % CTT
+l.2     \Universita
+                   {Trento} % CTT
 ? 
 
 ! LaTeX Error: Missing \begin{document}.
@@ -27,8 +27,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.2 \Universita{T
-                 rento} % CTT
+l.2     \Universita{T
+                     rento} % CTT
 ? 
 Missing character: There is no T in font nullfont!
 Missing character: There is no r in font nullfont!
@@ -37,8 +37,8 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no o in font nullfont!
 ! Undefined control sequence.
-l.3 \Logo
-         {Figures/logo_unitn} % CTT
+l.3     \Logo
+             {Figures/logo_unitn} % CTT
 ? 
 Missing character: There is no F in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -55,59 +55,59 @@ Missing character: There is no o in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.3 \Logo{Figures/logo_
-                       unitn} % CTT
+l.3     \Logo{Figures/logo_
+                           unitn} % CTT
 ? 
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 3.
 ! Extra }, or forgotten $.
-l.3 \Logo{Figures/logo_unitn}
-                              % CTT
+l.3     \Logo{Figures/logo_unitn}
+                                  % CTT
 ? 
 ! Undefined control sequence.
-l.4 \Divisione
-              {Fisica Computazionale} % CTT
+l.4     \Divisione
+                  {Fisica Computazionale} % CTT
 ? 
 ! Undefined control sequence.
-l.5 \Corso
-          [Laurea Triennale]{Fisica} % CTT, a meno che non cambi la denomina...
+l.5     \Corso
+              [Laurea Triennale]{Fisica} % CTT, a meno che non cambi la deno...
 
 ? 
 ! Undefined control sequence.
-l.6 \Annoaccademico
-                   {2023-2024}
+l.6     \Annoaccademico
+                       {2023-2024}
 ? 
 ! Undefined control sequence.
-l.7 \Titoletto
-              {Progetto Finale} % CTT
+l.7     \Titoletto
+                  {Progetto Finale} % CTT
 ? 
 ! Undefined control sequence.
-l.8 \Titolo
-           {Calcolo redshift nell'emissione di fotoni da una stella di neutr...
+l.8     \Titolo
+               {Calcolo redshift nell'emissione di fotoni da una stella di n...
 
 ? 
 ! Undefined control sequence.
-l.9 \Sottotitolo
-                {\today}
+l.9     \Sottotitolo
+                    {\today}
 ? 
 ! Undefined control sequence.
-l.9 \Sottotitolo{\today
-                       }
+l.9     \Sottotitolo{\today
+                           }
 ? 
 ! Undefined control sequence.
-l.10 \Candidato
-               [227552]{Federico De Paoli, \textsf {federico.depaoli@student...
+l.10     \Candidato
+                   [227552]{Federico De Paoli, \textsf {federico.depaoli@stu...
 
 ? 
 ! Undefined control sequence.
-l.11 \NRelatore
-               {Docente}{} % CTT
+l.11     \NRelatore
+                   {Docente}{} % CTT
 ? 
 ! Undefined control sequence.
-l.12 \Relatore
-              {Prof. Alessandro Roggero} % CTT, a meno che non sia cambiato ...
+l.12     \Relatore
+                  {Prof. Alessandro Roggero} % CTT, a meno che non sia cambi...
 
 ? 
 
@@ -117,20 +117,20 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.13 \end{frontespizio}
-                       
+l.13     \end{frontespizio}
+                           
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.13 \end{frontespizio}
-                       
+l.13     \end{frontespizio}
+                           
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.13 \end{frontespizio}
-                       
+l.13     \end{frontespizio}
+                           
 ? 
 runsystem(pdflatex frontespizio-frn)...disabled (restricted).
 
@@ -153,7 +153,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.17 \newpage
+l.18 \newpage
              
 ? 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
@@ -196,6 +196,66 @@ l.17 \newpage
 *
 (Please type a command or say `\end')
 *
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+(Please type a command or say `\end')
+*
+! Interruption.
+<*> 
+    
+? 
 (Please type a command or say `\end')
 *
 (Please type a command or say `\end')

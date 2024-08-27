@@ -48,7 +48,9 @@ int read_MR_data(int tipo_politropica, int lenfile, double *P, double *R, double
 }
 
 
-// Radianza
+// Radianza. Viene usata come funzione integranda con T = 1.
+// Perché è stato fatto un cambio di variabile per eliminare la dipendenza
+// dell'integrale da T
 double funB(double nu, double T){
     return pow(nu, 3) / (exp(nu / T) - 1.);
 }
@@ -69,15 +71,15 @@ double integrale_trapezio(double a, double b, int N, double T,
 }
 
 
-double funTeff(double R, double M, double integral_T){
+double funTeff(double R, double M, double integral, double T){
     return pow(15., 1. / 4.) / PI * pow(1. - 2. * M / R, 1. / 8.)
-         * pow(integral_T, 1. / 4.);
+         * pow(integral, 1. / 4.) * T;
 }
 
 
 void Teff_vs_P(double T0, int *file_lens, int N_trap, double nu_max){
 
-    double integral_T1 = integrale_trapezio(1e-12, nu_max, N_trap, T0, &funB);
+    double integral = integrale_trapezio(1e-12, nu_max, N_trap, 1., &funB);
 
     double T;
 
@@ -92,7 +94,7 @@ void Teff_vs_P(double T0, int *file_lens, int N_trap, double nu_max){
         fprintf(f, "P,Teff\n");
 
         for (int j = 0; j < file_lens[i]; j++){
-            T = funTeff(R[j], M[j], integral_T1);
+            T = funTeff(R[j], M[j], integral, T0);
             fprintf(f, "%.7e,%.7e\n", P[j] * P0, T);
         }
         fclose(f);

@@ -115,11 +115,10 @@ double integrale_simpson(double a, double b, int N, double T,
 // Si prende come riferimento l'integrale calcolato con N = 1e8 nu_max = 20
 // per la prima parte. N = 1e8 nu_max = 200 per la seconda parte.
 void test_cvg(){
-    double T = 0.01;
     int N = 10;
     int N_trap, N_simp;
     double Pot, nu_max = 20.;
-    double Pot_cvg = integrale_trapezio(1e-12, nu_max, 1e8, T, &funB);
+    double Pot_cvg = integrale_trapezio(1e-12, nu_max, 1e8, 1., &funB);
     double errore_max = 1e-7;
     printf("Errore massimo scelto = %.0e\n", errore_max);
     int kk = 0;
@@ -128,7 +127,7 @@ void test_cvg(){
     FILE *f0 = fopen("../data/potenza/test_cvg_N_trap.csv", "w");
     fprintf(f0, "I,N,nu_max\n");
     while(N <= 1e6){
-        Pot = integrale_trapezio(1e-12, nu_max, N, T, &funB);
+        Pot = integrale_trapezio(1e-12, nu_max, N, 1., &funB);
         fprintf(f0, "%.13e,%d,%.13e\n", Pot, N, nu_max * nu0);
 
         if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -150,7 +149,7 @@ void test_cvg(){
     FILE *f1 = fopen("../data/potenza/test_cvg_N_simp.csv", "w");
     fprintf(f1, "Pot,N,nu_max\n");
     while(N <= 1e6){
-        Pot = integrale_simpson(1e-12, nu_max, N, T, &funB);
+        Pot = integrale_simpson(1e-12, nu_max, N, 1., &funB);
         fprintf(f1, "%.13e,%d,%.13e\n", Pot, N, nu_max * nu0);
 
         if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -167,8 +166,7 @@ void test_cvg(){
 
     // Decidiamo che va bene N_trap e N_simp risultati del codice sopra
     // Ora verifichiamo la convergenza di nu_max nel caso peggiore, ovvero
-    T = 1;
-    Pot_cvg = integrale_trapezio(1e-12, 200, 1e8, T, &funB);
+    Pot_cvg = integrale_trapezio(1e-12, 200, 1e8, 1., &funB);
     nu_max = 20.;
     int Nrel_trap = (double)N_trap / nu_max; // Teniamo la stessa densita'
     int Nrel_simp = (double)N_simp / nu_max; // di trapezi: N / nu_max
@@ -183,7 +181,7 @@ void test_cvg(){
         N = Nrel_trap * nu_max;
         if (N % 2 != 0) N += 1;
 
-        Pot = integrale_trapezio(1e-12, nu_max, N, T, &funB);
+        Pot = integrale_trapezio(1e-12, nu_max, N, 1., &funB);
         fprintf(f2, "%.13e,%d,%.13e\n", Pot, N, nu_max);
 
         if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -206,7 +204,7 @@ void test_cvg(){
         N = Nrel_simp * nu_max;
         if (N % 2 != 0) N += 1;
 
-        Pot = integrale_simpson(1e-12, nu_max, N, T, &funB);
+        Pot = integrale_simpson(1e-12, nu_max, N, 1., &funB);
         fprintf(f3, "%.13e,%d,%.13e\n", Pot, N, nu_max);
 
         if ((fabs(Pot - Pot_cvg) / Pot_cvg) < errore_max && kk == 0){
@@ -222,29 +220,36 @@ void test_cvg(){
 }
 
 
-// Fissati i parametri per l'integrale con la funzione sopra, calcola il grafico Pot(r) per tutte e 3 le stelle sia con Simpson che con trapezi.
+// Fissati i parametri per l'integrale con la funzione sopra, calcola il grafico
+// Pot(r) per tutte e 3 le stelle con i trapezi.
 // r_max è in kilometri
-// Utilizza B senza correzioni, perché è stato fatto un cambio di variabile nell'itegrale
-void dati_grafico_Pot(int N_trap, int N_simp, double nu_max, double r_max){
+// Utilizza B senza correzioni, perché è stato fatto un cambio di variabile
+// nell'itegrale
+void dati_grafico_Pot(int N_trap, double nu_max, double r_max){
 
     double R[3] = {11.04289 / R0, 10.86752 / R0, 8.531525 / R0}; // Raggi stelle
     double M[3] = {2.456841 / M0, 0.990100 / M0, 1.635845 / M0}; // Masse stelle
     double T = 1.;
 
-    double Integrale_trap = integrale_trapezio(1e-12, nu_max, N_trap, T, &funB);
-    printf("I con trapezi, N = %d, nu_max = %.1f, vale %.12e\n", N_trap, nu_max, Integrale_trap);
+    double Integrale_trap = pow(T, 4) * integrale_trapezio(1e-12, nu_max,
+                                                            N_trap, 1., &funB);
+
+    printf("I con trapezi, N = %d, nu_max = %.1f, vale %.12e\n",
+            N_trap, nu_max, Integrale_trap);
     double corr, Pot;
 
     //// Trapezi
     // Cicla sulle 3 stelle
     for (int i = 0; i < 3; i++){
-        char filename_trap[50]; sprintf(filename_trap, "../data/potenza/Pot_trap_%d.csv", i + 1);
+        char filename_trap[50];
+        sprintf(filename_trap, "../data/potenza/Pot_trap_%d.csv", i + 1);
         FILE *f_trap = fopen(filename_trap, "w");
         fprintf(f_trap, "r,Pot\n");
 
         double r = R[i];
         while(r < r_max / R0){
-            corr = pow(1. - 2. * M[i] / R[i], 1. / 2.) * pow(1. - 2. * M[i] / r, - 1. / 2.);
+            corr = pow(1. - 2. * M[i] / R[i], 1. / 2.)
+                 * pow(1. - 2. * M[i] / r, - 1. / 2.);
             Pot = Integrale_trap * corr;
             fprintf(f_trap, "%.5e,%.5e\n", r * R0, Pot * POT0);
             r += 0.01;
@@ -257,11 +262,6 @@ void dati_grafico_Pot(int N_trap, int N_simp, double nu_max, double r_max){
 
         fclose(f_trap);
     }
-
-    //// Simpson
-    double Integrale_simp = integrale_simpson(1e-12, nu_max, N_simp, T, &funB);
-    printf("I con Simpson, N = %d, nu_max = %.1f, vale %.12e\n", N_simp, nu_max, Integrale_simp);
-    /* Simpson viene, giustamente, uguale all'integrale con trapezi */
 }
 
 
@@ -272,17 +272,18 @@ void Teff_su_T(int N_trap, double nu_max, double T_min, double T_max){
 
     // ciclo sulle stelle
     for (int i = 0; i < 3; i++){
-        char filename[50]; sprintf(filename, "../data/potenza/Teff_%d.csv", i + 1);
+        char filename[50];
+        sprintf(filename, "../data/potenza/Teff_%d.csv", i + 1);
         FILE *f = fopen(filename, "w");
         fprintf(f, "T,Teff\n");
 
         double T = T_min;
-        double Integrale, Teff;
+        double Teff, I = integrale_trapezio(1e-12, nu_max, N_trap, 1., &funB);
+        double I4 = pow(I, 1. / 4.);
 
         while (T <= T_max){
-            Integrale = integrale_trapezio(1e-12, nu_max, N_trap, T, &funB);
             Teff = pow(15, 1. / 4.) / PI * pow(1. - 2. * M[i] / R[i], 1. / 8.);
-            Teff *= pow(Integrale, 1. / 4.);
+            Teff *= T * I4;
             fprintf(f, "%.7e,%.7e\n", T, Teff);
             T += 0.001;
         }
@@ -302,18 +303,17 @@ int main(){
     
     //test_cvg();
 
-    //int N_trap = 22936;
-    //int N_simp = 30516;
-    //double nu_max = 24.0661923;
+    //int N_trap = 264;
+    //double nu_max = 29.2526072;
     //double r_max = 500;
-    //dati_grafico_Pot(N_trap, N_simp, nu_max, r_max);
+    //dati_grafico_Pot(N_trap, nu_max, r_max);
     
 
     /*************** Temperatura Efficacie ***************/
     
-    //int N_trap = 22936;
-    //double nu_max = 24.0661923;
-    //double T_min = 0.01;
+    //int N_trap = 264;
+    //double nu_max = 29.2526072;
+    //double T_min = 0.001;
     //double T_max = 1.;
     //Teff_su_T(N_trap, nu_max, T_min, T_max);
 

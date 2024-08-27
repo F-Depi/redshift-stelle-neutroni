@@ -329,10 +329,10 @@ def plt_Pot(save=['yes','no']):
     for i in ['1', '2', '3']:
         data = np.genfromtxt('../data/potenza/Pot_trap_'+i+'.csv', delimiter=',', skip_header=1, dtype=float)
         r = data[:-1,0]
-        Pot = data[:-1,1]
+        Pot = data[:-1,1]# * 1.602176e-13 * 1e30     # MeV to J and fm^-2 to m^-2
         # The last row contains R_star and Pot ad infinity
         R = data[-1,0]
-        Pot_inf = data[-1,1]
+        Pot_inf = data[-1,1]# * 1.602176e-13 * 1e30  # MeV to J and fm^-2 to m^-2
 
         plt.plot(r, Pot, color=colors[kk], marker='.', linestyle='', label=r'$\mathcal{P}_'+i+r'(r)$')
         plt.axvline(R, color=colors[kk], linestyle='-')
@@ -341,7 +341,7 @@ def plt_Pot(save=['yes','no']):
 
     plt.title('Potenza irradiata dalle 3 stelle più massive')
     plt.xlabel('raggio [km]')
-    plt.ylabel(r'potenza $\left[ \frac{\text{MeV}}{\text{s fm}^3} \right]$')
+    plt.ylabel(r'potenza $\left[ \frac{\text{MeV}}{\text{s fm}^2} \right]$')
     plt.legend(loc='upper right')
     plt.tight_layout()
     if save == 'yes': plt.savefig('../report/Figures/Pot.eps', format='eps')
@@ -425,7 +425,7 @@ def plt_Teff_su_Pressione(T0, save=['yes','no']):
 
 ################################## radianza.c ##################################
 ''' Grafico della radianza '''
-#plot_B('yes')
+#plot_B('no')
 
 ''' Convergenza dell'integrale della potenza'''
 #plt_P_test_cvgN('yes')
@@ -440,7 +440,7 @@ def plt_Teff_su_Pressione(T0, save=['yes','no']):
 
 ################################### punto7.c ###################################
 ''' Temperatura efficace rispetto a Pressione centrale delle stelle '''
-plt_Teff_su_Pressione(1, 'yes')
-plt_Teff_su_Pressione(0.01, 'yes')
+#plt_Teff_su_Pressione(1, 'yes')
+#plt_Teff_su_Pressione(0.01, 'yes')
 
 
