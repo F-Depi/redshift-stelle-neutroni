@@ -1,5 +1,4 @@
 % ::setlocal makeprg=cd\ report\ &&\ pdflatex\ -interaction=batchmode\ main.tex\ &&\ xdg-open\ main.pdf\ &&\ exit
-% then to compile and open the file just run :make (or press F8)
 
 \documentclass[a4paper, titlepage]{article}
 \newcommand{\Punit}[0]{\frac{\unit{\mega\electronvolt}}{c^2 \unit{\femto\cubic\meter}}}
@@ -24,31 +23,46 @@
 \newpage
 
 \section{Introduzione}
-Studiamo la stabilità delle stelle di neutroni in regime relativistico considerando 3 possibili equazioni di stato per la materia.
-Una volta risolte le equazioni è possibile ottenere l'espressione del potenziale gravitazione della stella e calcolare l'effetto sulla radiazione emessa dalla stella.
+Studiamo la stabilità delle stelle di neutroni in regime relativistico
+considerando 3 possibili equazioni di stato per la materia.
+Una volta risolte le equazioni è possibile ottenere l'espressione del potenziale
+gravitazione della stella e calcolare l'effetto sulla radiazione emessa dalla
+stella.
 
 
-Viene calcolata la radianza per ogni stella a 3 distanze diverse e la potenza totale di emissione in funzione della distanza dalla stella.
-Viene quindi calcolata la temperatura apparente delle 3 stelle più massive in funzione di quella effettiva e poi viene studiata la temperatura apparente in funzione della pressione centrale della stella.
+Viene calcolata la radianza per ogni stella a 3 distanze diverse e la potenza
+totale di emissione in funzione della distanza dalla stella.
+Viene quindi calcolata la temperatura apparente delle 3 stelle più massive in
+funzione di quella effettiva e poi viene studiata la temperatura apparente in 
+funzione della pressione centrale della stella.
 
 
 \section{Stabilità}
 
-Le equazioni che descrivono la stabilità di una stella in funzione della massa ($m$) e della pressione ($P$) sono quelle di Tolman-Oppenheimer-Volkoff
+Le equazioni che descrivono la stabilità di una stella in funzione della massa
+($m$) e della pressione ($P$) sono quelle di Tolman-Oppenheimer-Volkoff
 \begin{subequations}
-    \begin{align}[left = {\empheqlbrace}]
-        \dv[]{P(r)}{r} &= - G \frac{m(r) \epsilon (r)}{r^2 c^2} \left(1 + \frac{P(r)}{\epsilon (r)} \right) \left(\ + \frac{4 \pi r^3 P(r)}{m(r) c^2} \right) \left(1 - \frac{2 G m(r)}{r c^2} \right)^{-1} \label{eq:P_corr} \\
-        \dv[]{m(r)}{r} &= 4 \pi r^2 \frac{\epsilon (r)}{c^2} \label{eq:m_corr} \\
-        \dv[]{\Phi(r)}{r} &= - \frac{1}{P(r) + \epsilon (r)} \dv[]{P(r)}{r} \label{eq:Phi_corr}
-    \end{align}
-    \label{eq:sistema_corr}
+\begin{align}[left = {\empheqlbrace}]
+    \dv[]{P(r)}{r} &= - G \frac{m(r) \epsilon (r)}{r^2 c^2}
+    \left(1 + \frac{P(r)}{\epsilon (r)} \right)
+    \left(\ + \frac{4 \pi r^3 P(r)}{m(r) c^2} \right)
+    \left(1 - \frac{2 G m(r)}{r c^2} \right)^{-1} \label{eq:P_corr} \\
+    %
+    \dv[]{m(r)}{r} &= 4 \pi r^2 \frac{\epsilon (r)}{c^2} \label{eq:m_corr} \\
+    %
+    \dv[]{\Phi(r)}{r} &= - \frac{1}{P(r) + \epsilon (r)} \dv[]{P(r)}{r}
+    \label{eq:Phi_corr}
+\end{align}
+\label{eq:sistema_corr}
 \end{subequations}
 
 Dove la terza equazione è l'equazione disaccoppiata e descrive il potenziale gravitazionale della stella.
 Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:energia23} viene presa con due coppie di valori diversi di $\Gamma$ e $K$):
 \begin{subequations}
 \begin{align}
-    \epsilon_1 (n) &= a \left( \frac{n}{n_0} \right) ^{\alpha} + b \left( \frac{n}{n_0} \right) ^{\beta} \label{eq:energia1} \\
+    \epsilon_1 (n) &= \mu c^2 n
+    + a n_0 \left( \frac{n}{n_0} \right) ^{\alpha + 1}
+    + b n_0 \left( \frac{n}{n_0} \right) ^{\beta + 1} \label{eq:energia1} \\
     \epsilon_{2/3} (n) &= \mu c^2n+Kc^2n^\Gamma \label{eq:energia23}
 \end{align}
 \end{subequations}
@@ -60,22 +74,30 @@ Usiamo 3 diverse densità di energia per la materia della stella (eq. \ref{eq:en
     n_0 = 0.16 \unit{\per\femto\cubic\meter}
 \end{equation}
 
-dove $n$ è la densità numerica, $\mu$ la massa di una singola particella e quindi $\rho = \mu n$ è la densità di massa.
+dove $n$ è la densità numerica, $\mu$ la massa del neutrone e quindi
+$\rho = \mu n$ è la densità di massa.
 
-
-Visto che la densità di energia è in funzione di $\rho$ e le incognite del sistema \ref{eq:sistema_corr} sono $P$ e $m$ possiamo scrivere la densità di energia in funzione di $P$ e $m$ partendo dalla relazione termodinamica
+Visto che la densità di energia è in funzione di $\rho$ e le incognite del
+sistema \ref{eq:sistema_corr} sono $P$ e $m$ possiamo scrivere la densità di
+energia in funzione di $P$ e $m$ partendo dalla relazione termodinamica
 
 \begin{subequations}
     \label{eq:eps(r)}
     \begin{align}[left = {P = - \dv[]{E}{V} \Rightarrow \empheqlbrace}]
-        P &= (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} + (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} && \text{per } \epsilon_1 \label{eq:eps(r)1} \\
-        n &= \left( \frac{P}{K(\Gamma - 1) c^2} \right)^{1 / \Gamma} && \text{per } \epsilon_{1/2} \label{eq:eps(r)23}
+        P &= \alpha a n_0 \left( \frac{n}{n_0} \right)^{\alpha + 1}
+        + \beta b n_0 \left( \frac{n}{n_0} \right)^{\beta + 1}
+        && \text{per } \epsilon_1 \label{eq:eps(r)1} \\
+        n &= \left( \frac{P}{K(\Gamma - 1) c^2} \right)^{1 / \Gamma}
+        && \text{per } \epsilon_{2/3} \label{eq:eps(r)23}
     \end{align}
 \end{subequations}
 
-Nel primo caso (eq. \ref{eq:eps(r)1}) non è stato possibile invertire l'equazione per trovare $n$ in funzione di $P$ e $m$ quindi utilizzeremo un metodo numerico per trovare $n$ di volta in volta.
+Nel primo caso (eq. \ref{eq:eps(r)1}) non è stato possibile invertire
+l'equazione per trovare $n$ in funzione di $P$ e $m$ quindi utilizzeremo un
+metodo numerico per trovare $n$ di volta in volta.
 
-Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con valori più vicini a 0.
+Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con
+valori più vicini a 0.
 
 \begin{equation*}
     m=M_0\hat m, \quad 
@@ -87,110 +109,190 @@ Facciamo le seguenti sostituzioni per rendere le variabili adimensionali e con v
 
 \begin{subequations}
     \begin{align}[left = {\empheqlbrace}]
-        \dv[]{\hat P}{\hat r} &= - \frac{(\hat P + \hat{\epsilon})(\hat m + \hat r^3 \hat P)}{\hat r^2-2\hat m\hat r} \label{eq:P_ad} \\
+        \dv[]{\hat P}{\hat r} &=
+        - \frac{(\hat P + \hat{\epsilon})(\hat m + \hat r^3 \hat P)}
+        %
+        {\hat r^2-2\hat m\hat r} \label{eq:P_ad} \\
         \dv[]{\hat m}{\hat r} &= \hat r^2 \hat{\epsilon} \label{eq:m_ad} \\
-        \dv[]{\Phi}{\hat r} &= - \frac{1}{\hat P + \hat{\epsilon}} \dv[]{\hat P}{\hat r} \label{eq:Phi_ad}
+        %
+        \dv[]{\Phi}{\hat r} &= - \frac{1}{\hat P + \hat{\epsilon}}
+        \dv[]{\hat P}{\hat r} \label{eq:Phi_ad}
     \end{align}
     \label{eq:sistema_adim}
 \end{subequations}
 
-Otteniamo il sistema \ref{eq:sistema_adim} dove, grazie alle equazioni in \ref{eq:eps(r)}, $\hat m$, $\hat P$ e $\hat{\epsilon}$ sono funzioni di $\hat r$. Come valori delle costanti sono stati usati
+Otteniamo il sistema \ref{eq:sistema_adim}, dove le densità di energia sono
+
+\begin{subequations}
+\begin{align}
+    \hat \epsilon_1 (\hat n) &= \hat n + \frac{a n_0}{P_0} ~ \hat n^{\alpha + 1}
+    + \frac{b n_0}{P_0} ~ \hat n^{\beta + 1}
+    \quad \quad {\rm dove~vale} \quad
+    \hat P = \frac{\alpha a n_0}{P_0} ~ \hat n^{\alpha + 1}
+    + \frac{\beta b n_0}{P_0} ~ \hat n^{\beta + 1} \label{eq:e1_ad} \\
+    %
+    \hat \epsilon_2 (\hat P)
+    &= \left(\frac{\hat P}{\hat K (\Gamma - 1)} \right)^{1/\Gamma}
+    + \frac{\hat P}{\Gamma - 1} \label{eq:e23_ad}
+\end{align}
+\end{subequations}
+
+Nel caso di $\epsilon_1$ non è possibile invertire la relazione $P(n)$ e quindi
+si utilizzerà un metodo numerico.
+Per le politropiche $\epsilon_2$ e $\epsilon_3$ si utilizzano i seguenti valori
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c} 
+         & $\hat K$ & $\Gamma$ \\
+        \hline
+        $\epsilon_2$ & $5 / 3$ & $0.05$ \\
+        \hline
+        $\epsilon_3$ & $2.54$ & $0.01$ \\
+    \end{tabular}
+\end{table}
+
+Infine, i valori delle costati utilizzate per definire le variabili
+adimensionali sono i seguenti
 
 \begin{equation}
-    M_0 = 12.655756 M_\odot \quad R_0 = 20.06145 \unit{\kilo\meter} \quad \epsilon = P_0 = \rho_0 c^2 = 150.174 \Punit
+    M_0 = 12.655756 M_\odot \quad R_0 = 20.06145 \unit{\kilo\meter} \quad
+    \epsilon = P_0 = \rho_0 c^2 = n_0 \mu c^2 = 150.174 \Punit
     \label{eq:val_cost}
 \end{equation}
 
-Per il potenziale gravitazionale $\Phi$ si può inoltre trovare una soluzione analitica all'esterno della stella che possiamo mettere in forma adimensionale (eq. \ref{eq:Phi_ext}), dove $\hat{M}$ e $\hat R$ sono rispettivamente la massa totale e il raggio della stella in forma adimensionale.
+Per il potenziale gravitazionale $\Phi$ si può inoltre trovare una soluzione
+analitica all'esterno della stella che possiamo mettere in forma adimensionale
+(eq. \ref{eq:Phi_ext}), dove $\hat{M}$ e $\hat R$ sono rispettivamente la massa
+totale e il raggio della stella in forma adimensionale.
 
 \begin{equation}
     \Phi_\text{ext} (r) = \frac{1}{2} \log(1 - \frac{2 G M}{r c^2})
-    \implies \Phi_\text{ext} (\hat r) = \frac{1}{2} \log(1 - \frac{2 \hat{M}}{\hat r}) \quad \quad \hat r \geq \hat{R}
+    \implies \Phi_\text{ext} (\hat r) = \frac{1}{2}
+    \log(1 - \frac{2 \hat{M}}{\hat r}) \quad \quad \hat r \geq \hat{R}
     \label{eq:Phi_ext}
 \end{equation}
 
 
 \section{Curva massa raggio}
-Cominciamo con il risolvere le prime due equazioni \ref{eq:P_ad} e \ref{eq:m_ad} del sistema adimensionale con il metodo \texttt{RK4} (appendice \ref{ap:RK4}).
-Per il caso con equzione di stato più complessa (eq. \ref{eq:energia1}) viene risolta numericamente l'equazione \ref{eq:eps(r)1} per trovare $\rho$ da $P$ (Appendice \ref{ap:eps(r)1}).
+Cominciamo con il risolvere le prime due equazioni \ref{eq:P_ad} e \ref{eq:m_ad}
+del sistema adimensionale con il metodo \texttt{RK4} (appendice \ref{ap:RK4}).
+Per il caso con equzione di stato più complessa (eq. \ref{eq:e1_ad}) viene
+risolta numericamente l'equazione $\hat P(\hat n)$ a fianco per trovare $\rho$
+da un $P$ fissato (Appendice \ref{ap:eps(r)1}).
 
-Segliamo massa iniziale 0 e pressioni iniziali differenti in modo da trovare soluzioni con $R$ compreso tra i 3 e i 60 \unit{\kilo\meter}. Il grafico massa raggio trovato viene riportato in figura \ref{fig:MR}.
+Segliamo massa iniziale 0 e pressioni iniziali differenti in modo da trovare
+soluzioni con $R$ compreso tra i 3 e i 40 \unit{\kilo\meter}.
+Il grafico massa raggio trovato viene riportato in figura \ref{fig:MR}.
 
 \begin{figure}[h]
         \centering
-        \includegraphics[width = 0.6 \textwidth]{Figures/MR.eps}
-        \caption{Curva massa raggio per stelle di equzioni di stato $\epsilon_{1/2/3}$. La prima equazione di stato, quella più realistica, prevede stelle di neutroni più massive.}
+        \includegraphics[width = 0.7 \textwidth]{Figures/MR.eps}
+        \caption{Curva massa raggio per stelle di equzioni di stato
+        $\epsilon_{1/2/3}$.
+        La prima equazione di stato, quella più realistica,
+        prevede stelle di neutroni più massive.}
         \label{fig:MR}
 \end{figure}
 
-Durante l'esecuzione del programma abbiamo inoltre smesso di incrementare la pressione centrale iniziale quando la condizione di stabilità $\dv[]{M}{r} > 0$ veniva meno.
+Durante l'esecuzione del programma abbiamo inoltre smesso di incrementare la
+pressione centrale iniziale quando la condizione di stabilità $\dv[]{M}{r} > 0$
+veniva meno.
 
-Notiamo subito che con l'equazione di stato \ref{eq:energia1} il modello prevede stelle con massa e raggio maggiore rispetto al limite previsto dagli altri modelli.
+Notiamo subito che con l'equazione di stato \ref{eq:energia1} il modello prevede
+stelle con massa e raggio maggiore rispetto al limite previsto dagli altri
+modelli.
 
-I valori della stella più massiva per ogni equazione di stato diversa vengono riportati nella tabella \ref{tab:Mgrosso}.
+I valori della stella più massiva per ognuna delle 3 equazioni di stato vengono
+riportati nella tabella \ref{tab:Mgrosso}.
 
 \begin{table}[h!]
     \centering
     \begin{tabular}{c|c|c|c}
         & $P_0~[\Punit]$ & $R~[\unit{\kilo\meter}]$ & $M~[M_\odot]$ \\
          \hline
-         $\epsilon_1$ & 43.31065 & 59.03824 & 14.29963 \\
+         $\epsilon_1$ & 885.2114 & 11.04289 & 2.456841 \\
          \hline
-         $\epsilon_2$ & 217.0675 & 10.90280 & 0.9252994 \\
+         $\epsilon_2$ & 217.2936 & 10.86752 & 0.990100 \\
          \hline
-         $\epsilon_3$ & 947.5339 & 8.559218 & 1.528782 \\
+         $\epsilon_3$ & 948.5211 & 8.531525 & 1.635845 \\
     \end{tabular}
-    \caption{Valori della pressione iniziale $P_0$, massa totale $M$ e raggio $R$ della stella più massiva per ogni equazione di stato utilizzata.}
+    \caption{Valori della pressione iniziale $P_0$, massa totale $M$ e raggio
+    $R$ della stella più massiva per ogni equazione di stato utilizzata.}
     \label{tab:Mgrosso}
 \end{table}
 
 
 \section{Potenziale gravitazionale}
 
-Come mostrato nel sistema \ref{eq:sistema_corr}, l'equzione che determina il potenziale gravitazionale è disaccoppiata dalle altre due e, per $r \geq R$, può anche essere risolta analiticamente.
-Utilizzando le equazioni \ref{eq:Phi_ad} e \ref{eq:Phi_ext} possiamo trovare l'espressione generale per il potenziale all'interno della stella riportata in eq. \ref{eq:Phi_int1}.
+Come mostrato nel sistema \ref{eq:sistema_corr}, l'equzione che determina il
+potenziale gravitazionale è disaccoppiata dalle altre due e, per $r \geq R$,
+può anche essere risolta analiticamente.
+Utilizzando le equazioni \ref{eq:Phi_ad} e \ref{eq:Phi_ext} possiamo trovare
+l'espressione generale per il potenziale all'interno della stella riportata in
+eq. \ref{eq:Phi_int1}.
 
 \begin{equation}
     \Phi_\text{int} (\hat r) =
     \Phi_\text{ext} (\hat R) - \int_{\hat r}^{\hat R} \dv[]{\Phi}{x} \;\mathrm{d}x =
-    \frac{1}{2} \log(1 - \frac{2 \hat M}{\hat R}) + \int_{\hat r}^{\hat R} \frac{1}{\hat P (x) + \hat \epsilon (x)} \dv[]{\hat P (x)}{x} \;\mathrm{d}x
+    \frac{1}{2} \log(1 - \frac{2 \hat M}{\hat R})
+    + \int_{\hat r}^{\hat R} \frac{1}{\hat P (x) + \hat \epsilon (x)} \dv[]{\hat P (x)}{x} \;\mathrm{d}x
     \label{eq:Phi_int1}
 \end{equation}
 
-dove siamo stati attenti a rendere $\Phi (r)$ continuo per ogni $r \geq 0$ usando il valore di $\Phi_\text{ext}$ in $\hat R$. Infine sostituendo alla derivata della pressione l'espressione in \ref{eq:P_ad} otteniamo
+dove siamo stati attenti a rendere $\Phi (r)$ continuo per ogni $r \geq 0$
+usando il valore di $\Phi_\text{ext}$ in $\hat R$. Infine sostituendo alla
+derivata della pressione l'espressione in \ref{eq:P_ad} otteniamo
 
 \begin{equation}
     \Phi_\text{int} (\hat r) =
-    \frac{1}{2} \log(1 - \frac{2 \hat{M}}{\hat R}) + \int_{\hat r}^{\hat R} \frac{\hat m (x) + x^3 \hat P (x)}{2 \hat m (x) x - x^2}  \;\mathrm{d}x
+    \frac{1}{2} \log(1 - \frac{2 \hat{M}}{\hat R}) + \int_{\hat r}^{\hat R}
+    \frac{\hat m (x) + x^3 \hat P (x)}{2 \hat m (x) x - x^2}  \;\mathrm{d}x
     \label{eq:Phi_int2}
 \end{equation}
 
-Dati i valori di $\hat P (\hat r)$ e $\hat m (\hat r)$ che si ottengono risolvendo le equazioni di stabilità possiamo quindi risolvere l'integrale con il metodo dei trapezi per ottenere il valore di $Phi$ a ogni $r$ (Appendice \ref{ap:Phi}). Il grafico del potenziale gravitazionale ottenuto è mostrato in figura \ref{fig:Phi}.
+Dati i valori di $\hat P (\hat r)$ e $\hat m (\hat r)$ che si ottengono
+risolvendo le equazioni di stabilità possiamo quindi risolvere l'integrale con
+il metodo dei trapezi per ottenere il valore di $Phi$ a ogni $r$ (Appendice
+\ref{ap:Phi}).
+Il grafico del potenziale gravitazionale ottenuto è mostrato in figura
+\ref{fig:Phi}.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[width = \textwidth]{Figures/Phi.eps}
-    \caption{Grafico del potenziale gravitazionale all'interno e all'esterno della stella. Per $r < R$ è stato ottenuto integrando con il metodo dei trapezi l'eq. \ref{eq:Phi_int2}, per $r \geq R$ è stata plottata l'eq. \ref{eq:Phi_ext}}
+    \includegraphics[width = 0.8 \textwidth]{Figures/Phi.eps}
+    \caption{Grafico del potenziale gravitazionale all'interno e all'esterno
+    della stella.
+    Per $r < R$ è stato ottenuto integrando con il metodo dei trapezi l'eq.
+    \ref{eq:Phi_int2}, per $r \geq R$ è stata plottata l'eq. \ref{eq:Phi_ext}}
     \label{fig:Phi}
 \end{figure}
 
-Vediamo dalla figura \ref{fig:Phi} che in tutti e 3 i casi $\Phi (r)$ è continuo, grazie alla condizione imposta.
+Vediamo dalla figura \ref{fig:Phi} che in tutti e 3 i casi $\Phi (r)$ è
+continuo, grazie alla condizione imposta.
 
-Il potenziale $\Phi$ (che fa parte del termine $e^{\Phi (r)} c^2 \mathrm{d}t^2$ della metrica $\mathrm{d}s^2$, che descrive la geometria dello spazio vicino alla stella) assume un andamento famigliare: raggiunge valori più bassi per le stelle più massive al diminuire di $r$ e tende a 0 per $r$ grandi.
+Il potenziale $\Phi$ (che fa parte del termine $e^{\Phi (r)} c^2 \mathrm{d}t^2$
+della metrica $\mathrm{d}s^2$, che descrive la geometria dello spazio vicino
+alla stella) assume un andamento famigliare: raggiunge valori più bassi per le
+stelle più massive al diminuire di $r$ e tende a 0 per $r$ grandi.
 
 
 \section{Radianza} \label{sec:rad}
 
-In metrica di \Sh un fotone emesso a distanza $r$ con frequenza $\nu_\text{em}$ viene ricevuto da un osservatore a distanza $r'$ con una frequeza $\nu_\text{ric}$ data da
+In metrica di \Sh un fotone emesso a distanza $r$ con frequenza $\nu_\text{em}$
+viene ricevuto da un osservatore a distanza $r'$ con una frequeza
+$\nu_\text{ric}$ data da
 
 \begin{equation}
     \frac{\nu_\text{ric}}{\nu_\text{em}} = e^{\Phi (r) - \Phi (r')} \, .
 \label{eq:redshift}
 \end{equation}
 
-Dove $\Phi (r)$ è propio il potenziale gravitazionale mostrato in figura \ref{fig:Phi}.
+Dove $\Phi (r)$ è propio il potenziale gravitazionale mostrato in figura
+\ref{fig:Phi}.
 
-La radianza di una stella si può esprimere con l'equazione di Plank per il corpo nero
+La radianza di una stella si può esprimere con l'equazione di Plank per il corpo
+nero
 
 \begin{equation}
     B(\nu, T) = \frac{2 h \nu ^3}{c^2} \frac{1}{e^{h \nu / (k_B T)} - 1}
@@ -198,7 +300,9 @@ La radianza di una stella si può esprimere con l'equazione di Plank per il corp
 \end{equation}
 
 dove $T$ è la temperatura della stella e $h$ la costante di Plank.
-Per fare i conti considerando solo il caso con $K_B T = 1 \unit{\mega\electronvolt}$ e mettiamo l'equzione \ref{eq:rad} in funzione di variabili adimensionali. Otteniamo
+Per fare i conti considerando solo il caso con $K_B T = 1
+\unit{\mega\electronvolt}$ e mettiamo l'equzione \ref{eq:rad} in funzione di
+variabili adimensionali. Otteniamo
 
 \begin{equation}
     \hat B(\hat \nu) = \frac{\hat \nu ^3 }{e^{\hat \nu} - 1}
@@ -206,81 +310,134 @@ Per fare i conti considerando solo il caso con $K_B T = 1 \unit{\mega\electronvo
 \end{equation}
 dove abbiamo definito
 \begin{align}
-    \nu_0 &= \frac{\nu}{\hat \nu} = \frac{1\unit{\mega\electronvolt}}{h} \simeq \num{2.417989e20} \unit{\hertz} \label{eq:B0def}\\
-    B_0 &= \frac{B}{\hat B} = \frac{2 h \nu_0^3}{c^2} = \frac{2 \unit{\mega\electronvolt}}{(h c)^2} \simeq \num{1.301059e-6} \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}} \label{eq:nu0def}
+    \nu_0 &= \frac{\nu}{\hat \nu} = \frac{1\unit{\mega\electronvolt}}{h} \simeq
+    \num{2.417989e20} \unit{\hertz} \label{eq:B0def}\\
+    B_0 &= \frac{B}{\hat B} = \frac{2 h \nu_0^3}{c^2}
+    = \frac{2 \unit{\mega\electronvolt}}{(h c)^2} \simeq \num{1.301059e-6}
+    \frac{\unit{\mega\electronvolt}}{\unit{\femto\meter\squared}}
+    \label{eq:nu0def}
 \end{align}
 
-Infine, se consideriamo l'effetto doppler dovuto al potenziale gravitazionale descritto in eq. \ref{eq:redshift} e utilizziamo la formula analitica per il potenziale gravitazionale all'esterno della stella (eq. \ref{eq:Phi_ext}), otteniamo
+Infine, se consideriamo l'effetto doppler dovuto al potenziale gravitazionale
+descritto in eq. \ref{eq:redshift} e utilizziamo la formula analitica per il
+potenziale gravitazionale all'esterno della stella (eq. \ref{eq:Phi_ext}),
+otteniamo
 
 \begin{equation}
-    \hat \nu_\text{em} = \hat \nu_\text{ric} \left ( \frac{1 - \frac{2 \hat M}{r}}{1 - \frac{2 \hat M}{\hat R}}\right )^{1/2}
+    \hat \nu_\text{em} = \hat \nu_\text{ric}
+    \left ( \frac{1 - \frac{2 \hat M}{r}}{1 - \frac{2 \hat M}{\hat R}}\right )^{1/2}
     \quad
     \implies
     \quad
     \hat B(\hat \nu_\text{ric}, \hat r) =
-    \frac{\hat \nu_\text{ric}^3 \left(1 - \frac{2 \hat M}{\hat r}\right)^{3/2} \left(1 - \frac{2 \hat M}{\hat R}\right)^{-3/2} }
-    {\exp( \hat \nu_\text{ric} \left(1 - \frac{2 \hat M}{\hat r} \right)^{1/2} \left(1 - \frac{2 \hat M}{\hat R}\right)^{-1/2} ) - 1}
+    \frac{\hat \nu_\text{ric}^3 \left(1 - \frac{2 \hat M}{\hat r}\right)^{3/2}
+    \left(1 - \frac{2 \hat M}{\hat R}\right)^{-3/2} }
+    {\exp( \hat \nu_\text{ric} \left(1 - \frac{2 \hat M}{\hat r} \right)^{1/2}
+    \left(1 - \frac{2 \hat M}{\hat R}\right)^{-1/2} ) - 1}
     \label{eq:B_corr}
 \end{equation}
 
-Nel figure \ref{fig:rad1}, \ref{fig:rad2} e \ref{fig:rad3} viene studiato lo spettro della radiazione emessa per le 3 stelle massive di cui abbiamo studiato il potenziale in \ref{fig:Phi} a distanze diverse dalla stella.
-In blu è plottata l'eq. \ref{eq:rad}, ovvero la radianza senza correzioni relativistiche.
+Nel figure \ref{fig:rad1}, \ref{fig:rad2} e \ref{fig:rad3} viene studiato lo
+spettro della radiazione emessa per le 3 stelle massive di cui abbiamo studiato
+il potenziale in \ref{fig:Phi} a distanze diverse dalla stella.
+In blu è plottata l'eq. \ref{eq:rad}, ovvero la radianza senza correzioni
+relativistiche.
 
 \begin{figure}[h]
     \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/radianza1.eps}
-        \caption{Radianza di una stella con $M = 14M_\odot$ e $R = 59\unit{\kilo\meter}$, percepita a $88.6 \unit{\kilo\meter}$, $472 \unit{\kilo\meter}$ e a distanza infinita.
-        Essendo la stella con massa maggiore è anche quella in cui il redshift è più visibile.}
+        \caption{Radianza di una stella con $M = 2.5M_\odot$ e
+        $R = 11.0\unit{\kilo\meter}$, percepita a $16.5 \unit{\kilo\meter}$,
+        $88 \unit{\kilo\meter}$ e a distanza infinita.
+        Essendo la stella con massa maggiore è anche quella in cui la curva è
+        più spostata verso sinistra.}
         \label{fig:rad1}
     \end{minipage}
     \hspace{0.015\textwidth}    
     \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width = \textwidth]{Figures/radianza3.eps}
-        \caption{Radianza da una stella con $M = 1.5M_\odot$ e $R = 8.6\unit{\kilo\meter}$, percepita a $12.8 \unit{\kilo\meter}$, $68.5 \unit{\kilo\meter}$ e a distanza infinita.
+        \caption{Radianza da una stella con $M = 1.6M_\odot$ e
+        $R = 8.5\unit{\kilo\meter}$, percepita a $12.8 \unit{\kilo\meter}$,
+        $68 \unit{\kilo\meter}$ e a distanza infinita.
         In blu la radianza senza correzioni relativistiche.\\}
         \label{fig:rad2}
     \end{minipage}
 \end{figure}
 
-La curva in tutti e 3 i casi subisce uno spostamento verso le frequenze più basse, \textit{redshift} per l'appunto, e l'effetto è tanto maggiore quanto più la stella è massiva e l'osservatore distante. Già a una distanza di 8 volte il raggio della stella la curva della radianza è molto simile a quella all'inifinito, in cui il termine $\Phi (r')$ in eq. \ref{eq:redshift} è trascurabile.
+La curva in tutti e 3 i casi subisce uno spostamento verso le frequenze più
+basse, \textit{redshift} per l'appunto, e l'effetto è tanto maggiore quanto più
+la stella è massiva e l'osservatore distante. Già a una distanza di 8 volte il
+raggio della stella la curva della radianza è molto simile a quella
+all'inifinito, in cui il termine $\Phi (r')$ in eq. \ref{eq:redshift} è
+trascurabile.
 \begin{figure}[h]
     \centering
     \includegraphics[width = 0.6 \textwidth]{Figures/radianza2.eps}
-    \caption{Radianza da una stella con $M = 0.93M_\odot$ e $R = 11\unit{\kilo\meter}$, percepita a 16.4, 87.2 \unit{\kilo\meter} e a distanza infinita.
+    \caption{Radianza da una stella con $M = 0.99M_\odot$ e
+    $R = 10.8\unit{\kilo\meter}$, percepita a 16.2, 86.4 \unit{\kilo\meter} e a
+    distanza infinita.
     In blu la radianza senza correzioni relativistiche.}
     \label{fig:rad3}
 \end{figure}
 
 
 \section{Potenza emessa}
-La potenza totale emessa dalla stella per un elemento della sua superficie, si può ottenere integrando la radianza $B(\nu, T)$ sulle frequenze e sull'angolo solido, con l'accortezza di moltiplicare per un fattore $\cos(\theta)$ (Legge di Lambert) per proiettare la radiazione lungo la normale alla superficie sottesa da $\mathrm{d}\Omega$.
+La potenza totale emessa dalla stella per un elemento della sua superficie, si
+può ottenere integrando la radianza $B(\nu, T)$ sulle frequenze e sull'angolo
+solido, con l'accortezza di moltiplicare per un fattore $\cos(\theta)$ (Legge
+di Lambert) per proiettare la radiazione lungo la normale alla superficie
+sottesa da $\mathrm{d}\Omega$.
 
 \begin{align}
-    \mathcal P &= \int_0^\infty \mathrm{d}\nu \int B(\nu, T) \cos(\theta) \; \mathrm{d}\Omega
+    \mathcal P &= \int_0^\infty \mathrm{d}\nu \int B(\nu, T) \cos(\theta) \;
+    \mathrm{d}\Omega
     =  \int_0^{A k_B T} B(\nu, T) \; \mathrm{d}\nu ~ 
-    \int_0^{2 \pi} \mathrm{d}\phi \int_0^1 \mathrm{d}(\cos(\theta)) \; \cos(\theta) \\
-    &\simeq \pi \int_{\nu_\text{ric} = 0}^{\nu_\text{ric} = A k_B T} B(\nu_\text{em}, T) \; \mathrm{d}\nu_\text{ric}
+    \int_0^{2 \pi} \mathrm{d}\phi \int_0^1 \mathrm{d}(\cos(\theta)) \;
+    \cos(\theta) \\
+    &\simeq \pi \int_{\nu_\text{ric} = 0}^{\nu_\text{ric}
+    = A k_B T} B(\nu_\text{em}, T) \; \mathrm{d}\nu_\text{ric}
     \label{eq:Pot}
 \end{align}
 
-Nell'ultimo passaggio (eq. \ref{eq:Pot}) è esplicitato che l'integrazione viene fatta su $\nu_\text{ric}$, ovvero le frequenze misurate a distanza r, abbiamo messo un upperbound finito all'integrale e, per semplificare i calcoli per il prossimo punto, abbiamo lasciato la dipendenza da $\nu_\text{em}$ in $B$.
+Nell'ultimo passaggio (eq. \ref{eq:Pot}) è esplicitato che l'integrazione viene
+fatta su $\nu_\text{ric}$, ovvero le frequenze misurate a distanza r, abbiamo
+messo un upperbound finito all'integrale e, per semplificare i calcoli per il
+prossimo punto, abbiamo lasciato la dipendenza da $\nu_\text{em}$ in $B$.
 
-Passiamo quindi alle unità adimensionali, riportate in eq. \ref{eq:PT_ad}, e facciamo un cambio di variabile all'interno dell'integrale utilizzando la formula del redshift $\nu_\text{ric} = \nu_\text{em} e^{\Phi(R) - \Phi(r)}$:
+Passiamo quindi alle unità adimensionali, riportate in eq. \ref{eq:PT_ad}, e
+facciamo un cambio di variabile all'interno dell'integrale utilizzando la
+formula del redshift $\nu_\text{ric} = \nu_\text{em} e^{\Phi(R) - \Phi(r)}$:
 
 \begin{align}
-    \hat{\mathcal P}(\hat r) &= \int_{\hat \nu_\text{ric} = 0}^{\hat \nu_\text{ric} = \frac{A T_0}{\nu_0}} \hat B (\hat \nu_\text{em}, \hat T) \; \mathrm{d} \hat \nu_\text{ric}
-    = e^{\Phi(\hat R) - \Phi(\hat r)} \int_{\hat \nu_\text{em} = 0}^{\hat \nu_\text{em} = \frac{A T_0 \hat T}{\nu_0} e^{\Phi(\hat R) - \Phi(\hat r)}} \frac{\hat \nu_{em}^3}{\exp(\hat \nu_\text{em} / \hat T) - 1} \; \mathrm{d}\hat \nu_\text{em} \\
-    &= \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2} \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2} \int_0^{\frac{A T_0 \hat T}{\nu_0} e^{\Phi(\hat R) - \Phi(\hat r)}} \frac{\nu^3}{e^{\nu / \hat T} - 1} \; \mathrm{d} \nu \\
-    &= \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2} \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2} \int_0^{\frac{A T_0 \hat T}{\nu_0}} \frac{\nu^3}{e^{\nu / \hat T} - 1} \; \mathrm{d} \nu \, .
+    \hat{\mathcal P}(\hat r)
+    &= \int_{\hat \nu_\text{ric} = 0}^{\hat \nu_\text{ric} = \frac{A T_0}{\nu_0}}
+    \hat B (\hat \nu_\text{em}, \hat T) \; \mathrm{d} \hat \nu_\text{ric}
+    = e^{\Phi(\hat R) - \Phi(\hat r)}
+    \int_{\hat \nu_\text{em} = 0}^{\hat \nu_\text{em} = \frac{A T_0 \hat T}{\nu_0} e^{\Phi(\hat R) - \Phi(\hat r)}}
+    \frac{\hat \nu_{em}^3}{\exp(\hat \nu_\text{em} / \hat T) - 1} \; \mathrm{d}\hat \nu_\text{em} \\
+    &= \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2}
+    \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2}
+    \int_0^{\frac{A T_0 \hat T}{\nu_0} e^{\Phi(\hat R) - \Phi(\hat r)}}
+    \frac{\nu^3}{e^{\nu / \hat T} - 1} \; \mathrm{d} \nu \\
+    &= \left(1 - \frac{2 \hat M}{\hat R} \right)^{1/2}
+    \left(1 - \frac{2 \hat M}{\hat r} \right)^{-1/2}
+    \int_0^{\frac{A T_0 \hat T}{\nu_0}} \frac{\nu^3}{e^{\nu / \hat T} - 1} \;
+    \mathrm{d} \nu \, .
     \label{eq:Pot_ad}
 \end{align}
 
-Dove sono state usate le definizioni di $B(\hat \nu, \hat T)$ (eq. \ref{eq:B_ad}) e quella di $\Phi (r)$ (eq. \ref{eq:Phi_ext}) e nell'ultimo passaggio in \ref{eq:Pot_ad} si è utilizzato il fatto che nell'integrale $A \to \infty$ e che $e^{\Phi(R) - \Phi(r)} < 1$, ignorare il termine migliora quindi la nostra approssimazione.
+Dove sono state usate le definizioni di $B(\hat \nu, \hat T)$ (eq.
+\ref{eq:B_ad}) e quella di $\Phi (r)$ (eq. \ref{eq:Phi_ext}) e nell'ultimo
+passaggio in \ref{eq:Pot_ad} si è utilizzato il fatto che nell'integrale
+$A \to \infty$ e che $e^{\Phi(R) - \Phi(r)} < 1$, ignorare il termine migliora
+quindi la nostra approssimazione.
 
 \begin{equation}
-    \mathcal P_0 = \frac{\mathcal P}{\hat {\mathcal P}} = \pi B_0 \nu_0 \simeq \num{9.883290e+14} \, \frac{\unit{\mega\electronvolt}}{\unit{\second\femto\meter\squared}} \, ,
+    \mathcal P_0 = \frac{\mathcal P}{\hat {\mathcal P}}
+    = \pi B_0 \nu_0 \simeq \num{9.883290e+14} \,
+    \frac{\unit{\mega\electronvolt}}{\unit{\second\femto\meter\squared}} \, ,
     \quad \quad
     T_0 = T / \hat T = 1 \unit{\mega\electronvolt} \, .
     \label{eq:PT_ad}
@@ -288,7 +445,11 @@ Dove sono state usate le definizioni di $B(\hat \nu, \hat T)$ (eq. \ref{eq:B_ad}
 
 
 \subsection{Convergenza dell'integrale}
-Dal momento che numericamente non è possibile integrare sulle frequenze fino a $\nu = + \infty$, nei passaggi in eq. \ref{eq:Pot} e poi in eq. \ref{eq:Pot_ad} abbiamo utilizzato un parametro $A$ che deve essere sufficientemente grande da poter approssimare in modo ragionevole l'integrale, per i valori di $\hat T$ utili.
+Dal momento che numericamente non è possibile integrare sulle frequenze fino a
+$\nu = + \infty$, nei passaggi in eq. \ref{eq:Pot} e poi in eq. \ref{eq:Pot_ad}
+abbiamo utilizzato un parametro $A$ che deve essere sufficientemente grande da
+poter approssimare in modo ragionevole l'integrale, per i valori di $\hat T$
+utili.
 Riportiamo in eq. \ref{eq:integrale} l'integrale da calcolare.
 
 \begin{equation}
@@ -489,9 +650,9 @@ più massiva, il cui redshift gravitazionale è più forte.
 \appendix
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%                APPENDICI               %%%%%%%%%%%%%%%%%%%%%%%%% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%                APPENDICI               %%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{RK4} \label{ap:RK4}
@@ -524,139 +685,154 @@ void rungeKutta4(double h, double r, double *P, double *m, int tipo_politropica)
 
 Quando si calcola il valore della derivata di $P$ o $m$ ad un dato $r$ serve anche il valore dell'energia interna, infatti
 \begin{lstlisting}[language=C]
-// fun_m = r^3 E
+// f_m = r^2 E
 double fun_m(double r, double P, int tipo_politropica){
     return r * r * fun_E(P, tipo_politropica);
 }
 
 
-// fun_P = - (P + E)(m + r^3 P)/(r^2 - 2mr)
+// f_P = - (P + E)(m + r^3 P)/(r^2 - 2mr)
 double fun_P(double r, double P, double m, int tipo_politropica){
     if (m == 0)
         return 0;
-    return (P + fun_E(P, tipo_politropica)) * (m + pow(r, 3) * P) / ((2 * m - r) * r);
+    return (P + fun_E(P, tipo_politropica)) * (m + pow(r, 3) * P)
+           / ((2 * m - r) * r);
 }
 \end{lstlisting}
 Dove la funzione \texttt{fun\_E()} è definita come
 \begin{lstlisting}[language=C]
 double fun_E(double P, int tipo_politropica){
-    // Politropica quasi realistica (a*rho^alpha + b*rho^beta)
-    if (tipo_politropica == 0){
+
+    // Politropica quasi realistica (rho*mc^2 + a*rho^alpha + b*rho^beta)
+    if (tipo_politropica == 1){
         double rho = findRho(P);
-        return A * pow(rho, ALPHA) + B * pow(rho, BETA);
+        return rho + A * pow(rho, ALPHA + 1.) + B * pow(rho, BETA + 1.);
     }
 
     double lambda, K;
 
-    // Politropiche semplici
-    if (tipo_politropica == 1){
+    // Materia fermionica non relativistica
+    if (tipo_politropica == 2){
         lambda = 5. / 3.;
         K = 0.05;
-    } else if (tipo_politropica == 2){
+    }
+    else if (tipo_politropica == 3){
         lambda = 2.54;
         K = 0.01;
-    } else {
+    }
+    else {
         printf("Tipo politropica non riconosciuto\n");
         return 0;
     }
 
-    double a1 = P / (lambda - 1);
+    double a1 = P / (lambda - 1.);
     return a1 + pow(a1 / K, 1. / lambda);
 }
 \end{lstlisting}
 
-Per le politropiche semplici (eq. \ref{eq:energia23}) abbiamo potuto trovare un'espressione analitica per $\rho (P)$ (eq. \ref{eq:eps(r)23}). L'energia può quindi essere calcolata in modo diretto come viene fatto nelle righe 22-23 del codice sopra riportato.
+Per le politropiche semplici (eq. \ref{eq:energia23}) abbiamo potuto trovare
+un'espressione analitica per $\rho (P)$ (eq. \ref{eq:eps(r)23}).
+L'energia può quindi essere calcolata in modo diretto come viene fatto nelle
+righe 22-23 del codice sopra riportato.
 
-Per la politropica \ref{eq:energia1}, la relazione tra $\rho$ e $P$ che si trova è data in \ref{eq:eps(r)1}, che riportiamo
+Per la politropica \ref{eq:energia1}, la relazione tra $\rho$ e $P$ che si trova
+è data in \ref{eq:eps(r)1}, che riportiamo
 
 \begin{equation}
-        P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha} + (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} \ .
+        P = (\alpha - 1) a \left( \frac{n}{n_0} \right)^{\alpha}
+        + (\beta - 1) b \left( \frac{n}{n_0} \right)^{\beta} \ .
         \label{ap:eq:1}
 \end{equation}
 
-Data una certa pressione $P$ bisopgna quindi risolvere numericamente l'equazione per trovare il valore $n$ che la soddisfa. Per fare ciò utiliziamo la funzione \texttt{findRho()} così definita
+Data una certa pressione $P$ bisopgna quindi risolvere numericamente l'equazione
+per trovare il valore $n$ che la soddisfa.
+Per fare ciò utiliziamo la funzione \texttt{findRho()} così definita
 
 \begin{lstlisting}[language=C]
 double findRho(double P){
 
-    // Cominciamo prima con il metodo di Newton-Raphson
-    if (P > 0.01){
-
-        double rho = pow(P / (BETA1 * B), 1 / BETA);    // buona approx. iniziale
-        while (fabs(P - P_of_rho(rho)) > 1e-6){
-            rho -= (P_of_rho(rho) - P) / DP_of_rho(rho);
-        }
-        return rho;
-    }
-
-    // Per P piccoli meglio usare bisezione
-    double rho_sx = 0.7, rho_dx = 1.;
-    double rho = (rho_sx + rho_dx) / 2;
-    while (fabs(P - P_of_rho(rho)) > 1e-6){
-        if (P_of_rho(rho) > P)
-            rho_dx = rho;
-        else
-            rho_sx = rho;
-        rho = (rho_sx + rho_dx) / 2;
+    // Newton-Raphson method to find rho
+    double rho = pow(P / 0.15, 1. / 3.);    // buona approssimazione iniziale
+                                           
+    while (fabs(P - P_of_rho(rho)) > 1e-8){
+        rho -= (P_of_rho(rho) - P) / DP_of_rho(rho);
     }
     return rho;
 }
 \end{lstlisting}
 
-dove \texttt{P\_odf\_rho()} e \texttt{DP\_of\_rho()} sono rispettivamente la funzione \ref{ap:eq:1} e la sua derivata. In questo modo possiamo sempre trasformare $\epsilon (\rho)$ in $\epsilon (P)$.
+dove \texttt{P\_odf\_rho()} e \texttt{DP\_of\_rho()} sono rispettivamente la
+funzione \ref{ap:eq:1} e la sua derivata. In questo modo possiamo sempre
+trasformare $\epsilon (\rho)$ in $\epsilon (P)$.
 
 
 \section{Risoluzione dell'integrale del potenziale gravitazionale} \label{ap:Phi}
 
-Per ognuna delle 3 stelle trovate (la più massiva per ogni diversa equazione di stato) salviamo ogni valore di $r$, $m$ e $P$ in un file che successivamente importiamo (riga 3) e utiliziamo per calcolare l'integrale
+Per ognuna delle 3 stelle trovate (la più massiva per ogni diversa equazione di
+stato) salviamo ogni valore di $r$, $m$ e $P$ in un file che successivamente
+importiamo (riga 3) e utiliziamo per calcolare l'integrale
 
 \begin{lstlisting}[language=C]
-double r[lenfile], P[lenfile], m[lenfile], Phi[lenfile];
+for (int tipo_politropica = 1; tipo_politropica < 4; tipo_politropica++){
+    int lenfile = len_files[tipo_politropica - 1];
 
-read_maxM_data(tipo_politropica, lenfile, r, P, m);
+    double r[lenfile], P[lenfile], m[lenfile], Phi[lenfile];
 
-double R = r[lenfile - 1];
-double M = m[lenfile - 1];
-double Phi_ext = fun_Phi_ext(R, M);
-double integral = 0;
-double h = 1e-5;
+    read_maxM_data(tipo_politropica, lenfile, r, P, m);
 
-// Partiamo a calcolare Phi dalla fine (r = R) perche' e' quando l'integrale e' piu' piccolo
-for (int i = lenfile - 1; i > 0; i--){
-    integral += h / 2 * (fun_to_integrate(r[i], m[i], P[i]) + fun_to_integrate(r[i - 1], m[i - 1], P[i - 1]));
-    Phi[i] = Phi_ext + integral;
+    double R = r[lenfile - 1];
+    double M = m[lenfile - 1];
+    double Phi_ext = fun_Phi_ext(R, M);
+    double integral = 0;
+    double h = 1e-5;
+
+    // Partiamo a calcolare Phi dalla fine (r = R) perche' e' quando
+    // l'integrale e' piu' piccolo
+    for (int i = lenfile - 1; i > 0; i--){
+        integral += h / 2 * (fun_to_integrate(r[i], m[i], P[i])
+                  + fun_to_integrate(r[i - 1], m[i - 1], P[i - 1]));
+        Phi[i] = Phi_ext + integral;
+    }
+
+    char Phi_int_filename[50];
+    sprintf(Phi_int_filename, "../data/Phi_int_%d.csv", tipo_politropica);
+    FILE *f_Phi_int = fopen(Phi_int_filename, "w");
+    fprintf(f_Phi_int, "r,Phi\n");
+    for (int i = 0; i < lenfile; i++)
+        fprintf(f_Phi_int, "%.10e,%.10e\n", r[i] * R0, Phi[i]);
+    fclose(f_Phi_int);
+
+    // Calcoliamo anche Phi_ext(r) per r > R
+    double r_ext = R;
+
+    char Phi_ext_filename[50];
+    sprintf(Phi_ext_filename, "../data/Phi_ext_%d.csv", tipo_politropica);
+    FILE *f_Phi_ext = fopen(Phi_ext_filename, "w");
+    fprintf(f_Phi_ext, "r,Phi\n");
+
+    while (r_ext < 150 / R0){
+        fprintf(f_Phi_ext, "%.10e,%.10e\n",
+                r_ext * R0, fun_Phi_ext(r_ext, M));
+        r_ext += h;
+    }
+
+    fclose(f_Phi_ext);
 }
-
-char Phi_int_filename[50];
-sprintf(Phi_int_filename, "../data/Phi_int_%d.csv", tipo_politropica);
-FILE *f_Phi_int = fopen(Phi_int_filename, "w");
-fprintf(f_Phi_int, "r,Phi\n");
-for (int i = 0; i < lenfile; i++)
-    fprintf(f_Phi_int, "%.10e,%.10e\n", r[i] * R0, Phi[i]);
-fclose(f_Phi_int);
-
-// Calcoliamo anche Phi_ext(r) per r > R
-double r_ext = R;
-
-char Phi_ext_filename[50];
-sprintf(Phi_ext_filename, "../data/Phi_ext_%d.csv", tipo_politropica);
-FILE *f_Phi_ext = fopen(Phi_ext_filename, "w");
-fprintf(f_Phi_ext, "r,Phi\n");
-
-while (r_ext < 150 / R0){
-// for (int i = 0; i < lenfile; i++){
-    fprintf(f_Phi_ext, "%.10e,%.10e\n", r_ext * R0, fun_Phi_ext(r_ext, M));
-    r_ext += h;
-}
-
-fclose(f_Phi_ext);
 \end{lstlisting}
 
-L'integrale (calcolato esplicitamente nella riga 13) può essere valutato solo nei punti $r$ che sono stati utilizzati durante la risoluzione delle equazioni di stabilità della stella.
+L'integrale (calcolato esplicitamente nella righe 17-18) può essere valutato
+solo nei punti $r$ che sono stati utilizzati durante la risoluzione delle
+equazioni di stabilità della stella.
 
-Per ottimizzare il codice, invece che calcolare l'intero integrale per ogni punto $r$ del grafico di $\Phi(r)$, partiamo da $r = R$ (ovvero quando l'integrale è nullo) e aggiungiamo il valore di 1 trapezio per volta alla variabile \texttt{integral}. In contemporanea, durante una iterazione del ciclo \texttt{for} possiamo utilizzare il valore (parziale) di \texttt{integral} per calcolare $\Phi_\text{int}$ in $r$.
+Per ottimizzare il codice, invece che calcolare l'intero integrale per ogni
+punto $r$ del grafico di $\Phi(r)$, partiamo da $r = R$ (ovvero quando
+l'integrale è nullo) e aggiungiamo il valore di 1 trapezio per volta alla
+variabile \texttt{integral}. In contemporanea, durante una iterazione del ciclo
+\texttt{for} possiamo utilizzare il valore (parziale) di \texttt{integral} per
+calcolare $\Phi_\text{int}$ in $r$.
 
-Infine dalla riga 25 calcoliamo $\Phi_\text{ext}$ utilizzando la funzione analitica.
+Infine dalla riga 30 calcoliamo $\Phi_\text{ext}$ utilizzando la funzione
+analitica.
 
 
 \section{Integrali con trapezi e simpson} \label{ap:integrali}

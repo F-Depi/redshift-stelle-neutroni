@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.25)  25 AUG 2024 20:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Fedora 40) (preloaded format=pdflatex 2024.8.2)  27 AUG 2024 02:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1340,26 +1340,26 @@ Package csquotes Info: Redefining alias 'default' -> 'italian'.
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Info: Redefining \it@ocap on input line 21.
-LaTeX Info: Redefining \it@ccap on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Info: Redefining \it@ocap on input line 20.
+LaTeX Info: Redefining \it@ccap on input line 20.
 
 Package siunitx Warning: Detected the "physics" package:
 (siunitx)                omitting definition of \qty.
@@ -1372,9 +1372,9 @@ Package siunitx Warning: Detected the "physics" package:
 (siunitx)                to your preamble.
 
 Package translations Info: no dictionary file `translations-basic-dictionary-it
-alian.trsl' found. on input line 21.
-LaTeX Info: Redefining \[ on input line 21.
-LaTeX Info: Redefining \] on input line 21.
+alian.trsl' found. on input line 20.
+LaTeX Info: Redefining \[ on input line 20.
+LaTeX Info: Redefining \] on input line 20.
 \c@lstlisting=\count544
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1416,8 +1416,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' not found.
 No file main.bbl.
-Package biblatex Info: Reference section=0 on input line 21.
-Package biblatex Info: Reference segment=0 on input line 21.
+Package biblatex Info: Reference section=0 on input line 20.
+Package biblatex Info: Reference segment=0 on input line 20.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1454,7 +1454,7 @@ Package biblatex Info: Reference segment=0 on input line 21.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 21.
+Package hyperref Info: Link coloring ON on input line 20.
 (./main.out) (./main.out)
 \@outlinefile=\write7
 \openout7 = `main.out'.
@@ -1492,229 +1492,223 @@ Non-PDF special ignored!
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
 st/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-14.
+79.
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
 Package epstopdf Info: Source file: <Figures/MR.eps>
-(epstopdf)                    date: 2024-07-31 01:24:15
-(epstopdf)                    size: 70775 bytes
+(epstopdf)                    date: 2024-08-27 01:34:47
+(epstopdf)                    size: 77630 bytes
 (epstopdf)             Output file: <Figures/MR-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-07-31 01:24:23
-(epstopdf)                    size: 236813 bytes
+(epstopdf)                    date: 2024-08-27 01:34:57
+(epstopdf)                    size: 253023 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/MR-eps-converted-t
 o.pdf Figures/MR.eps>
-(epstopdf)             \includegraphics on input line 121.
+(epstopdf)             \includegraphics on input line 190.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/MR-eps-converted-to.pdf, id=135, 462.72874pt x 347.2975pt>
+<Figures/MR-eps-converted-to.pdf, id=133, 650.43pt x 361.35pt>
 File: Figures/MR-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/MR-eps-converted-to.pdf>
-Package pdftex.def Info: Figures/MR-eps-converted-to.pdf  used on input line 12
-1.
-(pdftex.def)             Requested size: 264.61331pt x 198.60284pt.
+Package pdftex.def Info: Figures/MR-eps-converted-to.pdf  used on input line 19
+0.
+(pdftex.def)             Requested size: 308.71104pt x 171.5107pt.
 [3 <./Figures/MR-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <Figures/Phi.eps>
-(epstopdf)                    date: 2024-07-31 23:42:51
-(epstopdf)                    size: 37588 bytes
+(epstopdf)                    date: 2024-08-27 01:54:42
+(epstopdf)                    size: 36601 bytes
 (epstopdf)             Output file: <Figures/Phi-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-07-31 23:43:17
-(epstopdf)                    size: 19245 bytes
+(epstopdf)                    date: 2024-08-27 01:54:47
+(epstopdf)                    size: 18692 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Phi-eps-converted-
 to.pdf Figures/Phi.eps>
-(epstopdf)             \includegraphics on input line 172.
+(epstopdf)             \includegraphics on input line 263.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/Phi-eps-converted-to.pdf, id=206, 564.1075pt x 347.2975pt>
+<Figures/Phi-eps-converted-to.pdf, id=226, 650.43pt x 361.35pt>
 File: Figures/Phi-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Phi-eps-converted-to.pdf>
-Package pdftex.def Info: Figures/Phi-eps-converted-to.pdf  used on input line 1
-72.
-(pdftex.def)             Requested size: 441.01772pt x 271.52158pt.
+Package pdftex.def Info: Figures/Phi-eps-converted-to.pdf  used on input line 2
+63.
+(pdftex.def)             Requested size: 352.8155pt x 196.01381pt.
 [4 <./Figures/Phi-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <Figures/radianza1.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
-(epstopdf)                    size: 39946 bytes
+(epstopdf)                    date: 2024-08-27 02:21:21
+(epstopdf)                    size: 38078 bytes
 (epstopdf)             Output file: <Figures/radianza1-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-23 17:39:13
-(epstopdf)                    size: 22131 bytes
+(epstopdf)                    date: 2024-08-27 02:21:33
+(epstopdf)                    size: 20904 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/radianza1-eps-conv
 erted-to.pdf Figures/radianza1.eps>
-(epstopdf)             \includegraphics on input line 232.
+(epstopdf)             \includegraphics on input line 349.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/radianza1-eps-converted-to.pdf, id=277, 462.72874pt x 347.2975pt>
+<Figures/radianza1-eps-converted-to.pdf, id=296, 462.72874pt x 347.2975pt>
 File: Figures/radianza1-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/radianza1-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/radianza1-eps-converted-to.pdf  used on input 
-line 232.
+line 349.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
 Package epstopdf Info: Source file: <Figures/radianza3.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
-(epstopdf)                    size: 39520 bytes
+(epstopdf)                    date: 2024-08-27 02:21:21
+(epstopdf)                    size: 38182 bytes
 (epstopdf)             Output file: <Figures/radianza3-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-23 17:39:13
-(epstopdf)                    size: 21517 bytes
+(epstopdf)                    date: 2024-08-27 02:21:33
+(epstopdf)                    size: 20957 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/radianza3-eps-conv
 erted-to.pdf Figures/radianza3.eps>
-(epstopdf)             \includegraphics on input line 240.
+(epstopdf)             \includegraphics on input line 360.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/radianza3-eps-converted-to.pdf, id=278, 462.72874pt x 347.2975pt>
+<Figures/radianza3-eps-converted-to.pdf, id=297, 462.72874pt x 347.2975pt>
 File: Figures/radianza3-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/radianza3-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/radianza3-eps-converted-to.pdf  used on input 
-line 240.
+line 360.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
 
-Overfull \hbox (2.24281pt too wide) in paragraph at lines 230--245
+Overfull \hbox (2.24281pt too wide) in paragraph at lines 347--367
 []$[]$   $[]$ 
  []
 
 Package epstopdf Info: Source file: <Figures/radianza2.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
-(epstopdf)                    size: 40592 bytes
+(epstopdf)                    date: 2024-08-27 02:21:21
+(epstopdf)                    size: 39179 bytes
 (epstopdf)             Output file: <Figures/radianza2-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-23 17:39:13
-(epstopdf)                    size: 22143 bytes
+(epstopdf)                    date: 2024-08-27 02:21:33
+(epstopdf)                    size: 21504 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/radianza2-eps-conv
 erted-to.pdf Figures/radianza2.eps>
-(epstopdf)             \includegraphics on input line 250.
+(epstopdf)             \includegraphics on input line 377.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/radianza2-eps-converted-to.pdf, id=280, 462.72874pt x 347.2975pt>
+<Figures/radianza2-eps-converted-to.pdf, id=299, 462.72874pt x 347.2975pt>
 File: Figures/radianza2-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/radianza2-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/radianza2-eps-converted-to.pdf  used on input 
-line 250.
+line 377.
 (pdftex.def)             Requested size: 264.61331pt x 198.60284pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 [5 <./Figures/radianza1-eps-converted-to.pdf> <./Figures/radianza3-eps-converte
 d-to.pdf>] [6 <./Figures/radianza2-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <Figures/Pot_cvgN.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:15:50
 (epstopdf)                    size: 42698 bytes
 (epstopdf)             Output file: <Figures/Pot_cvgN-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:16:03
 (epstopdf)                    size: 49978 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Pot_cvgN-eps-conve
 rted-to.pdf Figures/Pot_cvgN.eps>
-(epstopdf)             \includegraphics on input line 325.
+(epstopdf)             \includegraphics on input line 486.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/Pot_cvgN-eps-converted-to.pdf, id=483, 462.72874pt x 347.2975pt>
+<Figures/Pot_cvgN-eps-converted-to.pdf, id=493, 462.72874pt x 347.2975pt>
 File: Figures/Pot_cvgN-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Pot_cvgN-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/Pot_cvgN-eps-converted-to.pdf  used on input l
-ine 325.
+ine 486.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 326--326
+Underfull \hbox (badness 10000) in paragraph at lines 487--487
 
  []
 
 Package epstopdf Info: Source file: <Figures/Pot_cvgA.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:15:51
 (epstopdf)                    size: 30839 bytes
 (epstopdf)             Output file: <Figures/Pot_cvgA-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:16:03
 (epstopdf)                    size: 29487 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Pot_cvgA-eps-conve
 rted-to.pdf Figures/Pot_cvgA.eps>
-(epstopdf)             \includegraphics on input line 332.
+(epstopdf)             \includegraphics on input line 493.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/Pot_cvgA-eps-converted-to.pdf, id=484, 462.72874pt x 347.2975pt>
+<Figures/Pot_cvgA-eps-converted-to.pdf, id=494, 462.72874pt x 347.2975pt>
 File: Figures/Pot_cvgA-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Pot_cvgA-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/Pot_cvgA-eps-converted-to.pdf  used on input l
-ine 332.
+ine 493.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 [7 <./Figures/Pot_cvgN-eps-converted-to.pdf> <./Figures/Pot_cvgA-eps-converted-
 to.pdf>]
 Package epstopdf Info: Source file: <Figures/Pot.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-05 17:12:35
 (epstopdf)                    size: 156557 bytes
 (epstopdf)             Output file: <Figures/Pot-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-05 17:21:21
 (epstopdf)                    size: 896171 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Pot-eps-converted-
 to.pdf Figures/Pot.eps>
-(epstopdf)             \includegraphics on input line 390.
+(epstopdf)             \includegraphics on input line 551.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/Pot-eps-converted-to.pdf, id=596, 867.24pt x 433.62pt>
+<Figures/Pot-eps-converted-to.pdf, id=607, 867.24pt x 433.62pt>
 File: Figures/Pot-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Pot-eps-converted-to.pdf>
-Package pdftex.def Info: Figures/Pot-eps-converted-to.pdf  used on input line 3
-90.
+Package pdftex.def Info: Figures/Pot-eps-converted-to.pdf  used on input line 5
+51.
 (pdftex.def)             Requested size: 441.01772pt x 220.50809pt.
 [8 <./Figures/Pot-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <Figures/Teff.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:39:23
 (epstopdf)                    size: 85074 bytes
 (epstopdf)             Output file: <Figures/Teff-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:48:38
 (epstopdf)                    size: 402409 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Teff-eps-converted
 -to.pdf Figures/Teff.eps>
-(epstopdf)             \includegraphics on input line 434.
+(epstopdf)             \includegraphics on input line 595.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/Teff-eps-converted-to.pdf, id=665, 867.24pt x 433.62pt>
+<Figures/Teff-eps-converted-to.pdf, id=676, 867.24pt x 433.62pt>
 File: Figures/Teff-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Teff-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/Teff-eps-converted-to.pdf  used on input line 
-434.
+595.
 (pdftex.def)             Requested size: 441.01772pt x 220.50809pt.
 
-Package caption Warning: \label without proper reference on input line 460.
+Package caption Warning: \label without proper reference on input line 621.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:Teff1_su_P' on page 9 undefined on input line 450
+LaTeX Warning: Reference `fig:Teff1_su_P' on page 9 undefined on input line 611
 .
 
 
-Package caption Warning: \label without proper reference on input line 466.
+Package caption Warning: \label without proper reference on input line 627.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:Teff001_su_P' on page 9 undefined on input line 4
-51.
+LaTeX Warning: Reference `fig:Teff001_su_P' on page 9 undefined on input line 6
+12.
 
 [9 <./Figures/Teff-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <Figures/Teff1_su_P.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:41:24
 (epstopdf)                    size: 65949 bytes
 (epstopdf)             Output file: <Figures/Teff1_su_P-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:48:38
 (epstopdf)                    size: 215089 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Teff1_su_P-eps-con
 verted-to.pdf Figures/Teff1_su_P.eps>
-(epstopdf)             \includegraphics on input line 459.
+(epstopdf)             \includegraphics on input line 620.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/Teff1_su_P-eps-converted-to.pdf, id=733, 462.72874pt x 347.2975pt>
+<Figures/Teff1_su_P-eps-converted-to.pdf, id=744, 462.72874pt x 347.2975pt>
 File: Figures/Teff1_su_P-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Teff1_su_P-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/Teff1_su_P-eps-converted-to.pdf  used on input
- line 459.
+ line 620.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
 Package epstopdf Info: Source file: <Figures/Teff001_su_P.eps>
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:41:27
 (epstopdf)                    size: 66749 bytes
 (epstopdf)             Output file: <Figures/Teff001_su_P-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2024-08-23 17:39:13
+(epstopdf)                    date: 2024-08-23 00:48:38
 (epstopdf)                    size: 205311 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/Teff001_su_P-eps-c
 onverted-to.pdf Figures/Teff001_su_P.eps>
-(epstopdf)             \includegraphics on input line 465.
+(epstopdf)             \includegraphics on input line 626.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/Teff001_su_P-eps-converted-to.pdf, id=734, 462.72874pt x 347.2975pt>
+<Figures/Teff001_su_P-eps-converted-to.pdf, id=745, 462.72874pt x 347.2975pt>
 File: Figures/Teff001_su_P-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/Teff001_su_P-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/Teff001_su_P-eps-converted-to.pdf  used on inp
-ut line 465.
+ut line 626.
 (pdftex.def)             Requested size: 216.10109pt x 162.19118pt.
 
-Overfull \hbox (2.24281pt too wide) in paragraph at lines 457--471
+Overfull \hbox (2.24281pt too wide) in paragraph at lines 618--632
 []$[]$   $[]$ 
  []
 
@@ -1722,30 +1716,33 @@ Overfull \hbox (2.24281pt too wide) in paragraph at lines 457--471
 verted-to.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 523.
+(hyperref)                removing `math shift' on input line 684.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\rho' on input line 523.
+(hyperref)                removing `\rho' on input line 684.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 523.
+(hyperref)                removing `math shift' on input line 684.
 
 [11{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [
 12] [13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 820--828
+Underfull \hbox (badness 10000) in paragraph at lines 996--1004
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 820--828
+Underfull \hbox (badness 10000) in paragraph at lines 996--1004
 
  []
 
 [15] [16] (./main.aux)
 
 LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: F950DFD6848C94E88D47D8BE8E1326F5;2686.
@@ -1754,10 +1751,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 51832 strings out of 476041
- 1139434 string characters out of 5793164
- 2671061 words of memory out of 6000000
- 71123 multiletter control sequences out of 15000+600000
+ 51831 strings out of 476041
+ 1139428 string characters out of 5793165
+ 2654159 words of memory out of 6000000
+ 71121 multiletter control sequences out of 15000+600000
  528558 words of font info for 72 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  99i,17n,134p,1149b,2571s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1783,10 +1780,10 @@ cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-supe
 r/sfti1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt0
 800.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb
 >
-Output written on main.pdf (16 pages, 2558195 bytes).
+Output written on main.pdf (16 pages, 2571908 bytes).
 PDF statistics:
- 1374 PDF objects out of 1440 (max. 8388607)
- 818 compressed objects within 9 object streams
- 403 named destinations out of 1000 (max. 500000)
+ 1381 PDF objects out of 1440 (max. 8388607)
+ 821 compressed objects within 9 object streams
+ 404 named destinations out of 1000 (max. 500000)
  188 words of extra memory for PDF output out of 10000 (max. 10000000)
 

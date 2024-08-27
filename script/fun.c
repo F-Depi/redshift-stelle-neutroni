@@ -34,7 +34,7 @@ double P_of_rho(double rho){
 
 
 // This is used in findRho() to do Newton-Rapson
-// It's the analitic derivative of the function above
+// It's the analytic derivative of the function above
 double DP_of_rho(double rho){
     return ALPHA * (ALPHA + 1.) * A * pow(rho, ALPHA)
            + BETA * (BETA + 1.) * B * pow(rho, BETA);
@@ -54,12 +54,15 @@ double findRho(double P){
 }
 
 
-// Evaluates the energy for 3 differents matter state functions
-// tipo_politropica = 1, 2, 3
+// Evaluates the energy for 3 different matter state functions
+// tipo_politropica =
+//      1: realistica
+//      2: lambda = 5/3, K = 0.05
+//      3: lambda = 2.54, K = 0.01
 double fun_E(double P, int tipo_politropica){
 
     // Politropica quasi realistica (rho*mc^2 + a*rho^alpha + b*rho^beta)
-    if (tipo_politropica == 0){
+    if (tipo_politropica == 1){
         double rho = findRho(P);
         return rho + A * pow(rho, ALPHA + 1.) + B * pow(rho, BETA + 1.);
     }
@@ -67,11 +70,11 @@ double fun_E(double P, int tipo_politropica){
     double lambda, K;
 
     // Materia fermionica non relativistica
-    if (tipo_politropica == 1){
+    if (tipo_politropica == 2){
         lambda = 5. / 3.;
         K = 0.05;
     }
-    else if (tipo_politropica == 2){
+    else if (tipo_politropica == 3){
         lambda = 2.54;
         K = 0.01;
     }
@@ -85,7 +88,7 @@ double fun_E(double P, int tipo_politropica){
 }
 
 
-// RK4 algorithm to advance 1 step of length h, in a sistem like
+// RK4 algorithm to advance 1 step of length h, in a system like
 // dP/dr = fun_P
 // dm/dr = fun_m 
 // Updates the values of m, P given

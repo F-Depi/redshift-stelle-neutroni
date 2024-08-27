@@ -32,7 +32,7 @@ double P_of_rho(double rho);
 
 
 // This is used in findRho() to do Newton-Rapson
-// It's the analitic derivative of the function above
+// It's the analytic derivative of the function above
 double DP_of_rho(double rho);
 
 
@@ -40,12 +40,12 @@ double DP_of_rho(double rho);
 double findRho(double P);
 
 
-// Evaluates the energy for 3 differents matter state functions
+// Evaluates the energy for 3 different matter state functions
 // tipo_politropica = 1, 2, 3
 double fun_E(double P, int tipo_politropica);
 
 
-// RK4 algorithm to advance 1 step of length h, in a sistem like
+// RK4 algorithm to advance 1 step of length h, in a system like
 // dP/dr = fun_P
 // dm/dr = fun_m 
 // Updates the values of m, P given

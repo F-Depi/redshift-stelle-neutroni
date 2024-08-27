@@ -1,12 +1,12 @@
 // ::setlocal makeprg=cd\ script\ &&\ gcc\ radianza.c\ -lm\ &&\ ./a.out\ &&\ rm\ a.out
 #include <stdio.h>
 #include <math.h>
-#define PI 3.1415926535     // \pi
-#define P0 150.174          // = E_0, MeV/c^2/fm^3
-#define R0 20.06145         // km
-#define M0 12.655756        // solar masses
-#define nu0 2.41798924208e20 //Hz
-#define B0 1.30105998011e-6 // Mev / fm^2
+#define PI 3.1415926535             // \pi
+#define P0 150.33046048             // = E_0, MeV/fm^3
+#define R0 19.996542543             // km
+#define M0 13.542058427             // solar masses
+#define nu0 2.41798924208e20        //Hz
+#define B0 1.30105998011e-6         // Mev / fm^2
 #define POT0 (PI * B0 * nu0)
 
 
@@ -31,6 +31,7 @@ double funB_corrected(double nu, double r, double R, double M){
 
 // Esercizio sulla Radianza
 void tutto_su_radianza(){
+
     // Calcolo una semplice radianza
     double T = 1.;
     int N = 1000;
@@ -47,15 +48,16 @@ void tutto_su_radianza(){
 
 
     // Prendo i dati di Phi dal file (a mano)
-    double R[3] = {59.03824 / R0, 10.90280 / R0, 8.559218 / R0};
-    double M[3] = {14.29963 / M0, 0.9252994 / M0, 1.528782 / M0};
+    double R[3] = {11.04289 / R0, 10.86752 / R0, 8.531525 / R0};
+    double M[3] = {2.456841 / M0, 0.990100 / M0, 1.635845 / M0};
     double r[3] = {1.5, 8., -1};
     // Cicla sulle 3 stelle
     for (int i = 0; i < 3; i++){
         // Cicla sulle 3 distanze
         for (int j = 0; j < 3; j++){
 
-            char filename3[50]; sprintf(filename3, "../data/radianza/Bcorr_%d_%.1f.csv", i + 1, r[j]);
+            char filename3[50];
+            sprintf(filename3, "../data/radianza/Bcorr_%d_%.1f.csv", i + 1, r[j]);
             FILE *f = fopen(filename3, "w");
             fprintf(f, "nu,B\n");
             for (int k = 0; k < N; k++){
@@ -504,25 +506,28 @@ void Teff_su_T(int N_trap, double nu_max, double T_min, double T_max){
 int main(){
 
     /***************** Radianza corretta *****************/
-    // tutto_su_radianza();
+
+    //tutto_su_radianza();
 
     
     /******************* Potenza Totale ******************/
+    
     // test_cvg();
 
-    // int N_trap = 22936;
-    // int N_simp = 30516;
-    // double nu_max = 24.0661923;
-    // double r_max = 500;
-    // dati_grafico_Pot(N_trap, N_simp, nu_max, r_max);
+    //int N_trap = 22936;
+    //int N_simp = 30516;
+    //double nu_max = 24.0661923;
+    //double r_max = 500;
+    //dati_grafico_Pot(N_trap, N_simp, nu_max, r_max);
     
 
     /*************** Temperatura Percepita ***************/
-    int N_trap = 22936;
-    double nu_max = 24.0661923;
-    double T_min = 0.01;
-    double T_max = 1.;
-    Teff_su_T(N_trap, nu_max, T_min, T_max);
+    
+    //int N_trap = 22936;
+    //double nu_max = 24.0661923;
+    //double T_min = 0.01;
+    //double T_max = 1.;
+    //Teff_su_T(N_trap, nu_max, T_min, T_max);
 
 
 
